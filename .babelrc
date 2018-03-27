@@ -1,0 +1,22 @@
+{
+	"presets": ["env"],
+	"plugins": [
+		"syntax-dynamic-import",
+		"transform-object-rest-spread",
+		[
+			"transform-runtime",
+			{
+				"polyfill": false,
+				"regenerator": true
+			}
+		],
+		[
+			"transform-regenerator",
+			{
+				"asyncGenerators": true,
+				"generators": true,
+				"async": true
+			}
+		]
+	]
+}

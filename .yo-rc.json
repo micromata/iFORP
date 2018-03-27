@@ -1,0 +1,15 @@
+{
+  "generator-baumeister": {
+    "promptValues": {
+      "projectType": "spa",
+      "boilerplateAmount": "minimum",
+      "license": "MIT",
+      "authorName": "Michael Kühnel",
+      "authorUrl": "",
+      "initialVersion": "0.0.0",
+      "additionalInfo": false,
+      "banners": false,
+      "addDistToVersionControl": false
+    }
+  }
+}
