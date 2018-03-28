@@ -1,9 +1,18 @@
 {
-  "extends": "baumeister",
+  "extends": [
+    "baumeister",
+    "plugin:react/recommended"
+  ],
+  "plugins": [
+    "react"
+  ],
   "parser": "babel-eslint",
   "parserOptions": {
-    "allowImportExportEverywhere": true
-},
+    "allowImportExportEverywhere": true,
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
   "overrides": [
     {
       "files": ["build/*.js"],

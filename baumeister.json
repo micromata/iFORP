@@ -30,9 +30,6 @@
         "PRODUCTION": true
       }
     },
-    "ProvidePlugin": {
-      "$": "jquery",
-      "jQuery": "jquery"
-    }
+    "ProvidePlugin": {}
   }
 }
