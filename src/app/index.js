@@ -4,6 +4,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 // Import polyfills
 import {applyPolyfills} from './base/polyfills';
@@ -21,12 +22,16 @@ import '../assets/scss/index.scss';
 	consoleErrorFix();
 	ieViewportFix();
 
-	function HelloWorld() {
-		return <p>Hello World!</p>;
+	function HelloPlanet(props) {
+		return <p>Hello {props.planet || 'World'}!</p>;
 	}
 
+	HelloPlanet.propTypes = {
+		planet: PropTypes.string
+	};
+
 	ReactDOM.render(
-		<HelloWorld/>,
+		<HelloPlanet planet="Mars" />,
 		document.getElementById('root')
 	);
 
