@@ -21,3 +21,4 @@ coverage
 ### Dev ###
 *.sublime-project
 *.sublime-workspace
+.vscode
