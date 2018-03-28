@@ -5,6 +5,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import {Button} from 'reactstrap';
 
 // Import polyfills
 import {applyPolyfills} from './base/polyfills';
@@ -23,7 +24,12 @@ import '../assets/scss/index.scss';
 	ieViewportFix();
 
 	function HelloPlanet(props) {
-		return <p>Hello {props.planet || 'World'}!</p>;
+		return (
+			<React.Fragment>
+				<p>Hello {props.planet || 'World'}!</p>
+				<Button color="primary">Okay</Button>
+			</React.Fragment>
+		);
 	}
 
 	HelloPlanet.propTypes = {
@@ -32,6 +38,7 @@ import '../assets/scss/index.scss';
 
 	ReactDOM.render(
 		<HelloPlanet planet="Mars" />,
+
 		document.getElementById('root')
 	);
 
