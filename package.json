@@ -55,6 +55,7 @@
     "core-js": "^2.5.3",
     "promise-polyfill": "^7.1.0",
     "prop-types": "^15.6.1",
+    "react-router-dom": "^4.2.2",
     "reactstrap": "^5.0.0"
   },
   "devDependencies": {
