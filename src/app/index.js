@@ -5,7 +5,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
+import {BrowserRouter as Router} from 'react-router-dom';
 
 // Import polyfills
 import {applyPolyfills} from './base/polyfills';
@@ -13,10 +13,8 @@ import {applyPolyfills} from './base/polyfills';
 // Import methods from the base module
 import {consoleErrorFix, ieViewportFix} from './base/base';
 
-// Import page components
-import {Home} from './home/home.page';
-import {HelloPlanet} from './hello-planet/hello-planet.page';
-import {Topics} from './topics/topics.page';
+import {MainNavigationNavbar} from './main-navigation/main-navigation.navbar';
+import {MainNavigationContent} from './main-navigation/main-navigation-content';
 
 // Import our Sass entrypoint to create the CSS app bundle
 import '../assets/scss/index.scss';
@@ -30,25 +28,11 @@ import '../assets/scss/index.scss';
 
 	const App = () => (
 		<Router>
-			<div>
-				<ul>
-					<li>
-						<Link to="/">Home</Link>
-					</li>
-					<li>
-						<Link to="/hello-planet">Hello Planet</Link>
-					</li>
-					<li>
-						<Link to="/topics">Topics</Link>
-					</li>
-				</ul>
-
+			<React.Fragment>
+				<MainNavigationNavbar />
 				<hr />
-
-				<Route exact path="/" component={Home} />
-				<Route path="/hello-planet" render={(props) => <HelloPlanet {...props} planet="Mars" />} />
-				<Route path="/topics" component={Topics} />
-			</div>
+				<MainNavigationContent />
+			</React.Fragment>
 		</Router>
 	);
 
