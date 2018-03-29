@@ -13,6 +13,9 @@ export const MainNavigation = () => (
 			<NavLink className="nav-link" to="/class-component">Class Component</NavLink>
 		</li>
 		<li className="nav-item">
+			<NavLink className="nav-link" to="/fetch-data">Fetch Data</NavLink>
+		</li>
+		<li className="nav-item">
 			<NavLink className="nav-link" to="/topics">Topics</NavLink>
 		</li>
 	</ul>
