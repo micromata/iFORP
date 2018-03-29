@@ -40,6 +40,10 @@ export const applyPolyfills = () => {
 	 * Globals
 	 */
 
+	if (!window.fetch) {
+		polyfills.push(import(/* webpackChunkName: "fetch" */ 'unfetch/polyfill'));
+	}
+
 	// if (typeof Object.assign !== 'function') {
 	// 	polyfills.push(import(/* webpackChunkName: "Object.assign" */ 'core-js/fn/object/assign'));
 	// }
