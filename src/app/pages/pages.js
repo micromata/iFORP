@@ -6,14 +6,16 @@ import {Home} from './home/home.page';
 import {HelloPlanet} from './hello-planet/hello-planet.page';
 import {Topics} from './topics/topics.page';
 import {Error} from './error/error.page';
+import {ClassComponent} from './class-component/class-component.page';
 
 export const Pages = () => (
 	<React.Fragment>
 		<Switch>
 			<Route exact path="/" component={Home} />
-			<Route path="/hello-planet" render={(props) => <HelloPlanet {...props} planet="Mars" />} />
+			<Route path="/hello-planet" render={props => <HelloPlanet {...props} planet="Mars" />} />
 			<Route path="/topics" component={Topics} />
-			<Route render={(props) => <Error {...props} code="404" message="Page not found" />} />
+			<Route path="/class-component" component={ClassComponent} />
+			<Route render={props => <Error {...props} code="404" message="Page not found" />} />
 		</Switch>
 	</React.Fragment>
 );

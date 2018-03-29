@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const Home = () => (
-	<div>
+	<React.Fragment>
 		<h2>Home</h2>
-	</div>
+	</React.Fragment>
 );
