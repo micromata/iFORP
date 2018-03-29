@@ -1,16 +1,16 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 export const MainNavigation = () => (
-	<ul>
-		<li>
-			<Link to="/">Home</Link>
+	<ul className="nav">
+		<li className="nav-item">
+			<NavLink exact className="nav-link" to="/">Home</NavLink>
 		</li>
-		<li>
-			<Link to="/hello-planet">Hello Planet</Link>
+		<li className="nav-item">
+			<NavLink className="nav-link" to="/hello-planet">Hello Planet</NavLink>
 		</li>
-		<li>
-			<Link to="/topics">Topics</Link>
+		<li className="nav-item">
+			<NavLink className="nav-link" to="/topics">Topics</NavLink>
 		</li>
 	</ul>
 );
