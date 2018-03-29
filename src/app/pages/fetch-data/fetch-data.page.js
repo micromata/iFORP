@@ -1,15 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {Button} from 'reactstrap';
 
 class FetchData extends React.Component {
-	state = {
+	emptyState = {
 		fox: {
 			image: null,
 			link: null
 		}
 	};
 
+	state = this.emptyState;
+
+	resetState = () => {
+		this.setState(this.emptyState);
+	}
+
 	getRandomFox = () => {
+		this.resetState();
 		fetch('https://cors-anywhere.herokuapp.com/https://randomfox.ca/floof/')
 			.then(response => response.json())
 			.then(data => {
@@ -27,14 +35,23 @@ class FetchData extends React.Component {
 				<h3>
 					Random <span style={{fontSize: '30px', position: 'relative', top: 4}}>🦊</span>
 				</h3>
-				<figure>
-					<img src={this.state.fox.image} alt="" />
-					<figcaption><a href="{this.state.fox.link}">Quelle</a></figcaption>
-				</figure>
+				{ this.state.fox.image ? <ShowFox image={this.state.fox.image} link={this.state.fox.link} /> : <p>Loading …</p> }
 				<Button color="primary" onClick={this.getRandomFox}>Get a another one</Button>
 			</React.Fragment>
 		);
 	}
 }
+
+const ShowFox = (props) => (
+	<figure>
+		<img src={props.image} alt="" />
+		<figcaption><a href={props.link}>Quelle</a></figcaption>
+	</figure>
+);
+
+ShowFox.propTypes = {
+	image: PropTypes.string,
+	link: PropTypes.string
+};
 
 export {FetchData};
