@@ -7,6 +7,8 @@
 	},
 	"plugins": [
 		"syntax-dynamic-import",
+		["transform-react-jsx"],
+		["transform-class-properties"],
 		[
 			"transform-runtime",
 			{
