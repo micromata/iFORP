@@ -13,6 +13,9 @@
       "jsx": true
     }
   },
+  "globals": {
+    "PRODUCTION": false
+  },
   "overrides": [
     {
       "files": ["build/*.js"],

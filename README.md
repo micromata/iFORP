@@ -7,7 +7,7 @@
 Baumeister is here to help you to build your things. From Bootstrap themes over static websites to single page applications. Baumeister provides:
 
 - a file structure with focus on maintainability and upgradability
-- a build setup based on Webpack and npm scripts with the following »features«
+- a build setup based on webpack and npm scripts with the following »features«
 	- generate static sites with ease using handlebars templates
 		- optional – see [details](#writing-markup-static-sites-vs-single-page-apps)
 	- transpile, bundle and minify your code
@@ -18,14 +18,14 @@ Baumeister is here to help you to build your things. From Bootstrap themes over 
 	- lint JavaScript, Sass and HTML
 	- optimize images (lossless)
 	- start a local server
-	- keep browsers in sync for testing
 	- delete unused CSS (optional)
 	- check for know vulnerabilities in dependencies
 	- release new versions
 	- run unit tests and create coverage reports
+	- web performance optimization fundamentals 
 	- and more.
 
-Baumeister mainly uses [Webpack](https://webpack.js.org) at its core for transpiling, bundling and minifying files and provides [npm scripts](#build-workflow-and-npm-scripts) for working with the project. Besides that we have defined a few npm scripts to handle things like our [release workflow](#release-workflow). All necessary dependencies are locally installed via npm.
+Baumeister mainly uses [webpack](https://webpack.js.org) at its core for transpiling, bundling and minifying files and provides [npm scripts](#build-workflow-and-npm-scripts) for working with the project. Besides that we have defined a few npm scripts to handle things like our [release workflow](#release-workflow). All necessary dependencies are locally installed via npm.
 
 ## Table of Contents
 
@@ -40,7 +40,7 @@ Baumeister mainly uses [Webpack](https://webpack.js.org) at its core for transpi
 - [Adding polyfills](#adding-polyfills)
 - [Unit tests](#unit-tests)
 - [Configuring linters](#configuring-linters)
-- [Deleting unused CSS](#deleting-unused-css)
+- [Web performance optimization](#web-performance-optimization)
 - [Deactivate cache busting](#deactivate-cache-busting)
 - [Adding banners](#adding-banners)
 - [Release Workflow](#release-workflow)
@@ -112,7 +112,7 @@ npm will look at the `package.json` file and automatically fetch and install the
 
 ### Adjust settings via the Baumeister config file
 
-In the root directory is a file named `baumeister.json` which you can be used to change the most important settings without touching any Webpack config:
+In the root directory is a file named `baumeister.json` which you can be used to change the most important settings without touching any webpack config:
 
 ```json
 {
@@ -140,8 +140,12 @@ In the root directory is a file named `baumeister.json` which you can be used to
   },
   "webpack": {
     "DefinePlugin": {
-      "development": {},
-      "production": {}
+      "development": {
+        "PRODUCTION": false
+      },
+      "production": {
+        "PRODUCTION": true
+      }
     },
     "ProvidePlugin": {
       "$": "jquery",
@@ -151,7 +155,7 @@ In the root directory is a file named `baumeister.json` which you can be used to
 }
 ```
 
-`vendor.bundleCSS` and `vendor.includeStaticFiles` makes it possible to include additional dependencies without touching any Webpack config. These settings are explained in depth in the section  [Using external libraries](#using-external-libraries) within this document.
+`vendor.bundleCSS` and `vendor.includeStaticFiles` makes it possible to include additional dependencies without touching any webpack config. These settings are explained in depth in the section  [Using external libraries](#using-external-libraries) within this document.
 
 The ramifications of changing the `useHandlebars` setting are explained in the section [Writing markup (static sites vs. single page apps)](#writing-markup-static-sites-vs-single-page-apps).
 
@@ -159,14 +163,18 @@ The ramifications of changing the `useHandlebars` setting are explained in the s
 
 ### Define global constants at compile time
 
-If you want to provide values for different types of builds (`NODE_ENV` is a popular example), you can define them inside the `dev` and `prod` properties of the `DefinePlugin` section.
-The plugin does a direct text replacement, so the value given to it must include actual quotes inside of the string. You can use alternating quotes, like `"'production'"`, or  use `JSON.stringify('production')`.
-You may take a look at the official [Webpack DefinePlugin docs](https://webpack.js.org/plugins/define-plugin/).
+If you want to provide constants for different types of builds, you can define them inside the `development` and `production` properties of the `DefinePlugin` section.
+
+The plugin does a direct text replacement, so the value given to it must include actual quotes inside of the string. You can use alternating quotes, like `"'My value'"`, or  use `JSON.stringify('My value')`.
+
+This is very useful to change behaviour between development and production build. For example adapting the URL prefix to an API. This is why we have predefined the constant `PRODUCTION`.
+
+You may take a look at the official [webpack DefinePlugin docs](https://webpack.js.org/plugins/define-plugin/).
 
 ### Automatically load modules instead of requiring / importing them
 
 The `ProvidePlugin` section is an object where the value equals to the module name and the key represents the property name of the window object the module gets mapped to.
-See the official [Webpack ProvidePlugin docs](https://webpack.js.org/plugins/define-plugin/) for further information.
+See the official [webpack ProvidePlugin docs](https://webpack.js.org/plugins/define-plugin/) for further information.
 
 ## Build Workflow and npm scripts
 
@@ -178,8 +186,8 @@ When completed the setup, you'll be able to run various npm scripts from the com
 | `npm test`              | *Lints your JavaScript files and runs unit test via the Jest CLI.* |
 | `npm run test:watch`    | *Runs unit test with Jests watch option.* |
 | `npm run build`         | *Builds for production to `dist` directory.* |
-| `npm run build:check`   | *Starts a static fileserver serving the `dist` directory.* |
-| `npm run build:analyze` | *Starts »Webpack Bundle Analyzer« to visualize size of Webpack output files* |
+| `npm run build:serve`   | *Starts a static fileserver serving the `dist` directory.* |
+| `npm run build:analyze` | *Starts »webpack bundle analyzer« to visualize size of webpack output files* |
 
 
 There a lot more scripts defined in the `package.json` but most of the other ones are used to combine scripts. We recommend to to use a tool like [npm task list](https://github.com/ruyadorno/ntl) which provides a interactive CLI menu to list and select npm scripts.
@@ -222,6 +230,9 @@ In this case you have to switch off Handlebars compiling in `baumeister.json`:
  */
 "useHandlebars": false
 ```
+
+**Please note:**  
+that we have additional guides for setting up Baumeister to be used with React and other single page applications libraries/frameworks in the Baumeister [Wiki](https://github.com/micromata/Baumeister/wiki). The [Baumeister Yeoman Generator](https://github.com/micromata/generator-baumeister) will handle the adaptions for you if you choose to create a single page application.
 
 ### Using handlebars
 
@@ -683,7 +694,13 @@ We are using [stylelint-config-standard](https://github.com/stylelint/stylelint-
 
 See [stylelint rules](https://stylelint.io/user-guide/rules/) in case you like get details to these rules and the [stylelint user guide](https://stylelint.io/user-guide/configuration/) to see how to configure stylelint (e.g. how to turn of rules).
 
-## Deleting unused CSS
+## Web performance optimization
+
+There are a few things that you don’t have to take care about, because Baumeister already had set them up to deliver the best possible optimizations while beeing safe to use (eg. image optimization and tree shaking).
+
+But besides that, you might want to tweak settings to get an even better performance.
+
+### Deleting unused CSS
 
 We are using [PurifyCSS](https://github.com/purifycss/purifycss) to remove unused selectors from your CSS. This is fully optional and is turned off by default.
 
@@ -693,13 +710,44 @@ In addition you can define a PurifyCSS `whitelist` defining an array of selector
 
 For example. `["button-active", "*modal*"]` will leave any selector that includes `modal` in it and selectors that match `button-active`. The asterisks act like a wildcard, so wrapping a string with `*`, leaves all selectors that include it.
 
-## Deactivate cache busting
+#### Alternative: selective imports:
 
-You should set far-future `Cache-Control` and `Expires` headers (see [Apache settings](https://github.com/h5bp/server-configs-apache/blob/master/src/web_performance/expires_headers.conf) and settings for other [web servers](https://github.com/h5bp/server-configs)). This ensures resources are cached for a specified time period (usually a year or more). And this will remain as long as the user doesn’t erase their browser cache.
+You could also import just the CSS from Bootstrap that you actually need in your project in `src/assets/scss/index.scss`. But you won‘t get your CSS bundle size that small in comparison to PurifyCSS. 
 
-By default we are revisioning the bundled assets with adding a hash to the filenames for the production build. So for instance the file `app.bundle.js` will be renamed to something like `app.6c38e655f70a4f9e3d26.bundle.js`. The filename will change when the file content changes which will force the browser to re-download changed files instead of serving them from the cache.
+### Make use of long-term caching
+
+You should set far-future `Cache-Control` and `Expires` headers (see [Apache settings](https://github.com/h5bp/server-configs-apache/blob/master/src/web_performance/expires_headers.conf) and settings for other [web servers](https://github.com/h5bp/server-configs)). This ensures resources are cached for a specified time period (usually a year or more). So the browser will only hit the network if the file name changes (or if a year passes or if the user manually erases their browser cache).
+
+By default we are revisioning the bundled assets with adding a content based hash to the filenames for the production build. So for instance the file `app.bundle.js` will be renamed to something like `app.6c38e655f70a4f9e3d26.bundle.js`. The filename will change when the file content changes which will force the browser to re-download changed files instead of serving them from the cache.
+
+We’ve set up webpack to store the webpack runtime in an separate file to improve the cacheability of the vendor bundle ([otherwise](https://developers.google.com/web/fundamentals/performance/webpack/use-long-term-caching#webpack_runtime_code) the hash of `vendor.js` would change even with changes to `app.js`).
+
+#### Deactivate cache busting
 
 You can disable hash based file name revving by setting the `cacheBusting` property within `baumeister.json` to `false`.
+
+### Selective JavaScript imports
+
+Some libraries, such as react-bootstrap and lodash, are rather large and pulling in the entire module just to use a few pieces would cause unnecessary bloat to your JavaScript vendor bundle. 
+
+`babel-plugin-transform-imports` can be used to add only what you need to your bundle. It automatically transforms member style imports such as:
+
+```javascript
+import { Row, Grid as MyGrid } from 'react-bootstrap';
+import { merge } from 'lodash';
+```
+
+into default style imports:
+
+```javascript
+import Row from 'react-bootstrap/lib/Row';
+import MyGrid from 'react-bootstrap/lib/Grid';
+import merge from 'lodash/merge';
+```
+
+Check the [packages page](https://www.npmjs.com/package/babel-plugin-transform-imports#thats-stupid-why-would-you-do-that) to read about the why.
+
+Baumeister has already set up the plugin for `lodash`, `reactstrap`, `react-bootstrap` and `react-router` just in case you will use them. See `src/app/.babelrc` to add aditional libraries.
 
 ## Adding banners
 
@@ -827,7 +875,7 @@ Are defined in the body of the commit message.
 
 Example:
 ```
-feat(build): Replace Gulp with Webpack and npm scripts
+feat(build): Replace Gulp with webpack and npm scripts
 <BLANK LINE>
 Closes #225
 BREAKING CHANGE: Gulp tasks aren’t available any longer.

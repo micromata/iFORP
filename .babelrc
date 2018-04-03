@@ -1,24 +1,4 @@
 {
 	"presets": ["env"],
-	"plugins": [
-		"syntax-dynamic-import",
-		"transform-react-jsx",
-		"transform-object-rest-spread",
-		"transform-class-properties",
-		[
-			"transform-runtime",
-			{
-				"polyfill": false,
-				"regenerator": true
-			}
-		],
-		[
-			"transform-regenerator",
-			{
-				"asyncGenerators": true,
-				"generators": true,
-				"async": true
-			}
-		]
-	]
+	"plugins": ["transform-object-rest-spread"]
 }
