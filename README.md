@@ -9,6 +9,8 @@ The tooling is based on Baumeister v3.0.0 and therefore sports the following set
 	- using the `env` preset whith enabled tree shaking
 	- using the following plugins
 		- `transform-object-rest-spread` – to make use of rest and spread in object literals
+		- `transform-react-jsx` - to turn JSX into React function calls
+		- `transform-class-properties` –  to make use of static class properties
 		- `syntax-dynamic-import` – to enable dynamic imports and lazy loading
 		- `transform-runtime` and `transform-regenerator` to make use of async/await
 		- `transform-imports` to transform your imports to only import specific components, which ensures not whole libraries gets included
