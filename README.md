@@ -1,5 +1,34 @@
 # React Playground
 
+The tooling is based on Baumeister v3.0.0 and therefore sports the following setup focused on web performance:
+
+- webpack 4.x
+	- using content based hashes to make use of long-term caching
+	- splitting the webpack runtime in an separate file to improve the cacheability of the vendor bundle
+- Babel 
+	- using the `env` preset whith enabled tree shaking
+	- using the following plugins
+		- `transform-object-rest-spread` – to make use of rest and spread in object literals
+		- `syntax-dynamic-import` – to enable dynamic imports and lazy loading
+		- `transform-runtime` and `transform-regenerator` to make use of async/await
+		- `transform-imports` to transform your imports to only import specific components, which ensures not whole libraries gets included
+	- see [.babelrc](https://github.com/micromata/Baumeister/blob/master/.babelrc) and [src/app/.babelrc](https://github.com/micromata/Baumeister/blob/master/src/app/.babelrc)
+- ESLint
+	- using `allowImportExportEverywhere` `jsx` parser option and `eslint-plugin-react`
+	- see [.eslintrc.json](https://github.com/micromata/Baumeister/blob/master/.eslintrc.json)
+
+Below you can find the Readme of Baumeister.
+
+#### tldr;
+
+| Command                 | Description |
+| ----------------------- | --- |
+| `npm start`             | *Builds for development, starts a webserver, watches files for changes, rebuilds incremental and reloads your browser.* |
+| `npm test`              | *Lints your JavaScript files and runs unit test via the Jest CLI.* |
+| `npm run test:watch`    | *Runs unit test with Jests watch option.* |
+| `npm run build`         | *Builds for production to `dist` directory.* |
+| `npm run build:serve`   | *Starts a static fileserver serving the `dist` directory.* |
+| `npm run build:analyze` | *Starts »webpack bundle analyzer« to visualize size of webpack output files* |
 
 
 ----
