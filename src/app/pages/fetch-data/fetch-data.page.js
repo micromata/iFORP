@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {Button} from 'reactstrap';
+
+import {ShowFox} from './show-fox';
 
 class FetchData extends React.Component {
 	emptyState = {
@@ -35,23 +35,10 @@ class FetchData extends React.Component {
 				<h3>
 					Random <span style={{fontSize: '30px', position: 'relative', top: 4}}>🦊</span>
 				</h3>
-				{ this.state.fox.image ? <ShowFox image={this.state.fox.image} link={this.state.fox.link} /> : <p>Loading …</p> }
-				<Button color="primary" onClick={this.getRandomFox}>Get a another one</Button>
+				{ this.state.fox.image ? <ShowFox image={this.state.fox.image} link={this.state.fox.link} update={this.getRandomFox} /> : <p>Loading …</p> }
 			</React.Fragment>
 		);
 	}
 }
-
-const ShowFox = (props) => (
-	<figure>
-		<img src={props.image} alt="" />
-		<figcaption><a href={props.link}>Quelle</a></figcaption>
-	</figure>
-);
-
-ShowFox.propTypes = {
-	image: PropTypes.string,
-	link: PropTypes.string
-};
 
 export {FetchData};
