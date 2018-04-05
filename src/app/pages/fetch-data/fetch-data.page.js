@@ -19,7 +19,7 @@ class FetchData extends React.Component {
 
 	handleUpdate = this.handleUpdate.bind(this);
 
-	componentWillMount() {
+	componentDidMount() {
 		this.getRandomFox();
 	}
 

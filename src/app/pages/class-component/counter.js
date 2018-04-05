@@ -8,7 +8,7 @@ class Counter extends React.Component {
 	decrementIsDisabled = () => this.state.count === 0;
 
 	decrement = () => {
-		this.setState(state => ({count: state.count === 0 ? state.count : state.count - 1}));
+		this.setState(prevState => ({count: prevState.count === 0 ? prevState.count : prevState.count - 1}));
 	}
 
 	increment = () => {
