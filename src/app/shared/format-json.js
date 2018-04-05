@@ -8,5 +8,8 @@ export const FormatJson = ({json}) => (
 );
 
 FormatJson.propTypes = {
-	json: PropTypes.object || PropTypes.array
+	json: PropTypes.oneOfType([
+		PropTypes.array,
+		PropTypes.object
+	])
 };
