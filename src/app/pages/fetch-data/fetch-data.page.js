@@ -12,20 +12,22 @@ class FetchData extends React.Component {
 
 	state = this.emptyState;
 
-	resetState = () => {
-		this.setState(this.emptyState);
+	handleUpdate = this.handleUpdate.bind(this);
+
+	componentWillMount() {
+		this.getRandomFox();
 	}
 
-	getRandomFox = () => {
-		this.resetState();
+	getRandomFox() {
+		this.setState(this.emptyState);
 		fetch('https://cors-anywhere.herokuapp.com/https://randomfox.ca/floof/')
 			.then(response => response.json())
 			.then(data => {
 				this.setState({fox: {image: data.image, link: data.link}});
 			});
-	};
+	}
 
-	componentWillMount() {
+	handleUpdate() {
 		this.getRandomFox();
 	}
 
@@ -35,7 +37,7 @@ class FetchData extends React.Component {
 				<h3>
 					Random <span style={{fontSize: '30px', position: 'relative', top: 4}}>🦊</span>
 				</h3>
-				{ this.state.fox.image ? <ShowFox image={this.state.fox.image} link={this.state.fox.link} update={this.getRandomFox} /> : <p>Loading …</p> }
+				{ this.state.fox.image ? <ShowFox image={this.state.fox.image} link={this.state.fox.link} onRequestNewFox={this.handleUpdate} /> : <p>Loading …</p> }
 			</React.Fragment>
 		);
 	}

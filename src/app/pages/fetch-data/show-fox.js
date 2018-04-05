@@ -8,12 +8,12 @@ export const ShowFox = (props) => (
 			<img src={props.image} alt="" />
 			<figcaption><a href={props.link}>Quelle</a></figcaption>
 		</figure>
-		<Button color="primary" onClick={props.update}>Get a another one</Button>
+		<Button color="primary" onClick={props.onRequestNewFox}>Get a another one</Button>
 	</React.Fragment>
 );
 
 ShowFox.propTypes = {
 	image: PropTypes.string,
 	link: PropTypes.string,
-	update: PropTypes.func
+	onRequestNewFox: PropTypes.func
 };
