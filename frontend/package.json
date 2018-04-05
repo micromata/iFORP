@@ -53,6 +53,7 @@
     "postmerge": "npm install"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "bootstrap": "^4.0.0",
     "core-js": "^2.5.4",
     "promise-polyfill": "^7.1.1",

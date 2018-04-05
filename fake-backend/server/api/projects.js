@@ -3,6 +3,7 @@
 const SetupEndpoint = require('./setup/');
 
 module.exports = SetupEndpoint({
+    // statusCode: 401,
     name: 'projects',
     urls: [
         {
