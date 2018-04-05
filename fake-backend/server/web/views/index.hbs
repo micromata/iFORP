@@ -1,0 +1,24 @@
+{{> header}}
+
+<h1>Endpoints / Routes</h1>
+
+<pre class="hidden"><code>{{{json endpoints}}}</code></pre>
+
+{{#if endpoints}}
+    <nav class="endpoints">
+        <ul>
+            {{#each endpoints}}
+                {{#each this.urls}}
+                    <li>
+                        <a href="{{../this.path}}{{removeCurlyBraces this.params}}">{{../this.name}}{{this.params}}</a>
+                        <span class="method">({{methods this.requests}})</span>
+                    </li>
+                {{/each}}
+            {{/each}}
+        </ul>
+    </nav>
+{{else}}
+    <p>No endpoints configured yet …</p>
+{{/if}}
+
+{{> footer}}

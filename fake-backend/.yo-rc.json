@@ -1,0 +1,8 @@
+{
+  "generator-http-fake-backend": {
+    "promptValues": {
+      "serverPort": "8087",
+      "apiPrefix": "/api"
+    }
+  }
+}
