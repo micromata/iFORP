@@ -1,0 +1,21 @@
+### OS ###
+*.DS_Store
+*thumbs.db
+*desktop.ini
+
+### npm ###
+node_modules
+
+### Build ###
+dist
+server
+coverage
+.metalsmith-build
+.eslintcache
+.webpack-stats.json
+.webpack-assets.json
+
+### Dev ###
+*.sublime-project
+*.sublime-workspace
+.vscode
