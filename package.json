@@ -1,6 +1,6 @@
 {
-  "name": "react-playground",
-  "title": "React Playground",
+  "name": "iforp",
+  "title": "iforp",
   "description": "",
   "homepage": "",
   "author": {
@@ -11,7 +11,7 @@
   "engines": {
     "node": ">=6.0.0"
   },
-  "license": "MIT",
+  "license": "All rights reserved",
   "version": "0.0.0",
   "repository": {
     "type": "",

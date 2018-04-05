@@ -13,7 +13,6 @@ import {applyPolyfills} from './base/polyfills';
 // Import methods from the base module
 import {consoleErrorFix, ieViewportFix} from './base/base';
 
-import {MainNavigation} from './main-navigation/main-navigation';
 import {Pages} from './pages/pages';
 
 // Import our Sass entrypoint to create the CSS app bundle
@@ -29,8 +28,6 @@ import '../assets/scss/index.scss';
 	const App = () => (
 		<Router>
 			<React.Fragment>
-				<MainNavigation />
-				<hr />
 				<Pages />
 			</React.Fragment>
 		</Router>
@@ -38,7 +35,7 @@ import '../assets/scss/index.scss';
 
 	ReactDOM.render(
 		<App />,
-		document.getElementById('root'));
+		document.getElementById('app'));
 })().catch(err => {
 	console.error(err);
 });

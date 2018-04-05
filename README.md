@@ -1,4 +1,4 @@
-# React Playground
+# iforp
 
 The tooling is based on Baumeister v3.0.0 and therefore sports the following setup focused on web performance:
 
