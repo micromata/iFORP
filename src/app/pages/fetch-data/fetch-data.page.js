@@ -3,6 +3,11 @@ import React from 'react';
 import {ShowFox} from './show-fox';
 
 class FetchData extends React.Component {
+
+	/**
+	 * Class properties like empyState, state, handleUpdate could also be part of the constructor(),
+	 * but we don’t need to write it this way because of babel-plugin-transform-class-properties.
+	 */
 	emptyState = {
 		fox: {
 			image: null,
