@@ -21,6 +21,7 @@ if (!cliFlags.json) {
 
 module.exports = {
 	devServer,
+	devtool: isDevMode() ? 'inline-cheap-module-source-map' : false,
 	entry,
 	module: {rules},
 	output,
