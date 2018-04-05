@@ -1,0 +1,22 @@
+//
+// Cards
+// --------------------------------------------------
+
+#start,
+#projects {
+	.card {
+		border: none;
+
+		img.rounded {
+			border-radius: 0.5rem !important;
+		}
+	}
+}
+
+#whiteboard {
+	span.card-divider-horizontal {
+		border-bottom: 2px solid black;
+		width: 40px;
+		height: 0;
+	}
+}

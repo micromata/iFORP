@@ -1,3 +1,5 @@
+@import "footer";
+
 //
 // Scaffolding
 // --------------------------------------------------
@@ -16,17 +18,21 @@
 @viewport { width: device-width; }
 // stylelint-enable
 
+html {
+	// Get properties related to sticky footer. See _footer.scss
+	@include footer-htmlProps();
+}
+
 body {
 	overflow-y: scroll;
-	padding: 20px 0;
+	padding-top: 70px;
+	padding-bottom: 30px;
 
 	// Optimize legibility on Retina displays
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-}
 
-img {
-	max-width: 100%;
-	width: auto;
+	// Get properties related to sticky footer. See _footer.scss
+	@include footer-bodyProps();
 }
