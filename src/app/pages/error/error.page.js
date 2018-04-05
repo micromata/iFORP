@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export const Error = ({code, message}) => (
-	<h2>
-		{code} – {message}
-	</h2>
+	<main className="container">
+		<h2>
+			Error: {code} – {message}
+		</h2>
+	</main>
 );
 
 Error.propTypes = {
