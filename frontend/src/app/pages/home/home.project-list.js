@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 
 // eslint-disable-next-line no-unused-vars
 import {FormatJson} from '../../shared/format-json';
-import {ProjectListItem} from './project-list-item';
+import {ProjectListItem} from './home.project-list-item';
 
 export const ProjectList = ({projects}) => (
 	<React.Fragment>

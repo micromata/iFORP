@@ -1,8 +1,8 @@
 import React from 'react';
 
 import {get} from '../../base/http';
-import {NewProject} from './new-project';
-import {ProjectList} from './project-list';
+import {NewProject} from './home.new-project';
+import {ProjectList} from './home.project-list';
 
 export class Home extends React.Component {
 

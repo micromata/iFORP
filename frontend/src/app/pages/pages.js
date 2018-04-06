@@ -2,9 +2,9 @@ import React from 'react';
 import {Route, Switch} from 'react-router-dom';
 
 // Import page components
-import {Home} from './home/home.page';
-import {Error} from './error/error.page';
-import {Projects} from './projects/projects.page';
+import {Home} from './home/home.container';
+import {Error} from './error/error.container';
+import {Projects} from './projects/projects.container';
 
 export const Pages = () => (
 	<React.Fragment>
