@@ -13,8 +13,8 @@ export class Projects extends React.Component {
 		searchTerm: ''
 	};
 
-	handleSearch = event => {
-		this.setState({searchTerm: event.target.value});
+	handleSearch = searchTerm => {
+		this.setState({searchTerm});
 	}
 
 	async componentDidMount() {
