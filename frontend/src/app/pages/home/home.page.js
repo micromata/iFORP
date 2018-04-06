@@ -1,6 +1,6 @@
 import React from 'react';
-import request from 'axios';
 
+import {get} from '../../base/http';
 import {NewProject} from './new-project';
 import {ProjectList} from './project-list';
 
@@ -11,13 +11,8 @@ export class Home extends React.Component {
 	};
 
 	async componentDidMount() {
-		try {
-			const {data} = await request.get('http://localhost:8087/api/projects/home');
-			console.log(data);
-			this.setState({projects: data});
-		} catch (error) {
-			console.error(error);
-		}
+		const projects = await get('projects/home');
+		this.setState({projects});
 	}
 
 	render() {
