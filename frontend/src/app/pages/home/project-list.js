@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
+// eslint-disable-next-line no-unused-vars
 import {FormatJson} from '../../shared/format-json';
 import {ProjectListItem} from './project-list-item';
 
@@ -13,7 +14,7 @@ export const ProjectList = ({projects}) => (
 				<Link className="btn btn-secondary" to="/projects"><span className="oi oi-ellipses"></span></Link>
 			</div>
 		</div>
-		<FormatJson json={projects} />
+		{/* <FormatJson json={projects} /> */}
 	</React.Fragment>
 );
 
