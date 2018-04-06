@@ -72,9 +72,9 @@ export const applyPolyfills = () => {
 	 * String prototype methods
 	 */
 
-	// if (!String.prototype.includes) {
-	// 	polyfills.push(import(/* webpackChunkName: "String.prototype.includes" */ 'core-js/fn/string/includes'));
-	// }
+	if (!String.prototype.includes) {
+		polyfills.push(import(/* webpackChunkName: "String.prototype.includes" */ 'core-js/fn/string/includes'));
+	}
 
 	// if (!String.prototype.startsWith) {
 	// 	polyfills.push(import(/* webpackChunkName: "String.prototype.startsWith" */ 'core-js/fn/string/starts-with'));

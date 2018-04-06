@@ -8,8 +8,13 @@ import {PropTypes} from 'prop-types';
 export class Projects extends React.Component {
 
 	state = {
-		projects: []
+		projects: [],
+		searchTerm: ''
 	};
+
+	handleSearch = event => {
+		this.setState({searchTerm: event.target.value});
+	}
 
 	async componentDidMount() {
 		const projects = await get('projects/list');
@@ -20,8 +25,8 @@ export class Projects extends React.Component {
 		return (
 			<main id="projects" className="container">
 				<Header />
-				<ProjectSearch />
-				<ProjectList projects={this.state.projects} />
+				<ProjectSearch searchTerm={this.state.searchTerm} onSearchInput={this.handleSearch} />
+				<ProjectList projects={this.state.projects} searchTerm={this.state.searchTerm} />
 				<FormatJson json={this.state.projects} />
 			</main>
 		);
@@ -39,23 +44,32 @@ const Header = () => (
 	</div>
 );
 
-const ProjectSearch = () => (
+const ProjectSearch = ({searchTerm, onSearchInput}) => (
 	<div className="row">
 		<form className="form-inline mt-2 ml-3 mb-3">
-			<input className="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" />
+			<input className="form-control mr-sm-2" type="text" value={searchTerm} onChange={onSearchInput} placeholder="Search" aria-label="Search" />
 			<button className="btn btn-success my-2 my-sm-0" type="submit">Search</button>
 		</form>
 	</div>
 );
 
-const ProjectList = ({projects}) => (
+ProjectSearch.propTypes = {
+	searchTerm: PropTypes.string,
+	onSearchInput: PropTypes.func
+};
+
+const ProjectList = ({projects, searchTerm}) => (
 	<div className="row text-center">
-		{projects.map(project => <ProjectListItem key={project.id} project={project} />)}
+		{projects
+			.filter(project => project.name.trim().toLowerCase().includes(searchTerm.trim().toLowerCase()))
+			.map(project => <ProjectListItem key={project.id} project={project} />)
+		}
 	</div>
 );
 
 ProjectList.propTypes = {
-	projects: PropTypes.array
+	projects: PropTypes.array,
+	searchTerm: PropTypes.string
 };
 
 const ProjectListItem = ({project: {id, thumbnail, name}}) => (
