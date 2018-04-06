@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 
 import {FormatJson} from '../../shared/format-json';
 import {get} from '../../base/http';
+import {PropTypes} from 'prop-types';
 
 /*
 PageComponent
@@ -28,7 +29,7 @@ export class Projects extends React.Component {
 			<main id="projects" className="container">
 				<ProjectsHeader />
 				<ProjectsSearch />
-				<ProjectsList />
+				<ProjectsList projects={this.state.projects} />
 				<FormatJson json={this.state.projects} />
 			</main>
 		);
@@ -55,19 +56,27 @@ const ProjectsSearch = () => (
 	</div>
 );
 
-const ProjectsList = () => (
+const ProjectsList = ({projects}) => (
 	<div className="row text-center">
-		<ProjectsListItem />
+		{projects.map(project => <ProjectsListItem key={project.id} project={project} />)}
 	</div>
 );
 
-const ProjectsListItem = () => (
-	<a href="#">
+ProjectsList.propTypes = {
+	projects: PropTypes.array
+};
+
+const ProjectsListItem = ({project: {id, thumbnail, name}}) => (
+	<a href={id}>
 		<div className="card m-3">
-			<img className="card-img-top rounded" src="http://via.placeholder.com/155x120" alt="Card image cap" />
+			<img className="card-img-top rounded" src={thumbnail} alt="Card image cap" />
 			<div className="card-body">
-				<h5 className="card-title">Project 1</h5>
+				<h5 className="card-title">{name}</h5>
 			</div>
 		</div>
 	</a>
 );
+
+ProjectsListItem.propTypes = {
+	project: PropTypes.object
+};
