@@ -12,6 +12,13 @@ module.exports = SetupEndpoint({
                 method: 'GET',
                 response: '/response-files/projects/home.json'
             }]
+        },
+        {
+            params: '/list',
+            requests: [{
+                method: 'GET',
+                response: '/response-files/projects/list.json'
+            }]
         }
     ]
 });
