@@ -14,3 +14,12 @@ export async function get(url) {
 		console.error(error);
 	}
 }
+
+export async function post(url, payload) {
+	try {
+		const {data} = await request.post(apiPrefix + url, payload);
+		return data;
+	} catch (error) {
+		console.error(error);
+	}
+}

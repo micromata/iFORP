@@ -19,6 +19,19 @@ module.exports = SetupEndpoint({
                 method: 'GET',
                 response: '/response-files/projects/list.json'
             }]
+        },
+        {
+            params: '/create',
+            requests: [{
+                /**
+                 * Payload:
+                 * {
+                 *   name: string
+                 * }
+                 */
+                method: 'POST',
+                response: '/response-files/projects/create.json'
+            }]
         }
     ]
 });
