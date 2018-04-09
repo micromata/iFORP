@@ -1,3 +1,13 @@
 {
-  "name": "Default Whiteboard"
+  "name": "Default Whiteboard",
+  "views": [
+    {
+      "id": 1,
+      "name": "Login #1"
+    },
+    {
+      "id": 2,
+      "name": "Registrierung"
+    }
+  ]
 }

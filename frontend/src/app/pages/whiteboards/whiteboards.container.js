@@ -3,6 +3,8 @@ import {PropTypes} from 'prop-types';
 
 import {get} from '../../base/http';
 import {FormatJson} from '../../shared/format-json';
+import {Header} from './whiteboards.header';
+import {Views} from './whiteboards.views';
 
 export class Whiteboards extends React.Component {
 
@@ -22,9 +24,13 @@ export class Whiteboards extends React.Component {
 
 	render() {
 		return (
-			<main id="" className="container">
-				Whiteboards des Projektes <code>{this.props.match.params.projectId}</code><br/>
-				Ausgewähltes Whiteboard: <code>{this.props.match.params.whiteboardId}</code>
+			<main id="whiteboard" className="container">
+				<Header
+					project={this.state.project}
+					currentWhiteboard={this.state.currentWhiteboard}
+					whiteboards={this.state.whiteboards}
+				/>
+				<Views views={this.state.currentWhiteboard.views} />
 				<FormatJson json={this.state} />
 			</main>
 		);
