@@ -1,14 +1,21 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 
+import {get} from '../../base/http';
+import {FormatJson} from '../../shared/format-json';
+
 export class Whiteboards extends React.Component {
 
 	state = {
-		whiteboards: []
+		whiteboards: [],
+		currentWhiteboard: {}
 	};
 
 	async componentDidMount() {
-		console.log(this.props.match.params);
+		const {projectId, whiteboardId} = this.props.match.params;
+		const whiteboards = await get(`whiteboards/list/${projectId}`);
+		const currentWhiteboard = await get(`whiteboards/details/${whiteboardId}`);
+		this.setState({whiteboards, currentWhiteboard});
 	}
 
 	render() {
@@ -16,6 +23,7 @@ export class Whiteboards extends React.Component {
 			<main id="" className="container">
 				Whiteboards des Projektes <code>{this.props.match.params.projectId}</code><br/>
 				Ausgewähltes Whiteboard: <code>{this.props.match.params.whiteboardId}</code>
+				<FormatJson json={this.state} />
 			</main>
 		);
 	}
