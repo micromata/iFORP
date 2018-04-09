@@ -10,6 +10,11 @@ export class Home extends React.Component {
 		projects: []
 	};
 
+	handleNewProject = () => {
+		console.log('createNewProject');
+		console.log(this.state.projects);
+	}
+
 	async componentDidMount() {
 		const projects = await get('projects/home');
 		this.setState({projects});
@@ -18,7 +23,7 @@ export class Home extends React.Component {
 	render() {
 		return (
 			<main id="start" className="container">
-				<NewProject />
+				<NewProject onNewProject={this.handleNewProject} />
 				<ProjectList projects={this.state.projects} />
 			</main>
 		);

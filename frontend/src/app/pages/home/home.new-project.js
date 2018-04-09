@@ -1,16 +1,28 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {PropTypes} from 'prop-types';
 
-export const NewProject = () => (
-	<section className="jumbotron text-center">
-		<div className="container">
-			<h1 className="jumbotron-heading mb-5">Start prototyping with a</h1>
-			<p>
-				<Link className="btn btn-primary btn-lg" to="/whiteboard">New Project</Link>
-			</p>
-			<p>
-				or
-			</p>
-		</div>
-	</section>
-);
+export const NewProject = ({onNewProject}) => {
+
+	const handleClick = event => {
+		event.preventDefault();
+		return onNewProject();
+	};
+
+	return (
+		<section className="jumbotron text-center">
+			<div className="container">
+				<h1 className="jumbotron-heading mb-5">Start prototyping with a</h1>
+				<p>
+					<a className="btn btn-primary btn-lg" onClick={handleClick} href="#">New Project</a>
+				</p>
+				<p>
+					or
+				</p>
+			</div>
+		</section>
+	);
+};
+
+NewProject.propTypes = {
+	onNewProject: PropTypes.func
+};
