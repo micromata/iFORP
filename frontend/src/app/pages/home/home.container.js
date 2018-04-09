@@ -10,6 +10,8 @@ export class Home extends React.Component {
 		projects: []
 	};
 
+	amountOfProjectsToShow = 3;
+
 	handleNewProject = async () => {
 		const name = `Project ${this.state.projects.length + 1}`;
 		const response = await post('projects/create', {name});
@@ -17,8 +19,8 @@ export class Home extends React.Component {
 	}
 
 	async componentDidMount() {
-		const projects = await get('projects/home');
-		this.setState({projects});
+		const projects = await get('projects/list');
+		this.setState({projects: projects.filter((project, index) => index < this.amountOfProjectsToShow)});
 	}
 
 	render() {

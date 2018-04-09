@@ -7,13 +7,6 @@ module.exports = SetupEndpoint({
     name: 'projects',
     urls: [
         {
-            params: '/home',
-            requests: [{
-                method: 'GET',
-                response: '/response-files/projects/home.json'
-            }]
-        },
-        {
             params: '/list',
             requests: [{
                 method: 'GET',
