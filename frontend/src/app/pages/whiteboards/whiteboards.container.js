@@ -8,14 +8,16 @@ export class Whiteboards extends React.Component {
 
 	state = {
 		whiteboards: [],
-		currentWhiteboard: {}
+		currentWhiteboard: {},
+		project: {}
 	};
 
 	async componentDidMount() {
 		const {projectId, whiteboardId} = this.props.match.params;
 		const whiteboards = await get(`whiteboards/list/${projectId}`);
 		const currentWhiteboard = await get(`whiteboards/details/${whiteboardId}`);
-		this.setState({whiteboards, currentWhiteboard});
+		const project = await get(`projects/details/${projectId}`);
+		this.setState({whiteboards, currentWhiteboard, project});
 	}
 
 	render() {

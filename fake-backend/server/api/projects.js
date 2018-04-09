@@ -14,6 +14,13 @@ module.exports = SetupEndpoint({
             }]
         },
         {
+            params: '/details/{projectId}',
+            requests: [{
+                method: 'GET',
+                response: '/response-files/projects/details.json'
+            }]
+        },
+        {
             params: '/create',
             requests: [{
                 /**
