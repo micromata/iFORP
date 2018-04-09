@@ -1,4 +1,5 @@
 import React from 'react';
+import {PropTypes} from 'prop-types';
 
 import {get, post} from '../../base/http';
 import {NewProject} from './home.new-project';
@@ -15,7 +16,7 @@ export class Home extends React.Component {
 	handleNewProject = async () => {
 		const name = `Project ${this.state.projects.length + 1}`;
 		const response = await post('projects/create', {name});
-		console.log(response);
+		this.props.history.push(`/whiteboards/project-id/${response.id}/whiteboard-id/1`);
 	}
 
 	async componentDidMount() {
@@ -32,3 +33,7 @@ export class Home extends React.Component {
 		);
 	}
 }
+
+Home.propTypes = {
+	history: PropTypes.object
+};
