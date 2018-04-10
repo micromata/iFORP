@@ -19,6 +19,13 @@ module.exports = SetupEndpoint({
                 method: 'GET',
                 response: '/response-files/whiteboards/details.json'
             }]
+        },
+        {
+            params: '/details/2',
+            requests: [{
+                method: 'GET',
+                response: '/response-files/whiteboards/details-2.json'
+            }]
         }
     ]
 });

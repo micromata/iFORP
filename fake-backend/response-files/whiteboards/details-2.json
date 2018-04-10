@@ -1,0 +1,14 @@
+{
+  "name": "Second Whiteboard",
+  "id": 2,
+  "views": [
+    {
+      "id": 1,
+      "name": "Another Login"
+    },
+    {
+      "id": 2,
+      "name": "Another Registrierung"
+    }
+  ]
+}
