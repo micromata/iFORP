@@ -14,14 +14,6 @@ export class Whiteboards extends React.Component {
 		project: {}
 	};
 
-	handleWhiteboardChange = (whiteboard) => {
-		console.log('handleWhiteboardChange');
-		console.log(whiteboard);
-		const {projectId} = this.props.match.params;
-		this.getData(projectId, whiteboard.id);
-		this.props.history.push(`/whiteboards/project-id/${projectId}/whiteboard-id/${whiteboard.id}`);
-	}
-
 	async getData(projectId, whiteboardId) {
 		const whiteboards = await get(`whiteboards/list/${projectId}`);
 		const currentWhiteboard = await get(`whiteboards/details/${whiteboardId}`);
@@ -34,6 +26,12 @@ export class Whiteboards extends React.Component {
 		this.getData(projectId, whiteboardId);
 	}
 
+	componentWillReceiveProps(nextProps) {
+		console.log(nextProps.location.state);
+		const {projectId} = this.props.match.params;
+		this.getData(projectId, nextProps.location.state.clickedWhiteboard.id);
+	}
+
 	render() {
 		return (
 			<main id="whiteboard" className="container">
@@ -41,7 +39,6 @@ export class Whiteboards extends React.Component {
 					project={this.state.project}
 					currentWhiteboard={this.state.currentWhiteboard}
 					whiteboards={this.state.whiteboards}
-					onWhiteboardChange={this.handleWhiteboardChange}
 				/>
 				<Views views={this.state.currentWhiteboard.views} />
 				<FormatJson json={this.state} />
@@ -52,5 +49,6 @@ export class Whiteboards extends React.Component {
 
 Whiteboards.propTypes = {
 	match: PropTypes.object,
-	history: PropTypes.object
+	history: PropTypes.object,
+	location: PropTypes.object
 };

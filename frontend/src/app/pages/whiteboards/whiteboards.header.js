@@ -14,12 +14,6 @@ export class Header extends React.Component {
 		this.setState({dropdownOpen: !this.state.dropdownOpen});
 	}
 
-	handleClick = whiteboard => {
-		console.log('handleClick outer');
-		console.log(whiteboard);
-		this.props.onWhiteboardChange(whiteboard);
-	};
-
 	render() {
 		const {project, currentWhiteboard, whiteboards} = this.props;
 
@@ -45,11 +39,8 @@ export class Header extends React.Component {
 							<DropdownItem header>Available whiteboards</DropdownItem>
 							{whiteboards.map(whiteboard => {
 								return <DropdownItem
-									// active={whiteboard.id === currentWhiteboard.id}
 									key={whiteboard.id}
-									// onClick={this.handleClick}
-									// tag={() => <Link to={`/whiteboards/project-id/${project.id}/whiteboard-id/${whiteboard.id}`} className={`dropdown-item ${whiteboard.id === currentWhiteboard.id && 'active'}`}>{whiteboard.name}</Link>}
-									tag={() => <WhiteboardLink whiteboard={whiteboard} currentWhiteboard={currentWhiteboard} onClickWhiteboard={this.handleClick} />}
+									tag={() => <Link to={{pathname: `/whiteboards/project-id/${project.id}/whiteboard-id/${whiteboard.id}`, state: {clickedWhiteboard: whiteboard}}} className={`dropdown-item ${whiteboard.id === currentWhiteboard.id && 'active'}`}>{whiteboard.name}</Link>}
 								>
 									{whiteboard.name}
 								</DropdownItem>;
@@ -67,27 +58,5 @@ export class Header extends React.Component {
 Header.propTypes = {
 	project: PropTypes.object,
 	currentWhiteboard: PropTypes.object,
-	whiteboards: PropTypes.array,
-	onWhiteboardChange: PropTypes.func
-};
-
-const WhiteboardLink = ({whiteboard, currentWhiteboard, onClickWhiteboard}) => {
-	console.log('whiteboard', whiteboard);
-	console.log('currentWhiteboard', currentWhiteboard);
-
-	const handleClick = (event) => {
-		event.preventDefault();
-		console.log('handleClick');
-		console.log(whiteboard);
-		onClickWhiteboard(whiteboard);
-	};
-
-	return <a href="#" onClick={handleClick} className={`dropdown-item ${whiteboard.id === currentWhiteboard.id && 'active'}`}>{whiteboard.name}</a>;
-	return <a href="#" onClick={handleClick} className={`dropdown-item ${whiteboard.id === currentWhiteboard.id && 'active'}`}>{whiteboard.name}</a>;
-};
-
-WhiteboardLink.propTypes = {
-	whiteboard: PropTypes.object,
-	currentWhiteboard: PropTypes.object,
-	onClickWhiteboard: PropTypes.func
+	whiteboards: PropTypes.array
 };
