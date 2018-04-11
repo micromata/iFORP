@@ -28,7 +28,7 @@ module.exports = SetupEndpoint({
             }]
         },
         {
-            params: '/create',
+            params: '/create/{projectId}',
             requests: [{
                 /**
                  * Payload:
