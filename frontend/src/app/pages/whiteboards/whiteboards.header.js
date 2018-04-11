@@ -4,14 +4,17 @@ import {PropTypes} from 'prop-types';
 import {Link} from 'react-router-dom';
 
 export class Header extends React.Component {
-	toggle = this.toggle.bind(this);
 
 	state = {
 		dropdownOpen: false
 	};
 
-	toggle() {
+	toggle = () => {
 		this.setState({dropdownOpen: !this.state.dropdownOpen});
+	}
+
+	handleNewWhiteboardClick = () => {
+		return this.props.onCreateNewWhiteboard();
 	}
 
 	render() {
@@ -44,7 +47,7 @@ export class Header extends React.Component {
 											<Link
 												to={{
 													pathname: `/whiteboards/project-id/${project.id}/whiteboard-id/${whiteboard.id}`,
-													state: {clickedWhiteboard: whiteboard}
+													state: {whiteboard}
 												}}
 												className={`dropdown-item ${whiteboard.id === currentWhiteboard.id && 'active'}`}
 											>
@@ -57,7 +60,7 @@ export class Header extends React.Component {
 								</DropdownItem>;
 							})}
 							<DropdownItem divider />
-							<DropdownItem>Create new whiteboard</DropdownItem>
+							<DropdownItem onClick={this.handleNewWhiteboardClick}>Create new whiteboard</DropdownItem>
 						</DropdownMenu>
 					</Dropdown>
 				</div>
@@ -69,5 +72,6 @@ export class Header extends React.Component {
 Header.propTypes = {
 	project: PropTypes.object,
 	currentWhiteboard: PropTypes.object,
-	whiteboards: PropTypes.array
+	whiteboards: PropTypes.array,
+	onCreateNewWhiteboard: PropTypes.func
 };

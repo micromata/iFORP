@@ -1,7 +1,7 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 
-import {get} from '../../base/http';
+import {get, post} from '../../base/http';
 import {FormatJson} from '../../shared/format-json';
 import {Header} from './whiteboards.header';
 import {Views} from './whiteboards.views';
@@ -13,6 +13,11 @@ export class Whiteboards extends React.Component {
 		currentWhiteboard: {},
 		project: {}
 	};
+
+	createNewWhiteboard = async () => {
+		const whiteboard = await post(`whiteboards/create/${this.state.project.id}`, {name: 'New whiteboard'});
+		this.props.history.push(`/whiteboards/project-id/${this.state.project.id}/whiteboard-id/${whiteboard.id}`, {whiteboard});
+	}
 
 	async getData(projectId, whiteboardId) {
 		const whiteboards = await get(`whiteboards/list/${projectId}`);
@@ -39,7 +44,7 @@ export class Whiteboards extends React.Component {
 
 		// Get project ID from click on dropdown item in whiteboards.header.js
 		const {projectId} = this.props.match.params;
-		this.setState(await this.getData(projectId, nextProps.location.state.clickedWhiteboard.id));
+		this.setState(await this.getData(projectId, nextProps.location.state.whiteboard.id));
 	}
 
 	render() {
@@ -49,6 +54,7 @@ export class Whiteboards extends React.Component {
 					project={this.state.project}
 					currentWhiteboard={this.state.currentWhiteboard}
 					whiteboards={this.state.whiteboards}
+					onCreateNewWhiteboard={this.createNewWhiteboard}
 				/>
 				<Views views={this.state.currentWhiteboard.views} />
 				<FormatJson json={this.state} />
