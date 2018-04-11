@@ -4,6 +4,7 @@ import {PropTypes} from 'prop-types';
 import {get, post} from '../../base/http';
 import {NewProject} from './home.new-project';
 import {ProjectList} from './home.project-list';
+import {FormatJson} from '../../shared/format-json';
 
 export class Home extends React.Component {
 
@@ -21,14 +22,15 @@ export class Home extends React.Component {
 
 	async componentDidMount() {
 		const projects = await get('projects/list');
-		this.setState({projects: projects.filter((project, index) => index < this.amountOfProjectsToShow)});
+		this.setState({projects});
 	}
 
 	render() {
 		return (
 			<main id="start" className="container">
 				<NewProject onNewProject={this.handleNewProject} />
-				<ProjectList projects={this.state.projects} />
+				<ProjectList projects={this.state.projects.filter((project, index) => index < this.amountOfProjectsToShow)} />
+				<FormatJson json={this.state} />
 			</main>
 		);
 	}
