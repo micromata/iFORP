@@ -16,6 +16,13 @@ export class Whiteboards extends React.Component {
 
 	async getData(projectId, whiteboardId) {
 		const whiteboards = await get(`whiteboards/list/${projectId}`);
+
+		// Need to get the whiteboard from the response in case someone opens a project via
+		// /whiteboards/project-id/:projectId instead of
+		// /whiteboards/project-id/:projectId/whiteboard-id/:whiteboardId
+		if (!whiteboardId) {
+			whiteboardId = whiteboards[0].id;
+		}
 		const currentWhiteboard = await get(`whiteboards/details/${whiteboardId}`);
 		const project = await get(`projects/details/${projectId}`);
 		return {whiteboards, currentWhiteboard, project};
@@ -23,7 +30,7 @@ export class Whiteboards extends React.Component {
 
 	async componentDidMount() {
 
-		// Get IDs from path paramaters
+		// Get IDs from path parameters
 		const {projectId, whiteboardId} = this.props.match.params;
 		this.setState(await this.getData(projectId, whiteboardId));
 	}

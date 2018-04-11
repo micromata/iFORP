@@ -14,10 +14,24 @@ module.exports = SetupEndpoint({
             }]
         },
         {
+            params: '/list/14',
+            requests: [{
+                method: 'GET',
+                response: '/response-files/whiteboards/list-14.json'
+            }]
+        },
+        {
             params: '/details/{whiteboardId}',
             requests: [{
                 method: 'GET',
                 response: '/response-files/whiteboards/details.json'
+            }]
+        },
+        {
+            params: '/details/1',
+            requests: [{
+                method: 'GET',
+                response: '/response-files/whiteboards/details-1.json'
             }]
         },
         {
