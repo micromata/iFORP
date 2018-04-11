@@ -14,9 +14,9 @@ export class Home extends React.Component {
 	amountOfProjectsToShow = 3;
 
 	handleNewProject = async () => {
-		const name = `Project ${this.state.projects.length + 1}`;
-		const response = await post('projects/create', {name});
-		this.props.history.push(`/whiteboards/project-id/${response.id}/whiteboard-id/1`);
+		const newProject = await post('projects/create', {name: `Project ${this.state.projects.length + 1}`});
+		const newWhiteboard = await post('whiteboards/create', {name: 'Default whiteboard'});
+		this.props.history.push(`/whiteboards/project-id/${newProject.id}/whiteboard-id/${newWhiteboard.id}`);
 	}
 
 	async componentDidMount() {
