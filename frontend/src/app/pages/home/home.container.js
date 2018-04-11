@@ -12,8 +12,6 @@ export class Home extends React.Component {
 		projects: []
 	};
 
-	amountOfProjectsToShow = 3;
-
 	handleNewProject = async () => {
 		const newProject = await post('projects/create', {name: `Project ${this.state.projects.length + 1}`});
 		const newWhiteboard = await post('whiteboards/create', {name: 'Default whiteboard'});
@@ -29,7 +27,7 @@ export class Home extends React.Component {
 		return (
 			<main id="start" className="container">
 				<NewProject onNewProject={this.handleNewProject} />
-				<ProjectList projects={this.state.projects.filter((project, index) => index < this.amountOfProjectsToShow)} />
+				<ProjectList projects={this.state.projects} />
 				<FormatJson json={this.state} />
 			</main>
 		);
