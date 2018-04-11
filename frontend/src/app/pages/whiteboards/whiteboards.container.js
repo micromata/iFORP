@@ -22,11 +22,15 @@ export class Whiteboards extends React.Component {
 	}
 
 	async componentDidMount() {
+
+		// Get IDs from path paramaters
 		const {projectId, whiteboardId} = this.props.match.params;
 		this.setState(await this.getData(projectId, whiteboardId));
 	}
 
 	async componentWillReceiveProps(nextProps) {
+
+		// Get project ID from click on dropdown item in whiteboards.header.js
 		const {projectId} = this.props.match.params;
 		this.setState(await this.getData(projectId, nextProps.location.state.clickedWhiteboard.id));
 	}

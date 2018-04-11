@@ -26,7 +26,6 @@ export class Header extends React.Component {
 					<h1 className="h2">{project.name} / {currentWhiteboard.name}</h1>
 				</div>
 				<div className="col-2 text-right align-self-center">
-					{/* <a href="#"><span className="oi oi-menu"></span></a> */}
 					<Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} direction="down">
 						<DropdownToggle
 							tag="a"
@@ -40,7 +39,19 @@ export class Header extends React.Component {
 							{whiteboards.map(whiteboard => {
 								return <DropdownItem
 									key={whiteboard.id}
-									tag={() => <Link to={{pathname: `/whiteboards/project-id/${project.id}/whiteboard-id/${whiteboard.id}`, state: {clickedWhiteboard: whiteboard}}} className={`dropdown-item ${whiteboard.id === currentWhiteboard.id && 'active'}`}>{whiteboard.name}</Link>}
+									tag={() => {
+										return (
+											<Link
+												to={{
+													pathname: `/whiteboards/project-id/${project.id}/whiteboard-id/${whiteboard.id}`,
+													state: {clickedWhiteboard: whiteboard}
+												}}
+												className={`dropdown-item ${whiteboard.id === currentWhiteboard.id && 'active'}`}
+											>
+												{whiteboard.name}
+											</Link>
+										);
+									}}
 								>
 									{whiteboard.name}
 								</DropdownItem>;
