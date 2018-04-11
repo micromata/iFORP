@@ -18,18 +18,17 @@ export class Whiteboards extends React.Component {
 		const whiteboards = await get(`whiteboards/list/${projectId}`);
 		const currentWhiteboard = await get(`whiteboards/details/${whiteboardId}`);
 		const project = await get(`projects/details/${projectId}`);
-		this.setState({whiteboards, currentWhiteboard, project});
+		return {whiteboards, currentWhiteboard, project};
 	}
 
-	componentDidMount() {
+	async componentDidMount() {
 		const {projectId, whiteboardId} = this.props.match.params;
-		this.getData(projectId, whiteboardId);
+		this.setState(await this.getData(projectId, whiteboardId));
 	}
 
-	componentWillReceiveProps(nextProps) {
-		console.log(nextProps.location.state);
+	async componentWillReceiveProps(nextProps) {
 		const {projectId} = this.props.match.params;
-		this.getData(projectId, nextProps.location.state.clickedWhiteboard.id);
+		this.setState(await this.getData(projectId, nextProps.location.state.clickedWhiteboard.id));
 	}
 
 	render() {
