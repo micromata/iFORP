@@ -6,20 +6,42 @@ const DEVELOPMENT_API_PREFIX = 'http://localhost:8087/api/';
 // PRODUCTION constant is provided by the webpack DefinePlugin via baumeister.json
 const apiPrefix = PRODUCTION ? PRODUCTION_API_PREFIX : DEVELOPMENT_API_PREFIX;
 
-export async function get(url) {
+async function get(url, config) {
 	try {
-		const {data} = await request.get(apiPrefix + url);
+		const {data} = await request.get(apiPrefix + url, config);
 		return data;
 	} catch (error) {
 		console.error(error);
 	}
 }
 
-export async function post(url, payload) {
+async function post(url, payload, config) {
 	try {
-		const {data} = await request.post(apiPrefix + url, payload);
+		const {data} = await request.post(apiPrefix + url, payload, config);
 		return data;
 	} catch (error) {
 		console.error(error);
 	}
 }
+
+/**
+ * You need to pass a data object in the config parameter in case you want to send a payload.
+ * Example: http.delete('/my/url', { data: { key: 'value' } });
+ * See:
+ * - https://github.com/axios/axios/issues/897#issuecomment-343715381
+ * - https://github.com/axios/axios#request-method-aliases
+ */
+async function del(url, config) {
+	try {
+		const {data} = await request.delete(apiPrefix + url, config);
+		return data;
+	} catch (error) {
+		console.error(error);
+	}
+}
+
+export const http = {
+	get,
+	post,
+	delete: del
+};

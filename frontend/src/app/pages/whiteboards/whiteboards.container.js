@@ -1,7 +1,7 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 
-import {get, post} from '../../base/http';
+import {http} from '../../base/http';
 import {FormatJson} from '../../shared/format-json';
 import {Header} from './whiteboards.header';
 import {Views} from './whiteboards.views';
@@ -15,12 +15,12 @@ export class Whiteboards extends React.Component {
 	};
 
 	createNewWhiteboard = async () => {
-		const whiteboard = await post(`whiteboards/create/${this.state.project.id}`, {name: 'New whiteboard'});
+		const whiteboard = await http.post(`whiteboards/create/${this.state.project.id}`, {name: 'New whiteboard'});
 		this.props.history.push(`/whiteboards/project-id/${this.state.project.id}/whiteboard-id/${whiteboard.id}`, {whiteboard});
 	}
 
 	async getData(projectId, whiteboardId) {
-		const whiteboards = await get(`whiteboards/list/${projectId}`);
+		const whiteboards = await http.get(`whiteboards/list/${projectId}`);
 
 		// Need to get the whiteboard from the response in case someone opens a project via
 		// /whiteboards/project-id/:projectId instead of
@@ -28,8 +28,8 @@ export class Whiteboards extends React.Component {
 		if (!whiteboardId) {
 			whiteboardId = whiteboards[0].id;
 		}
-		const currentWhiteboard = await get(`whiteboards/details/${whiteboardId}`);
-		const project = await get(`projects/details/${projectId}`);
+		const currentWhiteboard = await http.get(`whiteboards/details/${whiteboardId}`);
+		const project = await http.get(`projects/details/${projectId}`);
 		return {whiteboards, currentWhiteboard, project};
 	}
 
