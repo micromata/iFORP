@@ -17,6 +17,12 @@ export class Header extends React.Component {
 		return this.props.onCreateNewWhiteboard();
 	}
 
+	handleDeleteWhiteboardClick = (whiteboard, event) => {
+		event.preventDefault();
+		event.stopPropagation();
+		return this.props.onDeleteWhiteboard(whiteboard);
+	}
+
 	render() {
 		const {project, currentWhiteboard, whiteboards} = this.props;
 
@@ -44,15 +50,19 @@ export class Header extends React.Component {
 									key={whiteboard.id}
 									tag={() => {
 										return (
-											<Link
-												to={{
-													pathname: `/whiteboards/project-id/${project.id}/whiteboard-id/${whiteboard.id}`,
-													state: {whiteboard}
-												}}
-												className={`dropdown-item ${whiteboard.id === currentWhiteboard.id && 'active'}`}
-											>
-												{whiteboard.name}
-											</Link>
+											<React.Fragment>
+												<Link
+													to={{
+														pathname: `/whiteboards/project-id/${project.id}/whiteboard-id/${whiteboard.id}`,
+														state: {whiteboard}
+													}}
+													className={`dropdown-item d-flex justify-content-end ${whiteboard.id === currentWhiteboard.id && 'active'}`}
+												>
+													<span className="">{whiteboard.name}</span>
+													<button type="button" className="oi oi-trash ml-2" onClick={(event) => this.handleDeleteWhiteboardClick(whiteboard, event)}></button>
+												</Link>
+
+											</React.Fragment>
 										);
 									}}
 								>
@@ -73,5 +83,6 @@ Header.propTypes = {
 	project: PropTypes.object,
 	currentWhiteboard: PropTypes.object,
 	whiteboards: PropTypes.array,
-	onCreateNewWhiteboard: PropTypes.func
+	onCreateNewWhiteboard: PropTypes.func,
+	onDeleteWhiteboard: PropTypes.func
 };

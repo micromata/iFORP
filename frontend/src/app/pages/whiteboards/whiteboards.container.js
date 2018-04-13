@@ -14,6 +14,20 @@ export class Whiteboards extends React.Component {
 		project: {}
 	};
 
+	deleteWhiteboard = async (whiteboard) => {
+		await http.delete(`whiteboards/delete/${whiteboard.id}`);
+
+		// Need to get the first whiteboard of the project in case the currently visited is deleted.
+		if (this.state.currentWhiteboard.id === whiteboard.id) {
+			const whiteboards = await http.get(`whiteboards/list/${this.state.project.id}`);
+			this.props.history.push(`/whiteboards/project-id/${this.state.project.id}/whiteboard-id/${whiteboards[0].id}`, {
+				whiteboard: whiteboards[0]
+			});
+		} else {
+			this.props.history.push(`/whiteboards/project-id/${this.state.project.id}/whiteboard-id/${this.state.currentWhiteboard.id}`, {whiteboard});
+		}
+	}
+
 	createNewWhiteboard = async () => {
 		const whiteboard = await http.post(`whiteboards/create/${this.state.project.id}`, {name: 'New whiteboard'});
 		this.props.history.push(`/whiteboards/project-id/${this.state.project.id}/whiteboard-id/${whiteboard.id}`, {whiteboard});
@@ -42,9 +56,10 @@ export class Whiteboards extends React.Component {
 
 	async componentWillReceiveProps(nextProps) {
 
-		// Get project ID from click on dropdown item in whiteboards.header.js
+		// Get whiteboard ID from click on dropdown item in whiteboards.header.js
+		const whiteboardId = nextProps.location.state.whiteboard.id;
 		const {projectId} = this.props.match.params;
-		this.setState(await this.getData(projectId, nextProps.location.state.whiteboard.id));
+		this.setState(await this.getData(projectId, whiteboardId));
 	}
 
 	render() {
@@ -55,6 +70,7 @@ export class Whiteboards extends React.Component {
 					currentWhiteboard={this.state.currentWhiteboard}
 					whiteboards={this.state.whiteboards}
 					onCreateNewWhiteboard={this.createNewWhiteboard}
+					onDeleteWhiteboard={this.deleteWhiteboard}
 				/>
 				<Views views={this.state.currentWhiteboard.views} />
 				<FormatJson json={this.state} />

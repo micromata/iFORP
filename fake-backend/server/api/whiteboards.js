@@ -53,6 +53,13 @@ module.exports = SetupEndpoint({
                 method: 'POST',
                 response: '/response-files/whiteboards/create.json'
             }]
+        },
+        {
+            params: '/delete/{whiteboardId}',
+            requests: [{
+                method: 'DELETE',
+                response: { ok: 'ok' }
+            }]
         }
     ]
 });
