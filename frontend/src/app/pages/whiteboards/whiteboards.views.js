@@ -5,7 +5,13 @@ import {View} from './whiteboards.view';
 export const Views = ({views}) => {
 	return (
 		<div className="row justify-content-md-center text-center">
-			{views ? views.map((view, index) => <View key={view.id} view={view} isNotLast={index < views.length - 1} />) : null}
+			{views &&
+				views.map((view, index) => <View
+					key={view.id}
+					view={view}
+					isTheOnlyView={views.length === 1}
+					isLast={index === views.length - 1} />)
+			}
 		</div>
 	);
 };

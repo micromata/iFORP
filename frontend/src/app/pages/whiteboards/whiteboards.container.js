@@ -36,9 +36,11 @@ export class Whiteboards extends React.Component {
 	async getData(projectId, whiteboardId) {
 		const whiteboards = await http.get(`whiteboards/list/${projectId}`);
 
-		// Need to get the whiteboard from the response in case someone opens a project via
-		// /whiteboards/project-id/:projectId instead of
-		// /whiteboards/project-id/:projectId/whiteboard-id/:whiteboardId
+		/**
+		 * Need to get the whiteboard from the response in case someone opens a project via
+		 * /whiteboards/project-id/:projectId instead of
+		 * /whiteboards/project-id/:projectId/whiteboard-id/:whiteboardId
+		 */
 		if (!whiteboardId) {
 			whiteboardId = whiteboards[0].id;
 		}
@@ -56,8 +58,15 @@ export class Whiteboards extends React.Component {
 
 	async componentWillReceiveProps(nextProps) {
 
-		// Get whiteboard ID from click on dropdown item in whiteboards.header.js
+		/**
+		 * Get whiteboard ID from React routers location state.
+		 *
+		 * This is set from:
+		 *  - Click on dropdown items in whiteboards.header.js
+		 *  - History pushes when creating and deleting whiteboards
+		 */
 		const whiteboardId = nextProps.location.state.whiteboard.id;
+
 		const {projectId} = this.props.match.params;
 		this.setState(await this.getData(projectId, whiteboardId));
 	}
