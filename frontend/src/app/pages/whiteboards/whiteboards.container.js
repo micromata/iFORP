@@ -73,7 +73,11 @@ export class Whiteboards extends React.Component {
 					onDeleteWhiteboard={this.deleteWhiteboard}
 				/>
 				<Views views={this.state.currentWhiteboard.views} />
-				<FormatJson json={this.state} />
+				<FormatJson
+					project={this.state.project}
+					whiteboards={this.state.whiteboards}
+					currentWhiteboard={this.state.currentWhiteboard}
+				/>
 			</main>
 		);
 	}
