@@ -1,7 +1,22 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 
-export const View = ({view, isLast, isTheOnlyView}) => {
+export const View = ({view, isLast, isTheOnlyView, onDeleteView, onAddView, onEditView}) => {
+	const handleDeleteClick = (viewId) => {
+		console.log('handleDeleteClick', viewId);
+		return onDeleteView(viewId);
+	};
+
+	const handleAddClick = () => {
+		console.log('handleAddClick');
+		return onAddView();
+	};
+
+	const handleEditClick = (viewId) => {
+		console.log('handleEditClick', viewId);
+		return onEditView(viewId);
+	};
+
 	return (
 		<React.Fragment>
 			<div className="card">
@@ -10,9 +25,9 @@ export const View = ({view, isLast, isTheOnlyView}) => {
 				</div>
 				<div className="card-body">
 					<div className="btn-group" role="group">
-						{isTheOnlyView === false && <button type="button" className="btn btn-secondary"><span className="oi oi-trash"></span></button>}
-						<button type="button" className="btn btn-secondary"><span className="oi oi-plus"></span></button>
-						<button type="button" className="btn btn-secondary"><span className="oi oi-pencil"></span></button>
+						{isTheOnlyView === false && <button type="button" onClick={(event) => handleDeleteClick(view.id, event)} className="btn btn-secondary"><span className="oi oi-trash"></span></button>}
+						<button type="button" onClick={handleAddClick} className="btn btn-secondary"><span className="oi oi-plus"></span></button>
+						<button type="button" onClick={(event) => handleEditClick(view.id, event)} className="btn btn-secondary"><span className="oi oi-pencil"></span></button>
 					</div>
 				</div>
 			</div>
@@ -24,5 +39,8 @@ export const View = ({view, isLast, isTheOnlyView}) => {
 View.propTypes = {
 	view: PropTypes.object,
 	isLast: PropTypes.bool,
-	isTheOnlyView: PropTypes.bool
+	isTheOnlyView: PropTypes.bool,
+	onAddView: PropTypes.func,
+	onDeleteView: PropTypes.func,
+	onEditView: PropTypes.func
 };

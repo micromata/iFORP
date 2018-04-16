@@ -14,6 +14,18 @@ export class Whiteboards extends React.Component {
 		project: {}
 	};
 
+	deleteView = (viewId) => {
+		console.log('deleteView', viewId);
+	};
+
+	addView = () => {
+		console.log('addView');
+	};
+
+	editView = (viewId) => {
+		console.log('editView', viewId);
+	};
+
 	deleteWhiteboard = async (whiteboard) => {
 		await http.delete(`whiteboards/delete/${whiteboard.id}`);
 
@@ -81,7 +93,12 @@ export class Whiteboards extends React.Component {
 					onCreateNewWhiteboard={this.createNewWhiteboard}
 					onDeleteWhiteboard={this.deleteWhiteboard}
 				/>
-				<Views views={this.state.currentWhiteboard.views} />
+				<Views
+					views={this.state.currentWhiteboard.views}
+					onDeleteView={this.deleteView}
+					onAddView={this.addView}
+					onEditView={this.editView}
+				/>
 				<FormatJson
 					project={this.state.project}
 					whiteboards={this.state.whiteboards}
