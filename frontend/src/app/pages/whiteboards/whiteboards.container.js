@@ -11,7 +11,8 @@ export class Whiteboards extends React.Component {
 	state = {
 		whiteboards: [],
 		currentWhiteboard: {},
-		project: {}
+		project: {},
+		views: []
 	};
 
 	deleteView = (viewId) => {
@@ -56,9 +57,11 @@ export class Whiteboards extends React.Component {
 		if (!whiteboardId) {
 			whiteboardId = whiteboards[0].id;
 		}
-		const currentWhiteboard = await http.get(`whiteboards/details/${whiteboardId}`);
+
+		const currentWhiteboard = whiteboards.filter(whiteboard => whiteboard.id === Number(whiteboardId))[0];
+		const views = await http.get(`views/list/${currentWhiteboard.id}`);
 		const project = await http.get(`projects/details/${projectId}`);
-		return {whiteboards, currentWhiteboard, project};
+		return {whiteboards, currentWhiteboard, project, views};
 	}
 
 	async componentDidMount() {
@@ -94,7 +97,7 @@ export class Whiteboards extends React.Component {
 					onDeleteWhiteboard={this.deleteWhiteboard}
 				/>
 				<Views
-					views={this.state.currentWhiteboard.views}
+					views={this.state.views}
 					onDeleteView={this.deleteView}
 					onAddView={this.addView}
 					onEditView={this.editView}
@@ -103,6 +106,7 @@ export class Whiteboards extends React.Component {
 					project={this.state.project}
 					whiteboards={this.state.whiteboards}
 					currentWhiteboard={this.state.currentWhiteboard}
+					views={this.state.views}
 				/>
 			</main>
 		);

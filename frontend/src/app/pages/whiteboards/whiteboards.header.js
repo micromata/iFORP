@@ -47,7 +47,7 @@ export class Header extends React.Component {
 							<DropdownItem header>Available whiteboards</DropdownItem>
 							{whiteboards.map(whiteboard => {
 								return <DropdownItem
-									key={whiteboard.id}
+									key={String(whiteboard.id)}
 									tag={() => {
 										return (
 											<React.Fragment>

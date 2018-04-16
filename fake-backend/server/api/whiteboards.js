@@ -21,27 +21,6 @@ module.exports = SetupEndpoint({
             }]
         },
         {
-            params: '/details/{whiteboardId}',
-            requests: [{
-                method: 'GET',
-                response: '/response-files/whiteboards/details.json'
-            }]
-        },
-        {
-            params: '/details/1',
-            requests: [{
-                method: 'GET',
-                response: '/response-files/whiteboards/details-1.json'
-            }]
-        },
-        {
-            params: '/details/2',
-            requests: [{
-                method: 'GET',
-                response: '/response-files/whiteboards/details-2.json'
-            }]
-        },
-        {
             params: '/create/{projectId}',
             requests: [{
                 /**
