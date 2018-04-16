@@ -1,5 +1,6 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
+import {Link} from 'react-router-dom';
 
 export const View = ({view, isLast, isTheOnlyView, onDeleteView, onAddView, onEditView}) => {
 	const handleDeleteClick = (viewId) => {
@@ -28,6 +29,7 @@ export const View = ({view, isLast, isTheOnlyView, onDeleteView, onAddView, onEd
 						{isTheOnlyView === false && <button type="button" onClick={(event) => handleDeleteClick(view.id, event)} className="btn btn-secondary"><span className="oi oi-trash"></span></button>}
 						<button type="button" onClick={handleAddClick} className="btn btn-secondary"><span className="oi oi-plus"></span></button>
 						<button type="button" onClick={(event) => handleEditClick(view.id, event)} className="btn btn-secondary"><span className="oi oi-pencil"></span></button>
+						{view.hasFile === true && <Link className="btn btn-primary" to={`/views/view-id/${view.id}`}><span className="oi oi-eye"></span></Link>}
 					</div>
 				</div>
 			</div>

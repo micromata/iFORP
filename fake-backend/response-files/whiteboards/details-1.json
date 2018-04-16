@@ -4,7 +4,8 @@
   "views": [
     {
       "id": 1,
-      "name": "Default View"
+      "name": "Default View",
+      "hasFile": false
     }
   ]
 }

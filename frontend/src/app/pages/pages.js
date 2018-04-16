@@ -6,6 +6,7 @@ import {Home} from './home/home.container';
 import {Error} from './error/error.container';
 import {Projects} from './projects/projects.container';
 import {Whiteboards} from './whiteboards/whiteboards.container';
+import {Views} from './views/views.container';
 
 export const Pages = () => (
 	<React.Fragment>
@@ -14,6 +15,7 @@ export const Pages = () => (
 			<Route exact path="/projects" component={Projects} />
 			<Route exact path="/whiteboards/project-id/:projectId/whiteboard-id/:whiteboardId" component={Whiteboards} />
 			<Route exact path="/whiteboards/project-id/:projectId" component={Whiteboards} />
+			<Route exact path="/views/view-id/:viewId" component={Views} />
 			<Route render={props => <Error {...props} code="404" message="Page not found" />} />
 		</Switch>
 	</React.Fragment>

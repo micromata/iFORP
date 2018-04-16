@@ -4,11 +4,13 @@
   "views": [
     {
       "id": 1,
-      "name": "Login #1"
+      "name": "Login #1",
+      "hasFile": true
     },
     {
       "id": 2,
-      "name": "Registrierung"
+      "name": "Registrierung",
+      "hasFile": false
     }
   ]
 }

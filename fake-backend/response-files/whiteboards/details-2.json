@@ -4,15 +4,18 @@
   "views": [
     {
       "id": 1,
-      "name": "Another Login"
+      "name": "Another Login",
+      "hasFile": true
     },
     {
       "id": 2,
-      "name": "Another Registrierung"
+      "name": "Another Registrierung",
+      "hasFile": true
     },
     {
       "id": 3,
-      "name": "Und weiter …"
+      "name": "Und weiter …",
+      "hasFile": false
     }
   ]
 }
