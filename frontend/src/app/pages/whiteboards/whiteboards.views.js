@@ -4,7 +4,6 @@ import {View} from './whiteboards.view';
 
 export const Views = ({views, onDeleteView, onAddView}) => {
 	const handleDeleteView = (viewId) => {
-		console.log('handleDeleteView', viewId);
 		return onDeleteView(viewId);
 	};
 

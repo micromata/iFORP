@@ -26,6 +26,13 @@ module.exports = SetupEndpoint({
                 method: 'GET',
                 response: '/response-files/views/list-2.json'
             }]
+        },
+        {
+            params: '/delete/{viewId}',
+            requests: [{
+                method: 'DELETE',
+                response: '/response-files/views/list.json'
+            }]
         }
     ]
 });

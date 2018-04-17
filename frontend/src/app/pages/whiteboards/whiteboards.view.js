@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 
 export const View = ({view, isLast, isTheOnlyView, onDeleteView, onAddView}) => {
 	const handleDeleteClick = (viewId) => {
-		console.log('handleDeleteClick', viewId);
 		return onDeleteView(viewId);
 	};
 
