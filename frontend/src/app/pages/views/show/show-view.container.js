@@ -1,9 +1,9 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 
-import {FormatJson} from '../../shared/format-json';
+import {FormatJson} from '../../../shared/format-json';
 
-export class Library extends React.Component {
+export class ShowView extends React.Component {
 
 	state = {
 		view: undefined
@@ -19,13 +19,13 @@ export class Library extends React.Component {
 	render() {
 		return (
 			<main id="" className="container">
-				<h2>Library</h2>
+				<h2>Show view</h2>
 				<FormatJson state={this.state}></FormatJson>
 			</main>
 		);
 	}
 }
 
-Library.propTypes = {
+ShowView.propTypes = {
 	match: PropTypes.object
 };
