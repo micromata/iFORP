@@ -2,7 +2,7 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import {View} from './whiteboards.view';
 
-export const Views = ({views, onDeleteView, onAddView, onEditView}) => {
+export const Views = ({views, onDeleteView, onAddView}) => {
 	const handleDeleteView = (viewId) => {
 		console.log('handleDeleteView', viewId);
 		return onDeleteView(viewId);
@@ -11,11 +11,6 @@ export const Views = ({views, onDeleteView, onAddView, onEditView}) => {
 	const handleAddView = () => {
 		console.log('handleAddView');
 		return onAddView();
-	};
-
-	const handleEditView = (viewId) => {
-		console.log('handleEditView', viewId);
-		return onEditView(viewId);
 	};
 
 	return (
@@ -28,7 +23,6 @@ export const Views = ({views, onDeleteView, onAddView, onEditView}) => {
 					isLast={index === views.length - 1}
 					onDeleteView={handleDeleteView}
 					onAddView={handleAddView}
-					onEditView={handleEditView}
 				/>)
 			}
 		</div>
@@ -38,6 +32,5 @@ export const Views = ({views, onDeleteView, onAddView, onEditView}) => {
 Views.propTypes = {
 	views: PropTypes.array,
 	onDeleteView: PropTypes.func,
-	onAddView: PropTypes.func,
-	onEditView: PropTypes.func
+	onAddView: PropTypes.func
 };

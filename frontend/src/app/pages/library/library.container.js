@@ -3,14 +3,17 @@ import {PropTypes} from 'prop-types';
 
 import {FormatJson} from '../../shared/format-json';
 
-export class Views extends React.Component {
+export class Library extends React.Component {
 
-	state = {};
+	state = {
+		view: undefined
+	};
 
 	componentDidMount() {
 
 		// Get ID from path parameters
-		this.setState(this.props.match.params);
+		const {viewId} = this.props.match.params;
+		this.setState({view: viewId});
 	}
 
 	render() {
@@ -22,6 +25,6 @@ export class Views extends React.Component {
 	}
 }
 
-Views.propTypes = {
+Library.propTypes = {
 	match: PropTypes.object
 };

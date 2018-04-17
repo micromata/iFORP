@@ -2,7 +2,7 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import {Link} from 'react-router-dom';
 
-export const View = ({view, isLast, isTheOnlyView, onDeleteView, onAddView, onEditView}) => {
+export const View = ({view, isLast, isTheOnlyView, onDeleteView, onAddView}) => {
 	const handleDeleteClick = (viewId) => {
 		console.log('handleDeleteClick', viewId);
 		return onDeleteView(viewId);
@@ -11,11 +11,6 @@ export const View = ({view, isLast, isTheOnlyView, onDeleteView, onAddView, onEd
 	const handleAddClick = () => {
 		console.log('handleAddClick');
 		return onAddView();
-	};
-
-	const handleEditClick = (viewId) => {
-		console.log('handleEditClick', viewId);
-		return onEditView(viewId);
 	};
 
 	return (
@@ -28,7 +23,10 @@ export const View = ({view, isLast, isTheOnlyView, onDeleteView, onAddView, onEd
 					<div className="btn-group" role="group">
 						{isTheOnlyView === false && <button type="button" onClick={(event) => handleDeleteClick(view.id, event)} className="btn btn-secondary"><span className="oi oi-trash"></span></button>}
 						<button type="button" onClick={handleAddClick} className="btn btn-secondary"><span className="oi oi-plus"></span></button>
-						<button type="button" onClick={(event) => handleEditClick(view.id, event)} className="btn btn-secondary"><span className="oi oi-pencil"></span></button>
+						{view.hasFile === true ?
+							<Link className="btn btn-secondary" to={`/views/view-id/${view.id}/edit`}><span className="oi oi-pencil"></span></Link> :
+							<Link className="btn btn-secondary" to={`/library/view-id/${view.id}`}><span className="oi oi-pencil"></span></Link>
+						}
 						{view.hasFile === true && <Link className="btn btn-primary" to={`/views/view-id/${view.id}`}><span className="oi oi-eye"></span></Link>}
 					</div>
 				</div>
@@ -43,6 +41,5 @@ View.propTypes = {
 	isLast: PropTypes.bool,
 	isTheOnlyView: PropTypes.bool,
 	onAddView: PropTypes.func,
-	onDeleteView: PropTypes.func,
-	onEditView: PropTypes.func
+	onDeleteView: PropTypes.func
 };
