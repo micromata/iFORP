@@ -2,7 +2,6 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 
 import {http} from '../../base/http';
-import {getWhiteboards, getViews, getProject} from './get-data';
 import {FormatJson} from '../../shared/format-json';
 import {Header} from './whiteboards.header';
 import {Views} from './whiteboards.views';
@@ -16,13 +15,14 @@ export class Whiteboards extends React.Component {
 		views: []
 	};
 
+	getViews = async (currentWhiteboard) => http.get(`views/list/${currentWhiteboard.id}`);
+
 	deleteView = async (viewId) => {
 		this.setState({views: await http.delete(`views/delete/${viewId}`)});
 	};
 
 	addView = async () => {
 		this.setState({views: await http.post(`views/create/${this.state.currentWhiteboard.id}`, {name: 'New view'})});
-
 	};
 
 	deleteWhiteboard = async (whiteboard) => {
@@ -54,8 +54,8 @@ export class Whiteboards extends React.Component {
 		// Get project ID from path parameters
 		const projectId = this.props.match.params.projectId;
 
-		const project = await getProject(projectId);
-		const whiteboards = await getWhiteboards(projectId);
+		const project = await http.get(`projects/details/${projectId}`);
+		const whiteboards = await http.get(`whiteboards/list/${projectId}`);
 
 		/**
 		 * Need to get the whiteboard from the response in case a project is opened via
@@ -64,7 +64,8 @@ export class Whiteboards extends React.Component {
 		 */
 		const whiteboardId = this.props.match.params.whiteboardId || whiteboards[0].id;
 		const currentWhiteboard = whiteboards.filter(whiteboard => whiteboard.id === Number(whiteboardId))[0];
-		const views = await getViews(currentWhiteboard);
+		const views = await this.getViews(currentWhiteboard);
+
 		this.setState({
 			project,
 			whiteboards,
@@ -87,7 +88,7 @@ export class Whiteboards extends React.Component {
 		 */
 		const whiteboardId = nextProps.location.state.whiteboard.id;
 		const currentWhiteboard = whiteboards.filter(whiteboard => whiteboard.id === Number(whiteboardId))[0];
-		const views = await getViews(currentWhiteboard);
+		const views = await this.getViews(currentWhiteboard);
 
 		this.setState({
 			project,
