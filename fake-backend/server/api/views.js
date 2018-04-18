@@ -28,6 +28,19 @@ module.exports = SetupEndpoint({
             }]
         },
         {
+            params: '/create/{whiteboardId}',
+            requests: [{
+                /**
+                 * Payload:
+                 * {
+                 *   name: string
+                 * }
+                 */
+                method: 'POST',
+                response: '/response-files/views/list-2.json'
+            }]
+        },
+        {
             params: '/delete/{viewId}',
             requests: [{
                 method: 'DELETE',

@@ -19,8 +19,9 @@ export class Whiteboards extends React.Component {
 		this.setState({views: await http.delete(`views/delete/${viewId}`)});
 	};
 
-	addView = () => {
-		console.log('addView');
+	addView = async () => {
+		this.setState({views: await http.post(`views/create/${this.state.currentWhiteboard.id}`, {name: 'New view'})});
+
 	};
 
 	deleteWhiteboard = async (whiteboard) => {
