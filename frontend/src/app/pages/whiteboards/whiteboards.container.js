@@ -30,20 +30,21 @@ export class Whiteboards extends React.Component {
 
 		// Need to get the first whiteboard of the project in case the currently visited is deleted.
 		if (this.state.currentWhiteboard.id === whiteboard.id) {
-			const whiteboards = await http.get(`whiteboards/list/${this.state.project.id}`);
-			this.props.history.push(`/whiteboards/project-id/${this.state.project.id}/whiteboard-id/${whiteboards[0].id}`, {
-				whiteboard: whiteboards[0],
+			this.setState({whiteboards: [...this.state.whiteboards.filter(current => current.id !== whiteboard.id)]});
+			this.props.history.push(`/whiteboards/project-id/${this.state.project.id}/whiteboard-id/${this.state.whiteboards[0].id}`, {
+				whiteboard: this.state.whiteboards[0],
 				updatedWhiteboardList: true
 			});
 		} else {
-			this.props.history.push(`/whiteboards/project-id/${this.state.project.id}/whiteboard-id/${this.state.currentWhiteboard.id}`, {whiteboard});
+			this.setState({whiteboards: [...this.state.whiteboards.filter(current => current.id !== whiteboard.id)]});
 		}
 	}
 
 	createNewWhiteboard = async () => {
-		const whiteboard = await http.post(`whiteboards/create/${this.state.project.id}`, {name: 'New whiteboard'});
-		this.props.history.push(`/whiteboards/project-id/${this.state.project.id}/whiteboard-id/${whiteboard.id}`, {
-			whiteboard,
+		const newWhiteboard = await http.post(`whiteboards/create/${this.state.project.id}`, {name: 'New whiteboard'});
+		this.setState({whiteboards: [...this.state.whiteboards, newWhiteboard]});
+		this.props.history.push(`/whiteboards/project-id/${this.state.project.id}/whiteboard-id/${newWhiteboard.id}`, {
+			whiteboard: newWhiteboard,
 			updatedWhiteboardList: true
 		});
 	}
@@ -73,17 +74,9 @@ export class Whiteboards extends React.Component {
 	}
 
 	async componentWillReceiveProps(nextProps) {
-		console.dir(nextProps.location.state);
 
-		// Get project data from state
-		const projectId = this.state.project.id;
 		const project = this.state.project;
-
-		/**
-		 * Get whiteboards from state if another whiteboard is selected.
-		 * Get them via via the API in case whiteboards are deleted or created.
-		 */
-		const whiteboards = nextProps.location.state.updatedWhiteboardList ? await getWhiteboards(projectId) : this.state.whiteboards;
+		const whiteboards = this.state.whiteboards;
 
 		/**
 		 * Get whiteboard ID from React routers location state.
@@ -93,9 +86,9 @@ export class Whiteboards extends React.Component {
 		 *  - History pushes when creating and deleting whiteboards
 		 */
 		const whiteboardId = nextProps.location.state.whiteboard.id;
-
 		const currentWhiteboard = whiteboards.filter(whiteboard => whiteboard.id === Number(whiteboardId))[0];
 		const views = await getViews(currentWhiteboard);
+
 		this.setState({
 			project,
 			whiteboards,

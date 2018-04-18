@@ -28,6 +28,13 @@ module.exports = SetupEndpoint({
             }]
         },
         {
+            params: '/list/3',
+            requests: [{
+                method: 'GET',
+                response: '/response-files/views/list-3.json'
+            }]
+        },
+        {
             params: '/create/{whiteboardId}',
             requests: [{
                 /**
