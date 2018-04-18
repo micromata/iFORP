@@ -2,6 +2,7 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 
 import {http} from '../../base/http';
+import {getWhiteboards, getViews, getProject} from './get-data';
 import {FormatJson} from '../../shared/format-json';
 import {Header} from './whiteboards.header';
 import {Views} from './whiteboards.views';
@@ -43,32 +44,38 @@ export class Whiteboards extends React.Component {
 		this.props.history.push(`/whiteboards/project-id/${this.state.project.id}/whiteboard-id/${whiteboard.id}`, {whiteboard});
 	}
 
-	async getData(projectId, whiteboardId) {
-		const whiteboards = await http.get(`whiteboards/list/${projectId}`);
+	async componentDidMount() {
+
+		// Get project ID from path parameters
+		const projectId = this.props.match.params.projectId;
+
+		const project = await getProject(projectId);
+		const whiteboards = await getWhiteboards(projectId);
 
 		/**
-		 * Need to get the whiteboard from the response in case someone opens a project via
+		 * Need to get the whiteboard from the response in case a project is opened via
 		 * /whiteboards/project-id/:projectId instead of
 		 * /whiteboards/project-id/:projectId/whiteboard-id/:whiteboardId
 		 */
-		if (!whiteboardId) {
-			whiteboardId = whiteboards[0].id;
-		}
-
+		const whiteboardId = this.props.match.params.whiteboardId || whiteboards[0].id;
 		const currentWhiteboard = whiteboards.filter(whiteboard => whiteboard.id === Number(whiteboardId))[0];
-		const views = await http.get(`views/list/${currentWhiteboard.id}`);
-		const project = await http.get(`projects/details/${projectId}`);
-		return {whiteboards, currentWhiteboard, project, views};
-	}
-
-	async componentDidMount() {
-
-		// Get IDs from path parameters
-		const {projectId, whiteboardId} = this.props.match.params;
-		this.setState(await this.getData(projectId, whiteboardId));
+		const views = await getViews(currentWhiteboard);
+		this.setState({
+			project,
+			whiteboards,
+			currentWhiteboard,
+			views
+		});
 	}
 
 	async componentWillReceiveProps(nextProps) {
+		console.dir(nextProps.location.state);
+
+		// Get project data from state
+		const projectId = this.state.project.id;
+		const project = this.state.project;
+
+		const whiteboards = await getWhiteboards(projectId);
 
 		/**
 		 * Get whiteboard ID from React routers location state.
@@ -79,8 +86,14 @@ export class Whiteboards extends React.Component {
 		 */
 		const whiteboardId = nextProps.location.state.whiteboard.id;
 
-		const {projectId} = this.props.match.params;
-		this.setState(await this.getData(projectId, whiteboardId));
+		const currentWhiteboard = whiteboards.filter(whiteboard => whiteboard.id === Number(whiteboardId))[0];
+		const views = await getViews(currentWhiteboard);
+		this.setState({
+			project,
+			whiteboards,
+			currentWhiteboard,
+			views
+		});
 	}
 
 	render() {
