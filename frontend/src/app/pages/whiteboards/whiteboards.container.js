@@ -29,16 +29,14 @@ export class Whiteboards extends React.Component {
 
 	deleteWhiteboard = async (whiteboardId) => {
 		await http.delete(`whiteboards/delete/${whiteboardId}`);
+		this.setState({whiteboards: [...this.state.whiteboards.filter(current => current.id !== whiteboardId)]});
 
 		// Need to get the first whiteboard of the project in case the currently visited is deleted.
 		if (this.state.currentWhiteboard.id === whiteboardId) {
-			this.setState({whiteboards: [...this.state.whiteboards.filter(current => current.id !== whiteboardId)]});
 			this.props.history.push(`/whiteboards/project-id/${this.state.project.id}/whiteboard-id/${this.state.whiteboards[0].id}`, {
 				whiteboard: this.state.whiteboards[0],
 				updatedWhiteboardList: true
 			});
-		} else {
-			this.setState({whiteboards: [...this.state.whiteboards.filter(current => current.id !== whiteboardId)]});
 		}
 	}
 
