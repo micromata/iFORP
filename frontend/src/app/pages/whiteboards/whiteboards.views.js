@@ -8,7 +8,6 @@ export const Views = ({views, onDeleteView, onAddView}) => {
 	};
 
 	const handleAddView = () => {
-		console.log('handleAddView');
 		return onAddView();
 	};
 

@@ -8,7 +8,6 @@ export const View = ({view, isLast, isTheOnlyView, onDeleteView, onAddView}) => 
 	};
 
 	const handleAddClick = () => {
-		console.log('handleAddClick');
 		return onAddView();
 	};
 

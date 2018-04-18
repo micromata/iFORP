@@ -44,14 +44,14 @@ module.exports = SetupEndpoint({
                  * }
                  */
                 method: 'POST',
-                response: '/response-files/views/list-2.json'
+                response: '/response-files/views/create.json'
             }]
         },
         {
             params: '/delete/{viewId}',
             requests: [{
                 method: 'DELETE',
-                response: '/response-files/views/list.json'
+                response: { ok: 'ok' }
             }]
         }
     ]

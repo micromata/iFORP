@@ -17,10 +17,10 @@ export class Header extends React.Component {
 		return this.props.onCreateNewWhiteboard();
 	}
 
-	handleDeleteWhiteboardClick = (whiteboard, event) => {
+	handleDeleteWhiteboardClick = (whiteboardId, event) => {
 		event.preventDefault();
 		event.stopPropagation();
-		return this.props.onDeleteWhiteboard(whiteboard);
+		return this.props.onDeleteWhiteboard(whiteboardId);
 	}
 
 	render() {
@@ -62,7 +62,7 @@ export class Header extends React.Component {
 													className={`dropdown-item d-flex justify-content-end ${whiteboard.id === currentWhiteboard.id && 'active'}`}
 												>
 													<span className="">{whiteboard.name}</span>
-													{whiteboards.length > 1 && <button type="button" className="oi oi-trash ml-2" onClick={(event) => this.handleDeleteWhiteboardClick(whiteboard, event)}></button>}
+													{whiteboards.length > 1 && <button type="button" className="oi oi-trash ml-2" onClick={(event) => this.handleDeleteWhiteboardClick(whiteboard.id, event)}></button>}
 												</Link>
 
 											</React.Fragment>
