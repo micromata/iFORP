@@ -54,7 +54,10 @@ export class Header extends React.Component {
 												<Link
 													to={{
 														pathname: `/whiteboards/project-id/${project.id}/whiteboard-id/${whiteboard.id}`,
-														state: {whiteboard}
+														state: {
+															whiteboard,
+															updatedWhiteboardList: false
+														}
 													}}
 													className={`dropdown-item d-flex justify-content-end ${whiteboard.id === currentWhiteboard.id && 'active'}`}
 												>

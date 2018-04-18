@@ -32,7 +32,8 @@ export class Whiteboards extends React.Component {
 		if (this.state.currentWhiteboard.id === whiteboard.id) {
 			const whiteboards = await http.get(`whiteboards/list/${this.state.project.id}`);
 			this.props.history.push(`/whiteboards/project-id/${this.state.project.id}/whiteboard-id/${whiteboards[0].id}`, {
-				whiteboard: whiteboards[0]
+				whiteboard: whiteboards[0],
+				updatedWhiteboardList: true
 			});
 		} else {
 			this.props.history.push(`/whiteboards/project-id/${this.state.project.id}/whiteboard-id/${this.state.currentWhiteboard.id}`, {whiteboard});
@@ -41,7 +42,10 @@ export class Whiteboards extends React.Component {
 
 	createNewWhiteboard = async () => {
 		const whiteboard = await http.post(`whiteboards/create/${this.state.project.id}`, {name: 'New whiteboard'});
-		this.props.history.push(`/whiteboards/project-id/${this.state.project.id}/whiteboard-id/${whiteboard.id}`, {whiteboard});
+		this.props.history.push(`/whiteboards/project-id/${this.state.project.id}/whiteboard-id/${whiteboard.id}`, {
+			whiteboard,
+			updatedWhiteboardList: true
+		});
 	}
 
 	async componentDidMount() {
@@ -75,7 +79,11 @@ export class Whiteboards extends React.Component {
 		const projectId = this.state.project.id;
 		const project = this.state.project;
 
-		const whiteboards = await getWhiteboards(projectId);
+		/**
+		 * Get whiteboards from state if another whiteboard is selected.
+		 * Get them via via the API in case whiteboards are deleted or created.
+		 */
+		const whiteboards = nextProps.location.state.updatedWhiteboardList ? await getWhiteboards(projectId) : this.state.whiteboards;
 
 		/**
 		 * Get whiteboard ID from React routers location state.
