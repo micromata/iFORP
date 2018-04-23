@@ -2,8 +2,21 @@
 // Example Wrapper
 // --------------------------------------------------
 
-#example-wrapper {
+.preview-wrapper {
+	height: 0;
+	margin-bottom: 15px;
+	overflow: hidden;
+	position: relative;
+	padding: 0 0 80vh 0;
+}
+
+.preview-container {
 	border: 1px solid gray;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }
 
 .syntax-view {

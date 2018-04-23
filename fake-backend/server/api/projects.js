@@ -78,27 +78,35 @@ module.exports = SetupEndpoint({
          */
         {
             params: '/{projectId}/whiteboards/{whiteboardId}/views',
-            requests: [{
-                method: 'GET',
-                response: '/response-files/views/list.json'
-            },
-            {
-                /**
-                 * Payload:
-                 * {
-                 *   name: string
-                 * }
-                 */
-                method: 'POST',
-                response: '/response-files/views/create.json'
-            }]
+            requests: [
+                {
+                    method: 'GET',
+                    response: '/response-files/views/list.json'
+                },
+                {
+                    /**
+                     * Payload:
+                     * {
+                     *   name: string
+                     * }
+                     */
+                    method: 'POST',
+                    response: '/response-files/views/create.json'
+                }
+            ]
         },
         {
             params: '/{projectId}/whiteboards/{whiteboardId}/views/{viewId}',
-            requests: [{
-                method: 'DELETE',
-                response: { ok: 'ok' }
-            }]
+            requests: [
+                {
+                    method: 'GET',
+                    response: '/response-files/views/detail.json'
+                },
+                {
+                    method: 'DELETE',
+                    response: { ok: 'ok' }
+                }
+            ]
         },
 
         // Fake dummy routes
