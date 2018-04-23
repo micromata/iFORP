@@ -19,3 +19,6 @@ coverage
 *.sublime-project
 *.sublime-workspace
 .vscode
+
+### Project ###
+src/uploads/*
