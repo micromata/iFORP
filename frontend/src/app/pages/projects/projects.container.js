@@ -18,7 +18,7 @@ export class Projects extends React.Component {
 	}
 
 	async componentDidMount() {
-		const projects = await http.get('projects/list');
+		const projects = await http.get('projects');
 		this.setState({projects});
 	}
 

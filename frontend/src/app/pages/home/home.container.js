@@ -13,13 +13,13 @@ export class Home extends React.Component {
 	};
 
 	handleNewProject = async () => {
-		const newProject = await http.post('projects/create', {name: `Project ${this.state.projects.length + 1}`});
-		const newWhiteboard = await http.post(`whiteboards/create/${newProject.id}`, {name: 'Default whiteboard'});
+		const newProject = await http.post('projects', {name: `Project ${this.state.projects.length + 1}`});
+		const newWhiteboard = await http.post(`whiteboards/${newProject.id}`, {name: 'Default whiteboard'});
 		this.props.history.push(`/whiteboards/project-id/${newProject.id}/whiteboard-id/${newWhiteboard.id}`);
 	}
 
 	async componentDidMount() {
-		const projects = await http.get('projects/list');
+		const projects = await http.get('projects');
 		this.setState({projects});
 	}
 

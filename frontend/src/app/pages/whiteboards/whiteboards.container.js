@@ -15,20 +15,20 @@ export class Whiteboards extends React.Component {
 		views: []
 	};
 
-	getViews = async (currentWhiteboard) => http.get(`views/list/${currentWhiteboard.id}`);
+	getViews = async (whiteboardId) => http.get(`projects/${this.state.project.id}/whiteboards/${whiteboardId}/views`);
 
 	deleteView = async (viewId) => {
-		await http.delete(`views/delete/${viewId}`);
+		await http.delete(`projects/${this.state.project.id}/whiteboards/${this.state.currentWhiteboard.id}/views/${viewId}`);
 		this.setState({views: [...this.state.views.filter(current => current.id !== viewId)]});
 	};
 
 	addView = async () => {
-		const newView = await http.post(`views/create/${this.state.currentWhiteboard.id}`, {name: 'New view'});
+		const newView = await http.post(`projects/${this.state.project.id}/whiteboards/${this.state.currentWhiteboard.id}/views`, {name: 'New view'});
 		this.setState({views: [...this.state.views, newView]});
 	};
 
 	deleteWhiteboard = async (whiteboardId) => {
-		await http.delete(`whiteboards/delete/${whiteboardId}`);
+		await http.delete(`projects/${this.state.project.id}/whiteboards/${whiteboardId}`);
 		this.setState({whiteboards: [...this.state.whiteboards.filter(current => current.id !== whiteboardId)]});
 
 		// Need to get the first whiteboard of the project in case the currently visited is deleted.
@@ -41,7 +41,7 @@ export class Whiteboards extends React.Component {
 	}
 
 	createNewWhiteboard = async () => {
-		const newWhiteboard = await http.post(`whiteboards/create/${this.state.project.id}`, {name: 'New whiteboard'});
+		const newWhiteboard = await http.post(`projects/${this.state.project.id}/whiteboards`, {name: 'New whiteboard'});
 		this.setState({whiteboards: [...this.state.whiteboards, newWhiteboard]});
 		this.props.history.push(`/whiteboards/project-id/${this.state.project.id}/whiteboard-id/${newWhiteboard.id}`, {
 			whiteboard: newWhiteboard,
@@ -54,8 +54,8 @@ export class Whiteboards extends React.Component {
 		// Get project ID from path parameters
 		const projectId = this.props.match.params.projectId;
 
-		const project = await http.get(`projects/details/${projectId}`);
-		const whiteboards = await http.get(`whiteboards/list/${projectId}`);
+		const project = await http.get(`projects/${projectId}`);
+		const whiteboards = await http.get(`projects/${projectId}/whiteboards`);
 
 		/**
 		 * Need to get the whiteboard from the response in case a project is opened via
@@ -64,7 +64,7 @@ export class Whiteboards extends React.Component {
 		 */
 		const whiteboardId = this.props.match.params.whiteboardId || whiteboards[0].id;
 		const currentWhiteboard = whiteboards.filter(whiteboard => whiteboard.id === Number(whiteboardId))[0];
-		const views = await this.getViews(currentWhiteboard);
+		const views = await this.getViews(currentWhiteboard.id);
 
 		this.setState({
 			project,
@@ -88,7 +88,7 @@ export class Whiteboards extends React.Component {
 		 */
 		const whiteboardId = nextProps.location.state.whiteboard.id;
 		const currentWhiteboard = whiteboards.filter(whiteboard => whiteboard.id === Number(whiteboardId))[0];
-		const views = await this.getViews(currentWhiteboard);
+		const views = await this.getViews(currentWhiteboard.id);
 
 		this.setState({
 			project,
