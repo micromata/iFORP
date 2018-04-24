@@ -4,6 +4,10 @@ import {PropTypes} from 'prop-types';
 
 export class Content extends React.Component {
 
+	iframeRendered = false;
+
+	iframeDocument = '';
+
 	updateIframeContent() {
 		this.props.scripts.forEach(script => {
 			this.iframeDocument.body.appendChild(this.getScriptElement(this.iframeDocument, script));
@@ -38,7 +42,10 @@ export class Content extends React.Component {
 	}
 
 	componentDidUpdate() {
-		this.updateIframeContent();
+		if (!this.iframeRendered) {
+			this.updateIframeContent();
+		}
+		this.iframeRendered = true;
 	}
 
 	render() {
