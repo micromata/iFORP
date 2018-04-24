@@ -65,8 +65,8 @@ const generalPlugins = [
 		},
 		{
 			from: '**/*',
-			context: './src/uploads',
-			to: 'uploads'
+			context: './src/library',
+			to: 'library'
 		},
 		...copyVendorFiles
 	]),
