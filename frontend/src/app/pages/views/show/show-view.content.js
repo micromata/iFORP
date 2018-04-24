@@ -14,7 +14,7 @@ export class Content extends React.Component {
 		this.iframeDocument.insertBefore(doctype, this.iframeDocument.querySelector('html'));
 
 		// Insert script elements
-		this.props.scripts.forEach(script => {
+		this.props.js.forEach(script => {
 			this.iframeDocument.body.appendChild(this.getScriptElement(this.iframeDocument, script));
 		});
 
@@ -69,6 +69,6 @@ export class Content extends React.Component {
 Content.propTypes = {
 	head: PropTypes.string,
 	body: PropTypes.string,
-	scripts: PropTypes.array,
+	js: PropTypes.array,
 	viewportSize: PropTypes.string
 };

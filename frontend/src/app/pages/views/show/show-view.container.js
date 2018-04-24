@@ -15,7 +15,7 @@ export class ShowView extends React.Component {
 			name: '',
 			head: '',
 			body: '',
-			scripts: []
+			js: []
 		},
 		viewportSize: 'desktop'
 	};
@@ -44,7 +44,7 @@ export class ShowView extends React.Component {
 							<Content
 								head={this.state.view.head}
 								body={this.state.view.body}
-								scripts={this.state.view.scripts}
+								js={this.state.view.js}
 								viewportSize={this.state.viewportSize}
 							/>
 						</div>
