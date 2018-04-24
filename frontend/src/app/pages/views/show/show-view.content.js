@@ -1,24 +1,61 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {PropTypes} from 'prop-types';
 
-export const Content = ({content}) => (
+export class Content extends React.Component {
 
-	<React.Fragment>
-		<div>{content}</div>
-		<div className="row">
-			<div className="col-12">
-				<div className="preview-wrapper">
-					<iframe
-						src="https://michael-kuehnel.de"
-						frameBorder="0"
-						className="preview-container"
-					></iframe>
-				</div>
-			</div>
-		</div>
-	</React.Fragment>
-);
+	updateIframeContent() {
+		this.props.scripts.forEach(script => {
+			this.iframeDocument.body.appendChild(this.getScriptElement(this.iframeDocument, script));
+		});
+
+		ReactDOM.render((
+			<html>
+				<head dangerouslySetInnerHTML={{__html: this.props.head}} />
+				<body dangerouslySetInnerHTML={{__html: this.props.body}} />
+			</html>
+			), this.iframeDocument);
+	}
+
+	getScriptElement(iframe, script) {
+		const scriptElement = iframe.createElement('script');
+
+		if (script.type === 'inline') {
+			scriptElement.appendChild(iframe.createTextNode(script.content));
+		} else {
+			scriptElement.src = script.href;
+		}
+
+		return scriptElement;
+	}
+
+	componentDidMount() {
+		const iframeDocument = this.node.contentDocument;
+		iframeDocument.removeChild(iframeDocument.querySelector('html'));
+
+		this.iframeDocument = iframeDocument;
+		this.updateIframeContent();
+	}
+
+	componentDidUpdate() {
+		this.updateIframeContent();
+	}
+
+	render() {
+		return (
+			<iframe
+				className="preview-container"
+				frameBorder="0"
+				ref={(node) => {
+					this.node = node;
+				}} />
+		);
+	}
+
+}
 
 Content.propTypes = {
-	content: PropTypes.string
+	head: PropTypes.string,
+	body: PropTypes.string,
+	scripts: PropTypes.array
 };

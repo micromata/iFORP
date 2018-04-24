@@ -13,7 +13,9 @@ export class ShowView extends React.Component {
 		view: {
 			id: null,
 			name: '',
-			file: ''
+			head: '',
+			body: '',
+			scripts: []
 		}
 	};
 
@@ -30,7 +32,13 @@ export class ShowView extends React.Component {
 			<main id="whiteboard" className="container">
 				<Header name={this.state.view.name} />
 				<ViewportChanger />
-				<Content content={this.state.view.file} />
+				<div className="row">
+					<div className="col-12">
+						<div className="preview-wrapper">
+							<Content head={this.state.view.head} body={this.state.view.body} scripts={this.state.view.scripts} />
+						</div>
+					</div>
+				</div>
 				<FormatJson state={this.state}></FormatJson>
 			</main>
 		);

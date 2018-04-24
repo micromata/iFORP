@@ -63,6 +63,11 @@ const generalPlugins = [
 			to: settings.destinations.assets,
 			ignore: ['scss/**']
 		},
+		{
+			from: '**/*',
+			context: './src/uploads',
+			to: 'uploads'
+		},
 		...copyVendorFiles
 	]),
 	new webpack.DefinePlugin(isDevMode() ? {...configFile.webpack.DefinePlugin.development} : {...configFile.webpack.DefinePlugin.production})

@@ -1,5 +1,16 @@
 {
 		"id": 1,
     "name": "Login #1",
-    "file": "<!DOCTYPE html><html><head><meta charset=\"utf-8\" /><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><title>Page Title</title><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><link rel=\"stylesheet\" href=\"https://gitcdn.xyz/repo/necolas/normalize.css/master/normalize.css\"><link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"/uploads/first-template/assets/index.css\" /></head><body><p class=\"css\">Der Absatz ist mit CSS gestyled.</p><p class=\"js\">Dieser Absatz ist via JS gestyled.</p><script src=\"/uploads/first-template/app/index.js\"></script></body></html>"
+    "head": "<meta charset=\"utf-8\" /><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><title>Page Title</title><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><link rel=\"stylesheet\" href=\"https://gitcdn.xyz/repo/necolas/normalize.css/master/normalize.css\"><link rel=\"stylesheet\" type=\"text/css\" media=\"screen\" href=\"/uploads/first-template/assets/index.css\" />",
+    "body": "<p class=\"css\">Der Absatz ist mit CSS gestyled.</p><p class=\"js\">Dieser Absatz ist via JS gestyled.</p>",
+    "scripts": [
+      {
+        "type": "linked",
+        "href": "uploads/first-template/app/index.js"
+      },
+      {
+        "type": "inline",
+        "content": "console.log('Yeha');"
+      }
+    ]
 	}
