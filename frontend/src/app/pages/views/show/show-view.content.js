@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {PropTypes} from 'prop-types';
 
 export class Content extends React.Component {
@@ -8,22 +7,31 @@ export class Content extends React.Component {
 
 	iframeDocument = '';
 
-	updateIframeContent() {
-		// Create and insert html5 doctype
-		const doctype = this.iframeDocument.implementation.createDocumentType('html', '', '');
-		this.iframeDocument.insertBefore(doctype, this.iframeDocument.querySelector('html'));
+	injectIframeContent() {
 
-		// Insert script elements
+		// Fill head element
+		this.iframeDocument.head.innerHTML = this.props.head;
+
+		// Insert CSS of the view
+		this.props.css.forEach(link => {
+			const linkElem = this.getLinkElement(this.iframeDocument, link);
+			this.iframeDocument.head.appendChild(linkElem);
+		});
+
+		// Fill body element
+		this.iframeDocument.body.innerHTML = this.props.body;
+
+		// Insert JavaScript of the view
 		this.props.js.forEach(script => {
 			this.iframeDocument.body.appendChild(this.getScriptElement(this.iframeDocument, script));
 		});
+	}
 
-		ReactDOM.render((
-			<html>
-				<head dangerouslySetInnerHTML={{__html: this.props.head}} />
-				<body dangerouslySetInnerHTML={{__html: this.props.body}} />
-			</html>
-			), this.iframeDocument);
+	getLinkElement(iframe, linkHref) {
+		const linkElement = iframe.createElement('link');
+		linkElement.href = linkHref;
+		linkElement.rel = 'stylesheet';
+		return linkElement;
 	}
 
 	getScriptElement(iframe, script) {
@@ -41,15 +49,16 @@ export class Content extends React.Component {
 
 	componentDidMount() {
 		const iframeDocument = this.node.contentDocument;
-		iframeDocument.removeChild(iframeDocument.querySelector('html'));
-
 		this.iframeDocument = iframeDocument;
-		this.updateIframeContent();
+
+		// Create and insert html5 doctype
+		const doctype = this.iframeDocument.implementation.createDocumentType('html', '', '');
+		this.iframeDocument.insertBefore(doctype, this.iframeDocument.querySelector('html'));
 	}
 
 	componentDidUpdate() {
 		if (!this.iframeRendered) {
-			this.updateIframeContent();
+			this.injectIframeContent();
 		}
 		this.iframeRendered = true;
 	}
@@ -70,6 +79,7 @@ export class Content extends React.Component {
 Content.propTypes = {
 	head: PropTypes.string,
 	body: PropTypes.string,
+	css: PropTypes.array,
 	js: PropTypes.array,
 	viewportSize: PropTypes.string
 };

@@ -15,13 +15,13 @@ export class ShowView extends React.Component {
 			name: '',
 			head: '',
 			body: '',
+			css: [],
 			js: []
 		},
 		viewportSize: 'desktop'
 	};
 
 	handleViewportChange = (updatedViewportSize) => {
-		console.log('updatedViewportSize =', updatedViewportSize);
 		this.setState({viewportSize: updatedViewportSize});
 	}
 
@@ -44,6 +44,7 @@ export class ShowView extends React.Component {
 							<Content
 								head={this.state.view.head}
 								body={this.state.view.body}
+								css={this.state.view.css}
 								js={this.state.view.js}
 								viewportSize={this.state.viewportSize}
 							/>
