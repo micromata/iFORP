@@ -16,8 +16,14 @@ export class ShowView extends React.Component {
 			head: '',
 			body: '',
 			scripts: []
-		}
+		},
+		viewportSize: 'desktop'
 	};
+
+	handleViewportChange = (updatedViewportSize) => {
+		console.log('updatedViewportSize =', updatedViewportSize);
+		this.setState({viewportSize: updatedViewportSize});
+	}
 
 	async componentDidMount() {
 
@@ -31,11 +37,16 @@ export class ShowView extends React.Component {
 		return (
 			<main id="whiteboard" className="container">
 				<Header name={this.state.view.name} />
-				<ViewportChanger />
+				<ViewportChanger viewportSize={this.state.viewportSize} onSizeChange={this.handleViewportChange} />
 				<div className="row">
 					<div className="col-12">
 						<div className="preview-wrapper">
-							<Content head={this.state.view.head} body={this.state.view.body} scripts={this.state.view.scripts} />
+							<Content
+								head={this.state.view.head}
+								body={this.state.view.body}
+								scripts={this.state.view.scripts}
+								viewportSize={this.state.viewportSize}
+							/>
 						</div>
 					</div>
 				</div>

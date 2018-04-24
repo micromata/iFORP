@@ -44,7 +44,7 @@ export class Content extends React.Component {
 	render() {
 		return (
 			<iframe
-				className="preview"
+				className={`preview ${this.props.viewportSize}`}
 				frameBorder="0"
 				ref={(node) => {
 					this.node = node;
@@ -57,5 +57,6 @@ export class Content extends React.Component {
 Content.propTypes = {
 	head: PropTypes.string,
 	body: PropTypes.string,
-	scripts: PropTypes.array
+	scripts: PropTypes.array,
+	viewportSize: PropTypes.string
 };
