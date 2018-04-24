@@ -9,6 +9,11 @@ export class Content extends React.Component {
 	iframeDocument = '';
 
 	updateIframeContent() {
+		// Create and insert html5 doctype
+		const doctype = this.iframeDocument.implementation.createDocumentType('html', '', '');
+		this.iframeDocument.insertBefore(doctype, this.iframeDocument.querySelector('html'));
+
+		// Insert script elements
 		this.props.scripts.forEach(script => {
 			this.iframeDocument.body.appendChild(this.getScriptElement(this.iframeDocument, script));
 		});
