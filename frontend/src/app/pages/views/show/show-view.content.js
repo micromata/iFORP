@@ -33,6 +33,7 @@ export class Content extends React.Component {
 			scriptElement.appendChild(iframe.createTextNode(script.content));
 		} else {
 			scriptElement.src = script.href;
+			scriptElement.async = false;
 		}
 
 		return scriptElement;
