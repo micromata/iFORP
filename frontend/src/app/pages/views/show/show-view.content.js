@@ -44,7 +44,7 @@ export class Content extends React.Component {
 	render() {
 		return (
 			<iframe
-				className="preview-container"
+				className="preview"
 				frameBorder="0"
 				ref={(node) => {
 					this.node = node;
