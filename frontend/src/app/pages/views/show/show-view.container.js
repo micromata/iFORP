@@ -3,9 +3,9 @@ import {PropTypes} from 'prop-types';
 
 import {FormatJson} from '../../../shared/format-json';
 import {http} from '../../../base/http';
-import {Header} from './show-view.header';
-import {ViewportChanger} from './show-view.viewport-changer';
-import {Content} from './show-view.content';
+import {Header} from '../shared/view.header';
+import {ViewportChanger} from './show-viewport-changer';
+import {Content} from '../shared/view.content';
 
 export class ShowView extends React.Component {
 

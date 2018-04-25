@@ -27,9 +27,9 @@ export class Content extends React.Component {
 
 		// Apply attributes to HTML element
 		const htmlElement = this.iframeDocument.querySelector('html');
-		this.props.htmlElementAttributes.forEach((attribute => {
+		this.props.htmlElementAttributes.forEach(attribute => {
 			htmlElement.setAttribute(attribute.name, attribute.value);
-		}));
+		});
 
 		// Fill head element
 		this.iframeDocument.head.innerHTML = this.props.head;
