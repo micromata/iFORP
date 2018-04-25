@@ -3,9 +3,25 @@ import {PropTypes} from 'prop-types';
 
 export class Content extends React.Component {
 
-	iframeRendered = false;
-
 	iframeDocument = '';
+
+	iframeContentInjected = false;
+
+	componentDidMount() {
+		const iframeDocument = this.node.contentDocument;
+		this.iframeDocument = iframeDocument;
+
+		// Create and insert html5 doctype
+		const doctype = this.iframeDocument.implementation.createDocumentType('html', '', '');
+		this.iframeDocument.insertBefore(doctype, this.iframeDocument.querySelector('html'));
+	}
+
+	componentDidUpdate() {
+		if (!this.iframeContentInjected) {
+			this.injectIframeContent();
+		}
+		this.iframeContentInjected = true;
+	}
 
 	injectIframeContent() {
 
@@ -51,22 +67,6 @@ export class Content extends React.Component {
 		}
 
 		return scriptElement;
-	}
-
-	componentDidMount() {
-		const iframeDocument = this.node.contentDocument;
-		this.iframeDocument = iframeDocument;
-
-		// Create and insert html5 doctype
-		const doctype = this.iframeDocument.implementation.createDocumentType('html', '', '');
-		this.iframeDocument.insertBefore(doctype, this.iframeDocument.querySelector('html'));
-	}
-
-	componentDidUpdate() {
-		if (!this.iframeRendered) {
-			this.injectIframeContent();
-		}
-		this.iframeRendered = true;
 	}
 
 	render() {
