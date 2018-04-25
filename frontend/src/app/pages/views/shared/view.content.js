@@ -71,12 +71,14 @@ export class Content extends React.Component {
 
 	render() {
 		return (
-			<iframe
-				className={`preview ${this.props.viewportSize}`}
-				frameBorder="0"
-				ref={(node) => {
-					this.node = node;
-				}} />
+			<div className="preview-wrapper">
+				<iframe
+					className={`preview ${this.props.viewportSize}`}
+					frameBorder="0"
+					ref={(node) => {
+						this.node = node;
+					}} />
+			</div>
 		);
 	}
 

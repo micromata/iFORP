@@ -41,16 +41,14 @@ export class ShowView extends React.Component {
 				<ViewportChanger viewportSize={this.state.viewportSize} onSizeChange={this.handleViewportChange} />
 				<div className="row">
 					<div className="col-12">
-						<div className="preview-wrapper">
-							<Content
-								htmlElementAttributes={this.state.view.htmlElementAttributes}
-								head={this.state.view.head}
-								body={this.state.view.body}
-								css={this.state.view.css}
-								js={this.state.view.js}
-								viewportSize={this.state.viewportSize}
-							/>
-						</div>
+						<Content
+							htmlElementAttributes={this.state.view.htmlElementAttributes}
+							head={this.state.view.head}
+							body={this.state.view.body}
+							css={this.state.view.css}
+							js={this.state.view.js}
+							viewportSize={this.state.viewportSize}
+						/>
 					</div>
 				</div>
 				<FormatJson state={this.state}></FormatJson>
