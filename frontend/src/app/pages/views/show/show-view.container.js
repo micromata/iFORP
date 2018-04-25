@@ -13,6 +13,7 @@ export class ShowView extends React.Component {
 		view: {
 			id: null,
 			name: '',
+			htmlElementAttributes: [],
 			head: '',
 			body: '',
 			css: [],
@@ -42,6 +43,7 @@ export class ShowView extends React.Component {
 					<div className="col-12">
 						<div className="preview-wrapper">
 							<Content
+								htmlElementAttributes={this.state.view.htmlElementAttributes}
 								head={this.state.view.head}
 								body={this.state.view.body}
 								css={this.state.view.css}

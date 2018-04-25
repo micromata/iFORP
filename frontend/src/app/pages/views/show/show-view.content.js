@@ -9,6 +9,12 @@ export class Content extends React.Component {
 
 	injectIframeContent() {
 
+		// Apply attributes to HTML element
+		const htmlElement = this.iframeDocument.querySelector('html');
+		this.props.htmlElementAttributes.forEach((attribute => {
+			htmlElement.setAttribute(attribute.name, attribute.value);
+		}));
+
 		// Fill head element
 		this.iframeDocument.head.innerHTML = this.props.head;
 
@@ -77,6 +83,7 @@ export class Content extends React.Component {
 }
 
 Content.propTypes = {
+	htmlElementAttributes: PropTypes.array,
 	head: PropTypes.string,
 	body: PropTypes.string,
 	css: PropTypes.array,
