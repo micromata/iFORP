@@ -2,10 +2,10 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {PropTypes} from 'prop-types';
 
-export const Header = ({name}) => (
+export const Header = ({name, projectId, whiteboardId}) => (
 	<div className="row text-center mb-4">
 		<div className="col-2 text-left align-self-center">
-			<Link to="/"><span className="oi oi-chevron-left"></span></Link>
+			<Link to={`/whiteboards/project-id/${projectId}/whiteboard-id/${whiteboardId}`}><span className="oi oi-chevron-left"></span></Link>
 		</div>
 		<div className="col-8">
 			<h1 className="h2">{name}</h1>
@@ -15,5 +15,7 @@ export const Header = ({name}) => (
 );
 
 Header.propTypes = {
-	name: PropTypes.string
+	name: PropTypes.string,
+	projectId: PropTypes.string,
+	whiteboardId: PropTypes.string
 };

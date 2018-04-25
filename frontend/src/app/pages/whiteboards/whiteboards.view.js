@@ -2,7 +2,7 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import {Link} from 'react-router-dom';
 
-export const View = ({view, isLast, isTheOnlyView, onDeleteView, onAddView}) => {
+export const View = ({view, isLast, isTheOnlyView, onDeleteView, onAddView, projectId, whiteboardId}) => {
 	const handleDeleteClick = (viewId) => {
 		return onDeleteView(viewId);
 	};
@@ -25,7 +25,7 @@ export const View = ({view, isLast, isTheOnlyView, onDeleteView, onAddView}) => 
 							<Link className="btn btn-secondary" to={`/views/edit/view-id/${view.id}`}><span className="oi oi-pencil"></span></Link> :
 							<Link className="btn btn-secondary" to={`/library/view-id/${view.id}`}><span className="oi oi-pencil"></span></Link>
 						}
-						{view.hasFile === true && <Link className="btn btn-primary" to={`/views/show/view-id/${view.id}`}><span className="oi oi-eye"></span></Link>}
+						{view.hasFile === true && <Link className="btn btn-primary" to={`/views/show/project-id/${projectId}/whiteboard-id/${whiteboardId}/view-id/${view.id}`}><span className="oi oi-eye"></span></Link>}
 					</div>
 				</div>
 			</div>
@@ -39,5 +39,7 @@ View.propTypes = {
 	isLast: PropTypes.bool,
 	isTheOnlyView: PropTypes.bool,
 	onAddView: PropTypes.func,
-	onDeleteView: PropTypes.func
+	onDeleteView: PropTypes.func,
+	projectId: PropTypes.number,
+	whiteboardId: PropTypes.number
 };

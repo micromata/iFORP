@@ -37,7 +37,7 @@ export class ShowView extends React.Component {
 	render() {
 		return (
 			<main id="whiteboard" className="container">
-				<Header name={this.state.view.name} />
+				<Header name={this.state.view.name} projectId={this.props.match.params.projectId} whiteboardId={this.props.match.params.whiteboardId} />
 				<ViewportChanger viewportSize={this.state.viewportSize} onSizeChange={this.handleViewportChange} />
 				<div className="row">
 					<div className="col-12">

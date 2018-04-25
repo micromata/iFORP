@@ -112,6 +112,8 @@ export class Whiteboards extends React.Component {
 					views={this.state.views}
 					onDeleteView={this.deleteView}
 					onAddView={this.addView}
+					projectId={this.state.project.id}
+					whiteboardId={this.state.currentWhiteboard.id}
 				/>
 				<FormatJson
 					project={this.state.project}
