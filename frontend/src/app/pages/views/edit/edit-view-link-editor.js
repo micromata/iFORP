@@ -11,8 +11,8 @@ export const LinkEditor = () => {
 					<div className="form-group row">
 						<label className="col-sm-4 col-form-label text-truncate form-control-sm">Feedback</label>
 						<div className="col-sm-8">
-							<select className="form-control form-control-sm">
-								<option selected>Choose …</option>
+							<select defaultValue="" className="form-control form-control-sm">
+								<option value="">Choose …</option>
 								<option>…</option>
 							</select>
 						</div>
