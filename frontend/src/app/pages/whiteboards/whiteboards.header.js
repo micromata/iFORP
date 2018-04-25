@@ -53,7 +53,7 @@ export class Header extends React.Component {
 											<React.Fragment>
 												<Link
 													to={{
-														pathname: `/whiteboards/project-id/${project.id}/whiteboard-id/${whiteboard.id}`,
+														pathname: `/whiteboards/project/${project.id}/whiteboard/${whiteboard.id}`,
 														state: {
 															whiteboard,
 															updatedWhiteboardList: false

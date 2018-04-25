@@ -22,10 +22,10 @@ export const View = ({view, isLast, isTheOnlyView, onDeleteView, onAddView, proj
 						{isTheOnlyView === false && <button type="button" onClick={(event) => handleDeleteClick(view.id, event)} className="btn btn-secondary"><span className="oi oi-trash"></span></button>}
 						<button type="button" onClick={handleAddClick} className="btn btn-secondary"><span className="oi oi-plus"></span></button>
 						{view.hasFile === true ?
-							<Link className="btn btn-secondary" to={`/views/edit/view-id/${view.id}`}><span className="oi oi-pencil"></span></Link> :
-							<Link className="btn btn-secondary" to={`/library/view-id/${view.id}`}><span className="oi oi-pencil"></span></Link>
+							<Link className="btn btn-secondary" to={`/views/edit/view/${view.id}`}><span className="oi oi-pencil"></span></Link> :
+							<Link className="btn btn-secondary" to={`/library/view/${view.id}`}><span className="oi oi-pencil"></span></Link>
 						}
-						{view.hasFile === true && <Link className="btn btn-primary" to={`/views/show/project-id/${projectId}/whiteboard-id/${whiteboardId}/view-id/${view.id}`}><span className="oi oi-eye"></span></Link>}
+						{view.hasFile === true && <Link className="btn btn-primary" to={`/views/show/project/${projectId}/whiteboard/${whiteboardId}/view/${view.id}`}><span className="oi oi-eye"></span></Link>}
 					</div>
 				</div>
 			</div>

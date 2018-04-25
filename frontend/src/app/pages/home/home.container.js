@@ -15,7 +15,7 @@ export class Home extends React.Component {
 	handleNewProject = async () => {
 		const newProject = await http.post('projects', {name: `Project ${this.state.projects.length + 1}`});
 		const newWhiteboard = await http.post(`whiteboards/${newProject.id}`, {name: 'Default whiteboard'});
-		this.props.history.push(`/whiteboards/project-id/${newProject.id}/whiteboard-id/${newWhiteboard.id}`);
+		this.props.history.push(`/whiteboards/project/${newProject.id}/whiteboard/${newWhiteboard.id}`);
 	}
 
 	async componentDidMount() {

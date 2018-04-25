@@ -15,11 +15,11 @@ export const Pages = () => (
 		<Switch>
 			<Route exact path="/" component={Home} />
 			<Route exact path="/projects" component={Projects} />
-			<Route exact path="/whiteboards/project-id/:projectId/whiteboard-id/:whiteboardId" component={Whiteboards} />
-			<Route exact path="/whiteboards/project-id/:projectId" component={Whiteboards} />
-			<Route exact path="/views/show/project-id/:projectId/whiteboard-id/:whiteboardId/view-id/:viewId" component={ShowView} />
-			<Route exact path="/views/edit/view-id/:viewId" component={EditView} />
-			<Route exact path="/library/view-id/:viewId" component={Library} />
+			<Route exact path="/whiteboards/project/:projectId/whiteboard/:whiteboardId" component={Whiteboards} />
+			<Route exact path="/whiteboards/project/:projectId" component={Whiteboards} />
+			<Route exact path="/views/show/project/:projectId/whiteboard/:whiteboardId/view/:viewId" component={ShowView} />
+			<Route exact path="/views/edit/view/:viewId" component={EditView} />
+			<Route exact path="/library/view/:viewId" component={Library} />
 			<Route render={props => <Error {...props} code="404" message="Page not found" />} />
 		</Switch>
 	</React.Fragment>

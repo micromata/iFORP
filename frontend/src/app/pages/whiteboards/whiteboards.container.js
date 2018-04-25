@@ -33,7 +33,7 @@ export class Whiteboards extends React.Component {
 
 		// Need to get the first whiteboard of the project in case the currently visited is deleted.
 		if (this.state.currentWhiteboard.id === whiteboardId) {
-			this.props.history.push(`/whiteboards/project-id/${this.state.project.id}/whiteboard-id/${this.state.whiteboards[0].id}`, {
+			this.props.history.push(`/whiteboards/project/${this.state.project.id}/whiteboard/${this.state.whiteboards[0].id}`, {
 				whiteboard: this.state.whiteboards[0],
 				updatedWhiteboardList: true
 			});
@@ -43,7 +43,7 @@ export class Whiteboards extends React.Component {
 	createNewWhiteboard = async () => {
 		const newWhiteboard = await http.post(`projects/${this.state.project.id}/whiteboards`, {name: 'New whiteboard'});
 		this.setState({whiteboards: [...this.state.whiteboards, newWhiteboard]});
-		this.props.history.push(`/whiteboards/project-id/${this.state.project.id}/whiteboard-id/${newWhiteboard.id}`, {
+		this.props.history.push(`/whiteboards/project/${this.state.project.id}/whiteboard/${newWhiteboard.id}`, {
 			whiteboard: newWhiteboard,
 			updatedWhiteboardList: true
 		});
@@ -59,8 +59,8 @@ export class Whiteboards extends React.Component {
 
 		/**
 		 * Need to get the whiteboard from the response in case a project is opened via
-		 * /whiteboards/project-id/:projectId instead of
-		 * /whiteboards/project-id/:projectId/whiteboard-id/:whiteboardId
+		 * /whiteboards/project/:projectId instead of
+		 * /whiteboards/project/:projectId/whiteboard/:whiteboardId
 		 */
 		const whiteboardId = this.props.match.params.whiteboardId || whiteboards[0].id;
 		const currentWhiteboard = whiteboards.filter(whiteboard => whiteboard.id === Number(whiteboardId))[0];
