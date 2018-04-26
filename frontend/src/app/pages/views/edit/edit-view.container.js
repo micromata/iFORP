@@ -16,6 +16,7 @@ export class EditView extends React.Component {
 			htmlElementAttributes: [],
 			head: '',
 			body: '',
+			interactionElements: [],
 			css: [],
 			js: []
 		},
@@ -52,7 +53,7 @@ export class EditView extends React.Component {
 						</div>
 					</div>
 					<div className="col-3">
-						<LinkEditor />
+						<LinkEditor interactionElements={this.state.view.interactionElements} />
 					</div>
 				</div>
 				<FormatJson state={this.state}></FormatJson>
