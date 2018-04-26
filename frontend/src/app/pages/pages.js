@@ -18,7 +18,7 @@ export const Pages = () => (
 			<Route exact path="/whiteboards/project/:projectId/whiteboard/:whiteboardId" component={Whiteboards} />
 			<Route exact path="/whiteboards/project/:projectId" component={Whiteboards} />
 			<Route exact path="/views/show/project/:projectId/whiteboard/:whiteboardId/view/:viewId" component={ShowView} />
-			<Route exact path="/views/edit/view/:viewId" component={EditView} />
+			<Route exact path="/views/edit/project/:projectId/whiteboard/:whiteboardId/view/:viewId" component={EditView} />
 			<Route exact path="/library/view/:viewId" component={Library} />
 			<Route render={props => <Error {...props} code="404" message="Page not found" />} />
 		</Switch>
