@@ -28,7 +28,10 @@ export class EditView extends React.Component {
 		this.setState({viewportSize: updatedViewportSize});
 	}
 
-	handleTargetViewChange = (interactionElementId, targetViewId) => {
+	handleTargetViewChange = async (interactionElementId, targetViewId) => {
+		const {projectId, whiteboardId, viewId} = this.props.match.params;
+
+		// Update state
 		this.setState(prevState => {
 			const interactionElements = prevState.currentView.interactionElements.map(element => {
 				element.targetViewId = element.id === interactionElementId ? targetViewId : element.targetViewId;
@@ -43,6 +46,13 @@ export class EditView extends React.Component {
 				}
 			};
 		});
+
+		// Save changes
+		const updatedView = await http.patch(
+			`projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}`,
+			this.state.currentView.interactionElements
+		);
+		this.setState({currentView: updatedView});
 	}
 
 	async componentDidMount() {

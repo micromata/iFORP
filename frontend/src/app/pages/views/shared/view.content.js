@@ -5,8 +5,6 @@ export class Content extends React.Component {
 
 	iframeDocument = '';
 
-	iframeContentInjected = false;
-
 	componentDidMount() {
 		const iframeDocument = this.node.contentDocument;
 		this.iframeDocument = iframeDocument;
@@ -16,11 +14,13 @@ export class Content extends React.Component {
 		this.iframeDocument.insertBefore(doctype, this.iframeDocument.querySelector('html'));
 	}
 
-	componentDidUpdate() {
-		if (!this.iframeContentInjected) {
+	componentDidUpdate(prevProps) {
+		console.log('prevProps = ', prevProps);
+		console.log('this.props = ', this.props);
+
+		if (prevProps.viewportSize === this.props.viewportSize) {
 			this.injectIframeContent();
 		}
-		this.iframeContentInjected = true;
 	}
 
 	injectIframeContent() {

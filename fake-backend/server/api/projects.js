@@ -105,6 +105,10 @@ module.exports = SetupEndpoint({
                 {
                     method: 'DELETE',
                     response: { ok: 'ok' }
+                },
+                {
+                    method: 'PATCH',
+                    response: '/response-files/views/patched.json'
                 }
             ]
         },
