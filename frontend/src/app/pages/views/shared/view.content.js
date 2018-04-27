@@ -6,8 +6,7 @@ export class Content extends React.Component {
 	iframeDocument = '';
 
 	componentDidMount() {
-		const iframeDocument = this.node.contentDocument;
-		this.iframeDocument = iframeDocument;
+		this.iframeDocument = this.node.contentDocument;
 
 		// Create and insert html5 doctype
 		const doctype = this.iframeDocument.implementation.createDocumentType('html', '', '');
@@ -15,9 +14,6 @@ export class Content extends React.Component {
 	}
 
 	componentDidUpdate(prevProps) {
-		console.log('prevProps = ', prevProps);
-		console.log('this.props = ', this.props);
-
 		if (prevProps.viewportSize === this.props.viewportSize) {
 			this.injectIframeContent();
 		}
@@ -47,6 +43,13 @@ export class Content extends React.Component {
 		this.props.js.forEach(script => {
 			this.iframeDocument.body.appendChild(this.getScriptElement(this.iframeDocument, script));
 		});
+
+		// Insert Script to highjack interaction elements
+		const pageChanger = this.iframeDocument.createElement('script');
+		pageChanger.src = '/assets/page-changer/view.content.page-changer.js';
+		pageChanger.async = false;
+		this.iframeDocument.body.appendChild(pageChanger);
+
 	}
 
 	getLinkElement(iframe, linkHref) {

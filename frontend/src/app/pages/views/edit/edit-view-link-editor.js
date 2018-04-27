@@ -4,8 +4,6 @@ import {PropTypes} from 'prop-types';
 export const LinkEditor = ({interactionElements, availableViews, onChangeTargetView}) => {
 
 	const handleChangeTargetView = (event, interactionElementId) => {
-		// console.log('TargetViewId =', event.target.value);
-		// console.log('interactionElementId =', interactionElementId);
 		onChangeTargetView(interactionElementId, Number(event.target.value) || null);
 	};
 
