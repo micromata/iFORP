@@ -7,17 +7,17 @@
       {
         "id": 1,
         "name": "Home",
-        "targetViewId": 5
+        "targetViewId": 1
       },
       {
         "id": 2,
         "name": "Impressum",
-        "targetViewId": 6
+        "targetViewId": 2
       },
       {
         "id": 3,
         "name": "Search",
-        "targetViewId": 7
+        "targetViewId": null
       }
     ],
     "htmlElementAttributes": [

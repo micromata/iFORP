@@ -1,22 +1,30 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 
-export const LinkEditor = ({interactionElements}) => {
-	console.log(interactionElements);
+export const LinkEditor = ({interactionElements, availableViews, onChangeTargetView}) => {
+
+	const handleChangeTargetView = (event, interactionElementId) => {
+		// console.log('TargetViewId =', event.target.value);
+		// console.log('interactionElementId =', interactionElementId);
+		onChangeTargetView(interactionElementId, Number(event.target.value) || null);
+	};
+
 	return (
 		<div className="row">
 			<div className="col">
 				<h4>Verlinkungen</h4>
 
 				<form>
-					{interactionElements.map((element, index) => {
+					{interactionElements.map((interactionElement, index) => {
 						return (
 							<div key={index} className="form-group row">
-								<label className="col-sm-4 col-form-label text-truncate form-control-sm">{element.name}</label>
+								<label className="col-sm-4 col-form-label text-truncate form-control-sm">{interactionElement.name}</label>
 								<div className="col-sm-8">
-									<select defaultValue="" className="form-control form-control-sm">
+									<select value={interactionElement.targetViewId || ''} onChange={(event) => handleChangeTargetView(event, interactionElement.id)} className="form-control form-control-sm">
 										<option value="">Choose …</option>
-										<option>…</option>
+										{availableViews.filter(view => view.hasFile).map((view, index) => {
+											return <option value={view.id} key={index}>{view.name}</option>;
+										})}
 									</select>
 								</div>
 							</div>
@@ -30,5 +38,7 @@ export const LinkEditor = ({interactionElements}) => {
 };
 
 LinkEditor.propTypes = {
-	interactionElements: PropTypes.array
+	interactionElements: PropTypes.array,
+	availableViews: PropTypes.array,
+	onChangeTargetView: PropTypes.func
 };
