@@ -28,8 +28,8 @@ export class Treeview extends React.Component {
 
 	componentDidMount() {
 		const initialCollapsedState = {};
-		this.props.directories.forEach(directory => {
-			initialCollapsedState[directory.id] = false;
+		this.props.directories.forEach((directory, index) => {
+			initialCollapsedState[directory.id] = index === 0;
 		});
 
 		this.setState({collapsed: initialCollapsedState});
