@@ -21,7 +21,21 @@ export class Library extends React.Component {
 		return (
 			<main id="" className="container">
 				<Header projectId={this.props.match.params.projectId} whiteboardId={this.props.match.params.whiteboardId} />
-				<h2>Library</h2>
+				<div className="row">
+					<div className="col-3">
+						Suche und Treeview
+					</div>
+					<div className="col-9">
+						<div className="card">
+							<div className="card-body">
+							HTML Preview
+							</div>
+						</div>
+						<div className="d-flex justify-content-end mt-3">
+							<button className="btn btn-primary ">Template verwenden</button>
+						</div>
+					</div>
+				</div>
 				<FormatJson state={this.state}></FormatJson>
 			</main>
 		);
