@@ -4,6 +4,7 @@ import {PropTypes} from 'prop-types';
 import {FormatJson} from '../../shared/format-json';
 import {Header} from './library.header';
 import {http} from '../../base/http';
+import {Treeview} from './library.treeview';
 
 export class Library extends React.Component {
 
@@ -30,6 +31,7 @@ export class Library extends React.Component {
 				<div className="row">
 					<div className="col-3">
 						Suche und Treeview
+						{this.state.directories.length ? <Treeview directories={this.state.directories} /> : false}
 					</div>
 					<div className="col-9">
 						<div className="card">
