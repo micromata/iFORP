@@ -1,0 +1,13 @@
+.treeview-icon {
+	width: 1em;
+	font-size: 14px;
+	&.opened { opacity: 0.5; }
+}
+
+.treeview-link:hover {
+	text-decoration: none;
+}
+
+.treeview-pages-list {
+	margin-left: 2em;
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
+import {Collapse} from 'reactstrap';
 
 import {FormatJson} from '../../shared/format-json';
 
@@ -28,7 +29,7 @@ export class Treeview extends React.Component {
 	componentDidMount() {
 		const initialCollapsedState = {};
 		this.props.directories.forEach(directory => {
-			initialCollapsedState[directory.id] = true;
+			initialCollapsedState[directory.id] = false;
 		});
 
 		this.setState({collapsed: initialCollapsedState});
@@ -41,15 +42,24 @@ export class Treeview extends React.Component {
 					{this.props.directories.map((directory) => {
 						return (
 							<li key={directory.id}>
-								<a href="#" onClick={event => this.handleDirectoryClick(event, directory.id)}>
-									<span className="oi oi-chevron-bottom mr-1"></span>
+								<a href="#" className="treeview-link" onClick={event => this.handleDirectoryClick(event, directory.id)}>
+									<span className={`treeview-icon oi mr-1 oi-folder ${this.state.collapsed[directory.id] && 'opened'}`}></span>
 									{directory.name}
 								</a>
-								<ul>
-									{directory.pages.map((page) => {
-										return <li key={page.id}><a href="#" onClick={event => this.handlePageClick(event, page.id)}>{page.name}</a></li>;
-									})}
-								</ul>
+								<Collapse isOpen={this.state.collapsed[directory.id]}>
+									<ul className="list-unstyled treeview-pages-list">
+										{directory.pages.map((page) => {
+											return (
+												<li key={page.id}>
+													<a href="#" className="treeview-link" onClick={event => this.handlePageClick(event, page.id)}>
+														<span className={`treeview-icon oi mr-1 oi-file`}></span>
+														{page.name}
+													</a>
+												</li>
+											);
+										})}
+									</ul>
+								</Collapse>
 							</li>
 						);
 					})}
