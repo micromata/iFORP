@@ -3,18 +3,24 @@ import {PropTypes} from 'prop-types';
 
 import {FormatJson} from '../../shared/format-json';
 import {Header} from './library.header';
+import {http} from '../../base/http';
 
 export class Library extends React.Component {
 
 	state = {
-		view: undefined
+		view: null,
+		directories: []
 	};
 
-	componentDidMount() {
+	async componentDidMount() {
 
 		// Get ID from path parameters
 		const {viewId} = this.props.match.params;
 		this.setState({view: viewId});
+
+		// Get directories and files from the backend
+		const directories = await http.get('library/directories');
+		this.setState(directories);
 	}
 
 	render() {
