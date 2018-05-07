@@ -13,6 +13,10 @@ export class Library extends React.Component {
 		directories: []
 	};
 
+	handlePageClick = pageId => {
+		console.log('pageId', pageId);
+	}
+
 	async componentDidMount() {
 
 		// Get ID from path parameters
@@ -31,7 +35,7 @@ export class Library extends React.Component {
 				<div className="row">
 					<div className="col-3">
 						Suche und Treeview
-						{this.state.directories.length ? <Treeview directories={this.state.directories} /> : false}
+						{this.state.directories.length ? <Treeview onPageSelection={this.handlePageClick} directories={this.state.directories} /> : false}
 					</div>
 					<div className="col-9">
 						<div className="card">

@@ -12,7 +12,6 @@ export class Treeview extends React.Component {
 
 	handleDirectoryClick = (event, directoryId) => {
 		event.preventDefault();
-		console.log('directoryId', directoryId);
 		this.setState({
 			collapsed: {
 				...this.state.collapsed,
@@ -23,7 +22,7 @@ export class Treeview extends React.Component {
 
 	handlePageClick = (event, pageId) => {
 		event.preventDefault();
-		console.log('pageId', pageId);
+		return this.props.onPageSelection(pageId);
 	};
 
 	componentDidMount() {
@@ -71,5 +70,6 @@ export class Treeview extends React.Component {
 }
 
 Treeview.propTypes = {
-	directories: PropTypes.array
+	directories: PropTypes.array,
+	onPageSelection: PropTypes.func
 };
