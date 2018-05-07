@@ -2,6 +2,7 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 
 import {FormatJson} from '../../shared/format-json';
+import {Header} from './library.header';
 
 export class Library extends React.Component {
 
@@ -19,6 +20,7 @@ export class Library extends React.Component {
 	render() {
 		return (
 			<main id="" className="container">
+				<Header projectId={this.props.match.params.projectId} whiteboardId={this.props.match.params.whiteboardId} />
 				<h2>Library</h2>
 				<FormatJson state={this.state}></FormatJson>
 			</main>
