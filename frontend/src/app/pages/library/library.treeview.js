@@ -50,7 +50,11 @@ export class Treeview extends React.Component {
 										{directory.pages.map((page) => {
 											return (
 												<li key={page.id}>
-													<a href="#" className="treeview-link" onClick={event => this.handlePageClick(event, page.id)}>
+													<a
+														href="#"
+														className={`treeview-link ${this.props.selectedPageId === page.id ? 'active' : ''}`}
+														onClick={event => this.handlePageClick(event, page.id)}
+													>
 														<span className={`treeview-icon oi mr-1 oi-file`}></span>
 														{page.name}
 													</a>
@@ -71,5 +75,6 @@ export class Treeview extends React.Component {
 
 Treeview.propTypes = {
 	directories: PropTypes.array,
-	onPageSelection: PropTypes.func
+	onPageSelection: PropTypes.func,
+	selectedPageId: PropTypes.number
 };

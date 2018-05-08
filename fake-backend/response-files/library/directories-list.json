@@ -24,15 +24,15 @@
       "pages": [
         {
           "name": "Login",
-          "id": 3
-        },
-        {
-          "name": "Login #2",
           "id": 4
         },
         {
-          "name": "Registrierung",
+          "name": "Login #2",
           "id": 5
+        },
+        {
+          "name": "Registrierung",
+          "id": 6
         }
       ]
     }

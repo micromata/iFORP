@@ -4,8 +4,9 @@
 	&.opened { opacity: 0.5; }
 }
 
-.treeview-link:hover {
-	text-decoration: none;
+.treeview-link {
+	&:hover { text-decoration: none; }
+	&.active { color: $link-hover-color }
 }
 
 .treeview-pages-list {

@@ -10,11 +10,13 @@ export class Library extends React.Component {
 
 	state = {
 		view: null,
-		directories: []
+		directories: [],
+		selectedPageId: null
 	};
 
 	handlePageClick = pageId => {
 		console.log('pageId', pageId);
+		this.setState({selectedPageId: pageId});
 	}
 
 	async componentDidMount() {
@@ -35,7 +37,11 @@ export class Library extends React.Component {
 				<div className="row">
 					<div className="col-3">
 						Suche und Treeview
-						{this.state.directories.length ? <Treeview onPageSelection={this.handlePageClick} directories={this.state.directories} /> : false}
+						{this.state.directories.length ? <Treeview
+							onPageSelection={this.handlePageClick}
+							directories={this.state.directories}
+							selectedPageId={this.state.selectedPageId}
+						/> : false}
 					</div>
 					<div className="col-9">
 						<div className="card">
