@@ -50,7 +50,7 @@ export class Library extends React.Component {
 							</div>
 						</div>
 						<div className="d-flex justify-content-end mt-3">
-							<button className="btn btn-primary ">Template verwenden</button>
+							<button className="btn btn-primary" disabled={!this.state.selectedPageId}>Template verwenden</button>
 						</div>
 					</div>
 				</div>
