@@ -25,7 +25,7 @@ export class Library extends React.Component {
 		this.setState({view: viewId});
 
 		// Get directories and files from the backend
-		const directories = await http.get('library/directories');
+		const directories = await http.get('library/files');
 		this.setState(directories);
 	}
 

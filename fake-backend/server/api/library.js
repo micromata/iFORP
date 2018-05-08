@@ -7,10 +7,10 @@ module.exports = SetupEndpoint({
     name: 'library',
     urls: [
         {
-            params: '/directories',
+            params: '/files',
             requests: [{
                 method: 'GET',
-                response: '/response-files/library/directories-list.json'
+                response: '/response-files/library/files.json'
             }]
         }
     ]
