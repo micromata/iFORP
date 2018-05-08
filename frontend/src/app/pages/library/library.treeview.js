@@ -2,7 +2,7 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import {Collapse} from 'reactstrap';
 
-import {FormatJson} from '../../shared/format-json';
+import {FormatJson} from '../../shared/format-json'; // eslint-disable-line no-unused-vars
 
 export class Treeview extends React.Component {
 
@@ -67,7 +67,7 @@ export class Treeview extends React.Component {
 						);
 					})}
 				</ul>
-				<FormatJson state={this.state}></FormatJson>
+				{/* <FormatJson state={this.state}></FormatJson> */}
 			</React.Fragment>
 		);
 	}

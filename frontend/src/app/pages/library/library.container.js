@@ -15,7 +15,6 @@ export class Library extends React.Component {
 	};
 
 	handlePageClick = pageId => {
-		console.log('pageId', pageId);
 		this.setState({selectedPageId: pageId});
 	}
 
@@ -36,12 +35,12 @@ export class Library extends React.Component {
 				<Header projectId={this.props.match.params.projectId} whiteboardId={this.props.match.params.whiteboardId} />
 				<div className="row">
 					<div className="col-3">
-						Suche und Treeview
 						{this.state.directories.length ? <Treeview
 							onPageSelection={this.handlePageClick}
 							directories={this.state.directories}
 							selectedPageId={this.state.selectedPageId}
 						/> : false}
+						<a href="#" className="btn btn-secondary btn-sm">Upload new templates</a>
 					</div>
 					<div className="col-9">
 						<div className="card">
