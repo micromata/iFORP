@@ -19,6 +19,10 @@ export class Library extends React.Component {
 		this.setState({selectedPageId: pageId});
 	}
 
+	handleUploadClick = event => {
+		event.preventDefault();
+	}
+
 	async componentDidMount() {
 
 		// Get ID from path parameters
@@ -41,7 +45,7 @@ export class Library extends React.Component {
 							directories={this.state.directories}
 							selectedPageId={this.state.selectedPageId}
 						/> : false}
-						<a href="#" className="btn btn-secondary btn-sm">Neues template hochladen</a>
+						<a href="#" onClick={this.handleUploadClick} className="btn btn-secondary btn-sm">Neues template hochladen</a>
 					</div>
 					<div className="col-9">
 						{this.state.selectedPageId ?
