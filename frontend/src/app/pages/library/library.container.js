@@ -1,5 +1,6 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
+import {Alert} from 'reactstrap';
 
 import {FormatJson} from '../../shared/format-json';
 import {Header} from './library.header';
@@ -40,14 +41,19 @@ export class Library extends React.Component {
 							directories={this.state.directories}
 							selectedPageId={this.state.selectedPageId}
 						/> : false}
-						<a href="#" className="btn btn-secondary btn-sm">Upload new templates</a>
+						<a href="#" className="btn btn-secondary btn-sm">Neues template hochladen</a>
 					</div>
 					<div className="col-9">
-						<div className="card">
-							<div className="card-body">
-							HTML Preview
-							</div>
-						</div>
+						{this.state.selectedPageId ?
+							<p><code>TODO: iframe der ausgewählten Seite einbinden.</code></p> :
+							this.state.directories.length ?
+								<Alert color="info">
+									Bitte wählen Sie in der linken Spalte ein Template aus um fortzufahren.
+								</Alert> :
+								<Alert color="warning">
+									Bitte laden Sie zunächst ein Template hoch um fortzufahren.
+								</Alert>
+						}
 						<div className="d-flex justify-content-end mt-3">
 							<button className="btn btn-primary" disabled={!this.state.selectedPageId}>Template verwenden</button>
 						</div>
