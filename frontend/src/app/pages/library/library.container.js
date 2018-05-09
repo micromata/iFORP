@@ -41,13 +41,14 @@ export class Library extends React.Component {
 		event.preventDefault();
 	}
 
+	handleUseTemplateClick = async () => {
+		await http.put(`projects/${this.projectId}/whiteboards/${this.whiteboardId}/views/${this.viewId}`, this.state.selectedFile);
+		this.props.history.push(`/whiteboards/project/${this.projectId}/whiteboard/${this.whiteboardId}`);
+	}
+
 	getPage = async (pageId) => {
 		const selectedFile = await http.get(`library/files/${pageId}`);
 		this.setState({selectedFile});
-	}
-
-	componentDidUpdate() {
-
 	}
 
 	async componentDidMount() {
@@ -97,7 +98,7 @@ export class Library extends React.Component {
 								</Alert>
 						}
 						<div className="d-flex justify-content-end mt-3">
-							<button className="btn btn-primary" disabled={!this.state.selectedPageId}>Template verwenden</button>
+							<button onClick={this.handleUseTemplateClick} className="btn btn-primary" disabled={!this.state.selectedPageId}>Template verwenden</button>
 						</div>
 					</div>
 				</div>
@@ -108,5 +109,6 @@ export class Library extends React.Component {
 }
 
 Library.propTypes = {
-	match: PropTypes.object
+	match: PropTypes.object,
+	history: PropTypes.object
 };
