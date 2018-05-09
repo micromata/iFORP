@@ -2,13 +2,22 @@
 	width: 1em;
 	font-size: 14px;
 	&.opened { opacity: 0.5; }
+
+	color: #6c6f73;
 }
 
 .treeview-link {
+	color: #d6d8da;
 	&:hover { text-decoration: none; }
-	&.active { color: $link-hover-color }
+	&.active { color: $link-hover-color; }
 }
 
 .treeview-pages-list {
 	margin-left: 2em;
+}
+
+.col-3 .list-unstyled {
+	background: #2d3236;
+	padding: 10px 15px;
+	border-radius: 10px;
 }

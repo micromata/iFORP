@@ -2,6 +2,15 @@
 // Cards
 // --------------------------------------------------
 
+.card {
+	background: #565d62;
+}
+
+.card-title {
+	color: #fff;
+	text-shadow: 0 1px 1px #333;
+}
+
 #start,
 #projects {
 	.card {
