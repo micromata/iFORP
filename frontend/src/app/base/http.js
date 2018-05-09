@@ -33,6 +33,15 @@ async function patch(url, payload, config) {
 	}
 }
 
+async function put(url, payload, config) {
+	try {
+		const {data} = await request.put(apiPrefix + url, payload, config);
+		return data;
+	} catch (error) {
+		console.error(error);
+	}
+}
+
 /**
  * You need to pass a data object in the config parameter in case you want to send a payload.
  * Example: http.delete('/my/url', { data: { key: 'value' } });
@@ -53,5 +62,6 @@ export const http = {
 	get,
 	post,
 	patch,
+	put,
 	delete: del
 };

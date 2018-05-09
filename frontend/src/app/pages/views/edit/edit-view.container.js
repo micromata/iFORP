@@ -4,7 +4,7 @@ import {PropTypes} from 'prop-types';
 import {FormatJson} from '../../../shared/format-json';
 import {http} from '../../../base/http';
 import {Header} from '../shared/view.header';
-import {Content} from '../shared/view.content';
+import {Iframe} from '../../../shared/iframe';
 import {LinkEditor} from './edit-view-link-editor';
 
 export class EditView extends React.Component {
@@ -72,7 +72,7 @@ export class EditView extends React.Component {
 				<div className="row">
 					<div className="col-9">
 						<div className="preview-wrapper">
-							<Content
+							<Iframe
 								htmlElementAttributes={this.state.currentView.htmlElementAttributes}
 								head={this.state.currentView.head}
 								body={this.state.currentView.body}

@@ -1,33 +1,60 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 import {Alert} from 'reactstrap';
+import {Link} from 'react-router-dom';
 
 import {FormatJson} from '../../shared/format-json';
-import {Header} from './library.header';
+import {Header} from './shared/library.header';
 import {http} from '../../base/http';
 import {Treeview} from './library.treeview';
+import {Iframe} from '../../shared/iframe';
 
 export class Library extends React.Component {
 
 	state = {
 		view: null,
 		directories: [],
-		selectedPageId: null
+		selectedPageId: null,
+		selectedFile: {
+			id: null,
+			name: '',
+			htmlElementAttributes: [],
+			head: '',
+			body: '',
+			css: [],
+			js: []
+		}
 	};
+
+	projectId = this.props.match.params.projectId;
+
+	whiteboardId = this.props.match.params.whiteboardId;
+
+	viewId = this.props.match.params.viewId;
 
 	handlePageClick = pageId => {
 		this.setState({selectedPageId: pageId});
+		this.getPage(pageId);
 	}
 
 	handleUploadClick = event => {
 		event.preventDefault();
 	}
 
+	handleUseTemplateClick = async () => {
+		await http.put(`projects/${this.projectId}/whiteboards/${this.whiteboardId}/views/${this.viewId}`, this.state.selectedFile);
+		this.props.history.push(`/whiteboards/project/${this.projectId}/whiteboard/${this.whiteboardId}`);
+	}
+
+	getPage = async (pageId) => {
+		const selectedFile = await http.get(`library/files/${pageId}`);
+		this.setState({selectedFile});
+	}
+
 	async componentDidMount() {
 
 		// Get ID from path parameters
-		const {viewId} = this.props.match.params;
-		this.setState({view: viewId});
+		this.setState({view: this.viewId});
 
 		// Get directories and files from the backend
 		const directories = await http.get('library/files');
@@ -37,7 +64,7 @@ export class Library extends React.Component {
 	render() {
 		return (
 			<main id="" className="container">
-				<Header projectId={this.props.match.params.projectId} whiteboardId={this.props.match.params.whiteboardId} />
+				<Header backLink={`/whiteboards/project/${this.projectId}/whiteboard/${this.whiteboardId}`} />
 				<div className="row">
 					<div className="col-3">
 						{this.state.directories.length ? <Treeview
@@ -45,11 +72,23 @@ export class Library extends React.Component {
 							directories={this.state.directories}
 							selectedPageId={this.state.selectedPageId}
 						/> : false}
-						<a href="#" onClick={this.handleUploadClick} className="btn btn-secondary btn-sm">Neues template hochladen</a>
+						<Link
+							className="btn btn-secondary btn-sm"
+							to={`/library/project/${this.projectId}/whiteboard/${this.whiteboardId}/view/${this.viewId}/upload`}
+						>
+							Neues Template hochladen
+						</Link>
 					</div>
 					<div className="col-9">
 						{this.state.selectedPageId ?
-							<p><code>TODO: iframe der ausgewählten Seite einbinden.</code></p> :
+							<Iframe
+								htmlElementAttributes={this.state.selectedFile.htmlElementAttributes}
+								head={this.state.selectedFile.head}
+								body={this.state.selectedFile.body}
+								css={this.state.selectedFile.css}
+								js={this.state.selectedFile.js}
+								viewportSize="desktop"
+							/> :
 							this.state.directories.length ?
 								<Alert color="info">
 									Bitte wählen Sie in der linken Spalte ein Template aus um fortzufahren.
@@ -59,7 +98,7 @@ export class Library extends React.Component {
 								</Alert>
 						}
 						<div className="d-flex justify-content-end mt-3">
-							<button className="btn btn-primary" disabled={!this.state.selectedPageId}>Template verwenden</button>
+							<button onClick={this.handleUseTemplateClick} className="btn btn-primary" disabled={!this.state.selectedPageId}>Template verwenden</button>
 						</div>
 					</div>
 				</div>
@@ -70,5 +109,6 @@ export class Library extends React.Component {
 }
 
 Library.propTypes = {
-	match: PropTypes.object
+	match: PropTypes.object,
+	history: PropTypes.object
 };

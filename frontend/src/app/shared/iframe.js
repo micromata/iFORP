@@ -1,12 +1,14 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 
-export class Content extends React.Component {
+export class Iframe extends React.Component {
 
 	iframeDocument = '';
 
 	componentDidMount() {
 		this.iframeDocument = this.node.contentDocument;
+
+		console.log(this.iframeDocument);
 
 		// Create and insert html5 doctype
 		const doctype = this.iframeDocument.implementation.createDocumentType('html', '', '');
@@ -87,11 +89,11 @@ export class Content extends React.Component {
 
 }
 
-Content.propTypes = {
+Iframe.propTypes = {
 	htmlElementAttributes: PropTypes.array,
 	head: PropTypes.string,
 	body: PropTypes.string,
 	css: PropTypes.array,
 	js: PropTypes.array,
-	viewportSize: PropTypes.string
+	viewportSize: PropTypes.oneOf(['desktop', 'tablet', 'phone'])
 };

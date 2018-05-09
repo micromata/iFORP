@@ -2,10 +2,10 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {PropTypes} from 'prop-types';
 
-export const Header = ({projectId, whiteboardId}) => (
+export const Header = ({backLink}) => (
 	<div className="row text-center mb-4">
 		<div className="col-2 text-left align-self-center">
-			<Link to={`/whiteboards/project/${projectId}/whiteboard/${whiteboardId}`}><span className="oi oi-chevron-left"></span></Link>
+			<Link to={backLink}><span className="oi oi-chevron-left"></span></Link>
 		</div>
 		<div className="col-8">
 			<h1 className="h2">Bibliothek</h1>
@@ -15,6 +15,5 @@ export const Header = ({projectId, whiteboardId}) => (
 );
 
 Header.propTypes = {
-	projectId: PropTypes.string,
-	whiteboardId: PropTypes.string
+	backLink: PropTypes.string
 };
