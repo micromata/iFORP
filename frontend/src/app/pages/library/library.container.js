@@ -7,7 +7,7 @@ import {FormatJson} from '../../shared/format-json';
 import {Header} from './shared/library.header';
 import {http} from '../../base/http';
 import {Treeview} from './library.treeview';
-import {Content} from '../../shared/iframe';
+import {Iframe} from '../../shared/iframe';
 
 export class Library extends React.Component {
 
@@ -80,7 +80,7 @@ export class Library extends React.Component {
 					</div>
 					<div className="col-9">
 						{this.state.selectedPageId ?
-							<Content
+							<Iframe
 								htmlElementAttributes={this.state.selectedFile.htmlElementAttributes}
 								head={this.state.selectedFile.head}
 								body={this.state.selectedFile.body}

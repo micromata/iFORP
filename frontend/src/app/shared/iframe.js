@@ -1,7 +1,7 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 
-export class Content extends React.Component {
+export class Iframe extends React.Component {
 
 	iframeDocument = '';
 
@@ -89,7 +89,7 @@ export class Content extends React.Component {
 
 }
 
-Content.propTypes = {
+Iframe.propTypes = {
 	htmlElementAttributes: PropTypes.array,
 	head: PropTypes.string,
 	body: PropTypes.string,

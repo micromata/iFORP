@@ -5,7 +5,7 @@ import {FormatJson} from '../../../shared/format-json';
 import {http} from '../../../base/http';
 import {Header} from '../shared/view.header';
 import {ViewportChanger} from './show-viewport-changer';
-import {Content} from '../../../shared/iframe';
+import {Iframe} from '../../../shared/iframe';
 
 export class ShowView extends React.Component {
 
@@ -41,7 +41,7 @@ export class ShowView extends React.Component {
 				<ViewportChanger viewportSize={this.state.viewportSize} onSizeChange={this.handleViewportChange} />
 				<div className="row">
 					<div className="col-12">
-						<Content
+						<Iframe
 							htmlElementAttributes={this.state.view.htmlElementAttributes}
 							head={this.state.view.head}
 							body={this.state.view.body}
