@@ -9,6 +9,7 @@ import {Whiteboards} from './whiteboards/whiteboards.container';
 import {ShowView} from './views/show/show-view.container';
 import {EditView} from './views/edit/edit-view.container';
 import {Library} from './library/library.container';
+import {Upload} from './library/upload/upload.container';
 
 export const Pages = () => (
 	<React.Fragment>
@@ -20,6 +21,7 @@ export const Pages = () => (
 			<Route exact path="/views/show/project/:projectId/whiteboard/:whiteboardId/view/:viewId" component={ShowView} />
 			<Route exact path="/views/edit/project/:projectId/whiteboard/:whiteboardId/view/:viewId" component={EditView} />
 			<Route exact path="/library/project/:projectId/whiteboard/:whiteboardId/view/:viewId" component={Library} />
+			<Route exact path="/library/project/:projectId/whiteboard/:whiteboardId/view/:viewId/upload" component={Upload} />
 			<Route render={props => <Error {...props} code="404" message="Page not found" />} />
 		</Switch>
 	</React.Fragment>

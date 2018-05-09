@@ -1,9 +1,10 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 import {Alert} from 'reactstrap';
+import {Link} from 'react-router-dom';
 
 import {FormatJson} from '../../shared/format-json';
-import {Header} from './library.header';
+import {Header} from './shared/library.header';
 import {http} from '../../base/http';
 import {Treeview} from './library.treeview';
 
@@ -14,6 +15,12 @@ export class Library extends React.Component {
 		directories: [],
 		selectedPageId: null
 	};
+
+	projectId = this.props.match.params.projectId;
+
+	whiteboardId = this.props.match.params.whiteboardId;
+
+	viewId = this.props.match.params.viewId;
 
 	handlePageClick = pageId => {
 		this.setState({selectedPageId: pageId});
@@ -26,8 +33,7 @@ export class Library extends React.Component {
 	async componentDidMount() {
 
 		// Get ID from path parameters
-		const {viewId} = this.props.match.params;
-		this.setState({view: viewId});
+		this.setState({view: this.viewId});
 
 		// Get directories and files from the backend
 		const directories = await http.get('library/files');
@@ -37,7 +43,7 @@ export class Library extends React.Component {
 	render() {
 		return (
 			<main id="" className="container">
-				<Header projectId={this.props.match.params.projectId} whiteboardId={this.props.match.params.whiteboardId} />
+				<Header projectId={this.projectId} whiteboardId={this.whiteboardId} />
 				<div className="row">
 					<div className="col-3">
 						{this.state.directories.length ? <Treeview
@@ -45,7 +51,12 @@ export class Library extends React.Component {
 							directories={this.state.directories}
 							selectedPageId={this.state.selectedPageId}
 						/> : false}
-						<a href="#" onClick={this.handleUploadClick} className="btn btn-secondary btn-sm">Neues template hochladen</a>
+						<Link
+							className="btn btn-secondary btn-sm"
+							to={`/library/project/${this.projectId}/whiteboard/${this.whiteboardId}/view/${this.viewId}/upload`}
+						>
+							Neues Template hochladen
+						</Link>
 					</div>
 					<div className="col-9">
 						{this.state.selectedPageId ?

@@ -8,6 +8,8 @@ export class Content extends React.Component {
 	componentDidMount() {
 		this.iframeDocument = this.node.contentDocument;
 
+		console.log(this.iframeDocument);
+
 		// Create and insert html5 doctype
 		const doctype = this.iframeDocument.implementation.createDocumentType('html', '', '');
 		this.iframeDocument.insertBefore(doctype, this.iframeDocument.querySelector('html'));
