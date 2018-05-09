@@ -17,7 +17,7 @@ export const Upload = (props) => {
 
 	return (
 		<main id="" className="container">
-			<Header projectId={projectId} whiteboardId={whiteboardId} />
+			<Header backLink={`/library/project/${projectId}/whiteboard/${whiteboardId}/view/${whiteboardId}`} />
 			<div className="row">
 				<div className="col-9">
 					<h3>Template hochladen</h3>

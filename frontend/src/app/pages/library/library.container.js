@@ -43,7 +43,7 @@ export class Library extends React.Component {
 	render() {
 		return (
 			<main id="" className="container">
-				<Header projectId={this.projectId} whiteboardId={this.whiteboardId} />
+				<Header backLink={`/whiteboards/project/${this.projectId}/whiteboard/${this.whiteboardId}`} />
 				<div className="row">
 					<div className="col-3">
 						{this.state.directories.length ? <Treeview
