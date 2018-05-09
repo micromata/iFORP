@@ -3,6 +3,7 @@ import {Alert} from 'reactstrap';
 
 import {http} from '../../../base/http';
 import {FormatJson} from '../../../shared/format-json';
+import {PropTypes} from 'prop-types';
 
 export class UploadForm extends React.Component {
 
@@ -13,14 +14,19 @@ export class UploadForm extends React.Component {
 		valid: false
 	};
 
+	handleSuccess = () => {
+		console.log('handleSuccess');
+		this.props.onSuccess();
+	}
+
 	handleSubmit = async event => {
 		event.preventDefault();
 		const response = await this.fileUpload(this.state.file);
 		console.log(response);
+		this.handleSuccess();
 	}
 
 	handleChange = event => {
-		// const {name, size, type} = event.target.files[0];
 		const file = event.target.files[0];
 		this.setState({
 			file,
@@ -43,7 +49,7 @@ export class UploadForm extends React.Component {
 		return (
 			<form onSubmit={this.handleSubmit}>
 				<Alert color="info">
-					Akzeptiertes Dateiformate: *.zip
+					Akzeptierte Dateiformate: *.zip
 				</Alert>
 				{this.state.file && !this.state.valid &&
 					<Alert color="danger">
@@ -68,3 +74,8 @@ export class UploadForm extends React.Component {
 		);
 	}
 }
+
+UploadForm.propTypes = {
+	history: PropTypes.object,
+	onSuccess: PropTypes.func
+};
