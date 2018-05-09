@@ -2,6 +2,7 @@ import React from 'react';
 import {Dropdown, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
 import {PropTypes} from 'prop-types';
 import {Link} from 'react-router-dom';
+import {Editable} from './whiteboards.editable';
 
 export class Header extends React.Component {
 
@@ -23,6 +24,10 @@ export class Header extends React.Component {
 		return this.props.onDeleteWhiteboard(whiteboardId);
 	}
 
+	handleWhiteboardNameChange = (value) => {
+		console.log('new name =', value);
+	}
+
 	render() {
 		const {project, currentWhiteboard, whiteboards} = this.props;
 
@@ -32,7 +37,7 @@ export class Header extends React.Component {
 					<Link to="/"><span className="oi oi-x"></span></Link>
 				</div>
 				<div className="col-8">
-					<h1 className="h2">{project.name} / {currentWhiteboard.name}</h1>
+					<h1 className="h2">{project.name} / <Editable text={currentWhiteboard.name} onChange={this.handleWhiteboardNameChange} /></h1>
 				</div>
 				<div className="col-2 text-right align-self-center">
 					<Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} direction="down">
