@@ -4,7 +4,6 @@ import {PropTypes} from 'prop-types';
 import {FormatJson} from '../../../shared/format-json';
 import {Header} from '../shared/library.header';
 import {UploadForm} from './upload.form';
-import {Alert} from 'reactstrap';
 
 export class Upload extends React.Component {
 
@@ -31,9 +30,6 @@ export class Upload extends React.Component {
 				<div className="row">
 					<div className="col-9">
 						<h2>Template hochladen</h2>
-						<Alert color="info">
-							Akzeptiertes Dateiformat: *.zip
-						</Alert>
 						<UploadForm />
 					</div>
 				</div>

@@ -1,12 +1,16 @@
 import React from 'react';
+import {Alert} from 'reactstrap';
 
 import {http} from '../../../base/http';
 import {FormatJson} from '../../../shared/format-json';
 
 export class UploadForm extends React.Component {
 
+	validFileTypes = ['application/zip'];
+
 	state = {
-		file: null
+		file: null,
+		valid: false
 	};
 
 	handleSubmit = async event => {
@@ -16,13 +20,11 @@ export class UploadForm extends React.Component {
 	}
 
 	handleChange = event => {
-		const {name, size, type} = event.target.files[0];
+		// const {name, size, type} = event.target.files[0];
+		const file = event.target.files[0];
 		this.setState({
-			file: {
-				name,
-				size,
-				type
-			}
+			file,
+			valid: this.validFileTypes.includes(file.type)
 		});
 	}
 
@@ -40,8 +42,27 @@ export class UploadForm extends React.Component {
 	render() {
 		return (
 			<form onSubmit={this.handleSubmit}>
-				<input type="file" onChange={this.handleChange} />
-				<button type="submit">Upload</button>
+				<Alert color="info">
+					Akzeptiertes Dateiformate: *.zip
+				</Alert>
+				{this.state.file && !this.state.valid &&
+					<Alert color="danger">
+						Datei kann nicht hochgeladen werden: Falsches Dateiformat.
+					</Alert>
+				}
+				<div className="row">
+					<div className="col-10">
+						<div className="custom-file">
+							<input type="file" onChange={this.handleChange} accept={this.validFileTypes} className="custom-file-input" id="fileInput" />
+							<label className="custom-file-label" htmlFor="fileInput">
+								{this.state.file ? this.state.file.name : 'Datei auswählen'}
+							</label>
+						</div>
+					</div>
+					<div className="col-2 d-flex">
+						<button className="btn btn-primary flex-grow-1" type="submit" disabled={!this.state.valid}>Upload</button>
+					</div>
+				</div>
 				<FormatJson formState={this.state} />
 			</form>
 		);
