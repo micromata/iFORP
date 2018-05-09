@@ -4,7 +4,7 @@ import {PropTypes} from 'prop-types';
 import {FormatJson} from '../../../shared/format-json';
 import {http} from '../../../base/http';
 import {Header} from '../shared/view.header';
-import {Content} from '../../../shared/view.content';
+import {Content} from '../../../shared/iframe';
 import {LinkEditor} from './edit-view-link-editor';
 
 export class EditView extends React.Component {

@@ -7,7 +7,7 @@ import {FormatJson} from '../../shared/format-json';
 import {Header} from './shared/library.header';
 import {http} from '../../base/http';
 import {Treeview} from './library.treeview';
-import {Content} from '../../shared/view.content';
+import {Content} from '../../shared/iframe';
 
 export class Library extends React.Component {
 
