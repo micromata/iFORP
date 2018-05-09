@@ -2,7 +2,7 @@ import React from 'react';
 import {Alert} from 'reactstrap';
 
 import {http} from '../../../base/http';
-import {FormatJson} from '../../../shared/format-json';
+import {FormatJson} from '../../../shared/format-json'; // eslint-disable-line no-unused-vars
 import {PropTypes} from 'prop-types';
 
 export class UploadForm extends React.Component {
@@ -15,14 +15,12 @@ export class UploadForm extends React.Component {
 	};
 
 	handleSuccess = () => {
-		console.log('handleSuccess');
 		this.props.onSuccess();
 	}
 
 	handleSubmit = async event => {
 		event.preventDefault();
-		const response = await this.fileUpload(this.state.file);
-		console.log(response);
+		await this.uploadFile(this.state.file);
 		this.handleSuccess();
 	}
 
@@ -34,7 +32,7 @@ export class UploadForm extends React.Component {
 		});
 	}
 
-	fileUpload(file) {
+	uploadFile(file) {
 		const formData = new FormData();
 		formData.append('file', file);
 		const config = {
@@ -69,7 +67,7 @@ export class UploadForm extends React.Component {
 						<button className="btn btn-primary flex-grow-1" type="submit" disabled={!this.state.valid}>Upload</button>
 					</div>
 				</div>
-				<FormatJson formState={this.state} />
+				{/* <FormatJson formState={this.state} /> */}
 			</form>
 		);
 	}

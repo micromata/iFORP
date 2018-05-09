@@ -5,44 +5,29 @@ import {FormatJson} from '../../../shared/format-json';
 import {Header} from '../shared/library.header';
 import {UploadForm} from './upload.form';
 
-export class Upload extends React.Component {
+export const Upload = (props) => {
 
-	state = {
-		view: null
+	const projectId = props.match.params.projectId;
+	const whiteboardId = props.match.params.whiteboardId;
+	const viewId = props.match.params.viewId;
+
+	const handleSuccess = () => {
+		props.history.push(`/library/project/${projectId}/whiteboard/${whiteboardId}/view/${viewId}`);
 	};
 
-	projectId = this.props.match.params.projectId;
-
-	whiteboardId = this.props.match.params.whiteboardId;
-
-	viewId = this.props.match.params.viewId;
-
-	async componentDidMount() {
-
-		// Get ID from path parameters
-		this.setState({view: this.viewId});
-	}
-
-	handleSuccess = () => {
-		console.log('handleSuccess');
-		this.props.history.push(`/library/project/${this.projectId}/whiteboard/${this.whiteboardId}/view/${this.viewId}`);
-	}
-
-	render() {
-		return (
-			<main id="" className="container">
-				<Header projectId={this.projectId} whiteboardId={this.whiteboardId} />
-				<div className="row">
-					<div className="col-9">
-						<h3>Template hochladen</h3>
-						<UploadForm onSuccess={this.handleSuccess} />
-					</div>
+	return (
+		<main id="" className="container">
+			<Header projectId={projectId} whiteboardId={whiteboardId} />
+			<div className="row">
+				<div className="col-9">
+					<h3>Template hochladen</h3>
+					<UploadForm onSuccess={handleSuccess} />
 				</div>
-				<FormatJson state={this.state} />
-			</main>
-		);
-	}
-}
+			</div>
+			<FormatJson IDs={{projectId, whiteboardId, viewId}} />
+		</main>
+	);
+};
 
 Upload.propTypes = {
 	match: PropTypes.object,
