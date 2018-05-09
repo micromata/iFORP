@@ -28,6 +28,10 @@ export class Header extends React.Component {
 		return this.props.onRenameWhiteboard(newName);
 	}
 
+	handleProjectNameChange = (newName) => {
+		return this.props.onRenameProject(newName);
+	}
+
 	render() {
 		const {project, currentWhiteboard, whiteboards} = this.props;
 
@@ -37,7 +41,7 @@ export class Header extends React.Component {
 					<Link to="/"><span className="oi oi-x"></span></Link>
 				</div>
 				<div className="col-8">
-					<h1 className="h2">{project.name} / <Editable text={currentWhiteboard.name} onChange={this.handleWhiteboardNameChange} /></h1>
+					<h1 className="h2"><Editable text={project.name} onChange={this.handleProjectNameChange} /> / <Editable text={currentWhiteboard.name} onChange={this.handleWhiteboardNameChange} /></h1>
 				</div>
 				<div className="col-2 text-right align-self-center">
 					<Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} direction="down">
@@ -93,5 +97,6 @@ Header.propTypes = {
 	whiteboards: PropTypes.array,
 	onCreateNewWhiteboard: PropTypes.func,
 	onDeleteWhiteboard: PropTypes.func,
-	onRenameWhiteboard: PropTypes.func
+	onRenameWhiteboard: PropTypes.func,
+	onRenameProject: PropTypes.func
 };

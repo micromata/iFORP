@@ -25,10 +25,17 @@ module.exports = SetupEndpoint({
         },
         {
             params: '/{projectId}',
-            requests: [{
-                method: 'GET',
-                response: '/response-files/projects/details.json'
-            }]
+            requests: [
+                {
+                    method: 'GET',
+                    response: '/response-files/projects/details.json'
+                },
+                {
+                    // Payload: {name: string}
+                    method: 'PATCH',
+                    response: '/response-files/projects/patched.json'
+                }
+            ]
         },
         {
             params: '/14',
@@ -73,7 +80,7 @@ module.exports = SetupEndpoint({
                     response: { ok: 'ok' }
                 },
                 {
-                    // Payload: {name: 'newName'}
+                    // Payload: {name: string}
                     method: 'PATCH',
                     response: '/response-files/whiteboards/patched.json'
                 }
