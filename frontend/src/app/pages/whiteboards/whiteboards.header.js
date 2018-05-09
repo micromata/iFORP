@@ -24,8 +24,8 @@ export class Header extends React.Component {
 		return this.props.onDeleteWhiteboard(whiteboardId);
 	}
 
-	handleWhiteboardNameChange = (value) => {
-		console.log('new name =', value);
+	handleWhiteboardNameChange = (newName) => {
+		return this.props.onRenameWhiteboard(newName);
 	}
 
 	render() {
@@ -92,5 +92,6 @@ Header.propTypes = {
 	currentWhiteboard: PropTypes.object,
 	whiteboards: PropTypes.array,
 	onCreateNewWhiteboard: PropTypes.func,
-	onDeleteWhiteboard: PropTypes.func
+	onDeleteWhiteboard: PropTypes.func,
+	onRenameWhiteboard: PropTypes.func
 };

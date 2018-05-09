@@ -67,10 +67,17 @@ module.exports = SetupEndpoint({
         },
         {
             params: '/{projectId}/whiteboards/{whiteboardId}',
-            requests: [{
-                method: 'DELETE',
-                response: { ok: 'ok' }
-            }]
+            requests: [
+                {
+                    method: 'DELETE',
+                    response: { ok: 'ok' }
+                },
+                {
+                    // Payload: {name: 'newName'}
+                    method: 'PATCH',
+                    response: '/response-files/whiteboards/patched.json'
+                }
+            ]
         },
 
         /**

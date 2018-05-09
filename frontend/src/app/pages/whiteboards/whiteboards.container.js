@@ -49,6 +49,11 @@ export class Whiteboards extends React.Component {
 		});
 	}
 
+	renameWhiteboard = async (newName) => {
+		const currentWhiteboard = await http.patch(`projects/${this.state.project.id}/whiteboards/${this.state.currentWhiteboard.id}`, {name: newName});
+		this.setState({currentWhiteboard});
+	}
+
 	async componentDidMount() {
 
 		// Get project ID from path parameters
@@ -107,6 +112,7 @@ export class Whiteboards extends React.Component {
 					whiteboards={this.state.whiteboards}
 					onCreateNewWhiteboard={this.createNewWhiteboard}
 					onDeleteWhiteboard={this.deleteWhiteboard}
+					onRenameWhiteboard={this.renameWhiteboard}
 				/>
 				<Views
 					views={this.state.views}
