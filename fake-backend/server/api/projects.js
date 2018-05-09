@@ -107,7 +107,15 @@ module.exports = SetupEndpoint({
                     response: { ok: 'ok' }
                 },
                 {
+                    // Payload: Array of interaction elements.
+                    // See: /frontend/src/app/pages/views/edit/edit-view.container.js
                     method: 'PATCH',
+                    response: '/response-files/views/patched.json'
+                },
+                {
+                    // Payload: HTML content properties.
+                    // See: /frontend/src/app/pages/library/library.container.js
+                    method: 'PUT',
                     response: '/response-files/views/patched.json'
                 }
             ]
