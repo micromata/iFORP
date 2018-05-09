@@ -14,6 +14,13 @@ module.exports = SetupEndpoint({
             }]
         },
         {
+            params: '/files/{fileId}',
+            requests: [{
+                method: 'GET',
+                response: '/response-files/library/file.json'
+            }]
+        },
+        {
             params: '/upload',
             requests: [{
                 method: 'POST',

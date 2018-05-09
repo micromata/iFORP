@@ -7,13 +7,23 @@ import {FormatJson} from '../../shared/format-json';
 import {Header} from './shared/library.header';
 import {http} from '../../base/http';
 import {Treeview} from './library.treeview';
+import {Content} from '../views/shared/view.content';
 
 export class Library extends React.Component {
 
 	state = {
 		view: null,
 		directories: [],
-		selectedPageId: null
+		selectedPageId: null,
+		selectedFile: {
+			id: null,
+			name: '',
+			htmlElementAttributes: [],
+			head: '',
+			body: '',
+			css: [],
+			js: []
+		}
 	};
 
 	projectId = this.props.match.params.projectId;
@@ -24,10 +34,20 @@ export class Library extends React.Component {
 
 	handlePageClick = pageId => {
 		this.setState({selectedPageId: pageId});
+		this.getPage(pageId);
 	}
 
 	handleUploadClick = event => {
 		event.preventDefault();
+	}
+
+	getPage = async (pageId) => {
+		const selectedFile = await http.get(`library/files/${pageId}`);
+		this.setState({selectedFile});
+	}
+
+	componentDidUpdate() {
+
 	}
 
 	async componentDidMount() {
@@ -60,7 +80,14 @@ export class Library extends React.Component {
 					</div>
 					<div className="col-9">
 						{this.state.selectedPageId ?
-							<p><code>TODO: iframe der ausgewählten Seite einbinden.</code></p> :
+							<Content
+								htmlElementAttributes={this.state.selectedFile.htmlElementAttributes}
+								head={this.state.selectedFile.head}
+								body={this.state.selectedFile.body}
+								css={this.state.selectedFile.css}
+								js={this.state.selectedFile.js}
+								viewportSize="desktop"
+							/> :
 							this.state.directories.length ?
 								<Alert color="info">
 									Bitte wählen Sie in der linken Spalte ein Template aus um fortzufahren.
