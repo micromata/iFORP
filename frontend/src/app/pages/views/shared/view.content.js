@@ -95,5 +95,5 @@ Content.propTypes = {
 	body: PropTypes.string,
 	css: PropTypes.array,
 	js: PropTypes.array,
-	viewportSize: PropTypes.string
+	viewportSize: PropTypes.oneOf(['desktop', 'tablet', 'phone'])
 };
