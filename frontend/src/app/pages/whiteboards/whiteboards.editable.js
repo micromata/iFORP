@@ -26,7 +26,17 @@ export class Editable extends React.Component {
 	};
 
 	componentDidUpdate(prevProps) {
+		// console.log('componentDidUpdate');
+		// console.log(prevProps);
 		if (!prevProps.text) {
+			this.setState({value: this.props.text});
+		}
+	}
+
+	componentDidMount() {
+		// console.log('componentDidMount');
+		// console.log(this.props.text);
+		if (this.props.text) {
 			this.setState({value: this.props.text});
 		}
 	}

@@ -17,6 +17,23 @@ export class Whiteboards extends React.Component {
 
 	getViews = async (whiteboardId) => http.get(`projects/${this.state.project.id}/whiteboards/${whiteboardId}/views`);
 
+	renameView = async (viewId, newName) => {
+		await http.patch(`projects/${this.state.project.id}/whiteboards/${this.state.currentWhiteboard.id}/views/${viewId}`, {name: newName});
+
+		const views = this.state.views.map(view => {
+			if (view.id === viewId) {
+				view.name = newName;
+			}
+			return view;
+		});
+
+		this.setState({
+			views: [
+				...views
+			]
+		});
+	}
+
 	deleteView = async (viewId) => {
 		await http.delete(`projects/${this.state.project.id}/whiteboards/${this.state.currentWhiteboard.id}/views/${viewId}`);
 		this.setState({views: [...this.state.views.filter(current => current.id !== viewId)]});
@@ -123,6 +140,7 @@ export class Whiteboards extends React.Component {
 				<Views
 					views={this.state.views}
 					onDeleteView={this.deleteView}
+					onRenameView={this.renameView}
 					onAddView={this.addView}
 					projectId={this.state.project.id}
 					whiteboardId={this.state.currentWhiteboard.id}

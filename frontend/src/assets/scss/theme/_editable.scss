@@ -1,7 +1,7 @@
 .editable-container {
 	cursor: pointer;
 	position: relative;
-	padding: 0 0.8em 0 0.5em;
+	padding: 0 25px 0 25px;
 
 	.editable-button {
 		cursor: pointer;
@@ -33,6 +33,5 @@
 
 	.form-control {
 		font-size: 1rem;
-		// padding: 0.25rem 0.75rem;
 	}
 }

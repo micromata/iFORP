@@ -121,8 +121,13 @@ module.exports = SetupEndpoint({
                     response: { ok: 'ok' }
                 },
                 {
-                    // Payload: Array of interaction elements.
-                    // See: /frontend/src/app/pages/views/edit/edit-view.container.js
+                    /**
+                     * Payload: {"interactionElements": […]}
+                     * See: /frontend/src/app/pages/views/edit/edit-view.container.js
+                     *
+                     * Or: {"name": "New Name"}
+                     * See: /frontend/src/app/pages/whiteboards/whiteboards.container.js
+                     */
                     method: 'PATCH',
                     response: '/response-files/views/patched.json'
                 },
