@@ -12,6 +12,7 @@ $icon-font-path: '../fonts/open-iconic/' !default;
 }
 
 // Catchall baseclass
+
 .oi {
 	position: relative;
 	top: 1px;
@@ -952,3 +953,34 @@ $icon-font-path: '../fonts/open-iconic/' !default;
 	content: '\e0de';
 }
 
+// Own styles
+
+.oi.oi-chevron-left,
+.oi.oi-menu {
+	padding: 8px 10px;
+	background: #2f405d;
+	border-radius: 5px;
+	color: white;
+}
+
+.oi.oi-menu {
+	padding: 8px 10px;
+	background: #2f405d;
+	border-radius: 5px;
+	color: #fff;
+}
+
+.oi.oi-x {
+	padding: 7px 10px 9px 10px;
+	background: #2f405d;
+	border-radius: 5px;
+	color: #fff;
+}
+
+.oi.oi-plus {
+	color: #76b354;
+}
+
+.oi.oi-pencil {
+	color: #eabf5e;
+}
