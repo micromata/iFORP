@@ -24,10 +24,12 @@
   "webpack": {
     "DefinePlugin": {
       "development": {
-        "PRODUCTION": false
+        "PRODUCTION": false,
+        "API_PREFIX": "'http://localhost:8087/api/'"
       },
       "production": {
-        "PRODUCTION": true
+        "PRODUCTION": true,
+        "API_PREFIX": "'http://localhost:8087/api/'"
       }
     },
     "ProvidePlugin": {}
