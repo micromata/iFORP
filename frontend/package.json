@@ -60,6 +60,7 @@
     "promise-polyfill": "^7.1.1",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
+    "react-archer": "^0.1.7",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
     "reactstrap": "^5.0.0",

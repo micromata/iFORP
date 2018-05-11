@@ -1,9 +1,11 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 import {Link} from 'react-router-dom';
+import {ArcherElement} from 'react-archer';
+
 import {Editable} from './whiteboards.editable';
 
-export const View = ({view, isLast, isTheOnlyView, onDeleteView, onRenameView, onAddView, projectId, whiteboardId}) => {
+export const View = ({view, index, isLast, isTheOnlyView, onDeleteView, onRenameView, onAddView, projectId, whiteboardId}) => {
 	const handleDeleteClick = (viewId) => {
 		return onDeleteView(viewId);
 	};
@@ -17,8 +19,14 @@ export const View = ({view, isLast, isTheOnlyView, onDeleteView, onRenameView, o
 	};
 
 	return (
-		<React.Fragment>
-			<div className="card">
+		<div className="card">
+			<ArcherElement
+				id={String(index)}
+				relations={isLast === true ? [] : [{
+					from: {anchor: 'right'},
+					to: {anchor: 'left', id: String(index + 1)}
+				}]}
+			>
 				<div className="card-header">
 					<h5 className="card-title mb-0"><Editable text={view.name} onChange={newName => handleViewNameChange(view.id, newName)} /></h5>
 				</div>
@@ -33,9 +41,8 @@ export const View = ({view, isLast, isTheOnlyView, onDeleteView, onRenameView, o
 						{view.hasFile === true && <Link className="btn btn-primary" to={`/views/show/project/${projectId}/whiteboard/${whiteboardId}/view/${view.id}`}><span className="oi oi-eye"></span></Link>}
 					</div>
 				</div>
-			</div>
-			{isLast === false ? <span className="card-divider-horizontal align-self-center">&nbsp;</span> : null}
-		</React.Fragment>
+			</ArcherElement>
+		</div>
 	);
 };
 

@@ -1,5 +1,7 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
+import {ArcherContainer} from 'react-archer';
+
 import {View} from './whiteboards.view';
 
 export const Views = ({views, onDeleteView, onRenameView, onAddView, projectId, whiteboardId}) => {
@@ -16,21 +18,24 @@ export const Views = ({views, onDeleteView, onRenameView, onAddView, projectId, 
 	};
 
 	return (
-		<div className="row justify-content-md-center text-center">
-			{views &&
-				views.map((view, index) => <View
-					key={view.id}
-					view={view}
-					isTheOnlyView={views.length === 1}
-					isLast={index === views.length - 1}
-					onDeleteView={handleDeleteView}
-					onRenameView={handleRenameView}
-					onAddView={handleAddView}
-					projectId={projectId}
-					whiteboardId={whiteboardId}
-				/>)
-			}
-		</div>
+		<ArcherContainer strokeColor="grey">
+			<div className="row justify-content-md-center text-center">
+				{views &&
+					views.map((view, index) => <View
+						key={view.id}
+						index={index}
+						view={view}
+						isTheOnlyView={views.length === 1}
+						isLast={index === views.length - 1}
+						onDeleteView={handleDeleteView}
+						onRenameView={handleRenameView}
+						onAddView={handleAddView}
+						projectId={projectId}
+						whiteboardId={whiteboardId}
+					/>)
+				}
+			</div>
+		</ArcherContainer>
 	);
 };
 

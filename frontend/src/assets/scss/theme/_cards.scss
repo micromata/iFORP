@@ -34,6 +34,12 @@
 }
 
 #whiteboard {
+	.card {
+		margin: 0 50px 50px 0;
+		position: relative;
+		padding: 0;
+	}
+
 	span.card-divider-horizontal {
 		border-bottom: 2px solid black;
 		width: 40px;
