@@ -3,11 +3,5 @@
 // --------------------------------------------------
 
 .form-inline .form-control {
-	background: #63676b;
-	border: none;
-	color: $white;
-
-	&::placeholder {
-		color: $gray-500;
-	}
+	background: white;
 }

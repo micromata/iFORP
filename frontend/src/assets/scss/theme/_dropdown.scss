@@ -1,8 +1,17 @@
+.dropdown-item {
+	font-size: 14px;
+}
+
 .dropdown-item:active {
 	background-color: inherit;
-	color: inherit;
+	color: #595959;
 }
 
 .dropdown button {
 	cursor: pointer;
+}
+
+.dropdown-header {
+	font-size: 16px;
+	color: #2f405d;
 }
