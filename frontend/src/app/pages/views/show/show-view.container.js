@@ -1,7 +1,7 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 
-import {FormatJson} from '../../../shared/format-json';
+import {FormatJson} from '../../../shared/format-json'; // eslint-disable-line no-unused-vars
 import {http} from '../../../base/http';
 import {Header} from '../shared/view.header';
 import {ViewportChanger} from './show-viewport-changer';
@@ -51,7 +51,7 @@ export class ShowView extends React.Component {
 						/>
 					</div>
 				</div>
-				<FormatJson state={this.state}></FormatJson>
+				{/* <FormatJson state={this.state}></FormatJson> */}
 			</main>
 		);
 	}

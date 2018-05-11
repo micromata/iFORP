@@ -1,7 +1,7 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 
-import {FormatJson} from '../../../shared/format-json';
+import {FormatJson} from '../../../shared/format-json'; // eslint-disable-line no-unused-vars
 import {Header} from '../shared/library.header';
 import {UploadForm} from './upload.form';
 
@@ -24,7 +24,7 @@ export const Upload = (props) => {
 					<UploadForm onSuccess={handleSuccess} />
 				</div>
 			</div>
-			<FormatJson IDs={{projectId, whiteboardId, viewId}} />
+			{/* <FormatJson IDs={{projectId, whiteboardId, viewId}} /> */}
 		</main>
 	);
 };

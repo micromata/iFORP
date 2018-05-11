@@ -3,7 +3,7 @@ import {PropTypes} from 'prop-types';
 import {Alert} from 'reactstrap';
 import {Link} from 'react-router-dom';
 
-import {FormatJson} from '../../shared/format-json';
+import {FormatJson} from '../../shared/format-json'; // eslint-disable-line no-unused-vars
 import {Header} from './shared/library.header';
 import {http} from '../../base/http';
 import {Treeview} from './library.treeview';
@@ -102,7 +102,7 @@ export class Library extends React.Component {
 						</div>
 					</div>
 				</div>
-				<FormatJson state={this.state}></FormatJson>
+				{/* <FormatJson state={this.state}></FormatJson> */}
 			</main>
 		);
 	}

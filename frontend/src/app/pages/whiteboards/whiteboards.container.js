@@ -2,7 +2,7 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 
 import {http} from '../../base/http';
-import {FormatJson} from '../../shared/format-json';
+import {FormatJson} from '../../shared/format-json'; // eslint-disable-line no-unused-vars
 import {Header} from './whiteboards.header';
 import {Views} from './whiteboards.views';
 
@@ -145,12 +145,12 @@ export class Whiteboards extends React.Component {
 					projectId={this.state.project.id}
 					whiteboardId={this.state.currentWhiteboard.id}
 				/>
-				<FormatJson
+				{/* <FormatJson
 					project={this.state.project}
 					whiteboards={this.state.whiteboards}
 					currentWhiteboard={this.state.currentWhiteboard}
 					views={this.state.views}
-				/>
+				/> */}
 			</main>
 		);
 	}

@@ -4,7 +4,7 @@ import {PropTypes} from 'prop-types';
 import {http} from '../../base/http';
 import {NewProject} from './home.new-project';
 import {ProjectList} from './home.project-list';
-import {FormatJson} from '../../shared/format-json';
+import {FormatJson} from '../../shared/format-json'; // eslint-disable-line no-unused-vars
 
 export class Home extends React.Component {
 
@@ -28,7 +28,7 @@ export class Home extends React.Component {
 			<main id="start" className="container">
 				<NewProject onNewProject={this.handleNewProject} />
 				<ProjectList projects={this.state.projects} />
-				<FormatJson json={this.state} />
+				{/* <FormatJson json={this.state} /> */}
 			</main>
 		);
 	}
