@@ -11,7 +11,7 @@
 
 	function addClickEvents() {
 		const interactionElements = document.querySelectorAll('[data-interaction-target-view]');
-		interactionElements.forEach(element => {
+		[...interactionElements].forEach(element => {
 			element.addEventListener('click', handleClick);
 		});
 	}
