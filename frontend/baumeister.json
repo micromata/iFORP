@@ -24,10 +24,12 @@
   "webpack": {
     "DefinePlugin": {
       "development": {
-        "PRODUCTION": false
+        "PRODUCTION": false,
+        "API_HOST": "'localhost'"
       },
       "production": {
-        "PRODUCTION": true
+        "PRODUCTION": true,
+        "API_HOST": "'localhost'"
       }
     },
     "ProvidePlugin": {}
