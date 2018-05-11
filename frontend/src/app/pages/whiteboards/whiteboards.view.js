@@ -48,6 +48,7 @@ export const View = ({view, index, isLast, isTheOnlyView, onDeleteView, onRename
 
 View.propTypes = {
 	view: PropTypes.object,
+	index: PropTypes.number,
 	isLast: PropTypes.bool,
 	isTheOnlyView: PropTypes.bool,
 	onAddView: PropTypes.func,
