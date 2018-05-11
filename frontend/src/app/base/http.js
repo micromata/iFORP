@@ -1,10 +1,9 @@
 import request from 'axios';
 
-const PRODUCTION_API_PREFIX = `http://${API_HOST}:8087/api/`;
-const DEVELOPMENT_API_PREFIX = `http://${API_HOST}:8087/api/`;
-
-// PRODUCTION constant is provided by the webpack DefinePlugin via baumeister.json
-const apiPrefix = PRODUCTION ? PRODUCTION_API_PREFIX : DEVELOPMENT_API_PREFIX;
+/**
+ * API_PREFIX constant is provided by the webpack DefinePlugin via baumeister.json
+ */
+const apiPrefix = API_PREFIX;
 
 async function get(url, config) {
 	try {

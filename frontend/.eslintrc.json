@@ -15,7 +15,7 @@
   },
   "globals": {
     "PRODUCTION": false,
-    "API_HOST": false
+    "API_PREFIX": false
   },
   "overrides": [
     {

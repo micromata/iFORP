@@ -25,11 +25,11 @@
     "DefinePlugin": {
       "development": {
         "PRODUCTION": false,
-        "API_HOST": "'localhost'"
+        "API_PREFIX": "'http://localhost:8087/api/'"
       },
       "production": {
         "PRODUCTION": true,
-        "API_HOST": "'localhost'"
+        "API_PREFIX": "'http://localhost:8087/api/'"
       }
     },
     "ProvidePlugin": {}
