@@ -20,7 +20,7 @@ export const Upload = (props) => {
 			<Header backLink={`/library/project/${projectId}/whiteboard/${whiteboardId}/view/${whiteboardId}`} />
 			<div className="row">
 				<div className="col-9">
-					<h3>Template hochladen</h3>
+					<h3>Inhalt hochladen</h3>
 					<UploadForm onSuccess={handleSuccess} />
 				</div>
 			</div>

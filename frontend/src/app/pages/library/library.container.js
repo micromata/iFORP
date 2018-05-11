@@ -76,7 +76,7 @@ export class Library extends React.Component {
 							className="btn btn-secondary btn-sm"
 							to={`/library/project/${this.projectId}/whiteboard/${this.whiteboardId}/view/${this.viewId}/upload`}
 						>
-							Neues Template hochladen
+							Neuen Inhalt hochladen
 						</Link>
 					</div>
 					<div className="col-9">
@@ -91,14 +91,14 @@ export class Library extends React.Component {
 							/> :
 							this.state.directories.length ?
 								<Alert color="info">
-									Bitte wählen Sie in der linken Spalte ein Template aus um fortzufahren.
+									Bitte wählen Sie in der linken Spalte einen Inhalt aus um fortzufahren.
 								</Alert> :
 								<Alert color="warning">
-									Bitte laden Sie zunächst ein Template hoch um fortzufahren.
+									Bitte laden Sie zunächst Inhalte hoch um fortzufahren.
 								</Alert>
 						}
 						<div className="d-flex justify-content-end mt-3">
-							<button onClick={this.handleUseTemplateClick} className="btn btn-primary" disabled={!this.state.selectedPageId}>Template verwenden</button>
+							<button onClick={this.handleUseTemplateClick} className="btn btn-primary" disabled={!this.state.selectedPageId}>Inhalt verwenden</button>
 						</div>
 					</div>
 				</div>
