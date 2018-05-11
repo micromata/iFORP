@@ -4,6 +4,8 @@
 
 .card {
 	border: 1px solid #a6a6a6;
+	background: #e9ecef;
+	padding: 15px;
 }
 
 .card-header {
@@ -22,6 +24,11 @@
 
 		.card-title {
 			color: #2f405d;
+			font-size: 16px;
+		}
+
+		.card-body {
+			padding: 10px 0;
 		}
 	}
 }
@@ -32,4 +39,16 @@
 		width: 40px;
 		height: 0;
 	}
+}
+
+#start .template-thumb {
+	width: 160px;
+	margin: 0 auto;
+	opacity: 0.8;
+}
+
+#projects .template-thumb {
+	width: 120px;
+	margin: 0 auto;
+	opacity: 0.8;
 }
