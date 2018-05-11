@@ -1,10 +1,15 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 import {Link} from 'react-router-dom';
+import {Editable} from './whiteboards.editable';
 
-export const View = ({view, isLast, isTheOnlyView, onDeleteView, onAddView, projectId, whiteboardId}) => {
+export const View = ({view, isLast, isTheOnlyView, onDeleteView, onRenameView, onAddView, projectId, whiteboardId}) => {
 	const handleDeleteClick = (viewId) => {
 		return onDeleteView(viewId);
+	};
+
+	const handleViewNameChange = (viewId, newName) => {
+		return onRenameView(viewId, newName);
 	};
 
 	const handleAddClick = () => {
@@ -15,7 +20,7 @@ export const View = ({view, isLast, isTheOnlyView, onDeleteView, onAddView, proj
 		<React.Fragment>
 			<div className="card">
 				<div className="card-header">
-					<h5 className="card-title mb-0">{view.name}</h5>
+					<h5 className="card-title mb-0"><Editable text={view.name} onChange={newName => handleViewNameChange(view.id, newName)} /></h5>
 				</div>
 				<div className="card-body">
 					<div className="btn-group" role="group">
@@ -40,6 +45,7 @@ View.propTypes = {
 	isTheOnlyView: PropTypes.bool,
 	onAddView: PropTypes.func,
 	onDeleteView: PropTypes.func,
+	onRenameView: PropTypes.func,
 	projectId: PropTypes.number,
 	whiteboardId: PropTypes.number
 };

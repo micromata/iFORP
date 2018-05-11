@@ -25,10 +25,17 @@ module.exports = SetupEndpoint({
         },
         {
             params: '/{projectId}',
-            requests: [{
-                method: 'GET',
-                response: '/response-files/projects/details.json'
-            }]
+            requests: [
+                {
+                    method: 'GET',
+                    response: '/response-files/projects/details.json'
+                },
+                {
+                    // Payload: {name: string}
+                    method: 'PATCH',
+                    response: '/response-files/projects/patched.json'
+                }
+            ]
         },
         {
             params: '/14',
@@ -67,10 +74,17 @@ module.exports = SetupEndpoint({
         },
         {
             params: '/{projectId}/whiteboards/{whiteboardId}',
-            requests: [{
-                method: 'DELETE',
-                response: { ok: 'ok' }
-            }]
+            requests: [
+                {
+                    method: 'DELETE',
+                    response: { ok: 'ok' }
+                },
+                {
+                    // Payload: {name: string}
+                    method: 'PATCH',
+                    response: '/response-files/whiteboards/patched.json'
+                }
+            ]
         },
 
         /**
@@ -107,8 +121,13 @@ module.exports = SetupEndpoint({
                     response: { ok: 'ok' }
                 },
                 {
-                    // Payload: Array of interaction elements.
-                    // See: /frontend/src/app/pages/views/edit/edit-view.container.js
+                    /**
+                     * Payload: {"interactionElements": […]}
+                     * See: /frontend/src/app/pages/views/edit/edit-view.container.js
+                     *
+                     * Or: {"name": "New Name"}
+                     * See: /frontend/src/app/pages/whiteboards/whiteboards.container.js
+                     */
                     method: 'PATCH',
                     response: '/response-files/views/patched.json'
                 },

@@ -2,9 +2,13 @@ import React from 'react';
 import {PropTypes} from 'prop-types';
 import {View} from './whiteboards.view';
 
-export const Views = ({views, onDeleteView, onAddView, projectId, whiteboardId}) => {
+export const Views = ({views, onDeleteView, onRenameView, onAddView, projectId, whiteboardId}) => {
 	const handleDeleteView = (viewId) => {
 		return onDeleteView(viewId);
+	};
+
+	const handleRenameView = (viewId, newName) => {
+		return onRenameView(viewId, newName);
 	};
 
 	const handleAddView = () => {
@@ -20,6 +24,7 @@ export const Views = ({views, onDeleteView, onAddView, projectId, whiteboardId})
 					isTheOnlyView={views.length === 1}
 					isLast={index === views.length - 1}
 					onDeleteView={handleDeleteView}
+					onRenameView={handleRenameView}
 					onAddView={handleAddView}
 					projectId={projectId}
 					whiteboardId={whiteboardId}
@@ -32,6 +37,7 @@ export const Views = ({views, onDeleteView, onAddView, projectId, whiteboardId})
 Views.propTypes = {
 	views: PropTypes.array,
 	onDeleteView: PropTypes.func,
+	onRenameView: PropTypes.func,
 	onAddView: PropTypes.func,
 	projectId: PropTypes.number,
 	whiteboardId: PropTypes.number
