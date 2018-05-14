@@ -6,14 +6,14 @@ class Service {
 
   async find (params) {
     return [
-      'Project 1',
-      'Project 2'
+      'Whiteboard 1',
+      'Whiteboard 2'
     ];
   }
 
   async get (id, params) {
     return {
-      id, text: `A project with ID: ${id}!`
+      id, text: `A whiteboard with ID: ${id}!`
     };
   }
 
@@ -21,7 +21,6 @@ class Service {
     if (Array.isArray(data)) {
       return Promise.all(data.map(current => this.create(current, params)));
     }
-    console.dir({data, params});
 
     return data;
   }
