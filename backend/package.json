@@ -29,16 +29,17 @@
     "start:dev": "nodemon src/index.ts",
     "build": "tsc -p .",
     "database:dummyData": "ts-node src/orm/add-dummy-data.ts",
-    "database:delete": "del '*.sqlite'"
+    "database:delete": "del '*.sqlite'",
+    "pretty": "prettier --write \"./src/**/*.{js?(x),ts?(x)}\""
   },
   "dependencies": {
+    "body-parser": "latest",
+    "cors": "latest",
     "express": "^4.16.3",
     "reflect-metadata": "^0.1.12",
     "sqlite3": "^4.0.0",
     "superb": "^2.0.0",
-    "typeorm": "^0.2.5",
-    "cors": "latest",
-    "body-parser": "latest"
+    "typeorm": "^0.2.5"
   },
   "devDependencies": {
     "@types/node": "^8.0.29",
@@ -47,13 +48,20 @@
     "husky": "1.0.0-rc.6",
     "nodemon": "^1.17.4",
     "prettier": "1.12.1",
+    "lint-staged": "^7.1.0",
     "ts-node": "3.3.0",
     "tsc": "^1.20150623.0",
     "typescript": "2.5.2"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "prettier --write \"./src/**/*.{js?(x),ts?(x)}\""
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "npm run pretty",
+      "git add"
+    ]
   }
 }
