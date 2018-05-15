@@ -29,7 +29,7 @@
     "start:dev": "nodemon index.js",
     "orm:start": "ts-node src/index.ts",
     "orm:start:dev": "nodemon src/index.ts",
-    "orm:build": "tsc src/index.ts"
+    "orm:build": "tsc -p ."
   },
   "dependencies": {
     "express": "^4.16.3",
