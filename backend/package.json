@@ -42,9 +42,16 @@
     "@types/node": "^8.0.29",
     "del-cli": "^1.1.0",
     "eslint": "^4.19.1",
+    "husky": "0.14.3",
     "nodemon": "^1.17.4",
+    "prettier": "1.12.1",
     "ts-node": "3.3.0",
     "tsc": "^1.20150623.0",
     "typescript": "2.5.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "prettier --write \"./src/**/*.{js?(x),ts?(x)}\""
+    }
   }
 }
