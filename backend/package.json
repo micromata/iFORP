@@ -26,17 +26,23 @@
     "eslint": "eslint . --config .eslintrc.json",
     "eslint:fix": "npm run eslint --silent",
     "start": "node index.js",
-    "start:dev": "nodemon index.js"
+    "start:dev": "nodemon index.js",
+    "orm:start": "ts-node src/index.ts",
+    "orm:start:dev": "nodemon src/index.ts",
+    "orm:build": "tsc src/index.ts"
   },
   "dependencies": {
-    "@types/node": "^10.0.9",
     "express": "^4.16.3",
     "reflect-metadata": "^0.1.12",
     "sqlite3": "^4.0.0",
     "typeorm": "^0.2.5"
   },
   "devDependencies": {
+    "@types/node": "^8.0.29",
     "eslint": "^4.19.1",
-    "nodemon": "^1.17.4"
+    "nodemon": "^1.17.4",
+    "ts-node": "3.3.0",
+    "tsc": "^1.20150623.0",
+    "typescript": "2.5.2"
   }
 }
