@@ -28,7 +28,7 @@
     "start": "node index.js",
     "start:dev": "nodemon index.js",
     "orm:start": "ts-node src/index.ts",
-    "orm:start:dev": "nodemon src/index.ts",
+    "orm:start:dev": "nodemon src/orm/index.ts",
     "orm:build": "tsc -p ."
   },
   "dependencies": {
