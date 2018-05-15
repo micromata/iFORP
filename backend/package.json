@@ -25,8 +25,8 @@
     "test": "npm run eslint",
     "eslint": "eslint . --config .eslintrc.json",
     "eslint:fix": "npm run eslint --silent",
-    "start": "ts-node src/orm/index.ts",
-    "start:dev": "nodemon src/orm/index.ts",
+    "start": "ts-node src/index.ts",
+    "start:dev": "nodemon src/index.ts",
     "build": "tsc -p .",
     "database:dummyData": "ts-node src/orm/add-dummy-data.ts",
     "database:delete": "del '*.sqlite'"
@@ -36,7 +36,9 @@
     "reflect-metadata": "^0.1.12",
     "sqlite3": "^4.0.0",
     "superb": "^2.0.0",
-    "typeorm": "^0.2.5"
+    "typeorm": "^0.2.5",
+    "cors": "latest",
+    "body-parser": "latest"
   },
   "devDependencies": {
     "@types/node": "^8.0.29",

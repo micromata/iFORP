@@ -1,10 +1,9 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 
-import {http} from '../../base/http';
+import http from 'axios';
 import {NewProject} from './home.new-project';
 import {ProjectList} from './home.project-list';
-import {FormatJson} from '../../shared/format-json'; // eslint-disable-line no-unused-vars
 
 export class Home extends React.Component {
 
@@ -13,21 +12,23 @@ export class Home extends React.Component {
 	};
 
 	handleNewProject = async () => {
-		const newProject = await http.post('projects', {name: `Project ${this.state.projects.length + 1}`});
-		const newWhiteboard = await http.post(`projects/${newProject.id}/whiteboards`, {name: 'Default whiteboard'});
-		this.props.history.push(`/whiteboards/project/${newProject.id}/whiteboard/${newWhiteboard.id}`);
+		const newProject = await http.post('http://localhost:3000/projects')
+			.then(res => res.data);
+		this.props.history.push(`/whiteboards/project/${newProject.id}/whiteboard/${newProject.whiteboards.pop().id}`);
 	}
 
 	async componentDidMount() {
-		const projects = await http.get('projects');
+		const projects = await http.get('http://localhost:3000/projects')
+			.then(res => res.data);
+		console.log(projects)
 		this.setState({projects});
 	}
 
 	render() {
 		return (
 			<main id="start" className="container">
-				<NewProject onNewProject={this.handleNewProject} />
-				<ProjectList projects={this.state.projects} />
+				<NewProject onNewProject={this.handleNewProject}/>
+				<ProjectList projects={this.state.projects}/>
 				{/* <FormatJson json={this.state} /> */}
 			</main>
 		);

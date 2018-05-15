@@ -1,7 +1,7 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 
-import {http} from '../../base/http';
+import http from 'axios';
 import {FormatJson} from '../../shared/format-json'; // eslint-disable-line no-unused-vars
 import {Header} from './whiteboards.header';
 import {Views} from './whiteboards.views';
@@ -15,10 +15,11 @@ export class Whiteboards extends React.Component {
 		views: []
 	};
 
-	getViews = async (whiteboardId) => http.get(`projects/${this.state.project.id}/whiteboards/${whiteboardId}/views`);
+	getViews = async (whiteboardId) => http.get(`http://localhost:3000/projects/${this.state.project.id}/whiteboards/${whiteboardId}/views`)
+		.then(res => res.data);
 
 	renameView = async (viewId, newName) => {
-		await http.patch(`projects/${this.state.project.id}/whiteboards/${this.state.currentWhiteboard.id}/views/${viewId}`, {name: newName});
+		await http.patch(`http://localhost:3000/projects/${this.state.project.id}/whiteboards/${this.state.currentWhiteboard.id}/views/${viewId}`, {name: newName});
 
 		const views = this.state.views.map(view => {
 			if (view.id === viewId) {
@@ -35,17 +36,18 @@ export class Whiteboards extends React.Component {
 	}
 
 	deleteView = async (viewId) => {
-		await http.delete(`projects/${this.state.project.id}/whiteboards/${this.state.currentWhiteboard.id}/views/${viewId}`);
+		await http.delete(`http://localhost:3000/projects/${this.state.project.id}/whiteboards/${this.state.currentWhiteboard.id}/views/${viewId}`);
 		this.setState({views: [...this.state.views.filter(current => current.id !== viewId)]});
 	};
 
 	addView = async () => {
-		const newView = await http.post(`projects/${this.state.project.id}/whiteboards/${this.state.currentWhiteboard.id}/views`, {name: 'New view'});
+		const newView = await http.post(`http://localhost:3000/projects/${this.state.project.id}/whiteboards/${this.state.currentWhiteboard.id}/views`, {name: 'New view'})
+			.then(res => res.data);
 		this.setState({views: [...this.state.views, newView]});
 	};
 
 	deleteWhiteboard = async (whiteboardId) => {
-		await http.delete(`projects/${this.state.project.id}/whiteboards/${whiteboardId}`);
+		await http.delete(`http://localhost:3000/projects/${this.state.project.id}/whiteboards/${whiteboardId}`);
 		this.setState({whiteboards: [...this.state.whiteboards.filter(current => current.id !== whiteboardId)]});
 
 		// Need to get the first whiteboard of the project in case the currently visited is deleted.
@@ -58,7 +60,8 @@ export class Whiteboards extends React.Component {
 	}
 
 	createNewWhiteboard = async () => {
-		const newWhiteboard = await http.post(`projects/${this.state.project.id}/whiteboards`, {name: 'New whiteboard'});
+		const newWhiteboard = await http.post(`http://localhost:3000/projects/${this.state.project.id}/whiteboards`, {name: 'New whiteboard'})
+			.then(res=> res.data);
 		this.setState({whiteboards: [...this.state.whiteboards, newWhiteboard]});
 		this.props.history.push(`/whiteboards/project/${this.state.project.id}/whiteboard/${newWhiteboard.id}`, {
 			whiteboard: newWhiteboard,
@@ -67,12 +70,14 @@ export class Whiteboards extends React.Component {
 	}
 
 	renameWhiteboard = async (newName) => {
-		const currentWhiteboard = await http.patch(`projects/${this.state.project.id}/whiteboards/${this.state.currentWhiteboard.id}`, {name: newName});
+		const currentWhiteboard = await http.patch(`http://localhost:3000/projects/${this.state.project.id}/whiteboards/${this.state.currentWhiteboard.id}`, {name: newName})
+			.then(res => res.data);
 		this.setState({currentWhiteboard});
 	}
 
 	renameProject = async (newName) => {
-		const project = await http.patch(`projects/${this.state.project.id}`, {name: newName});
+		const project = await http.patch(`http://localhost:3000/projects/${this.state.project.id}`, {name: newName})
+			.then(res => res.data);
 		this.setState({project});
 	}
 
@@ -81,8 +86,9 @@ export class Whiteboards extends React.Component {
 		// Get project ID from path parameters
 		const projectId = this.props.match.params.projectId;
 
-		const project = await http.get(`projects/${projectId}`);
-		const whiteboards = await http.get(`projects/${projectId}/whiteboards`);
+		const project = await http.get(`http://localhost:3000/projects/${projectId}`)
+			.then(res => res.data);
+		const whiteboards = project.whiteboards;
 
 		/**
 		 * Need to get the whiteboard from the response in case a project is opened via
