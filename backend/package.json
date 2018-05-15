@@ -25,16 +25,16 @@
     "test": "npm run eslint",
     "eslint": "eslint . --config .eslintrc.json",
     "eslint:fix": "npm run eslint --silent",
-    "start": "node index.js",
-    "start:dev": "nodemon index.js",
-    "orm:start": "ts-node src/index.ts",
-    "orm:start:dev": "nodemon src/orm/index.ts",
-    "orm:build": "tsc -p ."
+    "start": "ts-node src/orm/index.ts",
+    "start:dev": "nodemon src/orm/index.ts",
+    "build": "tsc -p .",
+    "database:dummyData": "ts-node src/orm/add-dummy-data.ts"
   },
   "dependencies": {
     "express": "^4.16.3",
     "reflect-metadata": "^0.1.12",
     "sqlite3": "^4.0.0",
+    "superb": "^2.0.0",
     "typeorm": "^0.2.5"
   },
   "devDependencies": {
