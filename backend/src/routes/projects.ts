@@ -1,4 +1,4 @@
-import {Router} from "express";
+import { Router } from 'express';
 
 const router = Router();
 
@@ -52,24 +52,36 @@ router.post('/:projectId/whiteboards/:whiteboardId/views', (req, res) => {
   res.send('Not implemented!');
 });
 
-router.get('/:projectId/whiteboards/:whiteboardId/views/:viewId', (req, res) => {
-  // Get whiteboard view by id
-  res.send('Not implemented!');
-});
+router.get(
+  '/:projectId/whiteboards/:whiteboardId/views/:viewId',
+  (req, res) => {
+    // Get whiteboard view by id
+    res.send('Not implemented!');
+  }
+);
 
-router.delete('/:projectId/whiteboards/:whiteboardId/views/:viewId', (req, res) => {
-  // Delete whiteboard view by id
-  res.send('Not implemented!');
-});
+router.delete(
+  '/:projectId/whiteboards/:whiteboardId/views/:viewId',
+  (req, res) => {
+    // Delete whiteboard view by id
+    res.send('Not implemented!');
+  }
+);
 
-router.patch('/:projectId/whiteboards/:whiteboardId/views/:viewId', (req, res) => {
-  // Modify whiteboard view by id
-  res.send('Not implemented!');
-});
+router.patch(
+  '/:projectId/whiteboards/:whiteboardId/views/:viewId',
+  (req, res) => {
+    // Modify whiteboard view by id
+    res.send('Not implemented!');
+  }
+);
 
-router.put('/:projectId/whiteboards/:whiteboardId/views/:viewId', (req, res) => {
-  // Replace whiteboard view by id
-  res.send('Not implemented!');
-});
+router.put(
+  '/:projectId/whiteboards/:whiteboardId/views/:viewId',
+  (req, res) => {
+    // Replace whiteboard view by id
+    res.send('Not implemented!');
+  }
+);
 
 export default router;

@@ -5,6 +5,7 @@ import libraryEndpoint from '../routes/library';
 import projectsEndpoint from '../routes/projects';
 
 const app = express();
+
 app.use('/library', libraryEndpoint);
 app.use('/projects', projectsEndpoint);
 

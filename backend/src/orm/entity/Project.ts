@@ -1,12 +1,12 @@
-import {Entity, PrimaryGeneratedColumn, Column} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Whiteboard } from './Whiteboard';
 
 @Entity()
 export class Project {
+  @PrimaryGeneratedColumn() id: number;
 
-  @PrimaryGeneratedColumn()
-  id: number;
+  @Column() name: string;
 
-  @Column()
-  name: string;
-
+  @OneToMany(type => Whiteboard, whiteboard => whiteboard.project)
+  whiteboards: Whiteboard[];
 }
