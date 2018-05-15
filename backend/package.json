@@ -29,7 +29,11 @@
     "start:dev": "nodemon index.js"
   },
   "dependencies": {
-    "express": "^4.16.3"
+    "@types/node": "^10.0.9",
+    "express": "^4.16.3",
+    "reflect-metadata": "^0.1.12",
+    "sqlite3": "^4.0.0",
+    "typeorm": "^0.2.5"
   },
   "devDependencies": {
     "eslint": "^4.19.1",
