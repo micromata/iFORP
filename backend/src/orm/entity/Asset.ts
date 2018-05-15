@@ -3,10 +3,12 @@ import { View } from './View';
 import { Page } from './Page';
 
 abstract class Asset {
-  @PrimaryGeneratedColumn() id: string;
+  @PrimaryGeneratedColumn() id: number;
   @Column() type: 'css' | 'js';
-  @Column() contents: string;
-  @Column() location: string;
+  @Column('text', { nullable: true })
+  contents: string;
+  @Column('text', { nullable: true })
+  location: string;
 
   get isInline() {
     return !this.location && this.contents;

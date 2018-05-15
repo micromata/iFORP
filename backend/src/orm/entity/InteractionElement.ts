@@ -3,7 +3,7 @@ import { View } from './View';
 
 @Entity()
 export class InteractionElement {
-  @PrimaryGeneratedColumn() id: string;
+  @PrimaryGeneratedColumn() id: number;
 
   @ManyToOne(type => View)
   view: View;

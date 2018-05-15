@@ -3,10 +3,12 @@ import { Page } from './Page';
 
 @Entity()
 export class Directory {
-  @PrimaryGeneratedColumn() id: string;
+  @PrimaryGeneratedColumn() id: number;
 
   @Column() name: string;
 
-  @OneToMany(type => Page, page => page.directory)
+  @OneToMany(type => Page, page => page.directory, {
+    cascade: true
+  })
   pages: Page[];
 }

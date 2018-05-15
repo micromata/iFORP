@@ -10,7 +10,7 @@ import { PageAsset } from './Asset';
 
 @Entity()
 export class Page {
-  @PrimaryGeneratedColumn() id: string;
+  @PrimaryGeneratedColumn() id: number;
 
   @Column() name: string;
 
@@ -20,10 +20,14 @@ export class Page {
 
   @Column() htmlElementAttributes: string;
 
-  @OneToMany(type => PageAsset, asset => asset.page)
+  @OneToMany(type => PageAsset, asset => asset.page, {
+    cascade: true
+  })
   css: PageAsset[];
 
-  @OneToMany(type => PageAsset, asset => asset.page)
+  @OneToMany(type => PageAsset, asset => asset.page, {
+    cascade: true
+  })
   js: PageAsset[];
 
   @ManyToOne(type => Directory)

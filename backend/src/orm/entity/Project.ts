@@ -7,6 +7,9 @@ export class Project {
 
   @Column() name: string;
 
-  @OneToMany(type => Whiteboard, whiteboard => whiteboard.project)
+  @OneToMany(type => Whiteboard, whiteboard => whiteboard.project, {
+    cascade: true,
+    eager: true
+  })
   whiteboards: Whiteboard[];
 }

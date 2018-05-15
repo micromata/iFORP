@@ -10,11 +10,14 @@ import { View } from './View';
 
 @Entity()
 export class Whiteboard {
-  @PrimaryGeneratedColumn() id: string;
+  @PrimaryGeneratedColumn() id: number;
 
   @Column() name: string;
 
-  @OneToMany(type => View, view => view.whiteboard)
+  @OneToMany(type => View, view => view.whiteboard, {
+    cascade: true,
+    eager: true
+  })
   views: View[];
 
   @ManyToOne(type => Project)
