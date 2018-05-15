@@ -1,4 +1,6 @@
-const router = require('express').Router();
+import {Router} from "express";
+
+const router = Router();
 
 router.get('/files', (req, res) => {
   // Get all library files
@@ -15,4 +17,4 @@ router.post('/library/upload', (req, res) => {
   res.send('Not implemented!');
 });
 
-module.exports = router;
+export default router;

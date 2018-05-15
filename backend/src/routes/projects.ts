@@ -1,4 +1,6 @@
-const router = require('express').Router();
+import {Router} from "express";
+
+const router = Router();
 
 router.get('/', (req, res) => {
   // Get all projects
@@ -70,4 +72,4 @@ router.put('/:projectId/whiteboards/:whiteboardId/views/:viewId', (req, res) => 
   res.send('Not implemented!');
 });
 
-module.exports = router;
+export default router;
