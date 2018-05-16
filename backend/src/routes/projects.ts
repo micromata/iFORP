@@ -3,6 +3,7 @@ import { getRepository } from 'typeorm';
 import * as superb from 'superb';
 import { Project } from '../orm/entity/Project';
 import { Whiteboard } from '../orm/entity/Whiteboard';
+import { View } from '../orm/entity/View';
 
 const router = Router();
 
@@ -84,37 +85,55 @@ router.get('/:projectId/whiteboards/:whiteboardId/views', async (req, res) => {
   res.send(whiteboard.views);
 });
 
-router.post('/:projectId/whiteboards/:whiteboardId/views', (req, res) => {});
+router.post('/:projectId/whiteboards/:whiteboardId/views', async (req, res) => {
+  const whiteboardRepo = getRepository(Whiteboard);
+  const viewRepo = getRepository(View);
+
+  const whiteboard = await whiteboardRepo.findOne(req.params.whiteboardId);
+  const view = <View>req.body;
+  view.whiteboard = whiteboard;
+  res.send(await viewRepo.save(view));
+});
 
 router.get(
   '/:projectId/whiteboards/:whiteboardId/views/:viewId',
-  (req, res) => {
-    // Get whiteboard view by id
-    res.send('Not implemented!');
+  async (req, res) => {
+    const viewRepo = getRepository(View);
+    res.send(await viewRepo.findOne(req.params.viewId));
   }
 );
 
 router.delete(
   '/:projectId/whiteboards/:whiteboardId/views/:viewId',
-  (req, res) => {
-    // Delete whiteboard view by id
-    res.send('Not implemented!');
+  async (req, res) => {
+    const viewRepo = getRepository(View);
+    res.send(await viewRepo.delete(req.params.viewId));
   }
 );
 
 router.patch(
   '/:projectId/whiteboards/:whiteboardId/views/:viewId',
-  (req, res) => {
-    // Modify whiteboard view by id
-    res.send('Not implemented!');
+  async (req, res) => {
+    const viewRepo = getRepository(View);
+    const orig = await viewRepo.findOne(req.params.viewId);
+    const patch = req.body;
+    const patched = <View>{
+      ...orig,
+      ...patch
+    };
+    res.send(await viewRepo.save(patched));
   }
 );
 
 router.put(
   '/:projectId/whiteboards/:whiteboardId/views/:viewId',
-  (req, res) => {
-    // Replace whiteboard view by id
-    res.send('Not implemented!');
+  async (req, res) => {
+    const viewRepo = getRepository(View);
+    const view = <View>{
+      id: req.params.viewId,
+      ...req.body
+    };
+    res.send(await viewRepo.save(view));
   }
 );
 
