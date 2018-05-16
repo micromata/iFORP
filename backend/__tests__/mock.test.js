@@ -1,0 +1,3 @@
+test('Application', () => {
+  expect(true);
+});

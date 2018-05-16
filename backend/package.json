@@ -22,8 +22,8 @@
     "npm": ">= 3.0.0"
   },
   "scripts": {
-    "test": "npm run eslint",
-    "eslint": "eslint . --config .eslintrc.json",
+    "test": "npm run eslint && jest",
+    "eslint": "eslint . --config .eslintrc.json --ignore-path .gitignore",
     "eslint:fix": "npm run eslint --silent",
     "start": "ts-node src/index.ts",
     "start:dev": "nodemon src/index.ts",
@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "body-parser": "latest",
+    "cheerio": "1.0.0-rc.2",
     "cors": "latest",
     "express": "^4.16.3",
     "reflect-metadata": "^0.1.12",
@@ -42,13 +43,17 @@
     "typeorm": "^0.2.5"
   },
   "devDependencies": {
+    "@types/jest": "22.2.3",
     "@types/node": "^8.0.29",
     "del-cli": "^1.1.0",
     "eslint": "^4.19.1",
+    "eslint-plugin-jest": "^21.15.1",
     "husky": "1.0.0-rc.6",
+    "jest": "22.4.3",
+    "lint-staged": "^7.1.0",
     "nodemon": "^1.17.4",
     "prettier": "1.12.1",
-    "lint-staged": "^7.1.0",
+    "ts-jest": "22.4.6",
     "ts-node": "3.3.0",
     "tsc": "^1.20150623.0",
     "typescript": "2.5.2"
@@ -62,6 +67,26 @@
     "*.ts": [
       "npm run pretty",
       "git add"
+    ]
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.(j|t)s?(x)"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.(j|t)s?(x)"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
     ]
   }
 }

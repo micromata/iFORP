@@ -2,7 +2,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { View } from './View';
 import { Page } from './Page';
 
-abstract class Asset {
+export class Asset {
   @PrimaryGeneratedColumn() id: number;
   @Column() type: 'css' | 'js';
   @Column('text', { nullable: true })
