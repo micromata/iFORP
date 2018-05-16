@@ -1,3 +1,0 @@
-test('Application', () => {
-  expect(true);
-});
