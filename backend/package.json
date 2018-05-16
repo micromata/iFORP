@@ -28,7 +28,7 @@
     "start": "ts-node src/index.ts",
     "start:dev": "nodemon src/index.ts",
     "build": "tsc -p .",
-    "database:dummyData": "ts-node src/orm/add-dummy-data.ts",
+    "database:dummyData": "npm run database:delete && echo 'Database deleted' && ts-node src/orm/add-dummy-data.ts",
     "database:delete": "del '*.sqlite'",
     "pretty": "prettier --write \"./src/**/*.{js?(x),ts?(x)}\""
   },

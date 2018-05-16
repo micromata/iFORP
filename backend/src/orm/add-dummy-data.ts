@@ -8,6 +8,8 @@ import { ViewAsset } from './entity/Asset';
 
 createConnection()
   .then(async connection => {
+    console.log('Add dummy data …');
+
     // Inserting a new project into the database
     const project = new Project();
     project.name = `My ${superb()} project`;
@@ -43,6 +45,8 @@ createConnection()
     const projects = await connection.getRepository(Project).find();
     console.log('Loaded projects:');
     console.dir(projects);
-    console.log(JSON.stringify(projects.pop()));
+
+    console.log('Show last project:');
+    console.log(JSON.stringify(projects.pop(), null, 2));
   })
   .catch(error => console.log(error));
