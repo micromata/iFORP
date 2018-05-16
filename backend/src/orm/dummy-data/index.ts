@@ -6,15 +6,18 @@ import { Project } from '../entity/Project';
 
 import { getDummyProject } from './dummy-project';
 import { getDummyDirectory } from './dummy-directory';
+import { dummyFileUpload } from './dummy-file-upload';
 
 createConnection()
   .then(async connection => {
     console.log('Add dummy data …');
 
-    // Inserting a new project
-    const project = getDummyProject();
+    // Dummy file upload
+    const dummyFiles = await dummyFileUpload();
+    console.log(dummyFiles);
 
-    // Save project
+    // Save dummy project in the database
+    const project = getDummyProject();
     await connection.getRepository(Project).save(project);
     console.log(`Saved a new project with id: ${project.id}\n`);
 
@@ -23,13 +26,11 @@ createConnection()
     console.log('Loaded projects:');
     console.dir(projects);
 
-    console.log('Show last project:');
-    console.log(JSON.stringify(projects.pop(), null, 2));
+    // console.log('Show last project:');
+    // console.log(JSON.stringify(projects.pop(), null, 2));
 
-    // Inserting a new directory
+    // Save dummy directory in the database
     const directory = getDummyDirectory();
-
-    // Save directory
     await connection.getRepository(Directory).save(directory);
     console.log(`Saved a new directory with id: ${directory.id}\n`);
   })

@@ -33,10 +33,12 @@
     "pretty": "prettier --write \"./src/**/*.{js?(x),ts?(x)}\""
   },
   "dependencies": {
+    "@sindresorhus/slugify": "^0.3.0",
     "body-parser": "latest",
     "cheerio": "1.0.0-rc.2",
     "cors": "latest",
     "express": "^4.16.3",
+    "fs-extra": "^6.0.1",
     "reflect-metadata": "^0.1.12",
     "sqlite3": "^4.0.0",
     "superb": "^2.0.0",
