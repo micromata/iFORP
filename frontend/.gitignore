@@ -21,4 +21,4 @@ coverage
 .vscode
 
 ### Project ###
-# src/library/*
+src/library/*
