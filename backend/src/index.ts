@@ -1,7 +1,7 @@
 import 'reflect-metadata';
-import express from 'express';
-import cors from 'cors';
-import bodyParser from 'body-parser';
+import * as express from 'express';
+import * as cors from 'cors';
+import * as bodyParser from 'body-parser';
 import libraryEndpoint from './routes/library';
 import projectsEndpoint from './routes/projects';
 import { createConnection } from 'typeorm';
@@ -15,13 +15,11 @@ import { createConnection } from 'typeorm';
   app.use('/library', libraryEndpoint);
   app.use('/projects', projectsEndpoint);
 
-  app.get('/', (req, res) => res.send('Hello Worldzzzzzzzz!'));
+  app.get('/', (req, res) => res.send('¯\\_(ツ)_/¯'));
 
   const db = await createConnection();
 
   app.listen(3000, () =>
-    console.log('Example app listening on http://localhost:3000!')
+    console.log('Backend started on http://localhost:3000!')
   );
-
-  console.log('App started!!!!!!!');
 })();
