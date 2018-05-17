@@ -1,8 +1,8 @@
 import React from 'react';
 import http from 'axios';
-import { Header } from './projects.header';
-import { ProjectSearch } from './projects.project-search';
-import { ProjectList } from './projects.project-list';
+import {Header} from './projects.header';
+import {ProjectSearch} from './projects.project-search';
+import {ProjectList} from './projects.project-list';
 
 export class Projects extends React.Component {
 	state = {
@@ -11,13 +11,13 @@ export class Projects extends React.Component {
 	};
 
 	handleSearch = searchTerm => {
-		this.setState({ searchTerm });
+		this.setState({searchTerm});
 	};
 
 	async componentDidMount() {
 		const projects = await http.get('http://localhost:3000/projects')
 			.then(res => res.data);
-		this.setState({ projects });
+		this.setState({projects});
 	}
 
 	render() {

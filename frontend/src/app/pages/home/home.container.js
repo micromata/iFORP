@@ -20,7 +20,7 @@ export class Home extends React.Component {
 	async componentDidMount() {
 		const projects = await http.get('http://localhost:3000/projects')
 			.then(res => res.data);
-		console.log(projects)
+		console.log(projects);
 		this.setState({projects});
 	}
 
