@@ -1,5 +1,7 @@
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
+import * as superb from 'superb';
+import * as slugify from '@sindresorhus/slugify';
 
 import { Directory } from '../entity/Directory';
 import { Project } from '../entity/Project';
@@ -12,12 +14,14 @@ createConnection()
   .then(async connection => {
     console.log('Add dummy data …');
 
+    const fakeUploadedDirName = slugify(`my ${superb()} directory`);
+
     // Dummy file upload
-    const dummyFiles = await dummyFileUpload();
+    const dummyFiles = await dummyFileUpload(fakeUploadedDirName);
     console.log(dummyFiles);
 
     // Save dummy project in the database
-    const project = getDummyProject();
+    const project = getDummyProject(fakeUploadedDirName);
     await connection.getRepository(Project).save(project);
     console.log(`Saved a new project with id: ${project.id}\n`);
 
@@ -30,7 +34,7 @@ createConnection()
     // console.log(JSON.stringify(projects.pop(), null, 2));
 
     // Save dummy directory in the database
-    const directory = getDummyDirectory();
+    const directory = getDummyDirectory(fakeUploadedDirName);
     await connection.getRepository(Directory).save(directory);
     console.log(`Saved a new directory with id: ${directory.id}\n`);
   })

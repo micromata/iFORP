@@ -2,9 +2,9 @@ import { PageAsset } from '../entity/Asset';
 import { Directory } from '../entity/Directory';
 import { Page } from '../entity/Page';
 
-export function getDummyDirectory() {
+export function getDummyDirectory(fakeUploadedDirName: string) {
   const directory = new Directory();
-  directory.name = 'first-template';
+  directory.name = fakeUploadedDirName;
   directory.pages = [];
 
   const page = new Page();
@@ -18,8 +18,7 @@ export function getDummyDirectory() {
 
   const cssAsset = new PageAsset();
   cssAsset.type = 'css';
-  cssAsset.location =
-    '../library/first-template/assets/css/app.73419fc85edeca40c47c.bundle.css';
+  cssAsset.location = `../library/${fakeUploadedDirName}/assets/css/app.73419fc85edeca40c47c.bundle.css`;
 
   page.css.push(cssAsset);
   directory.pages.push(page);

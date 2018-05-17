@@ -5,7 +5,7 @@ import { Whiteboard } from '../entity/Whiteboard';
 import { View } from '../entity/View';
 import { ViewAsset } from '../entity/Asset';
 
-export function getDummyProject() {
+export function getDummyProject(fakeUploadedDirName: string) {
   const project = new Project();
   project.name = `My ${superb()} project`;
   project.whiteboards = [];
@@ -25,8 +25,7 @@ export function getDummyProject() {
 
   const cssAsset = new ViewAsset();
   cssAsset.type = 'css';
-  cssAsset.location =
-    '../library/first-template/assets/css/app.73419fc85edeca40c47c.bundle.css';
+  cssAsset.location = `../library/${fakeUploadedDirName}/assets/css/app.73419fc85edeca40c47c.bundle.css`;
 
   view.css.push(cssAsset);
   wb.views.push(view);
