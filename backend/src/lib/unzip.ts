@@ -4,10 +4,18 @@ const Transform = require('stream').Transform;
 
 export const unzip = (zipfile, uploadDir) => {
   console.log('Unzipping:');
+  let directoryName: string;
+
   return new Promise(function(resolve, reject) {
     zipfile.readEntry();
-    zipfile.once('end', () => resolve('Done with unzipping.'));
+    zipfile.once('end', () =>
+      resolve({
+        message: 'Done with unzipping.',
+        directoryName: directoryName.substring(0, directoryName.length - 1)
+      })
+    );
     zipfile.on('entry', entry => {
+      directoryName = !directoryName ? entry.fileName : directoryName;
       if (entry.fileName.endsWith('/')) {
         /**
          * Create directories
