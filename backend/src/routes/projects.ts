@@ -4,110 +4,63 @@ import superb from 'superb';
 import { Project } from '../orm/entity/Project';
 import { Whiteboard } from '../orm/entity/Whiteboard';
 import { View } from '../orm/entity/View';
+import * as projectService from '../service/project-service';
+import * as whiteboardService from '../service/whiteboard-service';
+import * as viewService from '../service/view-service';
 
 const router = Router();
 
 router.get('/', async (req, res) => {
-  const repo = getRepository(Project);
-  const projects = await repo.find();
-  res.send(projects);
+  res.send(await projectService.find());
 });
 
 router.post('/', async (req, res) => {
-  const repo = getRepository(Project);
-
-  const whiteboard = new Whiteboard();
-  whiteboard.name = 'Default Whiteboard';
-
-  const project = new Project();
-  project.name = `A ${superb()} Project`;
-  project.whiteboards = [whiteboard];
-
-  const saved = await repo.save(project);
-  res.send(saved);
+  res.send(await projectService.save(req.body));
 });
 
 router.get('/:projectId', async (req, res) => {
-  const repo = getRepository(Project);
-  const found = await repo.findOne(req.params.projectId);
-  res.send(found);
+  res.send(await projectService.findById(req.params.projectId));
 });
 
 router.patch('/:projectId', async (req, res) => {
-  const repo = getRepository(Project);
-  const origProject = await repo.findOne(req.params.projectId);
-  const patch = req.body;
-  const patched = <Project>{ ...origProject, ...patch };
-  const saved = await repo.save(patched);
-  res.send(saved);
+  res.send(await projectService.update(req.params.projectId, req.body));
 });
 
 router.get('/:projectId/whiteboards', async (req, res) => {
-  const repo = getRepository(Project);
-  const project = await repo.findOne(req.params.projectId);
-  res.send(project.whiteboards);
+  res.send(await whiteboardService.find(req.params.projectId));
 });
 
 router.post('/:projectId/whiteboards', async (req, res) => {
-  const projectRepo = getRepository(Project);
-  const whiteboardRepo = getRepository(Whiteboard);
-  const project = await projectRepo.findOne(req.params.projectId);
-  const whiteboard = <Whiteboard>{
-    ...req.body,
-    project
-  };
-
-  const saved = await whiteboardRepo.save(whiteboard);
-  res.send(saved);
+  res.send(await whiteboardService.save(req.params.projectId, req.body));
 });
 
 router.delete('/:projectId/whiteboards/:whiteboardId', async (req, res) => {
-  const whiteboardRepo = getRepository(Whiteboard);
-  const found = await whiteboardRepo.findOne(req.params.whiteboardId);
-  res.send(found);
+  res.send(await whiteboardService.remove(req.params.whiteboardId));
 });
 
 router.patch('/:projectId/whiteboards/:whiteboardId', async (req, res) => {
-  const whiteboardRepo = getRepository(Whiteboard);
-  const orig = await whiteboardRepo.findOne(req.params.whiteboardId);
-  const patch = req.body;
-  const patched = <Whiteboard>{
-    ...orig,
-    ...patch
-  };
-  const saved = await whiteboardRepo.save(patched);
-  res.send(saved);
+  res.send(await whiteboardService.update(req.params.whiteboardId, req.body));
 });
 
 router.get('/:projectId/whiteboards/:whiteboardId/views', async (req, res) => {
-  const whiteboardRepo = getRepository(Whiteboard);
-  const whiteboard = await whiteboardRepo.findOne(req.params.whiteboardId);
-  res.send(whiteboard.views);
+  res.send(await viewService.getByWhiteboardId(req.params.whiteboardId));
 });
 
 router.post('/:projectId/whiteboards/:whiteboardId/views', async (req, res) => {
-  const whiteboardRepo = getRepository(Whiteboard);
-  const viewRepo = getRepository(View);
-
-  const whiteboard = await whiteboardRepo.findOne(req.params.whiteboardId);
-  const view = <View>req.body;
-  view.whiteboard = whiteboard;
-  res.send(await viewRepo.save(view));
+  res.send(await viewService.save(req.params.whiteboardId, req.body));
 });
 
 router.get(
   '/:projectId/whiteboards/:whiteboardId/views/:viewId',
   async (req, res) => {
-    const viewRepo = getRepository(View);
-    res.send(await viewRepo.findOne(req.params.viewId));
+    res.send(await viewService.findById(req.params.viewId));
   }
 );
 
 router.delete(
   '/:projectId/whiteboards/:whiteboardId/views/:viewId',
   async (req, res) => {
-    const viewRepo = getRepository(View);
-    res.send(await viewRepo.delete(req.params.viewId));
+    res.send(await viewService.remove(req.params.viewId));
   }
 );
 
@@ -128,12 +81,7 @@ router.patch(
 router.put(
   '/:projectId/whiteboards/:whiteboardId/views/:viewId',
   async (req, res) => {
-    const viewRepo = getRepository(View);
-    const view = <View>{
-      id: req.params.viewId,
-      ...req.body
-    };
-    res.send(await viewRepo.save(view));
+    res.send(await viewService.replace(req.params.viewId, req.body));
   }
 );
 

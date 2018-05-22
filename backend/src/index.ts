@@ -1,22 +1,8 @@
 import 'reflect-metadata';
-import * as express from 'express';
-import * as cors from 'cors';
-import * as bodyParser from 'body-parser';
-import libraryEndpoint from './routes/library';
-import projectsEndpoint from './routes/projects';
 import { createConnection } from 'typeorm';
+import app from './app';
 
 (async () => {
-  const app = express();
-  app.use(cors());
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: true }));
-
-  app.use('/library', libraryEndpoint);
-  app.use('/projects', projectsEndpoint);
-
-  app.get('/', (req, res) => res.send('¯\\_(ツ)_/¯'));
-
   const db = await createConnection();
 
   app.listen(3000, () =>
