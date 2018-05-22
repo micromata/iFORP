@@ -43,7 +43,11 @@ router.post('/upload', upload.single('file'), [], (req, res) => {
     console.log('Uploaded: ', req.file);
 
     fromBuffer(req.file.buffer, { lazyEntries: true })
-      .then(zipfile => unzip(zipfile, uploadDir, res))
+      .then(zipfile => unzip(zipfile, uploadDir))
+      .then(successMessage => {
+        res.send();
+        console.log(successMessage);
+      })
       .catch(error => {
         console.error(error);
       });
