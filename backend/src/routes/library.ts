@@ -40,6 +40,9 @@ router.post('/upload', upload.single('file'), [], (req, res) => {
   /**
    * TODO: Handle case that one uploads a directory with a name that already exists
    * (in the database and file system)
+   * Right now it:
+   * - adds a new entry into the database
+   * - Overwrites the content in the file system
    */
 
   if (!req.file) {
