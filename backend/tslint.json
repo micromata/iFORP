@@ -6,6 +6,7 @@
   ],
   "rules": {
     "comment-format": {
+      "options": [true, "check-space", "check-uppercase"],
       "severity": "warning"
     }
   }
