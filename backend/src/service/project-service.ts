@@ -8,7 +8,7 @@ export const find = () => {
   return repo.find();
 };
 
-export const save = () => {
+export const save = base => {
   const repo = getRepository(Project);
 
   const whiteboard = new Whiteboard();
@@ -18,7 +18,10 @@ export const save = () => {
   project.name = `A ${superb()} Project`;
   project.whiteboards = [whiteboard];
 
-  return repo.save(project);
+  return repo.save({
+    ...base,
+    ...project
+  });
 };
 
 export const findById = id => {
