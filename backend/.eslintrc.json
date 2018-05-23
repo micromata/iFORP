@@ -2,33 +2,12 @@
   "env": {
     "es6": true,
     "node": true,
-    "mocha": true,
     "jest/globals": true
   },
-  "parserOptions": {
-    "ecmaVersion": 2017
-  },
+  "parser": "typescript-eslint-parser",
   "plugins": ["jest"],
-  "extends": "eslint:recommended",
-  "rules": {
-    "indent": [
-      "error",
-      2
-    ],
-    "no-console": [
-      1
-    ],
-    "linebreak-style": [
-      "error",
-      "unix"
-    ],
-    "quotes": [
-      "error",
-      "single"
-    ],
-    "semi": [
-      "error",
-      "always"
-    ]
-  }
+  "extends": [
+    "baumeister",
+    "prettier"
+  ]
 }

@@ -23,8 +23,8 @@
   },
   "scripts": {
     "test": "npm run eslint && jest",
-    "eslint": "eslint . --config .eslintrc.json --ignore-path .gitignore",
-    "eslint:fix": "npm run eslint --silent",
+    "eslint": "eslint src/**/** --config .eslintrc.json --ignore-path .gitignore",
+    "eslint:fix": "npm run eslint --silent -- --fix",
     "start": "ts-node src/index.ts",
     "start:dev": "nodemon src/index.ts",
     "build": "tsc -p .",
@@ -53,8 +53,15 @@
     "@types/jest": "22.2.3",
     "@types/node": "8.0.29",
     "del-cli": "1.1.0",
-    "eslint": "4.19.1",
+    "eslint": "^4.19.1",
+    "eslint-config-baumeister": "^1.0.2",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-xo": "^0.22.2",
+    "eslint-plugin-filenames": "^1.2.0",
+    "eslint-plugin-import": "^2.12.0",
     "eslint-plugin-jest": "21.15.1",
+    "eslint-plugin-security": "^1.4.0",
+    "eslint-plugin-unicorn": "^4.0.3",
     "husky": "1.0.0-rc.6",
     "jest": "22.4.3",
     "lint-staged": "7.1.0",
@@ -63,7 +70,8 @@
     "ts-jest": "22.4.6",
     "ts-node": "3.3.0",
     "tsc": "1.20150623.0",
-    "typescript": "2.5.2"
+    "typescript": "2.5.2",
+    "typescript-eslint-parser": "^15.0.0"
   },
   "husky": {
     "hooks": {
