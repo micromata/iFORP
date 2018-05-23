@@ -1,5 +1,5 @@
 import 'reflect-metadata'; // tslint:disable-line
-import superb from 'superb';
+import * as superb from 'superb';
 import { createConnection } from 'typeorm';
 import { Project } from './entity/Project';
 import { Whiteboard } from './entity/Whiteboard';

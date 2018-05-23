@@ -1,4 +1,4 @@
-import superb from 'superb';
+import * as superb from 'superb';
 import { getRepository } from 'typeorm';
 import { Project } from '../orm/entity/Project';
 import { Whiteboard } from '../orm/entity/Whiteboard';
