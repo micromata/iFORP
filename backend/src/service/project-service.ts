@@ -8,7 +8,7 @@ export const find = () => {
   return repo.find();
 };
 
-export const save = base => {
+export const save = () => {
   const repo = getRepository(Project);
 
   const whiteboard = new Whiteboard();
@@ -29,6 +29,6 @@ export const findById = id => {
 export const update = async (id, base) => {
   const repo = getRepository(Project);
   const origProject = await repo.findOne(id);
-  const patched = <Project>{ ...origProject, ...base };
+  const patched = { ...origProject, ...base } as Project;
   return repo.save(patched);
 };
