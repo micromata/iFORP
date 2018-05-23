@@ -9,5 +9,8 @@
   "extends": [
     "baumeister",
     "prettier"
-  ]
+  ],
+  "rules": {
+    "import/no-unresolved": "off"
+  }
 }
