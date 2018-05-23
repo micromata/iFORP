@@ -82,6 +82,7 @@
   "lint-staged": {
     "*.ts": [
       "npm run pretty",
+      "npm run eslint:fix",
       "git add"
     ]
   },
