@@ -14,12 +14,12 @@ export class Whiteboard {
 
   @Column() name: string;
 
-  @OneToMany(type => View, view => view.whiteboard, {
+  @OneToMany(() => View, view => view.whiteboard, {
     cascade: true,
     eager: true
   })
   views: View[];
 
-  @ManyToOne(type => Project)
+  @ManyToOne(() => Project)
   project: Project;
 }

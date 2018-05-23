@@ -1,4 +1,4 @@
-import 'reflect-metadata';
+import 'reflect-metadata'; // tslint:disable-line
 import { createConnection } from 'typeorm';
 import * as superb from 'superb';
 import * as slugify from '@sindresorhus/slugify';

@@ -1,6 +1,12 @@
 {
   "extends": [
+    // "tslint:latest"
     "tslint-xo/space",
     "tslint-config-prettier"
-  ]
+  ],
+  "rules": {
+    "comment-format": {
+      "severity": "warning"
+    }
+  }
 }

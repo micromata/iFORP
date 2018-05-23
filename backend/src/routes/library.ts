@@ -15,12 +15,12 @@ import { unzip } from '../lib/unzip';
 const library = Router(); // eslint-disable-line new-cap
 const upload = multer({ storage: multer.memoryStorage() });
 
-library.get('/files', (req, res) => {
+library.get('/files', (_, res) => {
   // Get all library files
   res.send('Not implemented!');
 });
 
-library.get('/files/:fileId', (req, res) => {
+library.get('/files/:fileId', (_, res) => {
   // Get library file by id
   res.send('Not implemented!');
 });
@@ -47,6 +47,7 @@ library.post('/upload', upload.single('file'), [], (req, res) => {
 
   if (!req.file) {
     res.status(400).send('We need a file.');
+    return false;
   }
   if (req.file.size > maxFilesize) {
     res
@@ -54,51 +55,51 @@ library.post('/upload', upload.single('file'), [], (req, res) => {
       .send(
         `Maximum filesize of ${bytesToMegaBytes(maxFilesize)} MB exceeded.`
       );
+    return false;
   }
   if (!acceptedMimeTypes.includes(req.file.mimetype)) {
     res.status(406).send(`Wrong file type.`);
+    return false;
   }
 
-  if (req.file) {
-    console.log('Uploaded: ', req.file);
+  console.log('Uploaded: ', req.file);
 
-    readZipFileFromBuffer(req.file.buffer, { lazyEntries: true })
-      .then(zipfile => unzip(zipfile, uploadDir))
-      .then(result => {
-        console.log(result.message);
+  readZipFileFromBuffer(req.file.buffer, { lazyEntries: true })
+    .then(async zipfile => unzip(zipfile, uploadDir))
+    .then(async result => {
+      console.log(result.message);
 
-        // Save dummy directory in the database
-        const directory = new Directory();
-        const { directoryName } = result;
-        directory.name = directoryName;
-        directory.pages = [];
+      // Save dunmmy directory in the database
+      const directory = new Directory();
+      const { directoryName } = result;
+      directory.name = directoryName;
+      directory.pages = [];
 
-        // TODO: Need to get the pages stuff from the filesystem
-        // Need to do something like this in a loop
-        const page = new Page();
-        page.name = `Name from filesystem`;
-        page.body = '<p>Paragraph</p>';
-        page.head = '<meta charset="utf-8"><title>Title</title>';
-        page.htmlElementAttributes = 'lang:en';
-        page.css = [];
+      // TODO: Need to get the pages stuff from the filesystem
+      // Need to do something like this in a loop
+      const page = new Page();
+      page.name = `Name from filesystem`;
+      page.body = '<p>Paragraph</p>';
+      page.head = '<meta charset="utf-8"><title>Title</title>';
+      page.htmlElementAttributes = 'lang:en';
+      page.css = [];
 
-        const cssAsset = new PageAsset();
-        cssAsset.type = 'css';
-        cssAsset.location = `../library/${directoryName}/assets/css/filename`;
+      const cssAsset = new PageAsset();
+      cssAsset.type = 'css';
+      cssAsset.location = `../library/${directoryName}/assets/css/filename`;
 
-        page.css.push(cssAsset);
-        directory.pages.push(page);
+      page.css.push(cssAsset);
+      directory.pages.push(page);
 
-        repo.save(directory);
-        console.log('Saved the directory to the database.');
+      await repo.save(directory);
+      console.log('Saved the directory to the database.');
 
-        // Send 200 status code
-        res.send();
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  }
+      // Send 200 status code
+      res.send();
+    })
+    .catch(error => {
+      console.error(error);
+    });
 });
 
 export default library;

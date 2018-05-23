@@ -1,7 +1,7 @@
 import { Asset } from './orm/entity/Asset';
 import cheerio from 'cheerio';
 
-export function extractScriptAssets(markup: string): Array<Asset> {
+export function extractScriptAssets(markup: string): Asset[] {
   const $ = cheerio.load(markup);
   const scripts = $('script');
   return scripts.toArray().map(el => {
@@ -11,7 +11,7 @@ export function extractScriptAssets(markup: string): Array<Asset> {
   });
 }
 
-export function extractStyleAssets(markup: string): Array<Asset> {
+export function extractStyleAssets(markup: string): Asset[] {
   const $ = cheerio.load(markup);
   const inlineStyles = $('style');
   const linkedStyles = $('link[rel="stylesheet"]');
@@ -46,7 +46,7 @@ export function extractDocumentBody(markup: string): string {
 
 function mapElementToAsset(el: CheerioElement): Asset {
   const asset = new Asset();
-  const styleSrc = el.attribs['src'] || el.attribs['href'];
+  const styleSrc = el.attribs.src || el.attribs.href;
   if (styleSrc) {
     asset.location = styleSrc;
   } else {

@@ -17,12 +17,12 @@ export class Asset {
 
 @Entity()
 export class ViewAsset extends Asset {
-  @ManyToOne(type => View)
+  @ManyToOne(() => View)
   view: View;
 }
 
 @Entity()
 export class PageAsset extends Asset {
-  @ManyToOne(type => Page)
+  @ManyToOne(() => Page)
   page: Page;
 }

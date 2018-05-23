@@ -5,6 +5,6 @@ import { View } from './View';
 export class InteractionElement {
   @PrimaryGeneratedColumn() id: number;
 
-  @ManyToOne(type => View)
+  @ManyToOne(() => View)
   view: View;
 }

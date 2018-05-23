@@ -7,7 +7,7 @@ export class Directory {
 
   @Column() name: string;
 
-  @OneToMany(type => Page, page => page.directory, {
+  @OneToMany(() => Page, page => page.directory, {
     cascade: true
   })
   pages: Page[];

@@ -21,24 +21,24 @@ export class View {
 
   @Column() htmlElementAttributes: string;
 
-  @OneToMany(type => InteractionElement, ie => ie.view, {
+  @OneToMany(() => InteractionElement, ie => ie.view, {
     cascade: true,
     eager: true
   })
   interactionElements: InteractionElement[];
 
-  @OneToMany(type => ViewAsset, asset => asset.view, {
+  @OneToMany(() => ViewAsset, asset => asset.view, {
     cascade: true,
     eager: true
   })
   css: ViewAsset[];
 
-  @OneToMany(type => ViewAsset, asset => asset.view, {
+  @OneToMany(() => ViewAsset, asset => asset.view, {
     cascade: true,
     eager: true
   })
   js: ViewAsset[];
 
-  @ManyToOne(type => Whiteboard)
+  @ManyToOne(() => Whiteboard)
   whiteboard: Whiteboard;
 }

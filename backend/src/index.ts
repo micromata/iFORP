@@ -1,11 +1,11 @@
-import 'reflect-metadata';
-import { createConnection } from 'typeorm';
+import 'reflect-metadata'; // tslint:disable-line
 import app from './app';
+import { createConnection } from 'typeorm';
 
-(async () => {
-  const db = await createConnection();
-
-  app.listen(3000, () =>
-    console.log('Backend started on http://localhost:3000!')
-  );
-})();
+createConnection()
+  .then(() => {
+    app.listen(3000, () =>
+      console.log('Backend started on http://localhost:3000!')
+    );
+  })
+  .catch(error => console.error(error));

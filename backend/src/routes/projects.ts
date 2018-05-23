@@ -7,7 +7,7 @@ import * as viewService from '../service/view-service';
 
 const projects = Router(); // eslint-disable-line new-cap
 
-projects.get('/', async (req, res) => {
+projects.get('/', async (_, res) => {
   res.send(await projectService.find());
 });
 

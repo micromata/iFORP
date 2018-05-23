@@ -1,7 +1,7 @@
 import * as path from 'path';
 import * as fs from 'fs-extra';
 
-export const unzip = (zipfile, uploadDir) => {
+export const unzip = async (zipfile, uploadDir) => {
   console.log('Unzipping:');
   let directoryName: string;
 
@@ -33,7 +33,9 @@ export const unzip = (zipfile, uploadDir) => {
          */
         fs.mkdirp(path.dirname(`${uploadDir}/${entry.fileName}`)).then(() => {
           zipfile.openReadStream(entry, (error, readStream) => {
-            if (error) reject(error);
+            if (error) {
+              reject(error);
+            }
 
             // Write file contents into file
             const writeStream = fs.createWriteStream(

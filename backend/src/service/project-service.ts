@@ -3,12 +3,12 @@ import { getRepository } from 'typeorm';
 import { Project } from '../orm/entity/Project';
 import { Whiteboard } from '../orm/entity/Whiteboard';
 
-export const find = () => {
+export const find = async () => {
   const repo = getRepository(Project);
   return repo.find();
 };
 
-export const save = base => {
+export const save = async base => {
   const repo = getRepository(Project);
 
   const whiteboard = new Whiteboard();
@@ -24,7 +24,7 @@ export const save = base => {
   });
 };
 
-export const findById = id => {
+export const findById = async id => {
   const repo = getRepository(Project);
   return repo.findOne(id);
 };

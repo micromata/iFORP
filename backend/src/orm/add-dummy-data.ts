@@ -1,4 +1,4 @@
-import 'reflect-metadata';
+import 'reflect-metadata'; // tslint:disable-line
 import superb from 'superb';
 import { createConnection } from 'typeorm';
 import { Project } from './entity/Project';

@@ -23,7 +23,7 @@
   },
   "scripts": {
     "test": "npm run eslint && jest",
-    "tslint": "tslint -c tslint.json -t stylish \"src/**/*.ts\"",
+    "tslint": "tslint --project tsconfig.json -c tslint.json -t stylish \"src/**/*.ts\"",
     "tslint:fix": "npm run tslint --silent -- --fix ",
     "start": "ts-node src/index.ts",
     "start:dev": "nodemon src/index.ts",

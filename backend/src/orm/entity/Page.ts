@@ -20,16 +20,16 @@ export class Page {
 
   @Column() htmlElementAttributes: string;
 
-  @OneToMany(type => PageAsset, asset => asset.page, {
+  @OneToMany(() => PageAsset, asset => asset.page, {
     cascade: true
   })
   css: PageAsset[];
 
-  @OneToMany(type => PageAsset, asset => asset.page, {
+  @OneToMany(() => PageAsset, asset => asset.page, {
     cascade: true
   })
   js: PageAsset[];
 
-  @ManyToOne(type => Directory)
+  @ManyToOne(() => Directory)
   directory: Directory;
 }

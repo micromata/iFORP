@@ -13,6 +13,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/library', libraryEndpoint);
 app.use('/projects', projectsEndpoint);
 
-app.get('/', (req, res) => res.send('Hello Worldzzzzzzzz!'));
+app.get('/', (_, res) => res.send('Hello Worldzzzzzzzz!'));
 
 export default app;
