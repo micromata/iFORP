@@ -1,0 +1,6 @@
+{
+  "extends": [
+    "tslint-xo/space",
+    "tslint-config-prettier"
+  ]
+}
