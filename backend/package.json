@@ -28,8 +28,10 @@
     "start": "ts-node src/index.ts",
     "start:dev": "nodemon src/index.ts",
     "build": "tsc -p .",
-    "database:dummyData": "npm run database:delete && echo 'Database deleted' && ts-node src/orm/dummy-data",
-    "database:delete": "del '*.sqlite'",
+    "delete": "npm run delete:database && npm run delete:library",
+    "delete:database": "del '*.sqlite'",
+    "database:dummyData": "npm run delete:database && echo 'Database deleted' && ts-node src/orm/dummy-data",
+    "delete:library": "del -f '../frontend/src/library/**/*' '!.gitkeep'",
     "pretty": "prettier --write \"./src/**/*.{js?(x),ts?(x)}\""
   },
   "dependencies": {
