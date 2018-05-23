@@ -18,7 +18,8 @@ export class Page {
 
   @Column() body: string;
 
-  @Column() htmlElementAttributes: string;
+  @Column('text', { nullable: true })
+  htmlElementAttributes: string;
 
   @OneToMany(() => PageAsset, asset => asset.page, {
     cascade: true

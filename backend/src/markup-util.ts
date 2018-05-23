@@ -1,5 +1,5 @@
 import { Asset } from './orm/entity/Asset';
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 
 export function extractScriptAssets(markup: string): Asset[] {
   const $ = cheerio.load(markup);

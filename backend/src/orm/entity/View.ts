@@ -19,7 +19,8 @@ export class View {
 
   @Column() body: string;
 
-  @Column() htmlElementAttributes: string;
+  @Column('text', { nullable: true })
+  htmlElementAttributes: string;
 
   @OneToMany(() => InteractionElement, ie => ie.view, {
     cascade: true,

@@ -12,8 +12,10 @@ import {
 } from '../markup-util';
 import { getRepository } from 'typeorm';
 
-import { Directory } from '../orm/entity/directory';
-import { Page } from '../orm/entity/page';
+import * as libraryService from '../service/library-service';
+
+import { Directory } from '../orm/entity/Directory';
+import { Page } from '../orm/entity/Page';
 
 import { bytesToMegaBytes, megaBytesToBytes } from '../lib/utils';
 import { unzip } from '../lib/unzip';
@@ -21,9 +23,9 @@ import { unzip } from '../lib/unzip';
 const library = Router(); // eslint-disable-line new-cap
 const upload = multer({ storage: multer.memoryStorage() });
 
-library.get('/files', (_, res) => {
+library.get('/files', async (_, res) => {
   // Get all library files
-  res.send('Not implemented!');
+  res.send(await libraryService.find());
 });
 
 library.get('/files/:fileId', (_, res) => {
