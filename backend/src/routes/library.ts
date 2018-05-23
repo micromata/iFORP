@@ -3,13 +3,19 @@ import { Router } from 'express';
 import * as multer from 'multer';
 import * as promisify from 'pify';
 import * as yauzl from 'yauzl';
+import * as fs from 'fs-extra';
+import {
+  extractDocumentBody,
+  extractDocumentHead,
+  extractScriptAssets,
+  extractStyleAssets
+} from '../markup-util';
 import { getRepository } from 'typeorm';
 
-import { Directory } from '../orm/entity/Directory';
-import { PageAsset } from '../orm/entity/Asset';
-import { Page } from '../orm/entity/Page';
+import { Directory } from '../orm/entity/directory';
+import { Page } from '../orm/entity/page';
 
-import { megaBytesToBytes, bytesToMegaBytes } from '../lib/utils';
+import { bytesToMegaBytes, megaBytesToBytes } from '../lib/utils';
 import { unzip } from '../lib/unzip';
 
 const library = Router(); // eslint-disable-line new-cap
@@ -61,35 +67,41 @@ library.post('/upload', upload.single('file'), [], (req, res) => {
     res.status(406).send(`Wrong file type.`);
     return false;
   }
-
   console.log('Uploaded: ', req.file);
 
   readZipFileFromBuffer(req.file.buffer, { lazyEntries: true })
     .then(async zipfile => unzip(zipfile, uploadDir))
     .then(async result => {
       console.log(result.message);
-
-      // Save dunmmy directory in the database
+      // Save dummy directory in the database
       const directory = new Directory();
       const { directoryName } = result;
       directory.name = directoryName;
       directory.pages = [];
 
-      // TODO: Need to get the pages stuff from the filesystem
-      // Need to do something like this in a loop
-      const page = new Page();
-      page.name = `Name from filesystem`;
-      page.body = '<p>Paragraph</p>';
-      page.head = '<meta charset="utf-8"><title>Title</title>';
-      page.htmlElementAttributes = 'lang:en';
-      page.css = [];
+      const basePath = path.resolve(uploadDir, directoryName);
+      const files = ((await fs.readdir(basePath)) || []).filter(file => {
+        const f = file || '';
+        return (
+          f
+            .split('.')
+            .pop()
+            .trim() === 'html'
+        );
+      });
 
-      const cssAsset = new PageAsset();
-      cssAsset.type = 'css';
-      cssAsset.location = `../library/${directoryName}/assets/css/filename`;
-
-      page.css.push(cssAsset);
-      directory.pages.push(page);
+      files.forEach(file => {
+        const fileContents = fs
+          .readFileSync(path.resolve(basePath, file))
+          .toString();
+        const name = file;
+        const body = extractDocumentBody(fileContents);
+        const head = extractDocumentHead(fileContents);
+        // Const htmlElementAttributes TODO: implement in markup util
+        const css = extractStyleAssets(fileContents);
+        const js = extractScriptAssets(fileContents);
+        directory.pages.push({ name, body, head, css, js } as Page);
+      });
 
       await repo.save(directory);
       console.log('Saved the directory to the database.');
