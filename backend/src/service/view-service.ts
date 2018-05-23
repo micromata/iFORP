@@ -12,7 +12,7 @@ export const save = async (whiteboardId, base) => {
   const viewRepo = getRepository(View);
 
   const whiteboard = await whiteboardRepo.findOne(whiteboardId);
-  const view = <View>base;
+  const view = base as View;
   view.whiteboard = whiteboard;
   return viewRepo.save(view);
 };
@@ -29,9 +29,9 @@ export const remove = id => {
 
 export const replace = (id, base) => {
   const viewRepo = getRepository(View);
-  const view = <View>{
+  const view = {
     id,
     ...base
-  };
+  } as View;
   return viewRepo.save(view);
 };

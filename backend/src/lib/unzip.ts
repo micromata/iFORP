@@ -1,12 +1,11 @@
 import * as path from 'path';
 import * as fs from 'fs-extra';
-const Transform = require('stream').Transform;
 
 export const unzip = (zipfile, uploadDir) => {
   console.log('Unzipping:');
   let directoryName: string;
 
-  return new Promise(function(resolve, reject) {
+  return new Promise((resolve, reject) => {
     zipfile.readEntry();
     zipfile.once('end', () =>
       resolve({
@@ -15,7 +14,7 @@ export const unzip = (zipfile, uploadDir) => {
       })
     );
     zipfile.on('entry', entry => {
-      directoryName = !directoryName ? entry.fileName : directoryName;
+      directoryName = directoryName ? directoryName : entry.fileName;
       if (entry.fileName.endsWith('/')) {
         /**
          * Create directories
@@ -33,7 +32,7 @@ export const unzip = (zipfile, uploadDir) => {
          * Create files
          */
         fs.mkdirp(path.dirname(`${uploadDir}/${entry.fileName}`)).then(() => {
-          zipfile.openReadStream(entry, function(error, readStream) {
+          zipfile.openReadStream(entry, (error, readStream) => {
             if (error) reject(error);
 
             // Write file contents into file

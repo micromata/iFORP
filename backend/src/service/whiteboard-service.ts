@@ -11,10 +11,10 @@ export const save = async (projectId, base) => {
   const projectRepo = getRepository(Project);
   const whiteboardRepo = getRepository(Whiteboard);
   const project = await projectRepo.findOne(projectId);
-  const whiteboard = <Whiteboard>{
+  const whiteboard = {
     ...base,
     project
-  };
+  } as Whiteboard;
   return whiteboardRepo.save(whiteboard);
 };
 
@@ -26,9 +26,9 @@ export const remove = id => {
 export const update = async (id, base) => {
   const whiteboardRepo = getRepository(Whiteboard);
   const orig = await whiteboardRepo.findOne(id);
-  const patched = <Whiteboard>{
+  const patched = {
     ...orig,
     ...base
-  };
+  } as Whiteboard;
   return whiteboardRepo.save(patched);
 };

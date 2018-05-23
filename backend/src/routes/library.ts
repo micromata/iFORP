@@ -12,21 +12,21 @@ import { Page } from '../orm/entity/Page';
 import { megaBytesToBytes, bytesToMegaBytes } from '../lib/utils';
 import { unzip } from '../lib/unzip';
 
-const router = Router();
+const library = Router(); // eslint-disable-line new-cap
 const upload = multer({ storage: multer.memoryStorage() });
 
-router.get('/files', (req, res) => {
+library.get('/files', (req, res) => {
   // Get all library files
   res.send('Not implemented!');
 });
 
-router.get('/files/:fileId', (req, res) => {
+library.get('/files/:fileId', (req, res) => {
   // Get library file by id
   res.send('Not implemented!');
 });
 
-router.post('/upload', upload.single('file'), [], (req, res) => {
-  const ReadZipFileFromBuffer = promisify(yauzl.fromBuffer);
+library.post('/upload', upload.single('file'), [], (req, res) => {
+  const readZipFileFromBuffer = promisify(yauzl.fromBuffer);
   const maxFilesize = megaBytesToBytes(5);
   const acceptedMimeTypes = ['application/zip'];
   const uploadDir = path.join(__dirname, '../../../frontend/src/library');
@@ -62,14 +62,14 @@ router.post('/upload', upload.single('file'), [], (req, res) => {
   if (req.file) {
     console.log('Uploaded: ', req.file);
 
-    ReadZipFileFromBuffer(req.file.buffer, { lazyEntries: true })
+    readZipFileFromBuffer(req.file.buffer, { lazyEntries: true })
       .then(zipfile => unzip(zipfile, uploadDir))
       .then(result => {
         console.log(result.message);
 
         // Save dummy directory in the database
         const directory = new Directory();
-        const directoryName = result.directoryName;
+        const { directoryName } = result;
         directory.name = directoryName;
         directory.pages = [];
 
@@ -101,4 +101,4 @@ router.post('/upload', upload.single('file'), [], (req, res) => {
   }
 });
 
-export default router;
+export default library;
