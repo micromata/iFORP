@@ -5,7 +5,10 @@
     "jest/globals": true
   },
   "parser": "typescript-eslint-parser",
-  "plugins": ["jest"],
+  "plugins": [
+    "jest",
+    "typescript"
+  ],
   "extends": [
     "baumeister",
     "prettier"
