@@ -68,7 +68,15 @@ export class Whiteboards extends React.Component {
 
 	renameWhiteboard = async (newName) => {
 		const currentWhiteboard = await http.patch(`projects/${this.state.project.id}/whiteboards/${this.state.currentWhiteboard.id}`, {name: newName});
-		this.setState({currentWhiteboard});
+		this.setState((prevState) => {
+			return {
+				...prevState,
+				currentWhiteboard,
+				whiteboards: prevState.whiteboards.map(whiteboard => {
+					return whiteboard.id === currentWhiteboard.id ? currentWhiteboard : whiteboard;
+				})
+			};
+		});
 	}
 
 	renameProject = async (newName) => {
