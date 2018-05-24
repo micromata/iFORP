@@ -1,5 +1,6 @@
 import { getRepository } from 'typeorm';
 import { Directory } from '../orm/entity/Directory';
+import { Page } from '../orm/entity/Page';
 
 export const getStrippedDirectories = async () => {
   return (await getRepository(Directory).find()).map(directory => ({
@@ -9,4 +10,9 @@ export const getStrippedDirectories = async () => {
       name: page.name
     }))
   }));
+};
+
+export const getPage = async pageId => {
+  const repo = getRepository(Page);
+  return repo.findOne(pageId);
 };

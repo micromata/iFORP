@@ -28,9 +28,9 @@ library.get('/files', async (_, res) => {
   res.send(await libraryService.getStrippedDirectories());
 });
 
-library.get('/files/:fileId', (_, res) => {
-  // Get library file by id
-  res.send('Not implemented!');
+library.get('/files/:fileId', async (req, res) => {
+  // Get one page
+  res.send(await libraryService.getPage(req.params.fileId));
 });
 
 library.post('/upload', upload.single('file'), [], (req, res) => {
