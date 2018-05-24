@@ -5,7 +5,9 @@ import * as projectService from '../service/project-service';
 import * as whiteboardService from '../service/whiteboard-service';
 import * as viewService from '../service/view-service';
 
-const projects = Router(); // eslint-disable-line new-cap
+const projects = Router();
+
+// TODO: Send HTTP Status code 400 when trying to get data by IDs which don’t exist
 
 projects.get('/', async (_, res) => {
   res.send(await projectService.find());

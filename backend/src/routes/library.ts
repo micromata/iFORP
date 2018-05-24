@@ -23,6 +23,8 @@ import { unzip } from '../lib/unzip';
 const library = Router(); // eslint-disable-line new-cap
 const upload = multer({ storage: multer.memoryStorage() });
 
+// TODO: Send HTTP Status code 400 when trying to get data by IDs which don’t exist
+
 library.get('/files', async (_, res) => {
   // Get all directories with pages
   res.send(await libraryService.getStrippedDirectories());
