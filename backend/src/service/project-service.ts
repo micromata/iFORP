@@ -1,4 +1,4 @@
-import * as superb from 'superb';
+import superb from 'superb';
 import { getRepository } from 'typeorm';
 import { Project } from '../orm/entity/Project';
 import { Whiteboard } from '../orm/entity/Whiteboard';
@@ -19,8 +19,8 @@ export const save = async base => {
   project.whiteboards = [whiteboard];
 
   return repo.save({
-    ...base,
-    ...project
+    ...project,
+    ...base
   });
 };
 

@@ -1,4 +1,4 @@
-import * as MarkupUtil from '../src/markup-util';
+import * as MarkupUtil from '../../src/markup-util';
 import { readFileSync } from 'fs';
 import { resolve as resolvePath } from 'path';
 
@@ -6,7 +6,7 @@ describe('MarkupUtil', () => {
   describe('extractScriptAssets', () => {
     it('should return all script assets defined in an HTML document', async () => {
       const markup = readFileSync(
-        resolvePath(__dirname, 'dummy-page.html')
+        resolvePath(__dirname, '../dummy-page.html')
       ).toString();
       const scriptAssets = MarkupUtil.extractScriptAssets(markup);
       expect(scriptAssets.length).toEqual(2);
@@ -16,7 +16,7 @@ describe('MarkupUtil', () => {
   describe('extractStyleAssets', () => {
     it('should return all style assets defined in an HTML document', async () => {
       const markup = readFileSync(
-        resolvePath(__dirname, 'dummy-page.html')
+        resolvePath(__dirname, '../dummy-page.html')
       ).toString();
       const styleAssets = MarkupUtil.extractStyleAssets(markup);
       expect(styleAssets.length).toEqual(2);
@@ -24,18 +24,18 @@ describe('MarkupUtil', () => {
     });
   });
   describe('extractDocumentBody', () => {
-    it("should return the contents of the document's body section", function() {
+    it("should return the contents of the document's body section", () => {
       const markup = readFileSync(
-        resolvePath(__dirname, 'dummy-page.html')
+        resolvePath(__dirname, '../dummy-page.html')
       ).toString();
       const body = MarkupUtil.extractDocumentBody(markup);
       expect(body).toContain(`id="app"`);
     });
   });
   describe('extractDocumentHead', () => {
-    it('should return the contents of the document head without any css|js contents|references', function() {
+    it('should return the contents of the document head without any css|js contents|references', () => {
       const markup = readFileSync(
-        resolvePath(__dirname, 'dummy-page.html')
+        resolvePath(__dirname, '../dummy-page.html')
       ).toString();
       const head = MarkupUtil.extractDocumentHead(markup);
       expect(head).toContain('<title>Test Document</title>');

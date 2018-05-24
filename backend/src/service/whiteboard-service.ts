@@ -4,7 +4,8 @@ import { Whiteboard } from '../orm/entity/Whiteboard';
 
 export const find = async projectId => {
   const repo = getRepository(Project);
-  return repo.findOne(projectId);
+  const project = await repo.findOne(projectId);
+  return project.whiteboards;
 };
 
 export const save = async (projectId, base) => {

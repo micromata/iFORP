@@ -1,6 +1,6 @@
 import * as path from 'path';
 import { Router } from 'express';
-import * as multer from 'multer';
+import multer from 'multer';
 import * as promisify from 'pify';
 import * as yauzl from 'yauzl';
 import * as fs from 'fs-extra';

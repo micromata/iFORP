@@ -62,6 +62,8 @@
     "lint-staged": "7.1.0",
     "nodemon": "1.17.4",
     "prettier": "1.12.1",
+    "sql.js": "0.5.0",
+    "supertest": "3.1.0",
     "ts-jest": "22.4.6",
     "ts-node": "3.3.0",
     "tsc": "1.20150623.0",
@@ -89,10 +91,17 @@
     "collectCoverage": true,
     "collectCoverageFrom": [
       "src/**/*.(j|t)s?(x)",
-      "!src/index.ts"
+      "!src/orm/dummy-data/**",
+      "!src/index.ts",
+      "!src/app.ts"
+    ],
+    "coverageReporters": [
+      "lcov",
+      "text",
+      "text-summary"
     ],
     "testMatch": [
-      "**/__tests__/**/*.(j|t)s?(x)"
+      "**/__tests__/{unit,integration}/**/*.(j|t)s?(x)"
     ],
     "moduleFileExtensions": [
       "ts",
