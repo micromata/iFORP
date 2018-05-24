@@ -16,7 +16,12 @@ export const save = async (projectId, base) => {
     ...base,
     project
   } as Whiteboard;
-  return whiteboardRepo.save(whiteboard);
+  const newWhiteboard = await whiteboardRepo.save(whiteboard);
+
+  return {
+    id: newWhiteboard.id,
+    name: newWhiteboard.name
+  };
 };
 
 export const remove = async id => {
