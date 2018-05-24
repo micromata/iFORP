@@ -1,6 +1,7 @@
 import { getRepository } from 'typeorm';
 import { Project } from '../orm/entity/Project';
 import { Whiteboard } from '../orm/entity/Whiteboard';
+import { View } from '../orm/entity/View';
 
 export const find = async projectId => {
   const repo = getRepository(Project);
@@ -16,6 +17,12 @@ export const save = async (projectId, base) => {
     ...base,
     project
   } as Whiteboard;
+  const view = new View();
+
+  whiteboard.views = [];
+  view.name = `Initial view`;
+  whiteboard.views.push(view);
+
   const newWhiteboard = await whiteboardRepo.save(whiteboard);
 
   return {

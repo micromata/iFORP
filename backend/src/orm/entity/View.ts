@@ -15,9 +15,11 @@ export class View {
 
   @Column() name: string;
 
-  @Column() head: string;
+  @Column('text', { nullable: true })
+  head: string;
 
-  @Column() body: string;
+  @Column('text', { nullable: true })
+  body: string;
 
   @Column('text', { nullable: true })
   htmlElementAttributes: string;
@@ -40,6 +42,8 @@ export class View {
   })
   js: ViewAsset[];
 
-  @ManyToOne(() => Whiteboard)
+  @ManyToOne(() => Whiteboard, whiteboard => whiteboard.views, {
+    onDelete: 'CASCADE'
+  })
   whiteboard: Whiteboard;
 }
