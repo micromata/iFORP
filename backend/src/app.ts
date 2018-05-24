@@ -1,5 +1,5 @@
-import express from 'express';
-import cors from 'cors';
+import * as express from 'express';
+import * as cors from 'cors';
 import * as bodyParser from 'body-parser';
 import libraryEndpoint from './routes/library';
 import projectsEndpoint from './routes/projects';

@@ -1,6 +1,5 @@
 {
    "compilerOptions": {
-     "allowSyntheticDefaultImports": true,
      "lib": [
          "es5",
          "es6",
