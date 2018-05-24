@@ -1,9 +1,10 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 
-import http from 'axios';
+import {http} from '../../base/http';
 import {NewProject} from './home.new-project';
 import {ProjectList} from './home.project-list';
+import {FormatJson} from '../../shared/format-json'; // eslint-disable-line no-unused-vars
 
 export class Home extends React.Component {
 
@@ -12,15 +13,12 @@ export class Home extends React.Component {
 	};
 
 	handleNewProject = async () => {
-		const newProject = await http.post('http://localhost:3000/projects')
-			.then(res => res.data);
+		const newProject = await http.post('projects');
 		this.props.history.push(`/whiteboards/project/${newProject.id}/whiteboard/${newProject.whiteboards.pop().id}`);
 	}
 
 	async componentDidMount() {
-		const projects = await http.get('http://localhost:3000/projects')
-			.then(res => res.data);
-		console.log(projects);
+		const projects = await http.get('projects');
 		this.setState({projects});
 	}
 
