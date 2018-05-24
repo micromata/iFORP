@@ -25,8 +25,8 @@ export class Home extends React.Component {
 	render() {
 		return (
 			<main id="start" className="container">
-				<NewProject onNewProject={this.handleNewProject}/>
-				<ProjectList projects={this.state.projects}/>
+				<NewProject onNewProject={this.handleNewProject} hasProjects={this.state.projects.length > 0}/>
+				{this.state.projects.length ? <ProjectList projects={this.state.projects}/> : null}
 				{/* <FormatJson json={this.state} /> */}
 			</main>
 		);

@@ -1,7 +1,7 @@
 import React from 'react';
 import {PropTypes} from 'prop-types';
 
-export const NewProject = ({onNewProject}) => {
+export const NewProject = ({onNewProject, hasProjects}) => {
 
 	const handleClick = event => {
 		event.preventDefault();
@@ -15,14 +15,13 @@ export const NewProject = ({onNewProject}) => {
 				<p>
 					<a className="btn btn-primary btn-lg" onClick={handleClick} href="#">New Project</a>
 				</p>
-				<p>
-					or
-				</p>
+				{hasProjects && <p>or</p>}
 			</div>
 		</section>
 	);
 };
 
 NewProject.propTypes = {
-	onNewProject: PropTypes.func
+	onNewProject: PropTypes.func,
+	hasProjects: PropTypes.bool
 };
