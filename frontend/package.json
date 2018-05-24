@@ -22,8 +22,11 @@
   },
   "private": true,
   "scripts": {
-    "start": "npm-run-all clean:dev handlebars --parallel handlebars:watch webpack:server eslint:watch stylelint:watch start:fake-backend --silent",
-    "start:fake-backend": "(cd ../fake-backend && npm run start:dev)",
+    "start": "npm-run-all clean:dev handlebars --parallel handlebars:watch webpack:server eslint:watch stylelint:watch --silent",
+    "start:fake-backend": "(cd ../fake-backend && npm start)",
+    "start:fake-backend:dev": "(cd ../fake-backend && npm run start:dev)",
+    "start:backend": "(cd ../backend && npm start)",
+    "start:backend:dev": "(cd ../backend && npm run start:dev)",
     "start:real": "npm-run-all build --parallel start:fake-backend build:serve --silent",
     "build": "npm-run-all security test handlebars clean webpack --silent",
     "build:dev": "npm-run-all security test handlebars clean:dev webpack:dev --silent",
