@@ -15,7 +15,9 @@ export class Whiteboards extends React.Component {
 		views: []
 	};
 
-	getViews = async (whiteboardId) => http.get(`projects/${this.state.project.id}/whiteboards/${whiteboardId}/views`);
+	getViews = async (projectId, whiteboardId) => {
+		return http.get(`projects/${projectId}/whiteboards/${whiteboardId}/views`);
+	};
 
 	renameView = async (viewId, newName) => {
 		await http.patch(`projects/${this.state.project.id}/whiteboards/${this.state.currentWhiteboard.id}/views/${viewId}`, {name: newName});
@@ -99,7 +101,7 @@ export class Whiteboards extends React.Component {
 		 */
 		const whiteboardId = this.props.match.params.whiteboardId || whiteboards[0].id;
 		const currentWhiteboard = whiteboards.filter(whiteboard => whiteboard.id === Number(whiteboardId))[0];
-		const views = await this.getViews(currentWhiteboard.id);
+		const views = await this.getViews(project.id, currentWhiteboard.id);
 
 		this.setState({
 			project,
@@ -123,7 +125,7 @@ export class Whiteboards extends React.Component {
 		 */
 		const whiteboardId = nextProps.location.state.whiteboard.id;
 		const currentWhiteboard = whiteboards.filter(whiteboard => whiteboard.id === Number(whiteboardId))[0];
-		const views = await this.getViews(currentWhiteboard.id);
+		const views = await this.getViews(project.id, currentWhiteboard.id);
 
 		this.setState({
 			project,
@@ -153,12 +155,12 @@ export class Whiteboards extends React.Component {
 					projectId={this.state.project.id}
 					whiteboardId={this.state.currentWhiteboard.id}
 				/>
-				{/* <FormatJson
+				<FormatJson
 					project={this.state.project}
 					whiteboards={this.state.whiteboards}
 					currentWhiteboard={this.state.currentWhiteboard}
 					views={this.state.views}
-				/> */}
+				/>
 			</main>
 		);
 	}
