@@ -3,8 +3,8 @@ import { Whiteboard } from '../orm/entity/Whiteboard';
 import { View } from '../orm/entity/View';
 
 export const getByWhiteboardId = async whiteboardId => {
-  const whiteboardRepo = getRepository(Whiteboard);
-  return whiteboardRepo.findOne(whiteboardId);
+  const viewRepo = getRepository(View);
+  return viewRepo.find(whiteboardId);
 };
 
 export const save = async (whiteboardId, base) => {
