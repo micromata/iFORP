@@ -1,5 +1,6 @@
 import React from 'react';
-import http from 'axios';
+
+import {http} from '../../base/http';
 import {Header} from './projects.header';
 import {ProjectSearch} from './projects.project-search';
 import {ProjectList} from './projects.project-list';
@@ -15,8 +16,7 @@ export class Projects extends React.Component {
 	};
 
 	async componentDidMount() {
-		const projects = await http.get('http://localhost:3000/projects')
-			.then(res => res.data);
+		const projects = await http.get('projects');
 		this.setState({projects});
 	}
 
