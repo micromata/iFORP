@@ -4,6 +4,7 @@ import request from 'axios';
  * API_PREFIX constant is provided by the webpack DefinePlugin via baumeister.json
  */
 const apiPrefix = API_PREFIX;
+// const apiPrefix = 'http://localhost:8087/api/';
 
 async function get(url, config) {
 	try {
