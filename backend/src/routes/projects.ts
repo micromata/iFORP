@@ -32,7 +32,8 @@ projects.post('/:projectId/whiteboards', async (req, res) => {
 });
 
 projects.delete('/:projectId/whiteboards/:whiteboardId', async (req, res) => {
-  res.send(await whiteboardService.remove(req.params.whiteboardId));
+  await whiteboardService.remove(req.params.whiteboardId);
+  res.send();
 });
 
 projects.patch('/:projectId/whiteboards/:whiteboardId', async (req, res) => {

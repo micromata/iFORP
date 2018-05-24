@@ -21,7 +21,7 @@ export const save = async (projectId, base) => {
 
 export const remove = async id => {
   const whiteboardRepo = getRepository(Whiteboard);
-  return whiteboardRepo.findOne(id);
+  return whiteboardRepo.remove(await whiteboardRepo.findOne(id));
 };
 
 export const update = async (id, base) => {
