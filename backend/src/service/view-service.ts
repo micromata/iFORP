@@ -4,7 +4,7 @@ import { View } from '../orm/entity/View';
 
 export const getByWhiteboardId = async whiteboardId => {
   const viewRepo = getRepository(View);
-  return (await viewRepo.find(whiteboardId)).map(view => ({
+  return (await viewRepo.find({ whiteboard: whiteboardId })).map(view => ({
     id: view.id,
     name: view.name
   }));
