@@ -24,8 +24,8 @@ const library = Router(); // eslint-disable-line new-cap
 const upload = multer({ storage: multer.memoryStorage() });
 
 library.get('/files', async (_, res) => {
-  // Get all library files
-  res.send(await libraryService.find());
+  // Get all directories with pages
+  res.send(await libraryService.getStrippedDirectories());
 });
 
 library.get('/files/:fileId', (_, res) => {

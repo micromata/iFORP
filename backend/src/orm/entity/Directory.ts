@@ -8,7 +8,8 @@ export class Directory {
   @Column() name: string;
 
   @OneToMany(() => Page, page => page.directory, {
-    cascade: true
+    cascade: true,
+    eager: true
   })
   pages: Page[];
 }

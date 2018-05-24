@@ -1,7 +1,12 @@
 import { getRepository } from 'typeorm';
 import { Directory } from '../orm/entity/Directory';
 
-export const find = async () => {
-  const repo = getRepository(Directory);
-  return repo.find();
+export const getStrippedDirectories = async () => {
+  return (await getRepository(Directory).find()).map(directory => ({
+    ...directory,
+    pages: directory.pages.map(page => ({
+      id: page.id,
+      name: page.name
+    }))
+  }));
 };
