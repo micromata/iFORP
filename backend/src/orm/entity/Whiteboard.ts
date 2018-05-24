@@ -15,8 +15,7 @@ export class Whiteboard {
   @Column() name: string;
 
   @OneToMany(() => View, view => view.whiteboard, {
-    cascade: true,
-    eager: true
+    cascade: true
   })
   views: View[];
 
