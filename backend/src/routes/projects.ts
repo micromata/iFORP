@@ -30,7 +30,7 @@ projects.get('/:projectId/whiteboards', async (req, res) => {
 });
 
 projects.post('/:projectId/whiteboards', async (req, res) => {
-  res.send(await whiteboardService.save(req.params.projectId, req.body));
+  res.send(await whiteboardService.save(req.params.projectId));
 });
 
 projects.delete('/:projectId/whiteboards/:whiteboardId', async (req, res) => {

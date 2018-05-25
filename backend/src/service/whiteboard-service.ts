@@ -1,3 +1,4 @@
+import * as superb from 'superb';
 import { getRepository } from 'typeorm';
 import { Project } from '../orm/entity/Project';
 import { Whiteboard } from '../orm/entity/Whiteboard';
@@ -9,12 +10,15 @@ export const find = async projectId => {
   return project.whiteboards;
 };
 
-export const save = async (projectId, base) => {
+export const save = async projectId => {
+  const supportWord = superb();
   const projectRepo = getRepository(Project);
   const whiteboardRepo = getRepository(Whiteboard);
   const project = await projectRepo.findOne(projectId);
   const whiteboard = {
-    ...base,
+    name: `${supportWord.charAt(0).toUpperCase()}${supportWord.substr(
+      1
+    )} whiteboard`,
     project
   } as Whiteboard;
   const view = new View();

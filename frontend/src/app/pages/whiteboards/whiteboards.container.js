@@ -60,7 +60,7 @@ export class Whiteboards extends React.Component {
 	}
 
 	createNewWhiteboard = async () => {
-		const newWhiteboard = await http.post(`projects/${this.state.project.id}/whiteboards`, {name: 'New whiteboard'});
+		const newWhiteboard = await http.post(`projects/${this.state.project.id}/whiteboards`);
 		this.setState({whiteboards: [...this.state.whiteboards, newWhiteboard]});
 		this.props.history.push(`/whiteboards/project/${this.state.project.id}/whiteboard/${newWhiteboard.id}`, {
 			whiteboard: newWhiteboard,
@@ -155,12 +155,12 @@ export class Whiteboards extends React.Component {
 					projectId={this.state.project.id}
 					whiteboardId={this.state.currentWhiteboard.id}
 				/>
-				<FormatJson
+				{/* <FormatJson
 					project={this.state.project}
 					whiteboards={this.state.whiteboards}
 					currentWhiteboard={this.state.currentWhiteboard}
 					views={this.state.views}
-				/>
+				/> */}
 			</main>
 		);
 	}
