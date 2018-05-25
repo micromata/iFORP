@@ -49,7 +49,11 @@ library.post('/upload', upload.single('file'), [], (req, res) => {
   const readZipFileFromBuffer = promisify(yauzl.fromBuffer);
   const maxFilesize = megaBytesToBytes(5);
   const acceptedMimeTypes = ['application/zip'];
-  const uploadDir = path.join(__dirname, '../../../frontend/src/library');
+  const uploadDirName = 'library';
+  const uploadDir = path.join(
+    __dirname,
+    `../../../frontend/src/${uploadDirName}`
+  );
   const repo = getRepository(Directory);
 
   /**
@@ -112,9 +116,23 @@ library.post('/upload', upload.single('file'), [], (req, res) => {
         const body = extractDocumentBody(fileContents);
         const head = extractDocumentHead(fileContents);
         // Const htmlElementAttributes TODO: implement in markup util
-        const css = extractStyleAssets(fileContents);
-        const js = extractScriptAssets(fileContents);
-        directory.pages.push({ name, body, head, css, js } as Page);
+        const css = extractStyleAssets(
+          fileContents,
+          `../${uploadDirName}/${directoryName}`
+        );
+        const js = extractScriptAssets(
+          fileContents,
+          `../${uploadDirName}/${directoryName}`
+        );
+        // const css = `../${uploadDirName}/${directoryName}${extractStyleAssets(fileContents)}`;
+        // const js = `../${uploadDirName}/${directoryName}${extractScriptAssets(fileContents)}`;
+        // console.log('css =', css);
+        directory.pages.push({
+          name,
+          body,
+          head,
+          assets: [...css, ...js]
+        } as Page);
       });
 
       await repo.save(directory);

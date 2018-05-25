@@ -25,13 +25,7 @@ export class Page {
     cascade: true,
     eager: true
   })
-  css: PageAsset[];
-
-  @OneToMany(() => PageAsset, asset => asset.page, {
-    cascade: true,
-    eager: true
-  })
-  js: PageAsset[];
+  assets: PageAsset[];
 
   @ManyToOne(() => Directory)
   directory: Directory;

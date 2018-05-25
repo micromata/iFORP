@@ -34,13 +34,7 @@ export class View {
     cascade: true,
     eager: true
   })
-  css: ViewAsset[];
-
-  @OneToMany(() => ViewAsset, asset => asset.view, {
-    cascade: true,
-    eager: true
-  })
-  js: ViewAsset[];
+  assets: ViewAsset[];
 
   @ManyToOne(() => Whiteboard, whiteboard => whiteboard.views, {
     onDelete: 'CASCADE'
