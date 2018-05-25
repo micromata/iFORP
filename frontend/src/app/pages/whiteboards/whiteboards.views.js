@@ -23,6 +23,7 @@ export const Views = ({views, onDeleteView, onRenameView, onAddView, projectId, 
 		 * So we got an error when going back from one whiteboard to another via the whiteboard switcher.
 		 * It seems that this is something we dont have control over.
 		 * See: https://github.com/pierpo/react-archer/blob/8bb53fc1d7c5b955db7b3f3cc41a246ee6ab47d4/src/ArcherContainer.js#L104
+		 * ISSUE: PROFI-32
 		 */
 		<ArcherContainer strokeColor="grey">
 			<div className="row justify-content-md-center text-center">

@@ -28,6 +28,7 @@ const library = Router(); // eslint-disable-line new-cap
 const upload = multer({ storage: multer.memoryStorage() });
 
 // TODO: Send HTTP Status code 400 when trying to get data by IDs which don’t exist
+// Issue: PROFI-38
 
 library.get(
   '/files',
@@ -67,6 +68,7 @@ library.post('/upload', upload.single('file'), [], (req, res) => {
    * Right now it:
    * - adds a new entry into the database
    * - Overwrites the content in the file system
+   * Issue: PROFI-33
    */
 
   if (!req.file) {
@@ -115,7 +117,7 @@ library.post('/upload', upload.single('file'), [], (req, res) => {
         const name = file;
         const body = extractDocumentBody(fileContents);
         const head = extractDocumentHead(fileContents);
-        // Const htmlElementAttributes TODO: implement in markup util
+        // Const htmlElementAttributes TODO: implement in markup util Issue: PROFI-36
         const css = extractStyleAssets(
           fileContents,
           `../${uploadDirName}/${directoryName}`

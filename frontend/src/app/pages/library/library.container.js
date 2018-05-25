@@ -54,6 +54,7 @@ export class Library extends React.Component {
 			* ```
 			* this.setState({selectedFile});
 			* ```
+			* Related to Issue: PROFI-36
 			*/
 		this.setState({
 			selectedFile: {
