@@ -58,7 +58,7 @@ export class Library extends React.Component {
 
 		// Get directories and files from the backend
 		const directories = await http.get('library/files');
-		this.setState(directories);
+		this.setState({directories});
 	}
 
 	render() {
@@ -102,7 +102,7 @@ export class Library extends React.Component {
 						</div>
 					</div>
 				</div>
-				{/* <FormatJson state={this.state}></FormatJson> */}
+				<FormatJson directories={this.state.directories} state={this.state}></FormatJson>
 			</main>
 		);
 	}
