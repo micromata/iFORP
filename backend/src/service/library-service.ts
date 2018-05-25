@@ -1,6 +1,7 @@
 import { getRepository } from 'typeorm';
 import { Directory } from '../orm/entity/Directory';
 import { Page } from '../orm/entity/Page';
+import { exceptionWithHttpStatus } from '../lib/utils';
 
 export const getStrippedDirectories = async () => {
   return (await getRepository(Directory).find()).map(directory => ({
@@ -14,5 +15,9 @@ export const getStrippedDirectories = async () => {
 
 export const getPage = async pageId => {
   const repo = getRepository(Page);
-  return repo.findOne(pageId);
+  const page = await repo.findOne(pageId);
+  if (!page) {
+    throw exceptionWithHttpStatus(`Page with ID ${pageId} not found.`, 404);
+  }
+  return page;
 };

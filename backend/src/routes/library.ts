@@ -17,7 +17,11 @@ import * as libraryService from '../service/library-service';
 import { Directory } from '../orm/entity/Directory';
 import { Page } from '../orm/entity/Page';
 
-import { bytesToMegaBytes, megaBytesToBytes } from '../lib/utils';
+import {
+  bytesToMegaBytes,
+  handleRequest,
+  megaBytesToBytes
+} from '../lib/utils';
 import { unzip } from '../lib/unzip';
 
 const library = Router(); // eslint-disable-line new-cap
@@ -25,15 +29,21 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 // TODO: Send HTTP Status code 400 when trying to get data by IDs which don’t exist
 
-library.get('/files', async (_, res) => {
-  // Get all directories with pages
-  res.send(await libraryService.getStrippedDirectories());
-});
+library.get(
+  '/files',
+  handleRequest(async (_, res) => {
+    const result = await libraryService.getStrippedDirectories();
+    res.send(result);
+  })
+);
 
-library.get('/files/:fileId', async (req, res) => {
-  // Get one page
-  res.send(await libraryService.getPage(req.params.fileId));
-});
+library.get(
+  '/files/:fileId',
+  handleRequest(async (req, res) => {
+    const result = await libraryService.getPage(req.params.fileId);
+    res.send(result);
+  })
+);
 
 library.post('/upload', upload.single('file'), [], (req, res) => {
   const readZipFileFromBuffer = promisify(yauzl.fromBuffer);

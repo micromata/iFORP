@@ -3,6 +3,7 @@ import { getRepository } from 'typeorm';
 import { Project } from '../orm/entity/Project';
 import { Whiteboard } from '../orm/entity/Whiteboard';
 import { View } from '../orm/entity/View';
+import { exceptionWithHttpStatus } from '../lib/utils';
 
 export const find = async () => {
   const repo = getRepository(Project);
@@ -32,12 +33,19 @@ export const save = async base => {
 
 export const findById = async id => {
   const repo = getRepository(Project);
-  return repo.findOne(id);
+  const project = await repo.findOne(id);
+  if (!project) {
+    throw exceptionWithHttpStatus(`Project with ID ${id} not found.`, 404);
+  }
+  return project;
 };
 
 export const update = async (id, base) => {
   const repo = getRepository(Project);
   const origProject = await repo.findOne(id);
+  if (!origProject) {
+    throw exceptionWithHttpStatus(`Project with ID ${id} not found.`, 404);
+  }
   const patched = { ...origProject, ...base } as Project;
   return repo.save(patched);
 };
