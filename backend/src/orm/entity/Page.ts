@@ -22,12 +22,14 @@ export class Page {
   htmlElementAttributes: string;
 
   @OneToMany(() => PageAsset, asset => asset.page, {
-    cascade: true
+    cascade: true,
+    eager: true
   })
   css: PageAsset[];
 
   @OneToMany(() => PageAsset, asset => asset.page, {
-    cascade: true
+    cascade: true,
+    eager: true
   })
   js: PageAsset[];
 
