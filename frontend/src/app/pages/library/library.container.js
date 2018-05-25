@@ -48,7 +48,19 @@ export class Library extends React.Component {
 
 	getPage = async (pageId) => {
 		const selectedFile = await http.get(`library/files/${pageId}`);
-		this.setState({selectedFile});
+		/**
+			* TODO: Remove null check after the backend implemented sending an array of htmlElementAttributes
+			* This can the be reverted to:
+			* ```
+			* this.setState({selectedFile});
+			* ```
+			*/
+		this.setState({
+			selectedFile: {
+				...selectedFile,
+				htmlElementAttributes: selectedFile.htmlElementAttributes === null ? [] : selectedFile.htmlElementAttributes
+			}
+		});
 	}
 
 	async componentDidMount() {
