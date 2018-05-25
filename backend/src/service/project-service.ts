@@ -2,6 +2,7 @@ import * as superb from 'superb';
 import { getRepository } from 'typeorm';
 import { Project } from '../orm/entity/Project';
 import { Whiteboard } from '../orm/entity/Whiteboard';
+import { View } from '../orm/entity/View';
 
 export const find = async () => {
   const repo = getRepository(Project);
@@ -17,6 +18,11 @@ export const save = async base => {
   const project = new Project();
   project.name = `A ${superb()} Project`;
   project.whiteboards = [whiteboard];
+
+  const view = new View();
+  whiteboard.views = [];
+  view.name = `Initial view`;
+  whiteboard.views.push(view);
 
   return repo.save({
     ...project,
