@@ -52,7 +52,7 @@ export const remove = async id => {
 
 export const replace = async (id, base) => {
   const viewRepo = getRepository(View);
-  const view = (await viewRepo.findOne(id));
+  const view = await viewRepo.findOne(id);
 
   if (!view) {
     throw exceptionWithHttpStatus(`Cannot replace view with ID ${id}`, 404);
@@ -62,6 +62,7 @@ export const replace = async (id, base) => {
   view.head = base.head;
   view.body = base.body;
   view.htmlElementAttributes = base.htmlElementAttributes;
+  view.assets = base.assets;
 
   return viewRepo.save(view);
 };
