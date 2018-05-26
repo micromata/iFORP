@@ -32,6 +32,7 @@ export const save = async (whiteboardId, base) => {
   }
   const view = base as View;
   view.whiteboard = whiteboard;
+  view.hasFile = false;
   return viewRepo.save(view);
 };
 
