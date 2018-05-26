@@ -23,6 +23,7 @@ export const save = async base => {
   const view = new View();
   whiteboard.views = [];
   view.name = `Initial view`;
+  view.hasFile = false;
   whiteboard.views.push(view);
 
   return repo.save({

@@ -15,6 +15,8 @@ export class View {
 
   @Column() name: string;
 
+  @Column() hasFile: boolean;
+
   @Column('text', { nullable: true })
   head: string;
 

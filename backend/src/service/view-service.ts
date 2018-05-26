@@ -14,7 +14,8 @@ export const getByWhiteboardId = async whiteboardId => {
   }
   return byWhiteboardId.map(view => ({
     id: view.id,
-    name: view.name
+    name: view.name,
+    hasFile: view.hasFile
   }));
 };
 
@@ -51,12 +52,13 @@ export const remove = async id => {
 
 export const replace = async (id, base) => {
   const viewRepo = getRepository(View);
-  const view = (await viewRepo.findOne(id)) as View | any;
+  const view = (await viewRepo.findOne(id));
 
   if (!view) {
     throw exceptionWithHttpStatus(`Cannot replace view with ID ${id}`, 404);
   }
 
+  view.hasFile = true;
   view.head = base.head;
   view.body = base.body;
   view.htmlElementAttributes = base.htmlElementAttributes;
