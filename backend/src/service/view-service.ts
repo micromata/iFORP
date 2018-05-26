@@ -51,16 +51,15 @@ export const remove = async id => {
 
 export const replace = async (id, base) => {
   const viewRepo = getRepository(View);
-  const orig = viewRepo.findOne(id);
-  if (!orig) {
-    throw exceptionWithHttpStatus(
-      `Cannot replace whiteboard with ID ${id}`,
-      404
-    );
+  const view = (await viewRepo.findOne(id)) as View | any;
+
+  if (!view) {
+    throw exceptionWithHttpStatus(`Cannot replace view with ID ${id}`, 404);
   }
-  const view = {
-    id,
-    ...base
-  } as View;
+
+  view.head = base.head;
+  view.body = base.body;
+  view.htmlElementAttributes = base.htmlElementAttributes;
+
   return viewRepo.save(view);
 };
