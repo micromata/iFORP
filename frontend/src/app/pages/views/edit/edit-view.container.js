@@ -17,8 +17,7 @@ export class EditView extends React.Component {
 			head: '',
 			body: '',
 			interactionElements: [],
-			css: [],
-			js: []
+			assets: []
 		},
 		availableViews: [],
 		viewportSize: 'desktop'
@@ -73,11 +72,10 @@ export class EditView extends React.Component {
 					<div className="col-9">
 						<div className="preview-wrapper">
 							<Iframe
-								htmlElementAttributes={this.state.currentView.htmlElementAttributes}
+								htmlElementAttributes={this.state.currentView.htmlElementAttributes || []}
 								head={this.state.currentView.head}
 								body={this.state.currentView.body}
-								css={this.state.currentView.css}
-								js={this.state.currentView.js}
+								assets={this.state.currentView.assets}
 								viewportSize={this.state.viewportSize}
 							/>
 						</div>
@@ -90,7 +88,7 @@ export class EditView extends React.Component {
 						/>
 					</div>
 				</div>
-				{/* <FormatJson state={this.state}></FormatJson> */}
+				<FormatJson state={this.state}></FormatJson>
 			</main>
 		);
 	}

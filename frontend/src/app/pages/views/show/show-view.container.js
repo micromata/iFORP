@@ -16,8 +16,7 @@ export class ShowView extends React.Component {
 			htmlElementAttributes: [],
 			head: '',
 			body: '',
-			css: [],
-			js: []
+			assets: []
 		},
 		viewportSize: 'desktop'
 	};
@@ -42,16 +41,15 @@ export class ShowView extends React.Component {
 				<div className="row">
 					<div className="col-12">
 						<Iframe
-							htmlElementAttributes={this.state.view.htmlElementAttributes}
+							htmlElementAttributes={this.state.view.htmlElementAttributes || []}
 							head={this.state.view.head}
 							body={this.state.view.body}
-							css={this.state.view.css}
-							js={this.state.view.js}
+							assets={this.state.view.assets}
 							viewportSize={this.state.viewportSize}
 						/>
 					</div>
 				</div>
-				{/* <FormatJson state={this.state}></FormatJson> */}
+				<FormatJson state={this.state}></FormatJson>
 			</main>
 		);
 	}
