@@ -21,8 +21,7 @@ export class Library extends React.Component {
 			htmlElementAttributes: [],
 			head: '',
 			body: '',
-			css: [],
-			js: []
+			assets: []
 		}
 	};
 
@@ -98,8 +97,7 @@ export class Library extends React.Component {
 								htmlElementAttributes={this.state.selectedFile.htmlElementAttributes}
 								head={this.state.selectedFile.head}
 								body={this.state.selectedFile.body}
-								css={this.state.selectedFile.css}
-								js={this.state.selectedFile.js}
+								assets={this.state.selectedFile.assets}
 								viewportSize="desktop"
 							/> :
 							this.state.directories.length ?
@@ -115,7 +113,12 @@ export class Library extends React.Component {
 						</div>
 					</div>
 				</div>
-				<FormatJson directories={this.state.directories} state={this.state}></FormatJson>
+				{/* <FormatJson
+					view={this.state.view}
+					selectedPageId={this.state.selectedPageId}
+					selectedFile={this.state.selectedFile}
+					directories={this.state.directories}
+				></FormatJson> */}
 			</main>
 		);
 	}

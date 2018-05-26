@@ -8,7 +8,7 @@ export class Iframe extends React.Component {
 	componentDidMount() {
 		this.iframeDocument = this.node.contentDocument;
 
-		console.log(this.iframeDocument);
+		// console.log(this.iframeDocument);
 
 		// Create and insert html5 doctype
 		const doctype = this.iframeDocument.implementation.createDocumentType('html', '', '');
@@ -32,18 +32,16 @@ export class Iframe extends React.Component {
 		// Fill head element
 		this.iframeDocument.head.innerHTML = this.props.head;
 
-		// Insert CSS of the view
-		this.props.css.forEach(link => {
-			const linkElem = this.getLinkElement(this.iframeDocument, link);
-			this.iframeDocument.head.appendChild(linkElem);
-		});
-
 		// Fill body element
 		this.iframeDocument.body.innerHTML = this.props.body;
 
-		// Insert JavaScript of the view
-		this.props.js.forEach(script => {
-			this.iframeDocument.body.appendChild(this.getScriptElement(this.iframeDocument, script));
+		// Insert JavaScript and CSS assets to the view
+		this.props.assets.forEach(asset => {
+			if (asset.type === 'js') {
+				this.iframeDocument.body.appendChild(this.getScriptElement(this.iframeDocument, asset));
+			} else {
+				this.iframeDocument.head.appendChild(this.getLinkElement(this.iframeDocument, asset));
+			}
 		});
 
 		// Insert Script to highjack interaction elements
@@ -54,20 +52,26 @@ export class Iframe extends React.Component {
 
 	}
 
-	getLinkElement(iframe, linkHref) {
-		const linkElement = iframe.createElement('link');
-		linkElement.href = linkHref;
-		linkElement.rel = 'stylesheet';
-		return linkElement;
+	getLinkElement(iframe, asset) {
+		const styleElement = asset.contents === null ? iframe.createElement('link') : iframe.createElement('style');
+
+		if (asset.location === null) {
+			styleElement.appendChild(iframe.createTextNode(asset.contents));
+		} else {
+			styleElement.rel = 'stylesheet';
+			styleElement.href = asset.location;
+		}
+
+		return styleElement;
 	}
 
-	getScriptElement(iframe, script) {
+	getScriptElement(iframe, asset) {
 		const scriptElement = iframe.createElement('script');
 
-		if (script.type === 'inline') {
-			scriptElement.appendChild(iframe.createTextNode(script.content));
+		if (asset.location === null) {
+			scriptElement.appendChild(iframe.createTextNode(asset.contents));
 		} else {
-			scriptElement.src = script.href;
+			scriptElement.src = asset.location;
 			scriptElement.async = false;
 		}
 
@@ -93,7 +97,6 @@ Iframe.propTypes = {
 	htmlElementAttributes: PropTypes.array,
 	head: PropTypes.string,
 	body: PropTypes.string,
-	css: PropTypes.array,
-	js: PropTypes.array,
+	assets: PropTypes.array,
 	viewportSize: PropTypes.oneOf(['desktop', 'tablet', 'phone'])
 };
