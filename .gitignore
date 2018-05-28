@@ -1,4 +1,16 @@
+### IDEs and editors ###
+*.sublime-project
+*.sublime-workspace
 .vscode
 .idea
-build
-*.sqlite
+
+### Coverage ###
+coverage
+
+### npm ###
+node_modules
+
+### OS ###
+*.DS_Store
+*thumbs.db
+*desktop.ini
