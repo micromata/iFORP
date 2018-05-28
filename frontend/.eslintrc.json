@@ -21,7 +21,8 @@
     "API_PREFIX": false
   },
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "capitalized-comments": "off"
   },
   "overrides": [
     {
