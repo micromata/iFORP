@@ -1,10 +1,13 @@
 {
   "extends": [
     "baumeister",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "prettier",
+    "prettier/react"
   ],
   "plugins": [
-    "react"
+    "react",
+    "prettier"
   ],
   "parser": "babel-eslint",
   "parserOptions": {
@@ -16,6 +19,9 @@
   "globals": {
     "PRODUCTION": false,
     "API_PREFIX": false
+  },
+  "rules": {
+    "prettier/prettier": "error"
   },
   "overrides": [
     {
