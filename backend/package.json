@@ -1,18 +1,25 @@
 {
   "name": "iforp-backend",
-  "description": "",
+  "title": "iFORP Backend",
+  "description": "iFORP Backend",
   "version": "0.0.0",
-  "homepage": "",
+  "private": true,
+  "homepage": "http://prototyping4innovation.de",
+  "license": "MIT",
   "main": "src",
-  "keywords": [
-    "feathers"
-  ],
   "author": {
-    "name": "Michael Kühnel",
-    "email": "m.kuehnel@micromata.de"
+    "name": "Nicolai Süper",
+    "email": "n.sueper@micromata.de",
+    "url": "http://micromata.de"
   },
-  "contributors": [],
-  "bugs": {},
+  "contributors": [
+    {
+      "name": "Michael Kühnel",
+      "email": "m.kuehnel@micromata.de",
+      "url": "http://micromata.de"
+    }
+  ],
+  "repository": "micromata/iforp",
   "directories": {
     "lib": "src",
     "test": "test/"

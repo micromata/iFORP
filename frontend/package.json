@@ -1,33 +1,30 @@
 {
-  "name": "iforp",
-  "title": "iFORP",
-  "description": "",
-  "homepage": "",
+  "name": "iforp-frontend",
+  "title": "iFORP Frontend",
+  "description": "iFORP Frontend",
+  "version": "0.0.0",
+  "private": true,
+  "homepage": "http://prototyping4innovation.de",
+  "license": "MIT",
+  "main": "src",
   "author": {
     "name": "Michael Kühnel",
-    "email": "",
-    "url": ""
+    "email": "m.kuehnel@micromata.de",
+    "url": "http://micromata.de"
   },
+  "contributors": [
+    {
+      "name": "Nicolai Süper",
+      "email": "n.sueper@micromata.de",
+      "url": "http://micromata.de"
+    }
+  ],
+  "repository": "micromata/iforp",
   "engines": {
     "node": ">=6.0.0"
   },
-  "license": "All rights reserved",
-  "version": "0.0.0",
-  "repository": {
-    "type": "",
-    "url": ""
-  },
-  "bugs": {
-    "url": ""
-  },
-  "private": true,
   "scripts": {
     "start": "npm-run-all clean:dev handlebars --parallel handlebars:watch webpack:server eslint:watch stylelint:watch --silent",
-    "start:fake-backend": "(cd ../fake-backend && npm start)",
-    "start:fake-backend:dev": "(cd ../fake-backend && npm run start:dev)",
-    "start:backend": "(cd ../backend && npm start)",
-    "start:backend:dev": "(cd ../backend && npm run start:dev)",
-    "start:real": "npm-run-all build --parallel start:fake-backend build:serve --silent",
     "build": "npm-run-all security test handlebars clean webpack --silent",
     "build:dev": "npm-run-all security test handlebars clean:dev webpack:dev --silent",
     "build:serve": "serve dist --open",
