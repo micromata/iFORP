@@ -6,39 +6,39 @@ import request from 'axios';
 const apiPrefix = API_PREFIX;
 
 async function get(url, config) {
-	try {
-		const {data} = await request.get(apiPrefix + url, config);
-		return data;
-	} catch (error) {
-		console.error(error);
-	}
+  try {
+    const { data } = await request.get(apiPrefix + url, config);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 async function post(url, payload, config) {
-	try {
-		const {data} = await request.post(apiPrefix + url, payload, config);
-		return data;
-	} catch (error) {
-		console.error(error);
-	}
+  try {
+    const { data } = await request.post(apiPrefix + url, payload, config);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 async function patch(url, payload, config) {
-	try {
-		const {data} = await request.patch(apiPrefix + url, payload, config);
-		return data;
-	} catch (error) {
-		console.error(error);
-	}
+  try {
+    const { data } = await request.patch(apiPrefix + url, payload, config);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 async function put(url, payload, config) {
-	try {
-		const {data} = await request.put(apiPrefix + url, payload, config);
-		return data;
-	} catch (error) {
-		console.error(error);
-	}
+  try {
+    const { data } = await request.put(apiPrefix + url, payload, config);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 /**
@@ -49,18 +49,18 @@ async function put(url, payload, config) {
  * - https://github.com/axios/axios#request-method-aliases
  */
 async function del(url, config) {
-	try {
-		const {data} = await request.delete(apiPrefix + url, config);
-		return data;
-	} catch (error) {
-		console.error(error);
-	}
+  try {
+    const { data } = await request.delete(apiPrefix + url, config);
+    return data;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 export const http = {
-	get,
-	post,
-	patch,
-	put,
-	delete: del
+  get,
+  post,
+  patch,
+  put,
+  delete: del
 };
