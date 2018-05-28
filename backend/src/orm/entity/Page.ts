@@ -7,6 +7,7 @@ import {
 } from 'typeorm';
 import { Directory } from './Directory';
 import { PageAsset } from './Asset';
+import { htmlElementAttributeTransformer } from '../../lib/utils';
 
 @Entity()
 export class Page {
@@ -18,8 +19,11 @@ export class Page {
 
   @Column() body: string;
 
-  @Column('text', { nullable: true })
-  htmlElementAttributes: string;
+  @Column('text', {
+    nullable: true,
+    transformer: new htmlElementAttributeTransformer()
+  })
+  htmlElementAttributes: { [k: string]: string };
 
   @OneToMany(() => PageAsset, asset => asset.page, {
     cascade: true,

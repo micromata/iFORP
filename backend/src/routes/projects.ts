@@ -10,7 +10,6 @@ const projects = Router();
 
 // TODO: Send HTTP Status code 400 when trying to get data by IDs which don’t exist
 // Issue: PROFI-38
-
 projects.get(
   '/',
   handleRequest(async (_, res) => {

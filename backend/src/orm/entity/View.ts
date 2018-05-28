@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { ViewAsset } from './Asset';
 import { InteractionElement } from './InteractionElement';
+import { htmlElementAttributeTransformer } from '../../lib/utils';
 
 @Entity()
 export class View {
@@ -23,8 +24,11 @@ export class View {
   @Column('text', { nullable: true })
   body: string;
 
-  @Column('text', { nullable: true })
-  htmlElementAttributes: string;
+  @Column('text', {
+    nullable: true,
+    transformer: new htmlElementAttributeTransformer()
+  })
+  htmlElementAttributes: { [k: string]: string };
 
   @OneToMany(() => InteractionElement, ie => ie.view, {
     cascade: true,

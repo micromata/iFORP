@@ -34,6 +34,15 @@ function removeAssetsFromDocument($: CheerioStatic) {
   $('script').remove();
 }
 
+export function extractHtmlElementAttributes(
+  markup: string
+): { [key: string]: string } {
+  const $ = cheerio.load(markup);
+  return $('html')
+    .toArray()
+    .pop().attribs;
+}
+
 export function extractDocumentHead(markup: string): string {
   const $ = cheerio.load(markup);
   removeAssetsFromDocument($);

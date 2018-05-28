@@ -1,3 +1,5 @@
+import { ValueTransformer } from 'typeorm/decorator/options/ValueTransformer';
+
 export const megaBytesToBytes = (megabytes: number) => megabytes * 1024 * 1024;
 
 export const bytesToMegaBytes = (bytes: number) => bytes / 1024 / 1024;
@@ -17,4 +19,20 @@ export const handleRequest = handler => {
       res.sendStatus(exception.statusCode || 500);
     }
   };
+};
+
+export const htmlElementAttributeTransformer = class
+  implements ValueTransformer {
+  to(value: any): string {
+    return Object.keys(value)
+      .reduce((acc, cur) => [...acc, `${cur}=${value[cur]}`], [])
+      .join(';');
+  }
+
+  from(value: string): any {
+    return value.split(';').reduce((acc, cur) => {
+      const [key, val] = cur.split('=');
+      return { ...acc, [key]: val };
+    }, {});
+  }
 };

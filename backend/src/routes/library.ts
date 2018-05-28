@@ -7,6 +7,7 @@ import * as fs from 'fs-extra';
 import {
   extractDocumentBody,
   extractDocumentHead,
+  extractHtmlElementAttributes,
   extractScriptAssets,
   extractStyleAssets
 } from '../markup-util';
@@ -29,7 +30,6 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 // TODO: Send HTTP Status code 400 when trying to get data by IDs which don’t exist
 // Issue: PROFI-38
-
 library.get(
   '/files',
   handleRequest(async (_, res) => {
@@ -90,7 +90,7 @@ library.post('/upload', upload.single('file'), [], (req, res) => {
   console.log('Uploaded: ', req.file);
 
   readZipFileFromBuffer(req.file.buffer, { lazyEntries: true })
-    .then(async zipfile => unzip(zipfile, uploadDir))
+    .then(async zipFile => unzip(zipFile, uploadDir))
     .then(async result => {
       console.log(result.message);
       // Save dummy directory in the database
@@ -117,7 +117,6 @@ library.post('/upload', upload.single('file'), [], (req, res) => {
         const name = file;
         const body = extractDocumentBody(fileContents);
         const head = extractDocumentHead(fileContents);
-        // Const htmlElementAttributes TODO: implement in markup util Issue: PROFI-36
         const css = extractStyleAssets(
           fileContents,
           `../${uploadDirName}/${directoryName}`
@@ -126,14 +125,15 @@ library.post('/upload', upload.single('file'), [], (req, res) => {
           fileContents,
           `../${uploadDirName}/${directoryName}`
         );
-        // const css = `../${uploadDirName}/${directoryName}${extractStyleAssets(fileContents)}`;
-        // const js = `../${uploadDirName}/${directoryName}${extractScriptAssets(fileContents)}`;
-        // console.log('css =', css);
+        const htmlElementAttributes = extractHtmlElementAttributes(
+          fileContents
+        );
         directory.pages.push({
           name,
           body,
           head,
-          assets: [...css, ...js]
+          assets: [...css, ...js],
+          htmlElementAttributes
         } as Page);
       });
 

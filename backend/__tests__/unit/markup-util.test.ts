@@ -44,4 +44,14 @@ describe('MarkupUtil', () => {
       expect(head).not.toContain('href="');
     });
   });
+  describe('extractHtmlElementAttributes', () => {
+    it("should return the document's html element attributes", () => {
+      const markup = readFileSync(
+        resolvePath(__dirname, '../dummy-page.html')
+      ).toString();
+      const attributes = MarkupUtil.extractHtmlElementAttributes(markup);
+      expect(attributes.lang).toEqual('en');
+      expect(attributes['no-js']).toEqual('');
+    });
+  });
 });
