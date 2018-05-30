@@ -38,6 +38,7 @@ export const save = async projectId => {
 
   whiteboard.views = [];
   view.name = `Initial view`;
+  view.hasFile = false;
   whiteboard.views.push(view);
 
   const newWhiteboard = await whiteboardRepo.save(whiteboard);

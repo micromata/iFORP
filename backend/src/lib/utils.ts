@@ -23,13 +23,13 @@ export const handleRequest = handler => {
 
 export const htmlElementAttributeTransformer = class
   implements ValueTransformer {
-  to(value: any): string {
+  to(value: any = {}): string {
     return Object.keys(value)
       .reduce((acc, cur) => [...acc, `${cur}=${value[cur]}`], [])
       .join(';');
   }
 
-  from(value: string): any {
+  from(value: string = ''): any {
     return value.split(';').reduce((acc, cur) => {
       const [key, val] = cur.split('=');
       return { ...acc, [key]: val };

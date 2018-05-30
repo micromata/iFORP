@@ -38,9 +38,7 @@ export function extractHtmlElementAttributes(
   markup: string
 ): { [key: string]: string } {
   const $ = cheerio.load(markup);
-  return $('html')
-    .toArray()
-    .pop().attribs;
+  return $('html').get(0).attribs;
 }
 
 export function extractDocumentHead(markup: string): string {

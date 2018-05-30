@@ -8,7 +8,7 @@ describe('MarkupUtil', () => {
       const markup = readFileSync(
         resolvePath(__dirname, '../dummy-page.html')
       ).toString();
-      const scriptAssets = MarkupUtil.extractScriptAssets(markup);
+      const scriptAssets = MarkupUtil.extractScriptAssets(markup, '');
       expect(scriptAssets.length).toEqual(2);
       expect(scriptAssets.filter(asset => asset.isInline).length).toEqual(1);
     });
@@ -18,7 +18,7 @@ describe('MarkupUtil', () => {
       const markup = readFileSync(
         resolvePath(__dirname, '../dummy-page.html')
       ).toString();
-      const styleAssets = MarkupUtil.extractStyleAssets(markup);
+      const styleAssets = MarkupUtil.extractStyleAssets(markup, '');
       expect(styleAssets.length).toEqual(2);
       expect(styleAssets.filter(asset => asset.isInline).length).toEqual(1);
     });
@@ -51,7 +51,7 @@ describe('MarkupUtil', () => {
       ).toString();
       const attributes = MarkupUtil.extractHtmlElementAttributes(markup);
       expect(attributes.lang).toEqual('en');
-      expect(attributes['no-js']).toEqual('');
+      expect(attributes.class).toEqual('no-js');
     });
   });
 });
