@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { getRepository } from 'typeorm';
-import { View } from '../orm/entity/View';
+import { View } from '../orm/entity/view';
 import * as projectService from '../service/project-service';
 import * as whiteboardService from '../service/whiteboard-service';
 import * as viewService from '../service/view-service';
@@ -8,8 +8,6 @@ import { handleRequest } from '../lib/utils';
 
 const projects = Router();
 
-// TODO: Send HTTP Status code 400 when trying to get data by IDs which don’t exist
-// Issue: PROFI-38
 projects.get(
   '/',
   handleRequest(async (_, res) => {
@@ -105,7 +103,7 @@ projects.patch(
     const patched = {
       ...orig,
       ...patch
-    } as View;
+    };
     res.send(await viewRepo.save(patched));
   })
 );

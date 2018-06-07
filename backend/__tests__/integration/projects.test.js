@@ -1,7 +1,7 @@
 import { get, patch, post } from '../util/request';
 import { createTestDatabaseConnection } from '../util/setup';
 
-function createTestProject(testProjectName: string): any {
+function createTestProject(testProjectName) {
   return post('/projects')
     .send({ name: testProjectName })
     .expect(200);
@@ -84,21 +84,19 @@ describe('/projects', () => {
           const testProject = (await createTestProject(testProjectName).expect(
             200
           )).body;
-          return post(`/projects/${testProject.id}/whiteboards`)
+          await post(`/projects/${testProject.id}/whiteboards`)
             .send({ name: testWhiteboardName })
-            .expect(200)
-            .then(() =>
-              get(`/projects/${testProject.id}/whiteboards`)
-                .expect(200)
-                .then(res => {
-                  expect(res.body).toBeTruthy();
-                  expect(
-                    res.body.filter(
-                      whiteboard => whiteboard.name === testWhiteboardName
-                    )
-                  ).toBeTruthy();
-                })
-            );
+            .expect(200);
+          const res = await get(
+            `/projects/${testProject.id}/whiteboards`
+          ).expect(200);
+
+          expect(res.body).toBeTruthy();
+          expect(
+            res.body.filter(
+              whiteboard => whiteboard.name === testWhiteboardName
+            )
+          ).toBeTruthy();
         });
       });
     });

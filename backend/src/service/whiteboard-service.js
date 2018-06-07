@@ -1,8 +1,8 @@
-import * as superb from 'superb';
+import superb from 'superb';
 import { getRepository } from 'typeorm';
-import { Project } from '../orm/entity/Project';
-import { Whiteboard } from '../orm/entity/Whiteboard';
-import { View } from '../orm/entity/View';
+import { Project } from '../orm/entity/project';
+import { Whiteboard } from '../orm/entity/whiteboard';
+import { View } from '../orm/entity/view';
 import { exceptionWithHttpStatus } from '../lib/utils';
 
 export const find = async projectId => {
@@ -33,7 +33,7 @@ export const save = async projectId => {
       1
     )} whiteboard`,
     project
-  } as Whiteboard;
+  };
   const view = new View();
 
   whiteboard.views = [];
@@ -73,6 +73,6 @@ export const update = async (id, base) => {
   const patched = {
     ...orig,
     ...base
-  } as Whiteboard;
+  };
   return whiteboardRepo.save(patched);
 };

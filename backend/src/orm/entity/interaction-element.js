@@ -1,10 +1,10 @@
 import { Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { View } from './View';
+import { View } from './view';
 
 @Entity()
 export class InteractionElement {
-  @PrimaryGeneratedColumn() id: number;
+  @PrimaryGeneratedColumn() id = undefined;
 
   @ManyToOne(() => View)
-  view: View;
+  view = undefined;
 }

@@ -1,8 +1,8 @@
-import * as superb from 'superb';
+import superb from 'superb';
 import { getRepository } from 'typeorm';
-import { Project } from '../orm/entity/Project';
-import { Whiteboard } from '../orm/entity/Whiteboard';
-import { View } from '../orm/entity/View';
+import { Project } from '../orm/entity/project';
+import { Whiteboard } from '../orm/entity/whiteboard';
+import { View } from '../orm/entity/view';
 import { exceptionWithHttpStatus } from '../lib/utils';
 
 export const find = async () => {
@@ -47,6 +47,6 @@ export const update = async (id, base) => {
   if (!origProject) {
     throw exceptionWithHttpStatus(`Project with ID ${id} not found.`, 404);
   }
-  const patched = { ...origProject, ...base } as Project;
+  const patched = { ...origProject, ...base };
   return repo.save(patched);
 };

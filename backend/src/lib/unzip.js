@@ -1,19 +1,19 @@
-import * as path from 'path';
-import * as fs from 'fs-extra';
+import path from 'path';
+import fs from 'fs-extra';
 
-export const unzip = async (zipfile, uploadDir) => {
+export const unzip = async (zipFile, uploadDir) => {
   console.log('Unzipping:');
-  let directoryName: string;
+  let directoryName;
 
   return new Promise((resolve, reject) => {
-    zipfile.readEntry();
-    zipfile.once('end', () =>
+    zipFile.readEntry();
+    zipFile.once('end', () =>
       resolve({
         message: 'Done with unzipping.',
         directoryName: directoryName.substring(0, directoryName.length - 1)
       })
     );
-    zipfile.on('entry', entry => {
+    zipFile.on('entry', entry => {
       directoryName = directoryName ? directoryName : entry.fileName;
       if (entry.fileName.endsWith('/')) {
         /**
@@ -22,7 +22,7 @@ export const unzip = async (zipfile, uploadDir) => {
         fs
           .mkdirp(`${uploadDir}/${entry.fileName}`)
           .then(() => {
-            zipfile.readEntry();
+            zipFile.readEntry();
           })
           .catch(error => {
             reject(error);
@@ -32,7 +32,7 @@ export const unzip = async (zipfile, uploadDir) => {
          * Create files
          */
         fs.mkdirp(path.dirname(`${uploadDir}/${entry.fileName}`)).then(() => {
-          zipfile.openReadStream(entry, (error, readStream) => {
+          zipFile.openReadStream(entry, (error, readStream) => {
             if (error) {
               reject(error);
             }
@@ -47,7 +47,7 @@ export const unzip = async (zipfile, uploadDir) => {
             console.log(`${uploadDir}/${entry.fileName}`);
 
             // Continue with next file
-            zipfile.readEntry();
+            zipFile.readEntry();
           });
         });
       }

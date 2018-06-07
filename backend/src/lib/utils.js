@@ -1,11 +1,9 @@
-import { ValueTransformer } from 'typeorm/decorator/options/ValueTransformer';
+export const megaBytesToBytes = megabytes => megabytes * 1024 * 1024;
 
-export const megaBytesToBytes = (megabytes: number) => megabytes * 1024 * 1024;
-
-export const bytesToMegaBytes = (bytes: number) => bytes / 1024 / 1024;
+export const bytesToMegaBytes = bytes => bytes / 1024 / 1024;
 
 export const exceptionWithHttpStatus = (message, statusCode) => {
-  const error: Error | any = new Error(message);
+  const error = new Error(message);
   error.statusCode = statusCode;
   return error;
 };
@@ -15,24 +13,22 @@ export const handleRequest = handler => {
     try {
       await handler(req, res);
     } catch (exception) {
-      console.error(exception.message);
+      console.error(exception);
       res.sendStatus(exception.statusCode || 500);
     }
   };
 };
 
-export const htmlElementAttributeTransformer = class
-  implements ValueTransformer {
-  to(value: any = {}): string {
+export const htmlElementAttributeTransformer = () => ({
+  to(value = {}) {
     return Object.keys(value)
       .reduce((acc, cur) => [...acc, `${cur}=${value[cur]}`], [])
       .join(';');
-  }
-
-  from(value: string = ''): any {
+  },
+  from(value = '') {
     return value.split(';').reduce((acc, cur) => {
       const [key, val] = cur.split('=');
       return { ...acc, [key]: val };
     }, {});
   }
-};
+});

@@ -1,10 +1,7 @@
-import { Asset } from './orm/entity/Asset';
-import * as cheerio from 'cheerio';
+import { Asset } from './orm/entity/asset';
+import cheerio from 'cheerio';
 
-export function extractScriptAssets(
-  markup: string,
-  pathPrefix: string
-): Asset[] {
+export function extractScriptAssets(markup, pathPrefix) {
   const $ = cheerio.load(markup);
   const scripts = $('script');
   return scripts.toArray().map(el => {
@@ -14,10 +11,7 @@ export function extractScriptAssets(
   });
 }
 
-export function extractStyleAssets(
-  markup: string,
-  pathPrefix: string
-): Asset[] {
+export function extractStyleAssets(markup, pathPrefix) {
   const $ = cheerio.load(markup);
   const inlineStyles = $('style');
   const linkedStyles = $('link[rel="stylesheet"]');
@@ -28,20 +22,18 @@ export function extractStyleAssets(
   });
 }
 
-function removeAssetsFromDocument($: CheerioStatic) {
+function removeAssetsFromDocument($) {
   $('link[rel="stylesheet"]').remove();
   $('style').remove();
   $('script').remove();
 }
 
-export function extractHtmlElementAttributes(
-  markup: string
-): { [key: string]: string } {
+export function extractHtmlElementAttributes(markup) {
   const $ = cheerio.load(markup);
   return $('html').get(0).attribs;
 }
 
-export function extractDocumentHead(markup: string): string {
+export function extractDocumentHead(markup) {
   const $ = cheerio.load(markup);
   removeAssetsFromDocument($);
   return $('head')
@@ -49,7 +41,7 @@ export function extractDocumentHead(markup: string): string {
     .trim();
 }
 
-export function extractDocumentBody(markup: string): string {
+export function extractDocumentBody(markup) {
   const $ = cheerio.load(markup);
   removeAssetsFromDocument($);
   return $('body')
@@ -57,7 +49,7 @@ export function extractDocumentBody(markup: string): string {
     .trim();
 }
 
-function mapElementToAsset(el: CheerioElement, pathPrefix: string): Asset {
+function mapElementToAsset(el, pathPrefix) {
   const asset = new Asset();
   const styleSrc = el.attribs.src || el.attribs.href;
   if (styleSrc) {

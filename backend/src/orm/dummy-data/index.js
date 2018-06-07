@@ -1,10 +1,10 @@
-import 'reflect-metadata'; // tslint:disable-line
+import 'reflect-metadata';
 import { createConnection } from 'typeorm';
-import * as superb from 'superb';
-import * as slugify from '@sindresorhus/slugify';
+import superb from 'superb';
+import slugify from '@sindresorhus/slugify';
 
-import { Directory } from '../entity/Directory';
-import { Project } from '../entity/Project';
+import { Directory } from '../entity/directory';
+import { Project } from '../entity/project';
 
 import { getDummyProject } from './dummy-project';
 import { getDummyDirectory } from './dummy-directory';

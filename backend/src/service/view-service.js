@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm';
-import { Whiteboard } from '../orm/entity/Whiteboard';
-import { View } from '../orm/entity/View';
+import { Whiteboard } from '../orm/entity/whiteboard';
+import { View } from '../orm/entity/view';
 import { exceptionWithHttpStatus } from '../lib/utils';
 
 export const getByWhiteboardId = async whiteboardId => {
@@ -30,7 +30,7 @@ export const save = async (whiteboardId, base) => {
       404
     );
   }
-  const view = base as View;
+  const view = base;
   view.whiteboard = whiteboard;
   view.hasFile = false;
   return viewRepo.save(view);

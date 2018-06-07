@@ -1,7 +1,7 @@
-import * as fs from 'fs-extra';
-import * as path from 'path';
+import fs from 'fs-extra';
+import path from 'path';
 
-export async function dummyFileUpload(fakeUploadedDirName: string) {
+export async function dummyFileUpload(fakeUploadedDirName) {
   const uploadDir = path.join(__dirname, '../../../../frontend/src/library');
   const newDirectoryName = path.join(uploadDir, fakeUploadedDirName);
   const cssFile = path.join(newDirectoryName, 'assets/css/app.bundle.css');

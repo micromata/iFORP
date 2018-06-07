@@ -1,14 +1,17 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { View } from './View';
-import { Page } from './Page';
+import { View } from './view';
+import { Page } from './page';
 
 export class Asset {
-  @PrimaryGeneratedColumn() id: number;
-  @Column() type: 'css' | 'js';
+  @PrimaryGeneratedColumn() id = undefined;
+
+  @Column('text') type = undefined;
+
   @Column('text', { nullable: true })
-  contents: string;
+  contents = undefined;
+
   @Column('text', { nullable: true })
-  location: string;
+  location = undefined;
 
   get isInline() {
     return !this.location && this.contents;
@@ -18,11 +21,11 @@ export class Asset {
 @Entity()
 export class ViewAsset extends Asset {
   @ManyToOne(() => View)
-  view: View;
+  view = undefined;
 }
 
 @Entity()
 export class PageAsset extends Asset {
   @ManyToOne(() => Page)
-  page: Page;
+  page = undefined;
 }

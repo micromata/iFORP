@@ -1,15 +1,15 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import { Page } from './Page';
+import { Page } from './page';
 
 @Entity()
 export class Directory {
-  @PrimaryGeneratedColumn() id: number;
+  @PrimaryGeneratedColumn() id = undefined;
 
-  @Column() name: string;
+  @Column('text') name = undefined;
 
   @OneToMany(() => Page, page => page.directory, {
     cascade: true,
     eager: true
   })
-  pages: Page[];
+  pages = undefined;
 }

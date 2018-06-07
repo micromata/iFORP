@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm';
-import { Directory } from '../orm/entity/Directory';
-import { Page } from '../orm/entity/Page';
+import { Directory } from '../orm/entity/directory';
+import { Page } from '../orm/entity/page';
 import { exceptionWithHttpStatus } from '../lib/utils';
 
 export const getStrippedDirectories = async () => {

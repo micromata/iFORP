@@ -1,4 +1,4 @@
-import { Whiteboard } from './Whiteboard';
+import { Whiteboard } from './whiteboard';
 import {
   Column,
   Entity,
@@ -6,44 +6,44 @@ import {
   OneToMany,
   PrimaryGeneratedColumn
 } from 'typeorm';
-import { ViewAsset } from './Asset';
-import { InteractionElement } from './InteractionElement';
+import { ViewAsset } from './asset';
+import { InteractionElement } from './interaction-element';
 import { htmlElementAttributeTransformer } from '../../lib/utils';
 
 @Entity()
 export class View {
-  @PrimaryGeneratedColumn() id: number;
+  @PrimaryGeneratedColumn() id = undefined;
 
-  @Column() name: string;
+  @Column('text') name = undefined;
 
-  @Column() hasFile: boolean;
-
-  @Column('text', { nullable: true })
-  head: string;
+  @Column('boolean') hasFile = undefined;
 
   @Column('text', { nullable: true })
-  body: string;
+  head = undefined;
+
+  @Column('text', { nullable: true })
+  body = undefined;
 
   @Column('text', {
     nullable: true,
-    transformer: new htmlElementAttributeTransformer()
+    transformer: htmlElementAttributeTransformer()
   })
-  htmlElementAttributes: { [k: string]: string };
+  htmlElementAttributes = undefined;
 
   @OneToMany(() => InteractionElement, ie => ie.view, {
     cascade: true,
     eager: true
   })
-  interactionElements: InteractionElement[];
+  interactionElements = undefined;
 
   @OneToMany(() => ViewAsset, asset => asset.view, {
     cascade: true,
     eager: true
   })
-  assets: ViewAsset[];
+  assets = undefined;
 
   @ManyToOne(() => Whiteboard, whiteboard => whiteboard.views, {
     onDelete: 'CASCADE'
   })
-  whiteboard: Whiteboard;
+  whiteboard = undefined;
 }

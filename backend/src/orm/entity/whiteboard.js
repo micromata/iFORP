@@ -5,20 +5,20 @@ import {
   OneToMany,
   PrimaryGeneratedColumn
 } from 'typeorm';
-import { Project } from './Project';
-import { View } from './View';
+import { Project } from './project';
+import { View } from './view';
 
 @Entity()
 export class Whiteboard {
-  @PrimaryGeneratedColumn() id: number;
+  @PrimaryGeneratedColumn() id = undefined;
 
-  @Column() name: string;
+  @Column('text') name = undefined;
 
   @OneToMany(() => View, view => view.whiteboard, {
     cascade: true
   })
-  views: View[];
+  views = undefined;
 
   @ManyToOne(() => Project)
-  project: Project;
+  project = undefined;
 }

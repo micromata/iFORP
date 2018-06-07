@@ -5,32 +5,32 @@ import {
   OneToMany,
   PrimaryGeneratedColumn
 } from 'typeorm';
-import { Directory } from './Directory';
-import { PageAsset } from './Asset';
+import { Directory } from './directory';
+import { PageAsset } from './asset';
 import { htmlElementAttributeTransformer } from '../../lib/utils';
 
 @Entity()
 export class Page {
-  @PrimaryGeneratedColumn() id: number;
+  @PrimaryGeneratedColumn() id = undefined;
 
-  @Column() name: string;
+  @Column('text') name = undefined;
 
-  @Column() head: string;
+  @Column('text') head = undefined;
 
-  @Column() body: string;
+  @Column('text') body = undefined;
 
   @Column('text', {
     nullable: true,
-    transformer: new htmlElementAttributeTransformer()
+    transformer: htmlElementAttributeTransformer()
   })
-  htmlElementAttributes: { [k: string]: string };
+  htmlElementAttributes = undefined;
 
   @OneToMany(() => PageAsset, asset => asset.page, {
     cascade: true,
     eager: true
   })
-  assets: PageAsset[];
+  assets = undefined;
 
   @ManyToOne(() => Directory)
-  directory: Directory;
+  directory = undefined;
 }

@@ -1,9 +1,9 @@
-import * as path from 'path';
+import path from 'path';
 import { Router } from 'express';
-import * as multer from 'multer';
-import * as promisify from 'pify';
-import * as yauzl from 'yauzl';
-import * as fs from 'fs-extra';
+import multer from 'multer';
+import promisify from 'pify';
+import fs from 'fs-extra';
+import yauzl from 'yauzl';
 import {
   extractDocumentBody,
   extractDocumentHead,
@@ -13,10 +13,7 @@ import {
 } from '../markup-util';
 import { getRepository } from 'typeorm';
 
-import * as libraryService from '../service/library-service';
-
-import { Directory } from '../orm/entity/Directory';
-import { Page } from '../orm/entity/Page';
+import { Directory } from '../orm/entity/directory';
 
 import {
   bytesToMegaBytes,
@@ -24,7 +21,7 @@ import {
   megaBytesToBytes
 } from '../lib/utils';
 import { unzip } from '../lib/unzip';
-
+import * as libraryService from '../service/library-service';
 const library = Router(); // eslint-disable-line new-cap
 const upload = multer({ storage: multer.memoryStorage() });
 
@@ -47,9 +44,27 @@ library.get(
 );
 
 library.post('/upload', upload.single('file'), [], (req, res) => {
-  const readZipFileFromBuffer = promisify(yauzl.fromBuffer);
   const maxFilesize = megaBytesToBytes(5);
   const acceptedMimeTypes = ['application/zip'];
+
+  if (!req.file) {
+    res.status(400).send('We need a file.');
+    return false;
+  }
+  if (req.file.size > maxFilesize) {
+    res
+      .status(413)
+      .send(
+        `Maximum filesize of ${bytesToMegaBytes(maxFilesize)} MB exceeded.`
+      );
+    return false;
+  }
+  if (!acceptedMimeTypes.includes(req.file.mimetype)) {
+    res.status(406).send(`Wrong file type.`);
+    return false;
+  }
+
+  const readZipFileFromBuffer = promisify(yauzl.fromBuffer);
   const uploadDirName = 'library';
   const uploadDir = path.join(
     __dirname,
@@ -70,23 +85,6 @@ library.post('/upload', upload.single('file'), [], (req, res) => {
    * - Overwrites the content in the file system
    * Issue: PROFI-33
    */
-
-  if (!req.file) {
-    res.status(400).send('We need a file.');
-    return false;
-  }
-  if (req.file.size > maxFilesize) {
-    res
-      .status(413)
-      .send(
-        `Maximum filesize of ${bytesToMegaBytes(maxFilesize)} MB exceeded.`
-      );
-    return false;
-  }
-  if (!acceptedMimeTypes.includes(req.file.mimetype)) {
-    res.status(406).send(`Wrong file type.`);
-    return false;
-  }
   console.log('Uploaded: ', req.file);
 
   readZipFileFromBuffer(req.file.buffer, { lazyEntries: true })
@@ -134,7 +132,7 @@ library.post('/upload', upload.single('file'), [], (req, res) => {
           head,
           assets: [...css, ...js],
           htmlElementAttributes
-        } as Page);
+        });
       });
 
       await repo.save(directory);
