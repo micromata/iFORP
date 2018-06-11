@@ -10,32 +10,36 @@ import { getDummyProject } from './dummy-project';
 import { getDummyDirectory } from './dummy-directory';
 import { dummyFileUpload } from './dummy-file-upload';
 
+import getLogger from '../../lib/get-logger';
+
+const logger = getLogger('dummy data');
+
 createConnection()
   .then(async connection => {
-    console.log('Add dummy data …');
+    logger.info('Add dummy data …');
 
     const fakeUploadedDirName = slugify(`my ${superb()} directory`);
 
     // Dummy file upload
     const dummyFiles = await dummyFileUpload(fakeUploadedDirName);
-    console.log(dummyFiles);
+    logger.info(dummyFiles);
 
     // Save dummy project in the database
     const project = getDummyProject(fakeUploadedDirName);
     await connection.getRepository(Project).save(project);
-    console.log(`Saved a new project with id: ${project.id}\n`);
+    logger.info(`Saved a new project with id: ${project.id}\n`);
 
     // Loading projects from the database …
     const projects = await connection.getRepository(Project).find();
-    console.log('Loaded projects:');
-    console.dir(projects);
+    logger.info('Loaded projects:');
+    logger.info(projects);
 
-    // console.log('Show last project:');
-    // console.log(JSON.stringify(projects.pop(), null, 2));
+    // logger.info('Show last project:');
+    // logger.info(JSON.stringify(projects.pop(), null, 2));
 
     // Save dummy directory in the database
     const directory = getDummyDirectory(fakeUploadedDirName);
     await connection.getRepository(Directory).save(directory);
-    console.log(`Saved a new directory with id: ${directory.id}\n`);
+    logger.info(`Saved a new directory with id: ${directory.id}\n`);
   })
-  .catch(error => console.log(error));
+  .catch(error => logger.error(error));

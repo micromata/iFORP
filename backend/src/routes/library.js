@@ -1,9 +1,17 @@
-import path from 'path';
 import { Router } from 'express';
-import multer from 'multer';
-import promisify from 'pify';
 import fs from 'fs-extra';
+import multer from 'multer';
+import path from 'path';
+import promisify from 'pify';
+import { getRepository } from 'typeorm';
 import yauzl from 'yauzl';
+import getLogger from '../lib/get-logger';
+import { unzip } from '../lib/unzip';
+import {
+  bytesToMegaBytes,
+  getRequestHandler,
+  megaBytesToBytes
+} from '../lib/utils';
 import {
   extractDocumentBody,
   extractDocumentHead,
@@ -11,19 +19,15 @@ import {
   extractScriptAssets,
   extractStyleAssets
 } from '../markup-util';
-import { getRepository } from 'typeorm';
 
 import { Directory } from '../orm/entity/directory';
 
-import {
-  bytesToMegaBytes,
-  handleRequest,
-  megaBytesToBytes
-} from '../lib/utils';
-import { unzip } from '../lib/unzip';
 import * as libraryService from '../service/library-service';
+
 const library = Router(); // eslint-disable-line new-cap
 const upload = multer({ storage: multer.memoryStorage() });
+const logger = getLogger('library');
+const handleRequest = getRequestHandler(logger);
 
 // TODO: Send HTTP Status code 400 when trying to get data by IDs which don’t exist
 // Issue: PROFI-38
@@ -85,12 +89,12 @@ library.post('/upload', upload.single('file'), [], (req, res) => {
    * - Overwrites the content in the file system
    * Issue: PROFI-33
    */
-  console.log('Uploaded: ', req.file);
+  logger.info('Uploaded: ', req.file);
 
   readZipFileFromBuffer(req.file.buffer, { lazyEntries: true })
     .then(async zipFile => unzip(zipFile, uploadDir))
     .then(async result => {
-      console.log(result.message);
+      logger.info(result.message);
       // Save dummy directory in the database
       const directory = new Directory();
       const { directoryName } = result;
@@ -136,13 +140,13 @@ library.post('/upload', upload.single('file'), [], (req, res) => {
       });
 
       await repo.save(directory);
-      console.log('Saved the directory to the database.');
+      logger.info('Saved the directory to the database.');
 
       // Send 200 status code
       res.send();
     })
     .catch(error => {
-      console.error(error);
+      logger.error(error);
     });
 });
 

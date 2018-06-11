@@ -8,12 +8,12 @@ export const exceptionWithHttpStatus = (message, statusCode) => {
   return error;
 };
 
-export const handleRequest = handler => {
+export const getRequestHandler = logger => handler => {
   return async (req, res) => {
     try {
       await handler(req, res);
     } catch (exception) {
-      console.error(exception);
+      logger.error(exception);
       res.sendStatus(exception.statusCode || 500);
     }
   };

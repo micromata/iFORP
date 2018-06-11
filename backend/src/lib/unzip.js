@@ -1,8 +1,10 @@
 import path from 'path';
 import fs from 'fs-extra';
+import getLogger from './get-logger';
 
+const logger = getLogger('library');
 export const unzip = async (zipFile, uploadDir) => {
-  console.log('Unzipping:');
+  logger.info('Unzipping:');
   let directoryName;
 
   return new Promise((resolve, reject) => {
@@ -44,7 +46,7 @@ export const unzip = async (zipFile, uploadDir) => {
             readStream.pipe(writeStream);
 
             // Log progress
-            console.log(`${uploadDir}/${entry.fileName}`);
+            logger.info(`${uploadDir}/${entry.fileName}`);
 
             // Continue with next file
             zipFile.readEntry();

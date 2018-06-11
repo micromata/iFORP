@@ -4,9 +4,12 @@ import { View } from '../orm/entity/view';
 import * as projectService from '../service/project-service';
 import * as whiteboardService from '../service/whiteboard-service';
 import * as viewService from '../service/view-service';
-import { handleRequest } from '../lib/utils';
+import getLogger from '../lib/get-logger';
+import { getRequestHandler } from '../lib/utils';
 
 const projects = Router();
+
+const handleRequest = getRequestHandler(getLogger('projects'));
 
 projects.get(
   '/',
