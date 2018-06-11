@@ -11,10 +11,11 @@ import { getDummyDirectory } from './dummy-directory';
 import { dummyFileUpload } from './dummy-file-upload';
 
 import getLogger from '../../lib/get-logger';
+import getConnectionOptions from '../../get-connection-options';
 
 const logger = getLogger('dummy data');
 
-createConnection()
+createConnection(getConnectionOptions())
   .then(async connection => {
     logger.info('Add dummy data …');
 
