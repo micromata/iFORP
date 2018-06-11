@@ -33,8 +33,6 @@
     "test:watch": "jest --watch",
     "eslint": "eslint --ext .js --cache --ignore-path .gitignore src ",
     "eslint:fix": "npm run eslint --silent -- --fix",
-    "tslint": "tslint --project tsconfig.json -c tslint.json -t stylish \"src/**/*.ts\"",
-    "tslint:fix": "npm run tslint --silent -- --fix ",
     "start": "ts-node src/index.ts",
     "start:dev": "ts-node-dev --no-notify --transpileOnly src/index.ts",
     "build": "tsc -p .",
@@ -96,7 +94,7 @@
   "lint-staged": {
     "*.ts": [
       "npm run pretty",
-      "npm run tslint:fix",
+      "npm run eslint:fix",
       "git add"
     ]
   },
