@@ -33,14 +33,13 @@
     "test:watch": "jest --watch",
     "eslint": "eslint --ext .js --cache --ignore-path .gitignore src ",
     "eslint:fix": "npm run eslint --silent -- --fix",
-    "start": "ts-node src/index.ts",
-    "start:dev": "ts-node-dev --no-notify --transpileOnly src/index.ts",
-    "build": "tsc -p .",
+    "start": "node -r babel-register src/index.js",
+    "build": "babel src --out-dir build",
     "delete": "npm run delete:database && npm run delete:library",
     "delete:database": "del '*.sqlite'",
-    "database:dummyData": "npm run delete:database && echo 'Database deleted' && ts-node src/orm/dummy-data",
+    "database:dummyData": "npm run delete:database && echo 'Database deleted' && node -r babel-register src/orm/dummy-data",
     "delete:library": "del -f '../frontend/src/library/**/*' '!.gitkeep'",
-    "pretty": "prettier --write \"./src/**/*.{js?(x),ts?(x)}\""
+    "pretty": "prettier --write \"./src/**/*.{js?(x)}\""
   },
   "dependencies": {
     "@sindresorhus/slugify": "0.3.0",
@@ -53,6 +52,7 @@
     "pify": "^3.0.0",
     "reflect-metadata": "0.1.12",
     "sqlite3": "4.0.0",
+    "signale": "1.1.0",
     "superb": "2.0.0",
     "typeorm": "0.2.5",
     "yauzl": "2.9.2"
