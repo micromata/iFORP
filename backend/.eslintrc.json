@@ -13,7 +13,8 @@
   "rules": {
     "prettier/prettier": "error",
     "capitalized-comments": "off",
-    "new-cap": "off"
+    "new-cap": "off",
+    "no-await-in-loop": "off"
   },
   "overrides": [
     {
