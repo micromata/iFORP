@@ -2,11 +2,13 @@ import { Whiteboard } from './whiteboard';
 import {
   Column,
   Entity,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn
 } from 'typeorm';
-import { ViewAsset } from './asset';
+import { Asset } from './asset';
 import { InteractionElement } from './interaction-element';
 import { htmlElementAttributeTransformer } from '../../lib/utils';
 
@@ -36,10 +38,11 @@ export class View {
   })
   interactionElements = undefined;
 
-  @OneToMany(() => ViewAsset, asset => asset.view, {
+  @ManyToMany(() => Asset, {
     cascade: true,
     eager: true
   })
+  @JoinTable()
   assets = undefined;
 
   @ManyToOne(() => Whiteboard, whiteboard => whiteboard.views, {

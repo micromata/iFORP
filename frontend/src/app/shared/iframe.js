@@ -30,9 +30,14 @@ export class Iframe extends React.Component {
   injectIframeContent() {
     // Apply attributes to HTML element
     const htmlElement = this.iframeDocument.querySelector('html');
-    this.props.htmlElementAttributes.forEach(attribute => {
-      htmlElement.setAttribute(attribute.name, attribute.value);
-    });
+    Object.keys(this.props.htmlElementAttributes)
+      .filter(k => this.props.htmlElementAttributes.hasOwnProperty(k))
+      .forEach(attrName => {
+        htmlElement.setAttribute(
+          attrName,
+          this.props.htmlElementAttributes[attrName]
+        );
+      });
 
     // Fill head element
     this.iframeDocument.head.innerHTML = this.props.head;

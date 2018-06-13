@@ -1,5 +1,5 @@
 import { View } from '../../src/orm/entity/view';
-import { PageAsset, ViewAsset } from '../../src/orm/entity/asset';
+import { Asset } from '../../src/orm/entity/asset';
 import { InteractionElement } from '../../src/orm/entity/interaction-element';
 import { Project } from '../../src/orm/entity/project';
 import { Whiteboard } from '../../src/orm/entity/whiteboard';
@@ -13,8 +13,7 @@ export const createTestDatabaseConnection = () => {
     type: 'sqljs',
     synchronize: true,
     entities: [
-      PageAsset,
-      ViewAsset,
+      Asset,
       Directory,
       InteractionElement,
       Page,

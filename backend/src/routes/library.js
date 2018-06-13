@@ -1,6 +1,6 @@
-import { Router } from 'express';
 import multer from 'multer';
-import getLogger from '../lib/get-logger';
+import { Router } from 'express';
+import { getLogger } from '../lib/get-logger';
 import { getRequestHandler } from '../lib/utils';
 
 import * as libraryService from '../service/library-service';
@@ -10,13 +10,19 @@ const upload = multer({ storage: multer.memoryStorage() });
 const logger = getLogger('library');
 const handleRequest = getRequestHandler(logger);
 
-// TODO: Send HTTP Status code 400 when trying to get data by IDs which don’t exist
-// Issue: PROFI-38
 library.get(
   '/files',
   handleRequest(async (_, res) => {
     const result = await libraryService.getStrippedDirectories();
     res.send(result);
+  })
+);
+
+library.get(
+  '/asset/:id',
+  handleRequest(async (req, res) => {
+    const assetPath = await libraryService.getAssetPath(req.params.id);
+    res.send(assetPath);
   })
 );
 
@@ -33,7 +39,7 @@ library.post(
   upload.single('file'),
   [],
   handleRequest(async (req, res) => {
-    res.send(await libraryService.uploadZip(req.file));
+    res.send(await libraryService.uploadZip(req.file, req.body.directoryName));
   })
 );
 

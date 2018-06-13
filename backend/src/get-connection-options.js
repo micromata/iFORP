@@ -1,9 +1,10 @@
 import path from 'path';
+import os from 'os';
 
 export default () => {
   return {
     type: 'sqlite',
-    database: path.resolve(__dirname, '../database.sqlite'),
+    database: path.resolve(os.homedir(), '.iforp/database.sqlite'),
     synchronize: true,
     logging: false,
     entities: [path.resolve(__dirname, 'orm/entity/**/*.js')],

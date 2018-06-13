@@ -1,7 +1,6 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { View } from './view';
-import { Page } from './page';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
+@Entity()
 export class Asset {
   @PrimaryGeneratedColumn() id = undefined;
 
@@ -16,16 +15,4 @@ export class Asset {
   get isInline() {
     return !this.location && this.contents;
   }
-}
-
-@Entity()
-export class ViewAsset extends Asset {
-  @ManyToOne(() => View)
-  view = undefined;
-}
-
-@Entity()
-export class PageAsset extends Asset {
-  @ManyToOne(() => Page)
-  page = undefined;
 }

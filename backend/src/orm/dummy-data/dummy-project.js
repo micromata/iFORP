@@ -3,7 +3,7 @@ import superb from 'superb';
 import { Project } from '../entity/project';
 import { Whiteboard } from '../entity/whiteboard';
 import { View } from '../entity/view';
-import { ViewAsset } from '../entity/asset';
+import { Asset } from '../entity/asset';
 
 export function getDummyProject(fakeUploadedDirName) {
   const project = new Project();
@@ -24,7 +24,7 @@ export function getDummyProject(fakeUploadedDirName) {
 
   view.hasFile = true;
 
-  const cssAsset = new ViewAsset();
+  const cssAsset = new Asset();
   cssAsset.type = 'css';
   cssAsset.location = `../library/${fakeUploadedDirName}/assets/css/app.73419fc85edeca40c47c.bundle.css`;
 

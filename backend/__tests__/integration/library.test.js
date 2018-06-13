@@ -38,8 +38,7 @@ describe('/library', () => {
         await get('/library/files/' + exampleId).expect(200);
       });
       it('should return a 404 for non existent files', async () => {
-        await get('/library/files/1337')
-          .expect(404);
+        await get('/library/files/1337').expect(404);
       });
     });
   });

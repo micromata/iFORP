@@ -38,8 +38,8 @@
     "pretty": "prettier --write \"./src/**/*.{js?(x)}\"",
     "database:dummyData": "npm run delete:database && echo 'Database deleted' && node -r babel-register src/orm/dummy-data",
     "delete": "npm run delete:database && npm run delete:library",
-    "delete:database": "del '*.sqlite'",
-    "delete:library": "del -f '~/.iforp' '!.gitkeep'"
+    "delete:database": "del '~/.iforp/database.sqlite'",
+    "delete:library": "del -f ~/.iforp/library/"
   },
   "dependencies": {
     "@sindresorhus/slugify": "0.3.0",

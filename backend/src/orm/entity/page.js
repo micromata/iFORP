@@ -1,12 +1,13 @@
 import {
   Column,
   Entity,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn
 } from 'typeorm';
 import { Directory } from './directory';
-import { PageAsset } from './asset';
+import { Asset } from './asset';
 import { htmlElementAttributeTransformer } from '../../lib/utils';
 
 @Entity()
@@ -25,10 +26,11 @@ export class Page {
   })
   htmlElementAttributes = undefined;
 
-  @OneToMany(() => PageAsset, asset => asset.page, {
+  @ManyToMany(() => Asset, {
     cascade: true,
     eager: true
   })
+  @JoinTable()
   assets = undefined;
 
   @ManyToOne(() => Directory)
