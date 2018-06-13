@@ -31,15 +31,15 @@
   "scripts": {
     "test": "npm run eslint && jest",
     "test:watch": "jest --watch",
-    "eslint": "eslint --ext .js --cache --ignore-path .gitignore src ",
-    "eslint:fix": "npm run eslint --silent -- --fix",
     "start": "node -r babel-register src/index.js",
     "build": "babel src --out-dir build",
+    "eslint": "eslint --ext .js --cache --ignore-path .gitignore src ",
+    "eslint:fix": "npm run eslint --silent -- --fix",
+    "pretty": "prettier --write \"./src/**/*.{js?(x)}\"",
+    "database:dummyData": "npm run delete:database && echo 'Database deleted' && node -r babel-register src/orm/dummy-data",
     "delete": "npm run delete:database && npm run delete:library",
     "delete:database": "del '*.sqlite'",
-    "database:dummyData": "npm run delete:database && echo 'Database deleted' && node -r babel-register src/orm/dummy-data",
-    "delete:library": "del -f '~/.iforp' '!.gitkeep'",
-    "pretty": "prettier --write \"./src/**/*.{js?(x)}\""
+    "delete:library": "del -f '~/.iforp' '!.gitkeep'"
   },
   "dependencies": {
     "@sindresorhus/slugify": "0.3.0",
