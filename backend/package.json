@@ -38,7 +38,7 @@
     "delete": "npm run delete:database && npm run delete:library",
     "delete:database": "del '*.sqlite'",
     "database:dummyData": "npm run delete:database && echo 'Database deleted' && node -r babel-register src/orm/dummy-data",
-    "delete:library": "del -f '../frontend/src/library/**/*' '!.gitkeep'",
+    "delete:library": "del -f '~/.iforp' '!.gitkeep'",
     "pretty": "prettier --write \"./src/**/*.{js?(x)}\""
   },
   "dependencies": {
