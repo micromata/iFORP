@@ -55,7 +55,7 @@ function mapElementToAsset(el, fileBaseFolder) {
   const asset = new Asset();
   const styleSrc = el.attribs.src || el.attribs.href;
   if (styleSrc) {
-    asset.location = path.resolve(fileBaseFolder, styleSrc);
+    asset.location = path.join(fileBaseFolder, styleSrc);
   } else {
     asset.contents = el.firstChild.nodeValue.trim();
   }
@@ -65,7 +65,13 @@ function mapElementToAsset(el, fileBaseFolder) {
 export function processHtmlFile(file, extractionBasePath) {
   const filePath = path.resolve(extractionBasePath, file);
   const fileContents = fs.readFileSync(filePath).toString();
-  const fileBaseFolder = path.resolve(...filePath.split('/').pop());
+  const fileBaseFolder = path.resolve(
+    '/',
+    ...filePath
+      .split('/')
+      .filter(Boolean)
+      .slice(0, -1)
+  );
   const name = filePath
     .split('/')
     .filter(Boolean)

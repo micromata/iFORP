@@ -28,9 +28,7 @@ const getUserConfiguration = () => {
     const configFile = fs.readFileSync(defaults.configurationPath, 'utf8');
     return JSON.parse(configFile);
   } catch (error) {
-    if (error.code === 'ENOENT') {
-      logger.info('No user configuration given. Using defaults.');
-    } else {
+    if (!error.code === 'ENOENT') {
       logger.error(error);
     }
     return {};

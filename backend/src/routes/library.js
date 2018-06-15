@@ -21,8 +21,13 @@ library.get(
 library.get(
   '/asset/:id',
   handleRequest(async (req, res) => {
-    const assetPath = await libraryService.getAssetPath(req.params.id);
-    res.send(assetPath);
+    const asset = await libraryService.getAsset(req.params.id);
+    if (asset.type === 'css') {
+      res.set('Content-Type', 'text/css');
+    } else {
+      res.set('Content-Type', 'application/javascript');
+    }
+    res.sendFile(asset.location);
   })
 );
 

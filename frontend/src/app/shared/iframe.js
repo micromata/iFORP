@@ -75,7 +75,7 @@ export class Iframe extends React.Component {
       styleElement.appendChild(iframe.createTextNode(asset.contents));
     } else {
       styleElement.rel = 'stylesheet';
-      styleElement.href = asset.location;
+      styleElement.href = 'http://localhost:3000/library/asset/' + asset.id;
     }
 
     return styleElement;
@@ -87,7 +87,7 @@ export class Iframe extends React.Component {
     if (asset.location === null) {
       scriptElement.appendChild(iframe.createTextNode(asset.contents));
     } else {
-      scriptElement.src = asset.location;
+      scriptElement.src = 'http://localhost:3000/library/asset/' + asset.id;
       scriptElement.async = false;
     }
 

@@ -80,7 +80,7 @@ export const getPage = async pageId => {
 };
 
 // return raw asset
-export const getAssetPath = async assetId => {
+export const getAsset = async assetId => {
   const repository = getRepository(Asset);
   const asset = await repository.findOne(assetId);
   if (!asset)
