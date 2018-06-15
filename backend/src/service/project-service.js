@@ -3,7 +3,7 @@ import { getRepository } from 'typeorm';
 import { Project } from '../orm/entity/project';
 import { Whiteboard } from '../orm/entity/whiteboard';
 import { View } from '../orm/entity/view';
-import { exceptionWithHttpStatus } from '../lib/utils';
+import { exceptionWithHttpStatus } from '../utils/request';
 
 export const find = async () => {
   const repo = getRepository(Project);

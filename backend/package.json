@@ -106,7 +106,8 @@
       "!src/orm/**/*.js",
       "!src/app.js",
       "!src/index.js",
-      "!src/get-connection-options.js"
+      "!src/get-connection-options.js",
+      "!src/get-configuration.js"
     ],
     "coverageReporters": [
       "lcov",

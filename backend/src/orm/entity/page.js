@@ -8,7 +8,6 @@ import {
 } from 'typeorm';
 import { Directory } from './directory';
 import { Asset } from './asset';
-import { htmlElementAttributeTransformer } from '../../lib/utils';
 
 @Entity()
 export class Page {
@@ -22,7 +21,19 @@ export class Page {
 
   @Column('text', {
     nullable: true,
-    transformer: htmlElementAttributeTransformer()
+    transformer: {
+      to(value = {}) {
+        return Object.keys(value)
+          .reduce((acc, cur) => [...acc, `${cur}=${value[cur]}`], [])
+          .join(';');
+      },
+      from(value = '') {
+        return value.split(';').reduce((acc, cur) => {
+          const [key, val] = cur.split('=');
+          return { ...acc, [key]: val };
+        }, {});
+      }
+    }
   })
   htmlElementAttributes = undefined;
 

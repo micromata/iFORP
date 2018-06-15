@@ -1,7 +1,7 @@
 import multer from 'multer';
 import { Router } from 'express';
 import { getLogger } from '../lib/get-logger';
-import { getRequestHandler } from '../lib/utils';
+import { getRequestHandler } from '../utils/request';
 
 import * as libraryService from '../service/library-service';
 

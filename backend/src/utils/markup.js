@@ -1,6 +1,6 @@
 import cheerio from 'cheerio';
 import path from 'path';
-import { Asset } from './orm/entity/asset';
+import { Asset } from '../orm/entity/asset';
 import fs from 'fs-extra';
 
 export function extractScriptAssets(markup, fileBaseFolder) {

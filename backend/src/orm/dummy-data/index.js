@@ -10,7 +10,7 @@ import { getDummyProject } from './dummy-project';
 import { getDummyDirectory } from './dummy-directory';
 import { dummyFileUpload } from './dummy-file-upload';
 
-import getLogger from '../../lib/get-logger';
+import { getLogger } from '../../lib/get-logger';
 import getConnectionOptions from '../../get-connection-options';
 
 const logger = getLogger('dummy data');

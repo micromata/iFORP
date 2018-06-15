@@ -2,19 +2,18 @@ import path from 'path';
 import yauzl from 'yauzl-promise';
 import { getRepository } from 'typeorm';
 import { getLogger } from '../lib/get-logger';
-import {
-  ensureFile,
-  ensureFileSize,
-  ensureMimeType,
-  exceptionWithHttpStatus,
-  extractZip,
-  removeFileExtension
-} from '../lib/utils';
-import { processHtmlFile } from '../markup-util';
+import { extractZip, removeFileExtension } from '../utils/fs';
+import { processHtmlFile } from '../utils/markup';
 import { Asset } from '../orm/entity/asset';
 import { Directory } from '../orm/entity/directory';
 import { Page } from '../orm/entity/page';
 import { getConfiguration } from '../get-configuration';
+import {
+  ensureFileSize,
+  ensureMimeType,
+  ensureValue,
+  exceptionWithHttpStatus
+} from '../utils/request';
 
 const logger = getLogger('library');
 
@@ -22,7 +21,7 @@ const { upload: uploadOptions } = getConfiguration();
 
 // Service methods
 export const uploadZip = async (file, userDefinedDirName = '') => {
-  ensureFile(file);
+  ensureValue(file);
   ensureFileSize(file, uploadOptions.maxFileSize);
   ensureMimeType(file, uploadOptions.acceptedMimes);
 

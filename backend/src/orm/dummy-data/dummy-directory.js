@@ -1,6 +1,6 @@
-import { PageAsset } from '../entity/asset';
 import { Directory } from '../entity/directory';
 import { Page } from '../entity/page';
+import { Asset } from '../entity/asset';
 
 export function getDummyDirectory(fakeUploadedDirName) {
   const directory = new Directory();
@@ -19,7 +19,7 @@ export function getDummyDirectory(fakeUploadedDirName) {
   };
   page.assets = [];
 
-  const cssAsset = new PageAsset();
+  const cssAsset = new Asset();
   cssAsset.type = 'css';
   cssAsset.location = `../library/${fakeUploadedDirName}/assets/css/app.73419fc85edeca40c47c.bundle.css`;
 

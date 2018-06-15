@@ -1,7 +1,7 @@
 import fs from 'fs';
 import os from 'os';
 import path from 'path';
-import { deepMerge } from './lib/utils';
+import { deepMerge } from './utils/lang';
 import { getLogger } from './lib/get-logger';
 
 const logger = getLogger('config');
@@ -10,6 +10,14 @@ const defaults = {
   configurationPath: path.resolve(os.homedir(), '.iforp/iforprc.json'),
   upload: {
     directory: path.resolve(os.homedir(), '.iforp/library/'),
+    maxFileSize: 5 * 1024 * 1024,
+    acceptedMimes: ['application/zip']
+  }
+};
+
+const test = {
+  upload: {
+    directory: path.resolve(os.tmpdir(), '.iforp/library/'),
     maxFileSize: 5 * 1024 * 1024,
     acceptedMimes: ['application/zip']
   }
@@ -30,5 +38,8 @@ const getUserConfiguration = () => {
 };
 
 export const getConfiguration = () => {
+  if (process.env.NODE_ENV === 'test') {
+    return test;
+  }
   return deepMerge(defaults, getUserConfiguration());
 };

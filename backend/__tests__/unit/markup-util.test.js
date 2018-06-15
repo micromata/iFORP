@@ -1,25 +1,14 @@
-import * as MarkupUtil from '../../src/markup-util';
+import * as MarkupUtil from '../../src/utils/markup';
 import { readFileSync } from 'fs';
 import { resolve as resolvePath } from 'path';
-import { createTestDatabaseConnection } from '../util/setup';
 
 describe('MarkupUtil', () => {
-  let connection;
-  beforeAll(async () => {
-    connection = createTestDatabaseConnection();
-    await connection.connect();
-  });
-
-  afterAll(() => {
-    connection.close();
-  });
-
   describe('extractScriptAssets', async () => {
     it('should return all script assets defined in an HTML document', async () => {
       const markup = readFileSync(
         resolvePath(__dirname, '../dummy-page.html')
       ).toString();
-      const scriptAssets = await MarkupUtil.extractScriptAssets(markup, '');
+      const scriptAssets = MarkupUtil.extractScriptAssets(markup, '');
       expect(scriptAssets.length).toEqual(2);
       expect(scriptAssets.filter(asset => asset.isInline).length).toEqual(1);
     });
@@ -29,7 +18,7 @@ describe('MarkupUtil', () => {
       const markup = readFileSync(
         resolvePath(__dirname, '../dummy-page.html')
       ).toString();
-      const styleAssets = await MarkupUtil.extractStyleAssets(markup, '');
+      const styleAssets = MarkupUtil.extractStyleAssets(markup, '');
       expect(styleAssets.length).toEqual(2);
       expect(styleAssets.filter(asset => asset.isInline).length).toEqual(1);
     });

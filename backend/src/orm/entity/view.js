@@ -10,7 +10,6 @@ import {
 } from 'typeorm';
 import { Asset } from './asset';
 import { InteractionElement } from './interaction-element';
-import { htmlElementAttributeTransformer } from '../../lib/utils';
 
 @Entity()
 export class View {
@@ -28,7 +27,19 @@ export class View {
 
   @Column('text', {
     nullable: true,
-    transformer: htmlElementAttributeTransformer()
+    transformer: {
+      to(value = {}) {
+        return Object.keys(value)
+          .reduce((acc, cur) => [...acc, `${cur}=${value[cur]}`], [])
+          .join(';');
+      },
+      from(value = '') {
+        return value.split(';').reduce((acc, cur) => {
+          const [key, val] = cur.split('=');
+          return { ...acc, [key]: val };
+        }, {});
+      }
+    }
   })
   htmlElementAttributes = undefined;
 

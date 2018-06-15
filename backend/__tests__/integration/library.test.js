@@ -1,6 +1,8 @@
 import path from 'path';
-import { createTestDatabaseConnection } from '../util/setup';
-import { get, post } from '../util/request';
+import { createTestDatabaseConnection } from '../setup';
+import { get, post } from '../request';
+import { rmdir } from '../../src/utils/fs';
+import { getConfiguration } from '../../src/get-configuration';
 
 describe('/library', () => {
   let connection;
@@ -9,8 +11,9 @@ describe('/library', () => {
     await connection.connect();
   });
 
-  afterAll(() => {
-    connection.close();
+  afterAll(async () => {
+    await rmdir(getConfiguration().upload.directory);
+    await connection.close();
   });
 
   describe('/upload', () => {
@@ -20,6 +23,12 @@ describe('/library', () => {
           .attach('file', path.resolve(__dirname, '../dummy-project.zip'))
           .expect(200);
       });
+      it('should return HTTP 400 if no file was attached', () => {
+        return post('/library/upload').expect(400);
+      });
+      it('should return HTTP 413 for files exceeding max file size', () => {
+        // TODO
+      });
     });
   });
 
@@ -27,7 +36,7 @@ describe('/library', () => {
     describe('GET', () => {
       it('should return a list of uploaded files', async () => {
         const res = await get('/library/files').expect(200);
-        expect(res.length > 0);
+        expect(res.body.length > 0);
       });
     });
     describe('/files/:id', () => {

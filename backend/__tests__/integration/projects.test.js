@@ -1,16 +1,16 @@
-import { del, get, patch, post } from "../util/request";
-import { createTestDatabaseConnection } from "../util/setup";
+import { del, get, patch, post } from '../request';
+import { createTestDatabaseConnection } from '../setup';
 
 async function createAndGetTestProject(testProjectName) {
-  const res = await post("/projects")
+  const res = await post('/projects')
     .send({ name: testProjectName })
     .expect(200);
   return res.body;
 }
 
-describe("/projects", () => {
-  const testProjectName = "My test project";
-  const testWhiteboardName = "My test Whiteboard";
+describe('/projects', () => {
+  const testProjectName = 'My test project';
+  const testWhiteboardName = 'My test Whiteboard';
 
   let connection;
 
@@ -23,8 +23,8 @@ describe("/projects", () => {
     connection.close();
   });
 
-  describe("POST", () => {
-    it("should create and return a project", () =>
+  describe('POST', () => {
+    it('should create and return a project', () =>
       createAndGetTestProject(testProjectName).then(proj => {
         expect(proj.id).toBeGreaterThan(0);
         expect(proj.name).toEqual(testProjectName);
@@ -32,10 +32,10 @@ describe("/projects", () => {
       }));
   });
 
-  describe("GET", () => {
-    it("should return a list of projects", () =>
+  describe('GET', () => {
+    it('should return a list of projects', () =>
       createAndGetTestProject(testProjectName).then(() =>
-        get("/projects")
+        get('/projects')
           .expect(200)
           .then(res => {
             expect(res.body.length).toBeGreaterThan(0);
@@ -44,9 +44,9 @@ describe("/projects", () => {
       ));
   });
 
-  describe("/:projectId", () => {
-    describe("GET", () => {
-      it("should return a project with the given ID", () =>
+  describe('/:projectId', () => {
+    describe('GET', () => {
+      it('should return a project with the given ID', () =>
         createAndGetTestProject(testProjectName).then(savedProject => {
           return get(`/projects/${savedProject.id}`)
             .expect(200)
@@ -56,33 +56,33 @@ describe("/projects", () => {
         }));
     });
 
-    describe("PATCH", () => {
-      it("should update a project by id", () =>
+    describe('PATCH', () => {
+      it('should update a project by id', () =>
         createAndGetTestProject(testProjectName).then(savedProject => {
           return patch(`/projects/${savedProject.id}`)
-            .send({ name: "Replaced" })
+            .send({ name: 'Replaced' })
             .expect(200)
             .then(patchRes => {
-              expect(patchRes.body.name).toEqual("Replaced");
+              expect(patchRes.body.name).toEqual('Replaced');
             });
         }));
     });
 
-    describe("/whiteboards", () => {
-      describe("GET", () => {
-        it("should return all whiteboards of a project", () =>
+    describe('/whiteboards', () => {
+      describe('GET', () => {
+        it('should return all whiteboards of a project', () =>
           createAndGetTestProject(testProjectName).then(testProject =>
             get(`/projects/${testProject.id}/whiteboards`)
               .expect(200)
               .then(fetchRes => {
                 expect(fetchRes.body.length).toBeGreaterThan(0);
-                expect(fetchRes.body.pop().name).toEqual("Default Whiteboard");
+                expect(fetchRes.body.pop().name).toEqual('Default Whiteboard');
               })
           ));
       });
 
-      describe("POST", () => {
-        it("should add a whiteboard to an existing project", async () => {
+      describe('POST', () => {
+        it('should add a whiteboard to an existing project', async () => {
           const testProject = await createAndGetTestProject(testProjectName);
           await post(`/projects/${testProject.id}/whiteboards`)
             .send({ name: testWhiteboardName })
@@ -99,37 +99,37 @@ describe("/projects", () => {
           ).toBeTruthy();
         });
       });
-      describe("/:whiteboardId", function() {
-        describe("DELETE", function() {
-          it("should delete whiteboards by ID", async function() {
+      describe('/:whiteboardId', () => {
+        describe('DELETE', () => {
+          it('should delete whiteboards by ID', async () => {
             const testProject = await createAndGetTestProject(
-              "DeleteWhiteboardTest"
+              'DeleteWhiteboardTest'
             );
             const whiteboards = (await get(
-              "/projects/" + testProject.id + "/whiteboards"
+              '/projects/' + testProject.id + '/whiteboards'
             ).expect(200)).body;
             const whiteboard = whiteboards.pop();
-            return await del(
+            return del(
               `/projects/${testProject.id}/whiteboards/${whiteboard.id}`
             ).expect(200);
           });
         });
-        describe("PATCH", function() {
-          it("should update whiteboards", async () => {
+        describe('PATCH', () => {
+          it('should update whiteboards', async () => {
             const testProject = await createAndGetTestProject(
-              "UpdateWhiteboardTest"
+              'UpdateWhiteboardTest'
             );
             const whiteboard = testProject.whiteboards.pop();
             const patched = (await patch(
               `/projects/${testProject.id}/whiteboards/${whiteboard.id}`
             )
-              .send({ name: "testset" })
+              .send({ name: 'testset' })
               .expect(200)).body;
-            expect(patched.name).toEqual("testset");
+            expect(patched.name).toEqual('testset');
           });
         });
         // TODO implement
-        /*describe("/views", function() {});*/
+        /* describe("/views", function() {}); */
       });
     });
   });
