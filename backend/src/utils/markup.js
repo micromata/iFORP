@@ -76,12 +76,12 @@ export function processHtmlFile(file, extractionBasePath) {
     .split('/')
     .filter(Boolean)
     .pop();
-  const body = extractDocumentBody(fileContents);
-  const head = extractDocumentHead(fileContents);
   const assets = [
     ...extractStyleAssets(fileContents, fileBaseFolder),
     ...extractScriptAssets(fileContents, fileBaseFolder)
   ];
+  const body = extractDocumentBody(fileContents);
+  const head = extractDocumentHead(fileContents);
   const htmlElementAttributes = extractHtmlElementAttributes(fileContents);
   return {
     name,
