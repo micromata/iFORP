@@ -38,7 +38,7 @@
     "pretty": "prettier --write \"./src/**/*.{js?(x)}\"",
     "database:dummyData": "npm run delete:database && echo 'Database deleted' && node -r babel-register src/orm/dummy-data",
     "delete": "npm run delete:database && npm run delete:library",
-    "delete:database": "del '~/.iforp/database.sqlite'",
+    "delete:database": "del -f ~/.iforp/database.sqlite",
     "delete:library": "del -f ~/.iforp/library/"
   },
   "dependencies": {
