@@ -23,6 +23,11 @@ describe('/library', () => {
           .attach('file', path.resolve(__dirname, '../dummy-project.zip'))
           .expect(200);
       });
+      it('should handle dupes', () => {
+        return post('/library/upload')
+          .attach('file', path.resolve(__dirname, '../dummy-project.zip'))
+          .expect(200);
+      });
       it('should return HTTP 400 if no file was attached', () => {
         return post('/library/upload').expect(400);
       });

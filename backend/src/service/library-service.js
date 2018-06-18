@@ -1,5 +1,6 @@
 import path from 'path';
 import yauzl from 'yauzl-promise';
+import fs from 'fs-extra';
 import { getRepository } from 'typeorm';
 import { getLogger } from '../lib/get-logger';
 import { extractZip, removeFileExtension } from '../utils/fs';
@@ -19,6 +20,17 @@ const logger = getLogger('library');
 
 const { upload: uploadOptions } = getConfiguration();
 
+function getExtractionBasePath(baseDir, directoryName, ranTimes = 0) {
+  const extractionPath = path.resolve(
+    baseDir,
+    ranTimes ? directoryName + '-' + ranTimes : directoryName
+  );
+  if (fs.existsSync(extractionPath)) {
+    return getExtractionBasePath(baseDir, directoryName, ranTimes + 1);
+  }
+  return extractionPath;
+}
+
 // Service methods
 export const uploadZip = async (file, userDefinedDirName = '') => {
   ensureValue(file);
@@ -29,10 +41,11 @@ export const uploadZip = async (file, userDefinedDirName = '') => {
 
   const fileNameWithoutExtension = removeFileExtension(file.originalname);
   const directoryName = userDefinedDirName.trim() || fileNameWithoutExtension;
-  const extractionBasePath = path.resolve(
+  const extractionBasePath = getExtractionBasePath(
     uploadOptions.directory,
     directoryName
   );
+
   const extractedFiles = await extractZip(
     await yauzl.fromBuffer(file.buffer),
     extractionBasePath
