@@ -62,6 +62,13 @@ export const uploadZip = async (file, userDefinedDirName = '') => {
     );
   });
 
+  if (htmlFiles.length < 1) {
+    throw exceptionWithHttpStatus(
+      'You need to upload a Zip file containing HTML files',
+      422 // unprocessable entity
+    );
+  }
+
   const directory = new Directory();
   directory.name = directoryName;
   directory.pages = htmlFiles.map(file =>
