@@ -14,14 +14,14 @@ const handleRequest = getRequestHandler(getLogger('projects'));
 projects.get(
   '/',
   handleRequest(async (_, res) => {
-    res.send(await projectService.find());
+    return res.send(await projectService.find());
   })
 );
 
 projects.post(
   '/',
   handleRequest(async (req, res) => {
-    res.send(await projectService.save(req.body));
+    return res.send(await projectService.save(req.body));
   })
 );
 
@@ -29,28 +29,30 @@ projects.get(
   '/:projectId',
   handleRequest(async (req, res) => {
     const project = await projectService.findById(req.params.projectId);
-    res.send(project);
+    return res.send(project);
   })
 );
 
 projects.patch(
   '/:projectId',
   handleRequest(async (req, res) => {
-    res.send(await projectService.update(req.params.projectId, req.body));
+    return res.send(
+      await projectService.update(req.params.projectId, req.body)
+    );
   })
 );
 
 projects.get(
   '/:projectId/whiteboards',
   handleRequest(async (req, res) => {
-    res.send(await whiteboardService.find(req.params.projectId));
+    return res.send(await whiteboardService.find(req.params.projectId));
   })
 );
 
 projects.post(
   '/:projectId/whiteboards',
   handleRequest(async (req, res) => {
-    res.send(await whiteboardService.save(req.params.projectId));
+    return res.send(await whiteboardService.save(req.params.projectId));
   })
 );
 
@@ -58,42 +60,46 @@ projects.delete(
   '/:projectId/whiteboards/:whiteboardId',
   handleRequest(async (req, res) => {
     await whiteboardService.remove(req.params.whiteboardId);
-    res.send();
+    return res.send();
   })
 );
 
 projects.patch(
   '/:projectId/whiteboards/:whiteboardId',
   handleRequest(async (req, res) => {
-    res.send(await whiteboardService.update(req.params.whiteboardId, req.body));
+    return res.send(
+      await whiteboardService.update(req.params.whiteboardId, req.body)
+    );
   })
 );
 
 projects.get(
   '/:projectId/whiteboards/:whiteboardId/views',
   handleRequest(async (req, res) => {
-    res.send(await viewService.getByWhiteboardId(req.params.whiteboardId));
+    return res.send(
+      await viewService.getByWhiteboardId(req.params.whiteboardId)
+    );
   })
 );
 
 projects.post(
   '/:projectId/whiteboards/:whiteboardId/views',
   handleRequest(async (req, res) => {
-    res.send(await viewService.save(req.params.whiteboardId, req.body));
+    return res.send(await viewService.save(req.params.whiteboardId, req.body));
   })
 );
 
 projects.get(
   '/:projectId/whiteboards/:whiteboardId/views/:viewId',
   handleRequest(async (req, res) => {
-    res.send(await viewService.findById(req.params.viewId));
+    return res.send(await viewService.findById(req.params.viewId));
   })
 );
 
 projects.delete(
   '/:projectId/whiteboards/:whiteboardId/views/:viewId',
   handleRequest(async (req, res) => {
-    res.send(await viewService.remove(req.params.viewId));
+    return res.send(await viewService.remove(req.params.viewId));
   })
 );
 
@@ -107,14 +113,14 @@ projects.patch(
       ...orig,
       ...patch
     };
-    res.send(await viewRepo.save(patched));
+    return res.send(await viewRepo.save(patched));
   })
 );
 
 projects.put(
   '/:projectId/whiteboards/:whiteboardId/views/:viewId',
   handleRequest(async (req, res) => {
-    res.send(await viewService.replace(req.params.viewId, req.body));
+    return res.send(await viewService.replace(req.params.viewId, req.body));
   })
 );
 

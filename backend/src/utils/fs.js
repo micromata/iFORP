@@ -61,3 +61,11 @@ export const extractZip = async (archive, basePath) => {
   }
   return processedFiles;
 };
+
+export const getFileExtension = (fileName = '') =>
+  fileName
+    .split('.')
+    .pop()
+    .trim();
+
+export const getPathSegments = path => path.split('/').filter(Boolean);

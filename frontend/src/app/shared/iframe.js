@@ -19,6 +19,10 @@ export class Iframe extends React.Component {
       doctype,
       this.iframeDocument.querySelector('html')
     );
+
+    this.iframeDocument.addEventListener('DOMNodeInserted', event => {
+      console.log(event);
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -30,14 +34,13 @@ export class Iframe extends React.Component {
   injectIframeContent() {
     // Apply attributes to HTML element
     const htmlElement = this.iframeDocument.querySelector('html');
-    Object.keys(this.props.htmlElementAttributes)
-      .filter(k => this.props.htmlElementAttributes.hasOwnProperty(k))
-      .forEach(attrName => {
+    Object.keys(this.props.htmlElementAttributes).forEach(attrName => {
+      if (this.props.htmlElementAttributes[attrName])
         htmlElement.setAttribute(
           attrName,
           this.props.htmlElementAttributes[attrName]
         );
-      });
+    });
 
     // Fill head element
     this.iframeDocument.head.innerHTML = this.props.head;
@@ -57,7 +60,8 @@ export class Iframe extends React.Component {
         );
       }
     });
-
+    const webpackPubPath = this.iframeDocument.createElement('script');
+    this.iframeDocument.body.appendChild(webpackPubPath);
     // Insert Script to highjack interaction elements
     const pageChanger = this.iframeDocument.createElement('script');
     pageChanger.src = '/assets/page-changer/view.content.page-changer.js';
@@ -75,7 +79,7 @@ export class Iframe extends React.Component {
       styleElement.appendChild(iframe.createTextNode(asset.contents));
     } else {
       styleElement.rel = 'stylesheet';
-      styleElement.href = 'http://localhost:3000/library/asset/' + asset.id;
+      styleElement.href = 'http://localhost:3000/library/' + asset.location;
     }
 
     return styleElement;
@@ -87,7 +91,7 @@ export class Iframe extends React.Component {
     if (asset.location === null) {
       scriptElement.appendChild(iframe.createTextNode(asset.contents));
     } else {
-      scriptElement.src = 'http://localhost:3000/library/asset/' + asset.id;
+      scriptElement.src = 'http://localhost:3000/library/' + asset.location;
       scriptElement.async = false;
     }
 
@@ -110,7 +114,7 @@ export class Iframe extends React.Component {
 }
 
 Iframe.propTypes = {
-  htmlElementAttributes: PropTypes.array,
+  htmlElementAttributes: PropTypes.object,
   head: PropTypes.string,
   body: PropTypes.string,
   assets: PropTypes.array,

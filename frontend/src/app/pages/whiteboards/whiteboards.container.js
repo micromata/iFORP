@@ -2,7 +2,6 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 
 import { http } from '../../base/http';
-import { FormatJson } from '../../shared/format-json'; // eslint-disable-line no-unused-vars
 import { Header } from './whiteboards.header';
 import { Views } from './whiteboards.views';
 
@@ -128,10 +127,10 @@ export class Whiteboards extends React.Component {
 
   async componentDidMount() {
     // Get project ID from path parameters
-    const projectId = this.props.match.params.projectId;
+    const { projectId } = this.props.match.params;
 
     const project = await http.get(`projects/${projectId}`);
-    const whiteboards = project.whiteboards;
+    const { whiteboards } = project;
 
     /**
      * Need to get the whiteboard from the response in case a project is opened via
@@ -154,9 +153,7 @@ export class Whiteboards extends React.Component {
   }
 
   async componentWillReceiveProps(nextProps) {
-    const project = this.state.project;
-    const whiteboards = this.state.whiteboards;
-
+    const { project, whiteboards } = this.state;
     /**
      * Get whiteboard ID from React routers location state.
      *
@@ -169,13 +166,12 @@ export class Whiteboards extends React.Component {
       whiteboard => whiteboard.id === Number(whiteboardId)
     )[0];
     const views = await this.getViews(project.id, currentWhiteboard.id);
-
-    this.setState({
+    return {
       project,
       whiteboards,
       currentWhiteboard,
       views
-    });
+    };
   }
 
   render() {

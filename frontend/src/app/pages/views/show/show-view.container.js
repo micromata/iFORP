@@ -12,7 +12,7 @@ export class ShowView extends React.Component {
     view: {
       id: null,
       name: '',
-      htmlElementAttributes: [],
+      htmlElementAttributes: {},
       head: '',
       body: '',
       assets: []
@@ -49,7 +49,7 @@ export class ShowView extends React.Component {
           <div className="col-12">
             <Iframe
               htmlElementAttributes={
-                this.state.view.htmlElementAttributes || []
+                this.state.view.htmlElementAttributes || {}
               }
               head={this.state.view.head}
               body={this.state.view.body}

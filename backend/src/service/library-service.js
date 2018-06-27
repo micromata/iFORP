@@ -3,9 +3,14 @@ import yauzl from 'yauzl-promise';
 import fs from 'fs-extra';
 import { getRepository } from 'typeorm';
 import { getLogger } from '../lib/get-logger';
-import { extractZip, removeFileExtension } from '../utils/fs';
+import {
+  extractZip,
+  getFileExtension,
+  getPathSegments,
+  removeFileExtension,
+  rmdir
+} from '../utils/fs';
 import { processHtmlFile } from '../utils/markup';
-import { Asset } from '../orm/entity/asset';
 import { Directory } from '../orm/entity/directory';
 import { Page } from '../orm/entity/page';
 import { getConfiguration } from '../get-configuration';
@@ -39,8 +44,8 @@ export const uploadZip = async (file, userDefinedDirName = '') => {
 
   logger.info(`Processing "${file.originalname}"`);
 
-  const fileNameWithoutExtension = removeFileExtension(file.originalname);
-  const directoryName = userDefinedDirName.trim() || fileNameWithoutExtension;
+  const directoryName =
+    userDefinedDirName.trim() || removeFileExtension(file.originalname);
   const extractionBasePath = getExtractionBasePath(
     uploadOptions.directory,
     directoryName
@@ -54,15 +59,12 @@ export const uploadZip = async (file, userDefinedDirName = '') => {
   logger.info('Done with Unzipping.');
 
   const htmlFiles = extractedFiles.filter(fileName => {
-    return (
-      (fileName || '')
-        .split('.')
-        .pop()
-        .trim() === 'html'
-    );
+    const fileExtension = getFileExtension(fileName);
+    return fileExtension === 'html' || fileExtension === 'htm';
   });
 
   if (htmlFiles.length < 1) {
+    await rmdir(extractionBasePath);
     throw exceptionWithHttpStatus(
       'You need to upload a Zip file containing HTML files',
       422 // unprocessable entity
@@ -70,9 +72,9 @@ export const uploadZip = async (file, userDefinedDirName = '') => {
   }
 
   const directory = new Directory();
-  directory.name = directoryName;
+  directory.name = getPathSegments(extractionBasePath).pop();
   directory.pages = htmlFiles.map(file =>
-    processHtmlFile(file, extractionBasePath)
+    processHtmlFile(file, uploadOptions.directory, extractionBasePath)
   );
 
   const saved = await getRepository(Directory).save(directory);
@@ -99,11 +101,14 @@ export const getPage = async pageId => {
   return page;
 };
 
-// return raw asset
-export const getAsset = async assetId => {
-  const repository = getRepository(Asset);
-  const asset = await repository.findOne(assetId);
-  if (!asset)
-    throw exceptionWithHttpStatus(`Asset with ID ${assetId} not found.`, 404);
-  return asset;
+export const getProjectFile = async fileAbsPath => {
+  const file = path.join(uploadOptions.directory, fileAbsPath);
+  const mask = path.join(uploadOptions.directory);
+  const rel = path.relative(mask, file);
+  if (rel.indexOf('../') !== -1)
+    throw exceptionWithHttpStatus(`You aren't evil, aren't you?`, 400);
+  if (!(await fs.exists(file))) {
+    throw exceptionWithHttpStatus('File not found!', 404);
+  }
+  return file;
 };

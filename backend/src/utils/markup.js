@@ -3,22 +3,22 @@ import path from 'path';
 import { Asset } from '../orm/entity/asset';
 import fs from 'fs-extra';
 
-export function extractScriptAssets(markup, fileBaseFolder) {
-  const $ = cheerio.load(markup, fileBaseFolder);
+export function extractScriptAssets(markup, relPath) {
+  const $ = cheerio.load(markup);
   const scripts = $('script');
   return scripts.toArray().map(el => {
-    const asset = mapElementToAsset(el, fileBaseFolder);
+    const asset = mapElementToAsset(el, relPath);
     asset.type = 'js';
     return asset;
   });
 }
 
-export function extractStyleAssets(markup, fileBaseFolder) {
+export function extractStyleAssets(markup, relPath) {
   const $ = cheerio.load(markup);
   const inlineStyles = $('style');
   const linkedStyles = $('link[rel="stylesheet"]');
   return [...inlineStyles.toArray(), ...linkedStyles.toArray()].map(el => {
-    const asset = mapElementToAsset(el, fileBaseFolder);
+    const asset = mapElementToAsset(el, relPath);
     asset.type = 'css';
     return asset;
   });
@@ -51,34 +51,39 @@ export function extractDocumentBody(markup) {
     .trim();
 }
 
-function mapElementToAsset(el, fileBaseFolder) {
+function mapElementToAsset(el, relPath) {
   const asset = new Asset();
   const styleSrc = el.attribs.src || el.attribs.href;
   if (styleSrc) {
-    asset.location = path.join(fileBaseFolder, styleSrc);
+    asset.location = path.join(relPath, styleSrc);
   } else {
     asset.contents = el.firstChild.nodeValue.trim();
   }
   return asset;
 }
 
-export function processHtmlFile(file, extractionBasePath) {
+export function processHtmlFile(file, uploadDirectory, extractionBasePath) {
   const filePath = path.resolve(extractionBasePath, file);
   const fileContents = fs.readFileSync(filePath).toString();
-  const fileBaseFolder = path.resolve(
-    '/',
-    ...filePath
-      .split('/')
-      .filter(Boolean)
-      .slice(0, -1)
-  );
   const name = filePath
     .split('/')
     .filter(Boolean)
     .pop();
   const assets = [
-    ...extractStyleAssets(fileContents, fileBaseFolder),
-    ...extractScriptAssets(fileContents, fileBaseFolder)
+    ...extractStyleAssets(
+      fileContents,
+      path.relative(
+        uploadDirectory,
+        path.join(extractionBasePath, path.dirname(file))
+      )
+    ),
+    ...extractScriptAssets(
+      fileContents,
+      path.relative(
+        uploadDirectory,
+        path.join(extractionBasePath, path.dirname(file))
+      )
+    )
   ];
   const body = extractDocumentBody(fileContents);
   const head = extractDocumentHead(fileContents);

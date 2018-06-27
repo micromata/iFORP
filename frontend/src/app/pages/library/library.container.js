@@ -17,7 +17,7 @@ export class Library extends React.Component {
     selectedFile: {
       id: null,
       name: '',
-      htmlElementAttributes: [],
+      htmlElementAttributes: {},
       head: '',
       body: '',
       assets: []
@@ -66,7 +66,7 @@ export class Library extends React.Component {
         ...selectedFile,
         htmlElementAttributes:
           selectedFile.htmlElementAttributes === null
-            ? []
+            ? {}
             : selectedFile.htmlElementAttributes
       }
     });

@@ -37,6 +37,31 @@ describe('/library', () => {
     });
   });
 
+  describe('//project/.*/', () => {
+    it('should throw if one tries to do a path traversal', () => {
+      return post('/library/upload')
+        .field('directoryName', 'pathtrav')
+        .attach('file', path.resolve(__dirname, '../dummy-project.zip'))
+        .expect(200)
+        .then(() =>
+          get('/library/pathtrav/../../../../../../../../etc/passwd').expect(
+            400
+          )
+        );
+    });
+    it('should return files associated with uploaded projects', () => {
+      return post('/library/upload')
+        .field('directoryName', 'testset')
+        .attach('file', path.resolve(__dirname, '../dummy-project.zip'))
+        .expect(200)
+        .then(() =>
+          get(
+            '/library/testset/dist/app/app.4c457b2340cfeaa48b77.bundle.js'
+          ).expect(200)
+        );
+    });
+  });
+
   describe('/files', () => {
     describe('GET', () => {
       it('should return a list of uploaded files', async () => {

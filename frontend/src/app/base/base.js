@@ -47,10 +47,10 @@ export function consoleErrorFix() {
     'trace',
     'warn'
   ];
-  let length = methods.length;
+  let methodLength = methods.length;
   const console = window.console || {};
 
-  while (length--) {
+  while (methodLength--) {
     method = methods[length];
 
     // Only stub undefined methods.
@@ -61,14 +61,8 @@ export function consoleErrorFix() {
 }
 
 /**
- * Needed to perform a dummy import until this webpack 4 error with dynamic imports is fixed:
- * https://github.com/webpack/webpack/issues/6587
- */
-import(/* webpackChunkName: "noop" */ './dummy').then(() => {});
-
-/**
  * Thanks to tree shaking this won’t land in the production build 🌳
  */
 export function testTreeshaking() {
-  window.theTreeIsShaked = 'shakedy-shake';
+  window.theTreeIsShaked = 'shakedy-shake'; // 🤝 Baum-Meister
 }

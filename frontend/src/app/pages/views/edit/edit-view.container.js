@@ -12,7 +12,7 @@ export class EditView extends React.Component {
     currentView: {
       id: null,
       name: '',
-      htmlElementAttributes: [],
+      htmlElementAttributes: {},
       head: '',
       body: '',
       interactionElements: [],
@@ -84,7 +84,7 @@ export class EditView extends React.Component {
             <div className="preview-wrapper">
               <Iframe
                 htmlElementAttributes={
-                  this.state.currentView.htmlElementAttributes || []
+                  this.state.currentView.htmlElementAttributes || {}
                 }
                 head={this.state.currentView.head}
                 body={this.state.currentView.body}
