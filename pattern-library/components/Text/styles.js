@@ -1,10 +1,13 @@
-const styles = {
+const styles = theme => ({
   text: {
-    fontFamily: 'verdana',
-    fontSize: '18px',
-    color: '#FFFFFF',
-    '-webkit-font-smoothing': 'antialiased'
+    fontFamily: 'Verdana',
+    color: theme.primaryText,
+    fontSize: props => props.fontSize || '14px',
+    letterSpacing: 0,
+    textAlign: 'left',
+    marginBottom: props => props.marginBottom || '',
+    marginLeft: props => props.marginLeft || ''
   }
-};
+});
 
 export default styles;

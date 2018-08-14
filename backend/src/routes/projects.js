@@ -6,10 +6,13 @@ import * as whiteboardService from '../service/whiteboard-service';
 import * as viewService from '../service/view-service';
 import { getLogger } from '../lib/get-logger';
 import { getRequestHandler } from '../utils/request';
+import { ensureAuthentication } from '../utils/middleware';
 
 const projects = Router();
 
 const handleRequest = getRequestHandler(getLogger('projects'));
+
+projects.use(ensureAuthentication);
 
 projects.get(
   '/',

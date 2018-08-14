@@ -8,8 +8,7 @@ export async function dummyFileUpload(fakeUploadedDirName) {
   const jsFile = path.join(newDirectoryName, 'app/app.bundle.js');
 
   return new Promise((resolve, reject) => {
-    fs
-      .mkdirp(newDirectoryName)
+    fs.mkdirp(newDirectoryName)
       .then(() => fs.createFile(cssFile))
       .then(() => fs.writeFile(cssFile, 'body { background: pink; }', 'utf8'))
       .then(() => fs.createFile(jsFile))

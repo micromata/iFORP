@@ -11,13 +11,17 @@ import { Asset } from './asset';
 
 @Entity()
 export class Page {
-  @PrimaryGeneratedColumn() id = undefined;
+  @PrimaryGeneratedColumn()
+  id = undefined;
 
-  @Column('text') name = undefined;
+  @Column('text')
+  name = undefined;
 
-  @Column('text') head = undefined;
+  @Column('text')
+  head = undefined;
 
-  @Column('text') body = undefined;
+  @Column('text')
+  body = undefined;
 
   @Column('text', {
     nullable: true,

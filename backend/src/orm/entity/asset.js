@@ -2,9 +2,11 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Asset {
-  @PrimaryGeneratedColumn() id = undefined;
+  @PrimaryGeneratedColumn()
+  id = undefined;
 
-  @Column('text') type = undefined;
+  @Column('text')
+  type = undefined;
 
   @Column('text', { nullable: true })
   contents = undefined;

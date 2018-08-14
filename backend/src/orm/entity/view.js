@@ -13,11 +13,14 @@ import { InteractionElement } from './interaction-element';
 
 @Entity()
 export class View {
-  @PrimaryGeneratedColumn() id = undefined;
+  @PrimaryGeneratedColumn()
+  id = undefined;
 
-  @Column('text') name = undefined;
+  @Column('text')
+  name = undefined;
 
-  @Column('boolean') hasFile = undefined;
+  @Column('boolean')
+  hasFile = undefined;
 
   @Column('text', { nullable: true })
   head = undefined;

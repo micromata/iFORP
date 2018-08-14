@@ -18,7 +18,7 @@ export const find = async projectId => {
 };
 
 export const save = async projectId => {
-  const supportWord = superb();
+  const supportWord = superb.random();
   const projectRepo = getRepository(Project);
   const whiteboardRepo = getRepository(Whiteboard);
   const project = await projectRepo.findOne(projectId);

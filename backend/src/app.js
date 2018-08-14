@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import bodyParser from 'body-parser';
+import authEndpoint from './routes/auth';
 import libraryEndpoint from './routes/library';
 import projectsEndpoint from './routes/projects';
 
@@ -13,6 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/library', libraryEndpoint);
 app.use('/projects', projectsEndpoint);
+app.use('/auth', authEndpoint);
 
 // TODO Serve built frontend
 app.use(express.static(path.join(__dirname, '/public')));

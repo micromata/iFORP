@@ -1,11 +1,23 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn
+} from 'typeorm';
 import { Whiteboard } from './whiteboard';
+import { User } from './user';
 
 @Entity()
 export class Project {
-  @PrimaryGeneratedColumn() id = undefined;
+  @PrimaryGeneratedColumn()
+  id = undefined;
 
-  @Column('text') name = undefined;
+  @Column('text')
+  name = undefined;
+
+  @ManyToOne(() => User)
+  owner = undefined;
 
   @OneToMany(() => Whiteboard, whiteboard => whiteboard.project, {
     cascade: true,

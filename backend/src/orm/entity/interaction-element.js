@@ -3,7 +3,8 @@ import { View } from './view';
 
 @Entity()
 export class InteractionElement {
-  @PrimaryGeneratedColumn() id = undefined;
+  @PrimaryGeneratedColumn()
+  id = undefined;
 
   @ManyToOne(() => View)
   view = undefined;

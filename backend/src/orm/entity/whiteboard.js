@@ -10,9 +10,11 @@ import { View } from './view';
 
 @Entity()
 export class Whiteboard {
-  @PrimaryGeneratedColumn() id = undefined;
+  @PrimaryGeneratedColumn()
+  id = undefined;
 
-  @Column('text') name = undefined;
+  @Column('text')
+  name = undefined;
 
   @OneToMany(() => View, view => view.whiteboard, {
     cascade: true

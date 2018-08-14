@@ -6,6 +6,8 @@
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "devDependencies": {
+    "@storybook/addon-knobs": "3.4.8",
+    "@storybook/addons": "3.4.8",
     "@storybook/react": "3.4.8",
     "babel-core": "6.26.3"
   },
@@ -13,6 +15,10 @@
     "normalize.css": "8.0.0",
     "react": "16.4.1",
     "react-dom": "16.4.1",
-    "react-jss": "8.6.0"
+    "react-jss": "8.6.0",
+    "jss-nested": "6.0.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.0-14",
+    "@fortawesome/free-solid-svg-icons": "^5.1.0-11",
+    "@fortawesome/react-fontawesome": "0.1.0-11"
   }
 }

@@ -4,11 +4,14 @@ import { getLogger } from '../lib/get-logger';
 import { getRequestHandler } from '../utils/request';
 
 import * as libraryService from '../service/library-service';
+import { ensureAuthentication } from '../utils/middleware';
 
 const library = Router(); // eslint-disable-line new-cap
 const upload = multer({ storage: multer.memoryStorage() });
 const logger = getLogger('library');
 const handleRequest = getRequestHandler(logger);
+
+library.use(ensureAuthentication);
 
 library.get(
   '/files',
