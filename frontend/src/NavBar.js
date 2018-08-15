@@ -22,19 +22,29 @@ const styles = theme => ({
 
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'space-between',
   },
   NavItem: {
     display: 'flex',
     flexBasis: '30%',
+    padding: '0 10px',
+    justifyContent: 'center',
     // ARGH y u no work
-    '& .nav-center': {
-      alignItems: 'center'
+    // Cuz u left a whitespace
+    '&.nav-center': {
+      color: 'green',
     },
-    '& .nav-right': {
-      alignItems: 'flex-end'
-    }
+    '&.nav-right': {
+      color: 'blue',
+    },
+    // Last child works, too! Now we rollin'!!!
+    '&:first-child': {
+      justifyContent: "flex-start",
+    },
+    '&:last-child': {
+      justifyContent: "flex-end",
+    },
   }
 });
 
