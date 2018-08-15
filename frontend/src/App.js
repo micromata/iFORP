@@ -1,24 +1,20 @@
 import injectSheet from 'react-jss';
 import React, { Component } from 'react';
 import NavBar from './NavBar';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Login } from './pages/login/Login';
 
 const style = () => ({
-  '@global': {
-    body: {
-      margin: 0
-    }
-  },
   button: {
     minHeight: '20px',
     minWidth: '100px',
-    background: 'transparent',
     border: '1px solid black',
     borderRadius: '5px'
   }
 });
 
-const Button = ({ classes, type = 'button', children }) => (
-  <button type={type} className={classes.button}>
+const Button = ({ classes, type = 'button', children, click }) => (
+  <button type={type} onClick={click} className={classes.button}>
     {children}
   </button>
 );
@@ -29,14 +25,13 @@ class App extends Component {
   render() {
     return (
       <div className={'App'}>
-        <NavBar />
-        <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get <StyledButton>Started</StyledButton>, edit{' '}
-          <code>src/App.js</code> and save to reload.
-        </p>
+        <Router>
+          <React.Fragment>
+            <NavBar />
+            <Route exact path="/" component={StyledButton} />
+            <Route path="/login" component={Login} />
+          </React.Fragment>
+        </Router>
       </div>
     );
   }

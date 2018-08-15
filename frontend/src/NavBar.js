@@ -1,12 +1,15 @@
 import React from 'react';
 import injectSheet from 'react-jss';
+import { Link } from 'react-router-dom';
 
 export const NavBar = ({ classes }) => (
   <div className={classes.NavBar + ' nav-bar'}>
     <div className={classes.NavItem + ' nav-left'}>
-      <a href="/">Back</a>
+      <Link to="/">Back</Link>
     </div>
-    <div className={classes.NavItem + ' nav-center'}>Blubber</div>
+    <Link className={classes.NavItem + ' nav-center'} to="/login">
+      Login (vorläufig)
+    </Link>
     <div className={classes.NavItem + ' nav-right'}>Dropdown</div>
   </div>
 );
@@ -27,22 +30,19 @@ const styles = theme => ({
     flexBasis: '30%',
     padding: '0 10px',
     justifyContent: 'center',
-    // ARGH y u no work
-    // Cuz u left a whitespace
-    '&.nav-center': {
-      color: 'green',
+    color: 'white',
+    textDecoration: 'none',
+    '& a': {
+      textDecoration: 'none',
+      color: 'white',
     },
-    '&.nav-right': {
-      color: 'blue',
-    },
-    // Last child works, too! Now we rollin'!!!
     '&:first-child': {
-      justifyContent: "flex-start",
+      justifyContent: 'flex-start',
     },
     '&:last-child': {
-      justifyContent: "flex-end",
+      justifyContent: 'flex-end',
     },
-  }
+  },
 });
 
 export default injectSheet(styles)(NavBar);
