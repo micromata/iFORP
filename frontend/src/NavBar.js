@@ -15,9 +15,6 @@ const styles = theme => ({
   NavBar: {
     backgroundColor: theme.NavBar.backgroundColor,
     width: '100%',
-    position: 'absolute',
-    top: 0,
-    left: 0,
     height: '53px',
 
     display: 'flex',

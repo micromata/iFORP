@@ -4,6 +4,7 @@ import { create as createJss } from 'jss';
 import { JssProvider } from 'react-jss';
 import camelCase from 'jss-camel-case'
 import nested from 'jss-nested';
+import './index.css'
 
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
