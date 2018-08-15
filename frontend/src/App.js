@@ -2,7 +2,7 @@ import injectSheet from 'react-jss';
 import React, { Component } from 'react';
 import NavBar from './NavBar';
 
-const theme = theme => ({
+const style = () => ({
   button: {
     minHeight: '20px',
     minWidth: '100px',
@@ -18,7 +18,7 @@ const Button = ({ classes, type = 'button', children }) => (
   </button>
 );
 
-const StyledButton = injectSheet(theme)(Button);
+const StyledButton = injectSheet(style)(Button);
 
 class App extends Component {
   render() {
