@@ -2,16 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { create as createJss } from 'jss';
 import { JssProvider } from 'react-jss';
-import camelCase from 'jss-camel-case'
+import camelCase from 'jss-camel-case';
 import nested from 'jss-nested';
-import './index.css'
+import global from 'jss-global';
+// import './index.css';
 
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import ThemeSwitch from './ThemeSwitch';
 
 const jss = createJss();
-jss.use(nested(), camelCase());
+jss.use(nested(), camelCase(), global());
 
 ReactDOM.render(
   <JssProvider jss={jss}>

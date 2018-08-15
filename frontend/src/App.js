@@ -3,6 +3,11 @@ import React, { Component } from 'react';
 import NavBar from './NavBar';
 
 const style = () => ({
+  '@global': {
+    body: {
+      margin: 0
+    }
+  },
   button: {
     minHeight: '20px',
     minWidth: '100px',
