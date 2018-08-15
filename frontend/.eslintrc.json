@@ -1,0 +1,25 @@
+{
+  "extends": [
+    "baumeister",
+    "prettier"
+  ],
+  "plugins": [
+    "prettier"
+  ],
+  "parser": "babel-eslint",
+  "rules": {
+    "prettier/prettier": "error",
+    "capitalized-comments": "off",
+    "new-cap": "off",
+    "no-await-in-loop": "off"
+  },
+  "overrides": [
+    {
+      "files": ["build/*.js"],
+      "rules": {
+        "no-console": "off",
+        "unicorn/no-process-exit": "off"
+      }
+    }
+  ]
+}
