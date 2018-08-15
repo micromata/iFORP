@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "react-jss": "8.6.1",
+    "jss": "9.8.7",
     "jss-camel-case": "^6.1.0",
     "jss-nested": "6.0.1"
   }
