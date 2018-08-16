@@ -13,8 +13,7 @@ export const register = async (req, res) => {
   try {
     const createdUser = await repo.save(user);
     const token = await createTokenFor(createdUser);
-    res.set('Authorization', `Bearer ${token}`);
-    return res.sendStatus(200);
+    return res.send({ token });
   } catch (error) {
     if (violatesUniqueConstraint(error)) {
       throw exceptionWithHttpStatus('E-Mail address already exists.', 409);
@@ -43,6 +42,5 @@ export const login = async (req, res) => {
   }
 
   const token = await createTokenFor(loginSubject);
-  res.set('Authorization', `Bearer ${token}`);
-  res.sendStatus(200);
+  res.send({ token });
 };

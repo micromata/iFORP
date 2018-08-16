@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
-import NavBar from './NavBar';
+import NavBar from './components/NavBar/NavBar';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Login from './pages/login/Login';
+import Login from './pages/Login/Login';
 import injectSheet from 'react-jss';
+import { dottedBackground } from './theme';
+import ProtectedRoute from './ProtectedRoute';
+import Start from './pages/Start/Start';
 
 class App extends Component {
   render() {
     return (
-      <div className={'App'}>
+      <div className={`${this.props.classes.App} App`}>
         <Router>
           <React.Fragment>
-            <NavBar />
-            <Route exact path="/" />
+            <ProtectedRoute exact path="/" component={Start} />
             <Route path="/login" component={Login} />
           </React.Fragment>
         </Router>
@@ -22,10 +24,26 @@ class App extends Component {
 
 const style = theme => ({
   '@global': {
+    '*,*:after,*:before': {
+      boxSizing: 'border-box',
+    },
+    'html,body,#root,.App': {
+      height: '100%',
+      width: '100%',
+    },
     body: {
       margin: 0,
       backgroundColor: theme.backgroundColor,
+      fontFamily: 'Verdana',
     },
+  },
+  App: {
+    ...dottedBackground(
+      theme.DottedBackground.backgroundColor,
+      theme.DottedBackground.dotColor,
+      '22px',
+      '2px'
+    ),
   },
 });
 

@@ -24,7 +24,7 @@ export default class extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      theme: currentTheme
+      theme: currentTheme,
     };
     this.onThemeChangeUnregister = onThemeChange(theme =>
       this.setState({ theme })
@@ -37,7 +37,9 @@ export default class extends React.Component {
 
   render() {
     return (
-      <ThemeProvider theme={themes[currentTheme]}>{this.props.children}</ThemeProvider>
+      <ThemeProvider theme={themes[currentTheme]}>
+        {this.props.children}
+      </ThemeProvider>
     );
   }
 }
