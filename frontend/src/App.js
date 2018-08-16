@@ -1,25 +1,9 @@
-import injectSheet from 'react-jss';
 import React, { Component } from 'react';
 import NavBar from './NavBar';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Login } from './pages/login/Login';
-
-const style = () => ({
-  button: {
-    minHeight: '20px',
-    minWidth: '100px',
-    border: '1px solid black',
-    borderRadius: '5px'
-  }
-});
-
-const Button = ({ classes, type = 'button', children, click }) => (
-  <button type={type} onClick={click} className={classes.button}>
-    {children}
-  </button>
-);
-
-const StyledButton = injectSheet(style)(Button);
+import Login from './pages/login/Login';
+import Footer from './Footer';
+import injectSheet from 'react-jss';
 
 class App extends Component {
   render() {
@@ -28,14 +12,23 @@ class App extends Component {
         <Router>
           <React.Fragment>
             <NavBar />
-            <Route exact path="/" component={StyledButton} />
+            <Route exact path="/" />
             <Route path="/login" component={Login} />
+            <Footer />
           </React.Fragment>
         </Router>
       </div>
     );
   }
 }
-export default injectSheet(theme => ({
-  App: { backgroundColor: theme.backgroundColor }
-}))(App);
+
+const style = theme => ({
+  '@global': {
+    body: {
+      margin: 0,
+      backgroundColor: theme.backgroundColor,
+    },
+  },
+});
+
+export default injectSheet(style)(App);

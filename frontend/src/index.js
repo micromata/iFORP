@@ -4,7 +4,7 @@ import { create as createJss } from 'jss';
 import { JssProvider } from 'react-jss';
 import camelCase from 'jss-camel-case';
 import nested from 'jss-nested';
-import global from 'jss-global';
+import globals from 'jss-global';
 // import './index.css';
 
 import App from './App';
@@ -12,7 +12,7 @@ import registerServiceWorker from './registerServiceWorker';
 import ThemeSwitch from './ThemeSwitch';
 
 const jss = createJss();
-jss.use(nested(), camelCase(), global());
+jss.use(nested(), camelCase(), globals());
 
 ReactDOM.render(
   <JssProvider jss={jss}>
