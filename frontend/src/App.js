@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Login from './pages/login/Login';
+import Login from './pages/Login/Login';
 import injectSheet from 'react-jss';
 import { dottedBackground } from './theme';
 import ProtectedRoute from './ProtectedRoute';
