@@ -19,6 +19,12 @@ const Login = ({ classes }) => (
         </div>
         <div className="login-container">
           <form action="" className="login-form">
+            <div className="toggle">
+              <label htmlFor="sign">Sign In</label>
+              <input type="checkbox" className="toggle-checkbox" name="sign" id="sign" />
+              <label htmlFor="sign" className="toggle-button" />
+              <label htmlFor="sign">Sign Up</label>
+            </div>
           </form>
         </div>
       </div>

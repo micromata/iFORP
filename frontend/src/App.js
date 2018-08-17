@@ -26,6 +26,37 @@ const style = theme => ({
       margin: 0,
       backgroundColor: theme.backgroundColor,
     },
+    '.toggle': {
+      display: 'flex',
+      alignItems: 'center',
+      '& .toggle-checkbox:checked+.toggle-button::before': {
+        left: '24px',
+      },
+
+      '& .toggle-button': {
+        margin: '0 5px',
+        border: '1px solid #E0E0E0',
+        borderRadius: '25px',
+        boxShadow: 'inset rgba(0,0,0,0.5) 0 3px 3px 0',
+        position: 'relative',
+        height: '24px',
+        width: '48px',
+        '&:before': {
+          content: '""',
+          padding: '12px',
+          backgroundColor: theme.profiYellow,
+          position: 'absolute',
+          borderRadius: '15px',
+          boxShadow: 'rgba(0,0,0,0.5) 0 1px 3px 0',
+          transition: 'left 0.25s',
+          transitionTimingFunction: 'linear',
+          left: 0,
+        },
+      },
+      '& input': {
+        display: 'none',
+      },
+    },
   },
 });
 

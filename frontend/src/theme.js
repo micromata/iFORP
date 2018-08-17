@@ -1,6 +1,7 @@
 export default {
   dark: {
     backgroundColor: '#3D3D3D',
+    profiYellow: '#F9BB1F',
     NavBar: {
       backgroundColor: '#5E5E5E',
     },
