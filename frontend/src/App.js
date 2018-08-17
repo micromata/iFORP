@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
-import NavBar from './NavBar';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Login from './pages/login/Login';
 import injectSheet from 'react-jss';
+import { dottedBackground } from './theme';
+import ProtectedRoute from './ProtectedRoute';
+import Start from './pages/Start/Start';
 
 class App extends Component {
   render() {
     return (
-      <div className={'App'}>
+      <div className={`${this.props.classes.App} App`}>
         <Router>
           <React.Fragment>
-            <NavBar />
-            <Route exact path="/" />
+            <ProtectedRoute exact path="/" component={Start} />
             <Route path="/login" component={Login} />
           </React.Fragment>
         </Router>
@@ -22,25 +23,36 @@ class App extends Component {
 
 const style = theme => ({
   '@global': {
+    '*,*:after,*:before': {
+      boxSizing: 'border-box',
+    },
+    'html,body,#root,.App': {
+      height: '100%',
+      width: '100%',
+    },
     body: {
       margin: 0,
       backgroundColor: theme.backgroundColor,
+      fontFamily: 'Verdana',
     },
     '.toggle': {
       display: 'flex',
       alignItems: 'center',
+      justifyContent: 'center',
       '& .toggle-checkbox:checked+.toggle-button::before': {
         left: '24px',
       },
-
+      '& label.active': {
+        color: theme.profiYellow,
+      },
       '& .toggle-button': {
-        margin: '0 5px',
+        margin: '0 30px',
         border: '1px solid #E0E0E0',
         borderRadius: '25px',
         boxShadow: 'inset rgba(0,0,0,0.5) 0 3px 3px 0',
         position: 'relative',
-        height: '24px',
-        width: '48px',
+        height: '26px',
+        width: '50px',
         '&:before': {
           content: '""',
           padding: '12px',
@@ -57,6 +69,14 @@ const style = theme => ({
         display: 'none',
       },
     },
+  },
+  App: {
+    ...dottedBackground(
+      theme.DottedBackground.backgroundColor,
+      theme.DottedBackground.dotColor,
+      '22px',
+      '2px'
+    ),
   },
 });
 

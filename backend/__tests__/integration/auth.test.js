@@ -23,8 +23,7 @@ describe('/auth', () => {
           })
           .expect(200)
           .then(response => {
-            const authHeader = response.headers.authorization;
-            const token = authHeader.substring(7);
+            const { token } = response.body;
             const decoded = jsonwebtoken.decode(token);
             expect(decoded.emailAddress).toEqual('devnull@127.0.0.1');
           }));
@@ -61,8 +60,7 @@ describe('/auth', () => {
           })
           .expect(200)
           .then(response => {
-            const authHeader = response.header.authorization;
-            const token = authHeader.substring(7);
+            const { token } = response.body;
             const decoded = jsonwebtoken.decode(token);
             expect(decoded.emailAddress).toEqual('devnull@127.0.0.1');
           }));
