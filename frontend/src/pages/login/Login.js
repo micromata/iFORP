@@ -9,8 +9,17 @@ const Login = ({ classes }) => (
   <div className={classes.Login}>
     <main>
       <div className="grid">
-        <div className="logo">
-          <img src={Logo} alt="iForp" />
+        <div className="introducing-section">
+          <div className="introducing-container">
+            <div className="logo">
+              <img src={Logo} alt="iForp" />
+              <p>Build your own HTML-Prototyp without any coding experience.</p>
+            </div>
+          </div>
+        </div>
+        <div className="login-container">
+          <form action="" className="login-form">
+          </form>
         </div>
       </div>
     </main>
