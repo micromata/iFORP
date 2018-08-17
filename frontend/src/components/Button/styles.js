@@ -15,5 +15,10 @@ export default {
           : 0,
     minHeight: '30px',
     minWidth: props => props.minimumWidth || 0,
+    '&[disabled]':{
+      background: '#555',
+      border: 'none',
+      cursor: 'not-allowed'
+    }
   },
 };

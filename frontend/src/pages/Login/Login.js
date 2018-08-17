@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router';
 import injectSheet from 'react-jss';
 import MicromataLogo from '../../assets/img/micromata.svg';
 import BBFLogo from '../../assets/img/BBF.png';
 import iforpBrand from '../../assets/img/iforp-brand.svg';
-import styles from './styles';
 import LoginRegisterForm from '../../components/LoginRegisterForm/LoginRegisterForm';
 import * as backend from '../../backend';
-import { Redirect } from 'react-router';
+import styles from './styles';
 
 class Login extends Component {
   handleLogin = credentials =>
@@ -17,7 +17,9 @@ class Login extends Component {
       .then(token => {
         localStorage.setItem('id_token', token);
         this.props.history.push('/');
-      });
+      })
+      .catch(err => console.error(err));
+
   handleRegister = userData =>
     backend
       .post('/auth/register', userData)
@@ -26,7 +28,9 @@ class Login extends Component {
       .then(token => {
         localStorage.setItem('id_token', token);
         this.props.history.push('/');
-      });
+      })
+      .catch(err => console.error(err));
+
   render() {
     const token = localStorage.getItem('id_token');
     return token ? (

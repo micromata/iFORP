@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import NavBar from './components/NavBar/NavBar';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import injectSheet from 'react-jss';

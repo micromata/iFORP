@@ -12,37 +12,47 @@ class LoginForm extends Component {
     };
   }
 
+  maySubmit = () => {
+    const { emailAddress, password } = this.state;
+    return emailAddress.length > 0 && password.length > 0;
+  };
+
   render() {
     return (
-      <div className={this.props.classes.LoginForm}>
+      <React.Fragment>
         <form
-          className={'form-inputs'}
-          onSubmit={(event) => {
+          className={this.props.classes.LoginForm}
+          onSubmit={event => {
             event.preventDefault();
-            debugger;
-            return this.props.handleLogin(this.state);
+            this.props.handleLogin(this.state);
           }}
         >
-          <TextInput
-            placeholder={'Email Address'}
-            onChange={event =>
-              this.setState({ emailAddress: event.target.value })
-            }
-          />
-          <TextInput
-            placeholder={'Password'}
-            type="password"
-            onChange={event => this.setState({ password: event.target.value })}
-          />
+          <div className={this.props.classes.FormInputs}>
+            <TextInput
+              placeholder={'Email Address'}
+              onChange={event =>
+                this.setState({ emailAddress: event.target.value })
+              }
+            />
+            <TextInput
+              placeholder={'Password'}
+              type="password"
+              onChange={event =>
+                this.setState({ password: event.target.value })
+              }
+            />
+          </div>
+          <Button
+            type="submit"
+            minWidth={'100%'}
+            buttonStyle={'round'}
+            onClick={() => this.props.handleLogin(this.state)}
+            disabled={this.maySubmit() === false}
+          >
+            Start prototyping
+          </Button>
         </form>
-        <Button
-          minWidth={'100%'}
-          buttonStyle={'round'}
-          onClick={() => this.props.handleLogin(this.state)}
-        >
-          Start prototyping
-        </Button>
-      </div>
+      </React.Fragment>
     );
   }
 }
@@ -54,6 +64,9 @@ const styles = {
     justifyContent: 'space-between',
     flexDirection: 'column',
     padding: '43px 0',
+  },
+  FormInputs: {
+    height: '100%',
   },
 };
 

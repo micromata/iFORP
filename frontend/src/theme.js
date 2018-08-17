@@ -15,7 +15,7 @@ export default {
     accentColor: '#F9BB1F',
     DottedBackground: {
       backgroundColor: '#3D3D3D',
-      dotColor: '#979797',
+      dotColor: '#5E5E5E',
     },
     NavBar: {
       backgroundColor: '#5E5E5E',

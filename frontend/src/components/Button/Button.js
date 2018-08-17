@@ -8,8 +8,14 @@ const Button = ({
   buttonStyle = 'default',
   children,
   onClick,
+  disabled = false,
 }) => (
-  <button type={type} className={classes.button} onClick={onClick}>
+  <button
+    type={type}
+    className={classes.button}
+    onClick={onClick}
+    disabled={disabled}
+  >
     {children}
   </button>
 );
