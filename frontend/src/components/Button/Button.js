@@ -1,6 +1,6 @@
 import React from 'react';
 import injectSheet from 'react-jss';
-import styles from './button.styles.js';
+import styles from './Button.styles.js';
 
 const Button = ({
   classes,

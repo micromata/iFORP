@@ -1,6 +1,6 @@
 import React from 'react';
 import injectSheet from 'react-jss';
-import styles from './styles';
+import styles from './TextInput.styles';
 
 const TextInput = ({
   classes,

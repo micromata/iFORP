@@ -6,7 +6,7 @@ import BBFLogo from '../../assets/img/BBF.png';
 import iforpBrand from '../../assets/img/iforp-brand.svg';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import * as backend from '../../backend';
-import styles from './login.styles';
+import styles from './Login.styles';
 
 class Login extends Component {
   handleSignIn = credentials =>
