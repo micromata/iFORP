@@ -46,7 +46,7 @@ const style = theme => ({
         left: '24px',
       },
       '& label.active': {
-        color: theme.profiYellow,
+        color: theme.accentColor,
       },
       '& .toggle-button': {
         margin: '0 30px',
@@ -59,7 +59,7 @@ const style = theme => ({
         '&:before': {
           content: '""',
           padding: '12px',
-          backgroundColor: theme.profiYellow,
+          backgroundColor: theme.accentColor,
           position: 'absolute',
           borderRadius: '15px',
           boxShadow: 'rgba(0,0,0,0.5) 0 1px 3px 0',

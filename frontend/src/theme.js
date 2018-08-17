@@ -12,7 +12,6 @@ linear-gradient(${backgroundColor} calc(${dotSpace} - ${dotSize}), transparent 1
 export default {
   dark: {
     backgroundColor: '#3D3D3D',
-    profiYellow: '#F9BB1F',
     accentColor: '#F9BB1F',
     DottedBackground: {
       backgroundColor: '#3D3D3D',
