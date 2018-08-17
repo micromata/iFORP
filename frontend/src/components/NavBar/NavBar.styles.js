@@ -1,12 +1,15 @@
+import { NavBarHeight } from "./NavBar";
+
 export default (theme) => ({
   NavBar: {
     backgroundColor: theme.NavBar.backgroundColor,
     width: '100%',
-    height: '53px',
+    height: NavBarHeight,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    zIndex: 10,
   },
   NavItem: {
     display: 'flex',
@@ -28,11 +31,8 @@ export default (theme) => ({
     '&.nav-right': {
       justifyContent: 'flex-end',
       fontSize: '12px',
-      '&.account-settings': {},
+      height: '100%',
     },
-  },
-  AccountActions: {
-    padding: '0 8px',
   },
   BackNavigation: {
     height: '100%',
