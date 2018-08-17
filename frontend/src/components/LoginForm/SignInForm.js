@@ -3,7 +3,7 @@ import injectSheet from 'react-jss';
 import TextInput from '../TextInput/TextInput';
 import Button from '../Button/Button';
 
-class LoginForm extends Component {
+class SignInForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -21,10 +21,10 @@ class LoginForm extends Component {
     return (
       <React.Fragment>
         <form
-          className={this.props.classes.LoginForm}
+          className={this.props.classes.SignInForm}
           onSubmit={event => {
             event.preventDefault();
-            this.props.handleLogin(this.state);
+            this.props.handleSignIn(this.state);
           }}
         >
           <div className={this.props.classes.FormInputs}>
@@ -46,7 +46,7 @@ class LoginForm extends Component {
             type="submit"
             minWidth={'100%'}
             buttonStyle={'round'}
-            onClick={() => this.props.handleLogin(this.state)}
+            onClick={() => this.props.handleSignIn(this.state)}
             disabled={this.maySubmit() === false}
           >
             Start prototyping
@@ -58,7 +58,7 @@ class LoginForm extends Component {
 }
 
 const styles = {
-  LoginForm: {
+  SignInForm: {
     height: '100%',
     display: 'flex',
     justifyContent: 'space-between',
@@ -70,4 +70,4 @@ const styles = {
   },
 };
 
-export default injectSheet(styles)(LoginForm);
+export default injectSheet(styles)(SignInForm);

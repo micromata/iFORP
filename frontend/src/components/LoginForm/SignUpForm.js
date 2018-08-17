@@ -3,7 +3,7 @@ import injectSheet from 'react-jss';
 import TextInput from '../TextInput/TextInput';
 import Button from '../Button/Button';
 
-class RegisterForm extends Component {
+class SignUpForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,10 +23,10 @@ class RegisterForm extends Component {
     return (
       <React.Fragment>
         <form
-          className={this.props.classes.RegisterForm}
+          className={this.props.classes.SignUpForm}
           onSubmit={event => {
             event.preventDefault();
-            this.props.handleRegister(this.state);
+            this.props.handleSignUp(this.state);
           }}
         >
           <div className={this.props.classes.FormInputs}>
@@ -71,7 +71,7 @@ class RegisterForm extends Component {
 }
 
 const styles = {
-  RegisterForm: {
+  SignUpForm: {
     height: '100%',
     display: 'flex',
     justifyContent: 'space-between',
@@ -83,4 +83,4 @@ const styles = {
   },
 };
 
-export default injectSheet(styles)(RegisterForm);
+export default injectSheet(styles)(SignUpForm);

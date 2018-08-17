@@ -4,12 +4,12 @@ import injectSheet from 'react-jss';
 import MicromataLogo from '../../assets/img/micromata.svg';
 import BBFLogo from '../../assets/img/BBF.png';
 import iforpBrand from '../../assets/img/iforp-brand.svg';
-import LoginRegisterForm from '../../components/LoginRegisterForm/LoginRegisterForm';
+import LoginForm from '../../components/LoginForm/LoginForm';
 import * as backend from '../../backend';
 import styles from './login.styles';
 
 class Login extends Component {
-  handleLogin = credentials =>
+  handleSignIn = credentials =>
     backend
       .post('/auth/login', credentials)
       .then(res => res.json())
@@ -20,7 +20,7 @@ class Login extends Component {
       })
       .catch(err => console.error(err));
 
-  handleRegister = userData =>
+  handleSignUp = userData =>
     backend
       .post('/auth/register', userData)
       .then(res => res.json())
@@ -48,9 +48,9 @@ class Login extends Component {
               Build your own HTML prototype without any coding experience.
             </p>
           </div>
-          <LoginRegisterForm
-            handleLogin={this.handleLogin}
-            handleRegister={this.handleRegister}
+          <LoginForm
+            handleSignIn={this.handleSignIn}
+            handleSignUp={this.handleSignUp}
           />
         </main>
         <footer className={this.props.classes.Footer}>
