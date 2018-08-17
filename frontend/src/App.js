@@ -23,8 +23,11 @@ class App extends Component {
 
 const style = theme => ({
   '@global': {
-    '*,*:after,*:before': {
+    html: {
       boxSizing: 'border-box',
+    },
+    '*, *:before, *:after': {
+      boxSizing: 'inherit',
     },
     'html,body,#root,.App': {
       height: '100%',

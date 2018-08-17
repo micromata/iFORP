@@ -1,7 +1,7 @@
 export default {
   button: {
     backgroundColor: '#F9BB1F',
-    border: '1px solid #F9BB1F',
+    border: 'none',
     fontSize: '18px',
     color: '#fff',
     padding: '8px 45px',
@@ -15,8 +15,11 @@ export default {
           : 0,
     minHeight: '30px',
     minWidth: props => props.minimumWidth || 0,
+    '&:hover':{
+      backgroundColor: '#FFB600',
+    },
     '&[disabled]':{
-      background: '#555',
+      background: '#FCDD8F',
       border: 'none',
       cursor: 'not-allowed'
     }
