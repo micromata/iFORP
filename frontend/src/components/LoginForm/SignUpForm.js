@@ -60,7 +60,7 @@ class SignUpForm extends Component {
             type="submit"
             minWidth={'100%'}
             buttonStyle={'round'}
-            onClick={() => this.props.handleSignIn(this.state)}
+            onClick={() => this.props.handleSignUp(this.state)}
             disabled={this.maySubmit() === false}
           >
             Start prototyping
