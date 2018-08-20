@@ -12,11 +12,18 @@ class UserDropdown extends React.Component {
     };
   }
 
+  logout() {
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.href = '/';
+  }
+
   render() {
     const { classes, userName } = this.props;
     return (
       <div className={classes.UserDropdown}>
         <div
+          className="dropdown-toggle"
           onClick={event => this.setState({ isOpen: !this.state.isOpen })}
         >
           <img src={chevronDown} alt="Open account actions" />
@@ -27,15 +34,23 @@ class UserDropdown extends React.Component {
           />
           {userName}
         </div>
-        { (this.state.isOpen) &&
+        {this.state.isOpen && (
           <div className={classes.Drop}>
             <ul>
               <li>
-              <a href="" onClick={this.logout}>Logout</a>
+                <div
+                  className="click-area"
+                  href=""
+                  onClick={() => {
+                    this.logout();
+                  }}
+                >
+                  Logout
+                </div>
               </li>
             </ul>
           </div>
-        }
+        )}
       </div>
     );
   }
