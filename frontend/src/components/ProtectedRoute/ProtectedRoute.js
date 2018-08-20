@@ -1,6 +1,6 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router';
-import { getToken } from "./services/auth.service";
+import { getToken } from "../../services/auth.service";
 
 export default ({ component: Component, ...rest }) => {
   const token = getToken();

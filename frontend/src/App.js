@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import injectSheet from 'react-jss';
 import { dottedBackground } from './theme';
-import ProtectedRoute from './ProtectedRoute';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import Start from './pages/Start/Start';
 
 class App extends Component {
