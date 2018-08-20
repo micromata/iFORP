@@ -7,6 +7,7 @@ import iforpBrand from '../../assets/img/iforp-brand.svg';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import * as backend from '../../backend';
 import styles from './Login.styles';
+import { setToken, getToken } from '../../helpers/tokenHandler';
 
 class Login extends Component {
   handleSignIn = credentials =>
@@ -15,24 +16,24 @@ class Login extends Component {
       .then(res => res.json())
       .then(body => body.token)
       .then(token => {
-        localStorage.setItem('id_token', token);
+        setToken(token);
         this.props.history.push('/');
       })
       .catch(err => console.error(err));
 
-  handleSignUp = userData =>
-    backend
+      handleSignUp = userData =>
+      backend
       .post('/auth/register', userData)
       .then(res => res.json())
       .then(body => body.token)
       .then(token => {
-        localStorage.setItem('id_token', token);
+        setToken(token);
         this.props.history.push('/');
       })
       .catch(err => console.error(err));
 
   render() {
-    const token = localStorage.getItem('id_token');
+    const token = getToken();
     return token ? (
       <Redirect to="/" />
     ) : (

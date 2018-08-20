@@ -1,8 +1,9 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router';
+import { getToken } from "./helpers/tokenHandler";
 
 export default ({ component: Component, ...rest }) => {
-  const token = localStorage.getItem('id_token');
+  const token = getToken();
   return (
     <Route
       {...rest}

@@ -3,6 +3,7 @@ import injectSheet from 'react-jss';
 import styles from './UserDropdown.styles';
 import personIcon from '../../assets/img/icon-person.svg';
 import chevronDown from '../../assets/img/icon-chevron-down.svg';
+import { getUserFromToken, deleteToken } from "../../helpers/tokenHandler";
 
 class UserDropdown extends React.Component {
   constructor(props) {
@@ -13,9 +14,8 @@ class UserDropdown extends React.Component {
   }
 
   logout() {
-    localStorage.clear();
-    sessionStorage.clear();
-    window.location.href = '/';
+    deleteToken();
+    window.location.href = '/login';
   }
 
   render() {
