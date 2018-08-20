@@ -7,7 +7,7 @@ class SignUpForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      username: '',
       emailAddress: '',
       password: '',
       passwordRepeat: '',
@@ -15,8 +15,8 @@ class SignUpForm extends Component {
   }
 
   maySubmit = () => {
-    const { name, emailAddress, password, passwordRepeat } = this.state;
-    return name.length > 0 && emailAddress.length > 0 && password.length > 0 && password === passwordRepeat;
+    const { username, emailAddress, password, passwordRepeat } = this.state;
+    return username.length > 0 && emailAddress.length > 0 && password.length > 0 && password === passwordRepeat;
   };
 
   render() {
@@ -32,7 +32,7 @@ class SignUpForm extends Component {
           <div className={this.props.classes.FormInputs}>
             <TextInput
               placeholder={'Name'}
-              onChange={event => this.setState({ name: event.target.value })}
+              onChange={event => this.setState({ username: event.target.value })}
             />
             <TextInput
               placeholder={'Email Address'}

@@ -11,5 +11,8 @@ export class User {
   emailAddress = undefined;
 
   @Column('text')
+  username = undefined;
+
+  @Column('text')
   passwordHash = undefined;
 }

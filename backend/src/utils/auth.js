@@ -15,7 +15,8 @@ export const createToken = (payload, secret, options = {}) =>
 export const createTokenFor = async subject =>
   createToken(
     {
-      emailAddress: subject.emailAddress
+      emailAddress: subject.emailAddress,
+      username: subject.username
     },
     'TODO: make configurable',
     {

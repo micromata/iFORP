@@ -7,8 +7,9 @@ import { violatesUniqueConstraint } from '../utils/error';
 export const register = async (req, res) => {
   const repo = getRepository(User);
   const user = new User();
-  const { emailAddress, password } = req.body;
+  const { emailAddress, password, username } = req.body;
   user.emailAddress = emailAddress.trim().toLowerCase();
+  user.username = username;
   user.passwordHash = await createHash(password);
   try {
     const createdUser = await repo.save(user);
