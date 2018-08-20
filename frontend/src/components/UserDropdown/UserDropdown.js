@@ -19,12 +19,12 @@ class UserDropdown extends React.Component {
   }
 
   render() {
-    const { classes, userName } = this.props;
+    const { classes } = this.props;
     return (
       <div className={classes.UserDropdown}>
         <div
           className="dropdown-toggle"
-          onClick={event => this.setState({ isOpen: !this.state.isOpen })}
+          onClick={() => this.setState({ isOpen: !this.state.isOpen })}
         >
           <img src={chevronDown} alt="Open account actions" />
           <img
@@ -32,7 +32,7 @@ class UserDropdown extends React.Component {
             className={classes.AccountActions}
             alt="Account actions"
           />
-          {userName}
+          {getUserFromToken().username}
         </div>
         {this.state.isOpen && (
           <div className={classes.Drop}>

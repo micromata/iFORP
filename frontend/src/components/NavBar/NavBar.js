@@ -22,7 +22,7 @@ export const NavBar = ({ classes, title }) => (
       {title}
     </Link>
     <div className={classes.NavItem + ' nav-right'}>
-      <UserDropdown userName="Andy" />
+      <UserDropdown />
     </div>
   </div>
 );
