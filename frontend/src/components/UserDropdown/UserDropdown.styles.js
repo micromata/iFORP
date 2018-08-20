@@ -19,19 +19,7 @@ export default theme => ({
     top: NavBarHeight,
     right: 0,
     backgroundColor: 'gray',
-    padding: '.5rem 0',
+    padding: '.5rem',
     minWidth: '10rem',
-    '& ul': {
-      listStyle: 'none',
-      padding: 0,
-      margin: 0,
-      '& li': {
-        width: '100%',
-        padding: '.25rem 1.5rem;'
-      },
-    },
-    '& .click-area': {
-      cursor: 'pointer',
-    }
   },
 });

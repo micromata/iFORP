@@ -4,6 +4,7 @@ import styles from './UserDropdown.styles';
 import personIcon from '../../assets/img/icon-person.svg';
 import chevronDown from '../../assets/img/icon-chevron-down.svg';
 import { getUserFromToken, deleteToken } from '../../services/auth.service';
+import DropdownItem from '../DropdownItem/DropdownItem';
 
 class UserDropdown extends React.Component {
   constructor(props) {
@@ -36,19 +37,27 @@ class UserDropdown extends React.Component {
         </div>
         {this.state.isOpen && (
           <div className={classes.Drop}>
-            <ul>
-              <li>
-                <div
-                  className="click-area"
-                  href=""
-                  onClick={() => {
-                    this.logout();
-                  }}
-                >
-                  Logout
-                </div>
-              </li>
-            </ul>
+            <DropdownItem
+              onClick={() => {
+                this.logout();
+              }}
+            >
+              Logout
+            </DropdownItem>
+            <DropdownItem
+              onClick={() => {
+                this.logout();
+              }}
+            >
+              Logout
+            </DropdownItem>
+            <DropdownItem
+              onClick={() => {
+                this.logout();
+              }}
+            >
+              Logout
+            </DropdownItem>
           </div>
         )}
       </div>
