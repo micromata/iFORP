@@ -1,4 +1,4 @@
-import { getToken } from "./helpers/tokenHandler";
+import { getToken } from './auth.service';
 const isDev = process.env.NODE_ENV === 'development';
 const baseURL = isDev ? 'http://localhost:3000' : '';
 

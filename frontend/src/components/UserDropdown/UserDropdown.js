@@ -3,7 +3,7 @@ import injectSheet from 'react-jss';
 import styles from './UserDropdown.styles';
 import personIcon from '../../assets/img/icon-person.svg';
 import chevronDown from '../../assets/img/icon-chevron-down.svg';
-import { getUserFromToken, deleteToken } from "../../helpers/tokenHandler";
+import { getUserFromToken, deleteToken } from '../../services/auth.service';
 
 class UserDropdown extends React.Component {
   constructor(props) {

@@ -5,9 +5,9 @@ import MicromataLogo from '../../assets/img/micromata.svg';
 import BBFLogo from '../../assets/img/BBF.png';
 import iforpBrand from '../../assets/img/iforp-brand.svg';
 import LoginForm from '../../components/LoginForm/LoginForm';
-import * as backend from '../../backend';
+import * as backend from '../../services/backendrequest.service';
 import styles from './Login.styles';
-import { setToken, getToken } from '../../helpers/tokenHandler';
+import { setToken, getToken } from '../../services/auth.service';
 
 class Login extends Component {
   handleSignIn = credentials =>
