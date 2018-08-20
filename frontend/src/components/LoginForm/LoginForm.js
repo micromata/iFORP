@@ -38,7 +38,6 @@ class LoginForm extends Component {
             id="sign"
             onChange={() =>
               this.setState(() => {
-                debugger;
                 return {
                   mode: this.state.mode === 'signIn' ? 'signUp' : 'signIn',
                 };
