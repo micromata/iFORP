@@ -21,8 +21,8 @@ class Login extends Component {
       })
       .catch(err => console.error(err));
 
-      handleSignUp = userData =>
-      backend
+  handleSignUp = userData =>
+    backend
       .post('/auth/register', userData)
       .then(res => res.json())
       .then(body => body.token)
