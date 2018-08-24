@@ -3,10 +3,10 @@ import injectSheet from 'react-jss';
 import classnames from 'classnames';
 
 export const Toggle = ({
-  isActive,
+  isActive = false,
   onToggle,
-  labelLeft,
-  labelRight,
+  labelLeft = '',
+  labelRight = '',
   classes,
 }) => (
   <div className={classes.Toggle}>
@@ -24,8 +24,7 @@ export const Toggle = ({
       name="toggle"
       id="toggle"
       onChange={() => {
-        const mode = !isActive;
-        onToggle(mode);
+        onToggle(!isActive);
       }}
     />
     <label htmlFor="toggle" className="toggle-button" />
