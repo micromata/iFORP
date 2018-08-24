@@ -38,40 +38,6 @@ const style = theme => ({
       backgroundColor: theme.backgroundColor,
       fontFamily: 'Verdana',
     },
-    '.toggle': {
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      '& .toggle-checkbox:checked+.toggle-button::before': {
-        left: '24px',
-      },
-      '& label.active': {
-        color: theme.accentColor,
-      },
-      '& .toggle-button': {
-        margin: '0 30px',
-        border: '1px solid #E0E0E0',
-        borderRadius: '25px',
-        boxShadow: 'inset rgba(0,0,0,0.5) 0 3px 3px 0',
-        position: 'relative',
-        height: '26px',
-        width: '50px',
-        '&:before': {
-          content: '""',
-          padding: '12px',
-          backgroundColor: theme.accentColor,
-          position: 'absolute',
-          borderRadius: '15px',
-          boxShadow: 'rgba(0,0,0,0.5) 0 1px 3px 0',
-          transition: 'left 0.25s',
-          transitionTimingFunction: 'linear',
-          left: 0,
-        },
-      },
-      '& input': {
-        display: 'none',
-      },
-    },
   },
   App: {
     ...dottedBackground(

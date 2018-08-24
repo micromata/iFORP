@@ -3,7 +3,7 @@ import injectSheet from 'react-jss';
 import Card from '../Card/Card';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
-import classnames from 'classnames';
+import Toggle from '../Toggle/Toggle';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -22,39 +22,14 @@ class LoginForm extends Component {
         width={'420px'}
         height={'620px'}
       >
-        <div className="toggle">
-          <label
-            htmlFor="sign"
-            className={classnames({
-              active: this.state.mode === 'signIn',
-            })}
-          >
-            Sign In
-          </label>
-          <input
-            type="checkbox"
-            className="toggle-checkbox"
-            name="sign"
-            id="sign"
-            onChange={() =>
-              this.setState(() => {
-                return {
-                  mode: this.state.mode === 'signIn' ? 'signUp' : 'signIn',
-                };
-              })
-            }
-          />
-          <label htmlFor="sign" className="toggle-button" />
-          <label
-            htmlFor="sign"
-              className={classnames({
-                active: this.state.mode === 'signUp',
-              })
-            }
-          >
-            Sign Up
-          </label>
-        </div>
+        <Toggle
+          labelLeft="Sign In"
+          labelRight="Sign Up"
+          isActive={this.state.mode === 'signIn'}
+          onToggle={enabled => {
+            this.setState({ mode: enabled === true ? 'signIn' : 'signUp' });
+          }}
+        />
         {this.state.mode === 'signIn' && (
           <SignInForm handleSignIn={this.props.handleSignIn} />
         )}
