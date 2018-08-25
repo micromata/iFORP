@@ -3,6 +3,7 @@
 *.sublime-workspace
 .vscode
 .idea
+.eslintcache
 
 ### Coverage ###
 coverage
