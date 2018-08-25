@@ -1,6 +1,6 @@
 import { getToken } from './auth.service';
 const isDev = process.env.NODE_ENV === 'development';
-const baseURL = isDev ? 'http://localhost:3000' : '';
+const baseURL = isDev ? 'http://localhost:3001' : '';
 
 export const post = (path, payload = {}) =>
   fetch(baseURL + path, {
