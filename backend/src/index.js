@@ -20,8 +20,8 @@ args.forEach(async arg => {
 
 createConnection(getConnectionOptions())
   .then(() => {
-    app.listen(3000, () =>
-      logger.success('Backend started on http://localhost:3000!')
+    app.listen(3001, () =>
+      logger.success('Backend started on http://localhost:3001!')
     );
   })
   .catch(error => logger.fatal(error));
