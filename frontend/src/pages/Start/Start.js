@@ -17,7 +17,7 @@ class Start extends Component {
             <p>with a</p>
           </div>
           <div className="newProject">
-            <Button>New Project</Button>
+            <Button onClick={() => { console.log('Link to new Project')}}>New Project</Button>
           </div>
           <div className="recentProjectText">
             <p>or</p>
@@ -25,7 +25,7 @@ class Start extends Component {
           </div>
           <ElementGrid>
             <ButtonTile>Project 1</ButtonTile>
-            <ButtonTile>Project2</ButtonTile>
+            <ButtonTile>Project 2</ButtonTile>
           </ElementGrid>
         </div>
       </React.Fragment>
