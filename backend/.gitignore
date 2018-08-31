@@ -1,3 +1,5 @@
 ### Database ###
 *.sqlite
 coverage
+*.eslintcache
+
