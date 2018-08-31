@@ -3,7 +3,7 @@ import { NavBarHeight } from '../NavBar/NavBar';
 export default theme => ({
   UserDropdown: {
     position: 'relative',
-    '& img': {
+    '& svg': {
       marginRight: '10px',
     },
     '& .dropdown-toggle': {

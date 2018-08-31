@@ -1,8 +1,8 @@
 import React from 'react';
 import injectSheet from 'react-jss';
 import styles from './UserDropdown.styles';
-import personIcon from '../../assets/img/icon-person.svg';
-import chevronDown from '../../assets/img/icon-chevron-down.svg';
+import PersonIcon from '../../assets/img/Person';
+import ChevronDown from '../../assets/img/ChevronDown';
 import { getUserFromToken, deleteToken } from '../../services/auth.service';
 import DropdownItem from '../DropdownItem/DropdownItem';
 
@@ -27,12 +27,8 @@ class UserDropdown extends React.Component {
           className="dropdown-toggle"
           onClick={() => this.setState({ isOpen: !this.state.isOpen })}
         >
-          <img src={chevronDown} alt="Open account actions" />
-          <img
-            src={personIcon}
-            className={classes.AccountActions}
-            alt="Account actions"
-          />
+          <ChevronDown />
+          <PersonIcon />
           {getUserFromToken().username}
         </div>
         {this.state.isOpen && (
