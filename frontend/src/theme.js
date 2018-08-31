@@ -20,11 +20,11 @@ export default {
     },
     NavBar: {
       backgroundColor: '#5E5E5E',
-      textColor: '#FFFFFF',
+      textColor: '#FFF',
     },
   },
   light: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#FFF',
     accentColor: '#F9BB1F',
     DottedBackground: {
       backgroundColor: '',
