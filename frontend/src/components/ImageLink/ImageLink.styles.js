@@ -1,7 +1,4 @@
 export default {
-  Container: {
-    margin: '0 1rem'
-  },
   ImageLink: {
     position: 'relative',
     height: props => props.height || '',
@@ -11,7 +8,7 @@ export default {
     border: '1px solid',
     borderColor: props => props.borderColor || '#D9D9D9',
     borderRadius: props => props.borderRadius || '8px',
-    filter: props => (props.blur ? 'blur(1px)' : '')
+    filter: props => (props.blur ? 'blur(.5px)' : '')
   },
   Title: {
     color: 'white',
