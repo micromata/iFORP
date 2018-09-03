@@ -5,7 +5,8 @@ export default () => ({
     alignItems: 'center',
     flexDirection: 'column',
     fontSize: '1.5rem',
-    padding: '18rem',
+    justifyContent: 'center',
+    height: 'calc(100vh - 53px);',
     '& button': {
       width: '11rem',
       borderRadius: '100px',
@@ -18,8 +19,8 @@ export default () => ({
         margin: 0,
       }
     },
-    '& .newProject': {
-      marginBottom: '10rem',
+    '& .recentProjectText': {
+      marginTop: '8rem',
     },
   },
 });
