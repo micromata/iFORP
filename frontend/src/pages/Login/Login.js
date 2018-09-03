@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import injectSheet from 'react-jss';
-import MicromataLogo from '../../assets/img/micromata.svg';
+import MicromataBrand from '../../assets/img/MicromataBrand';
 import BBFLogo from '../../assets/img/BBF.png';
-import iforpBrand from '../../assets/img/iforp-brand.svg';
+import IForpBrand from '../../assets/img/IForpBrand';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import * as backend from '../../services/backendrequest.service';
 import styles from './Login.styles';
@@ -40,11 +40,7 @@ class Login extends Component {
       <div>
         <main>
           <div className={this.props.classes.Hero}>
-            <img
-              src={iforpBrand}
-              className={this.props.classes.IforpBrand}
-              alt="iFORP Logo"
-            />
+            <IForpBrand className={this.props.classes.IforpBrand} />
             <p className={this.props.classes.HeroText}>
               Build your own HTML prototype without any coding experience.
             </p>
@@ -62,11 +58,7 @@ class Login extends Component {
               className={this.props.classes.PromoterLogo}
               alt="Bundesagentur für Bildung und Forschung"
             />
-            <img
-              src={MicromataLogo}
-              className={this.props.classes.PromoterLogo}
-              alt="Micromata"
-            />
+            <MicromataBrand className={this.props.classes.PromoterLogo} />
           </div>
         </footer>
       </div>
