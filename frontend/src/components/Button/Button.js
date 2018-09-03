@@ -4,6 +4,7 @@ import styles from './Button.styles.js';
 
 const Button = ({
   classes,
+  className = '',
   type = 'button',
   buttonStyle = 'default',
   children,
@@ -12,7 +13,7 @@ const Button = ({
 }) => (
   <button
     type={type}
-    className={classes.button}
+    className={`${classes.button} ${className}`}
     onClick={onClick}
     disabled={disabled}
   >

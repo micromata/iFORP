@@ -22,6 +22,11 @@ export default {
       background: '#FCDD8F',
       border: 'none',
       cursor: 'not-allowed'
+    },
+    '&.ghost': {
+      backgroundColor: 'transparent',
+      border: 'none',
+
     }
   },
 };

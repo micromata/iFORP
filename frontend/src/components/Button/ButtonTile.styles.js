@@ -13,6 +13,7 @@ export default {
         backgroundColor: '#BCBCBC',
       },
     },
+    marginBottom: "2rem"
   },
   ProjectName: {
     cursor: 'pointer',

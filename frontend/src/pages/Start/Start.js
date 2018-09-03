@@ -5,6 +5,7 @@ import ButtonTile from '../../components/Button/ButtonTile';
 import injectSheet from 'react-jss';
 import styles from './Start.styles';
 import Button from '../../components/Button/Button';
+import Dots from '../../assets/img/Dots';
 
 class Start extends Component {
   render() {
@@ -17,7 +18,13 @@ class Start extends Component {
             <p>with a</p>
           </div>
           <div className="newProject">
-            <Button onClick={() => { console.log('Link to new Project')}}>New Project</Button>
+            <Button
+              onClick={() => {
+                console.log('Link to new Project');
+              }}
+            >
+              New Project
+            </Button>
           </div>
           <div className="recentProjectText">
             <p>or</p>
@@ -26,6 +33,10 @@ class Start extends Component {
           <ElementGrid>
             <ButtonTile>Project 1</ButtonTile>
             <ButtonTile>Project 2</ButtonTile>
+            <ButtonTile>Project 3</ButtonTile>
+            <Button className="ghost" onClick={() => {console.log('Link to project overview')}}>
+              <Dots />
+            </Button>
           </ElementGrid>
         </div>
       </React.Fragment>

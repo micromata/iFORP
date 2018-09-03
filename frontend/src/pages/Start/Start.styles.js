@@ -17,10 +17,17 @@ export default () => ({
       textAlign: 'center',
       '& > p': {
         margin: 0,
-      }
+      },
     },
     '& .recentProjectText': {
       marginTop: '8rem',
+    },
+    '& .ghost': {
+      position: 'absolute',
+      width: '3rem',
+      height: '3rem',
+      right: '-6rem',
+      top: '2.5rem',
     },
   },
 });

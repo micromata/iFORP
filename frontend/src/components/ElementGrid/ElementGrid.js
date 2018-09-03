@@ -7,6 +7,7 @@ const ElementGrid = ({ classes, children }) => (
 
 const styles = theme => ({
   ElementGrid: {
+    position: 'relative',
     display: 'flex',
     justifyContent: 'center',
     flexWrap: 'wrap',
