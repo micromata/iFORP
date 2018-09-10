@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './pages/Login/Login';
 import injectSheet from 'react-jss';
 import { dottedBackground } from './theme';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import Start from './pages/Start/Start';
+import PageNotFound from './pages/PageNotFound/PageNotFound';
+import Project from './pages/Project/Project';
 
 class App extends Component {
   render() {
@@ -12,8 +14,12 @@ class App extends Component {
       <div className={`${this.props.classes.App} App`}>
         <Router>
           <React.Fragment>
-            <ProtectedRoute exact path="/" component={Start} />
-            <Route path="/login" component={Login} />
+            <Switch>
+              <ProtectedRoute exact path="/" component={Start} />
+              <Route path="/login" component={Login} />
+              <Route path="/projects/:id" component={Project} />
+              <Route path="**" component={PageNotFound} />
+            </Switch>
           </React.Fragment>
         </Router>
       </div>
@@ -21,7 +27,7 @@ class App extends Component {
   }
 }
 
-const style = theme => ({
+const styles = theme => ({
   '@global': {
     html: {
       boxSizing: 'border-box',
@@ -37,6 +43,7 @@ const style = theme => ({
       margin: 0,
       backgroundColor: theme.backgroundColor,
       fontFamily: 'Verdana',
+      color: theme.textColor,
     },
   },
   App: {
@@ -49,4 +56,4 @@ const style = theme => ({
   },
 });
 
-export default injectSheet(style)(App);
+export default injectSheet(styles)(App);
