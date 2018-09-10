@@ -8,6 +8,15 @@ import Button from '../../components/Button/Button';
 import Dots from '../../assets/img/Dots';
 
 class Start extends Component {
+  constructor(props) {
+    super(props);
+
+    this.createNewProject = this.createNewProject.bind(this);
+  }
+  createNewProject() {
+    this.props.history.push(`projects/newProject`);
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -18,23 +27,22 @@ class Start extends Component {
             <p>with a</p>
           </div>
           <div className="newProject">
-            <Button
-              onClick={() => {
-                console.log('Link to new Project');
-              }}
-            >
-              New Project
-            </Button>
+            <Button onClick={this.createNewProject}>New Project</Button>
           </div>
           <div className="recentProjectText">
             <p>or</p>
             <p>choose a recent project</p>
           </div>
           <ElementGrid>
-            <ButtonTile>Project 1</ButtonTile>
-            <ButtonTile>Project 2</ButtonTile>
-            <ButtonTile>Project 3</ButtonTile>
-            <Button className="ghost" onClick={() => {console.log('Link to project overview')}}>
+            <ButtonTile titleBelow>Project 1</ButtonTile>
+            <ButtonTile titleBelow>Project 2</ButtonTile>
+            <ButtonTile titleBelow>Project 3</ButtonTile>
+            <Button
+              className="ghost"
+              onClick={() => {
+                console.log('Link to project overview');
+              }}
+            >
               <Dots />
             </Button>
           </ElementGrid>

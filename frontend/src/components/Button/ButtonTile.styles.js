@@ -5,6 +5,7 @@ export default {
       borderRadius: '.5rem',
       height: '8.25rem',
       width: '11.5rem',
+      outline: 'none',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',

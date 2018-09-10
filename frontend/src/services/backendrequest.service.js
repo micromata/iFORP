@@ -13,3 +13,14 @@ export const post = (path, payload = {}) =>
     mode: isDev ? 'cors' : 'same-origin',
     method: 'POST',
   });
+
+export const get = (path = {}) =>
+  fetch(baseURL + path, {
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${getToken() || ''}`,
+    },
+    mode: isDev ? 'cors' : 'same-origin',
+    method: 'GET',
+  });
