@@ -12,8 +12,7 @@ iFORP is designed to help you prototype your web applications. You can upload ei
 ## Installing
 
 - `git clone` this repository
-- `npm install` inside `backend/` and `frontend/`
-- `npm install` inside the project root
+- `npm run install:all` inside the project root
 - `npm run start:dev` inside the project root
 
 The frontend gets served on port 3000 and the backend will listen on port 3001.
