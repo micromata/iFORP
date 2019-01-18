@@ -7,7 +7,7 @@ import nested from 'jss-nested';
 import globals from 'jss-global';
 // import './index.css';
 
-import App from './App';
+import App from './app';
 import registerServiceWorker from './registerServiceWorker';
 import ThemeSwitch from './ThemeSwitch';
 

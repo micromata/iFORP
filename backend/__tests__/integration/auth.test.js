@@ -13,9 +13,9 @@ describe('/auth', () => {
     await connection.close();
   });
 
-  describe('/register', () => {
+  xdescribe('/register', () => {
     describe('POST', () => {
-      it('should register a new user and respond with a valid token', () =>
+      it('should register a new user and respond with a valid token', async () =>
         post('/auth/register')
           .send({
             emailAddress: 'devnull@127.0.0.1',
@@ -27,7 +27,7 @@ describe('/auth', () => {
             const decoded = jsonwebtoken.decode(token);
             expect(decoded.emailAddress).toEqual('devnull@127.0.0.1');
           }));
-      it('should error on register with duplicated email address', () =>
+      it('should error on register with duplicated email address', async () =>
         post('/auth/register')
           .send({
             emailAddress: 'devnull@127.0.0.1',
@@ -36,7 +36,7 @@ describe('/auth', () => {
           .expect(409));
     });
   });
-  describe('/login', () => {
+  xdescribe('/login', () => {
     describe('POST', () => {
       it('should error for non-existent users', () =>
         post('/auth/login')
