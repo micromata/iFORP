@@ -15,9 +15,9 @@ class App extends Component {
         <Router>
           <React.Fragment>
             <Switch>
-              <ProtectedRoute exact path="/" component={Start} />
               <Route path="/login" component={Login} />
-              <Route path="/projects/:id" component={Project} />
+              <ProtectedRoute exact path="/" component={Start} />
+              <ProtectedRoute path="/projects/:id" component={Project} />
               <Route path="**" component={PageNotFound} />
             </Switch>
           </React.Fragment>
