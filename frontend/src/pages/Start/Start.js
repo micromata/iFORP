@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as http from '../../services/backendrequest.service';
 import NavBar from '../../components/NavBar/NavBar';
 import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
@@ -11,13 +12,22 @@ class Start extends Component {
   constructor(props) {
     super(props);
 
+    this.state = { projects: [] };
     this.createNewProject = this.createNewProject.bind(this);
   }
   createNewProject() {
     this.props.history.push(`projects/newProject`);
   }
 
+  async componentDidMount() {
+    const response = await http.get('/projects');
+    const projects = await response.json();
+    this.setState({ projects });
+  }
+
   render() {
+    const hasExistingProject = Boolean(this.state.projects && this.state.projects.length);
+
     return (
       <React.Fragment>
         <NavBar title="iFORP" />
@@ -29,23 +39,28 @@ class Start extends Component {
           <div className="newProject">
             <Button onClick={this.createNewProject}>New Project</Button>
           </div>
-          <div className="recentProjectText">
-            <p>or</p>
-            <p>choose a recent project</p>
-          </div>
-          <ElementGrid>
-            <ButtonTile titleBelow>Project 1</ButtonTile>
-            <ButtonTile titleBelow>Project 2</ButtonTile>
-            <ButtonTile titleBelow>Project 3</ButtonTile>
-            <Button
-              className="ghost"
-              onClick={() => {
-                console.log('Link to project overview');
-              }}
-            >
-              <Dots />
-            </Button>
-          </ElementGrid>
+
+          { hasExistingProject &&
+            <React.Fragment>
+              <div className="recentProjectText">
+                <p>or</p>
+                <p>choose a recent project</p>
+              </div>
+              <ElementGrid>
+                { this.state.projects.map(project =>
+                  <ButtonTile key={ project.id } titleBelow>{ project.name }</ButtonTile>
+                )}
+                <Button
+                  className="ghost"
+                  onClick={() => {
+                    console.log('Link to project overview');
+                  }}
+                  >
+                  <Dots />
+                </Button>
+              </ElementGrid>
+            </React.Fragment>
+          }
         </div>
       </React.Fragment>
     );
