@@ -10,27 +10,28 @@ import styles from './Login.styles';
 import { setToken, getToken } from '../../services/auth.service';
 
 class Login extends Component {
-  handleSignIn = credentials =>
-    backend
-      .post('/auth/login', credentials)
-      .then(res => res.json())
-      .then(body => body.token)
-      .then(token => {
-        setToken(token);
-        this.props.history.push('/');
-      })
-      .catch(err => console.error(err));
 
-  handleSignUp = userData =>
-    backend
-      .post('/auth/register', userData)
-      .then(res => res.json())
-      .then(body => body.token)
-      .then(token => {
-        setToken(token);
-        this.props.history.push('/');
-      })
-      .catch(err => console.error(err));
+  handleSignIn = async credentials => {
+    try {
+      const response = await backend.post('/auth/login', credentials);
+      const json = await response.json();
+      setToken(json.token);
+      this.props.history.push('/');
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  handleSignUp = async userData => {
+    try {
+      const response = await backend.post('/auth/register', userData);
+      const json = await response.json();
+      setToken(json.token);
+      this.props.history.push('/');
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   render() {
     const token = getToken();

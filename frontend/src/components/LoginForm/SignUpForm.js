@@ -25,6 +25,7 @@ class SignUpForm extends Component {
         <form
           className={this.props.classes.SignUpForm}
           onSubmit={event => {
+            if (!this.maySubmit()) return;
             event.preventDefault();
             this.props.handleSignUp(this.state);
           }}
@@ -60,7 +61,6 @@ class SignUpForm extends Component {
             type="submit"
             minWidth={'100%'}
             buttonStyle={'round'}
-            onClick={() => this.props.handleSignUp(this.state)}
             disabled={this.maySubmit() === false}
           >
             Start prototyping

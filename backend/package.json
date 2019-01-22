@@ -32,6 +32,7 @@
     "test": "npm run eslint && jest",
     "test:watch": "jest --watch",
     "start": "node -r babel-register src/index.js",
+    "debug": "node --inspect -r babel-register src/index.js",
     "build": "babel src --out-dir build",
     "eslint": "eslint --ext .js --cache --ignore-path .gitignore src ",
     "eslint:fix": "npm run eslint --silent -- --fix",
