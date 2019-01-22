@@ -1,23 +1,17 @@
-const getBorderRadius = props => {
-  if (props.buttonStyle === 'round') return '100px';
-
-  if (props.buttonStyle === 'rounded-corners') return '8px';
-
-  return 0;
-}
-
 export default {
   button: {
     backgroundColor: '#F9BB1F',
     border: 'none',
     fontSize: '18px',
     color: '#fff',
-    padding: '8px 45px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     outlineStyle: 'none',
     cursor: 'pointer',
-    borderRadius: getBorderRadius,
-    minHeight: '30px',
-    minWidth: props => props.minimumWidth || 0,
+    borderRadius: '50%',
+    minHeight: '56px',
+    minWidth: '56px',
     '&:hover':{
       backgroundColor: '#FFB600',
     },
@@ -28,8 +22,7 @@ export default {
     },
     '&.ghost': {
       backgroundColor: 'transparent',
-      border: 'none',
-
+      border: 'none'
     }
   },
 };
