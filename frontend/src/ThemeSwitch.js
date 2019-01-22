@@ -3,12 +3,13 @@ import themes from './theme';
 import { ThemeProvider } from 'react-jss';
 const availableThemes = Object.keys(themes);
 let currentTheme = availableThemes[0];
-let themeChangeListeners = [];
+const themeChangeListeners = [];
 
 export const switchTheme = theme => {
   if (!availableThemes.indexOf(theme)) {
     return;
   }
+
   currentTheme = theme;
   themeChangeListeners.forEach(listener => listener(theme));
 };

@@ -9,6 +9,7 @@ export default (theme) => ({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    marginBottom: '30px',
     zIndex: 10,
   },
   NavItem: {
