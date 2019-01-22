@@ -1,19 +1,17 @@
 {
-  "extends": [
-    "prettier"
-  ],
-  "plugins": [
-    "prettier"
-  ],
   "parser": "babel-eslint",
-  "rules": {},
+  "extends": [ "baumeister", "prettier" ],
+  "plugins": [ "react", "prettier" ],
+  "rules": {
+    "no-console": "off",
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "unicorn/filename-case": "off",
+    "unicorn/no-process-exit": "off"
+  },
   "overrides": [
     {
-      "files": ["build/*.js"],
-      "rules": {
-        "no-console": "off",
-        "unicorn/no-process-exit": "off"
-      }
+      "files": ["build/*.js"]
     }
   ]
 }

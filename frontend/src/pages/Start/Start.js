@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import * as http from '../../services/backendrequest.service';
+import { connect } from 'react-redux';
+import { getAllProjects, createNewProject } from '../../actions/app-actions';
 import NavBar from '../../components/NavBar/NavBar';
 import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
@@ -12,21 +13,20 @@ class Start extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { projects: [] };
     this.createNewProject = this.createNewProject.bind(this);
   }
+
   createNewProject() {
-    this.props.history.push(`projects/newProject`);
+    this.props.createNewProject();
+    // This.props.history.push(`projects/newProject`);
   }
 
-  async componentDidMount() {
-    const response = await http.get('/projects');
-    const projects = await response.json();
-    this.setState({ projects });
+  componentDidMount() {
+    this.props.getAllProjects();
   }
 
   render() {
-    const hasExistingProject = Boolean(this.state.projects && this.state.projects.length);
+    const hasExistingProject = Boolean(this.props.projects && this.props.projects.length);
 
     return (
       <React.Fragment>
@@ -47,7 +47,7 @@ class Start extends Component {
                 <p>choose a recent project</p>
               </div>
               <ElementGrid>
-                { this.state.projects.map(project =>
+                { this.props.projects.map(project =>
                   <ButtonTile key={ project.id } titleBelow>{ project.name }</ButtonTile>
                 )}
                 <Button
@@ -67,4 +67,11 @@ class Start extends Component {
   }
 }
 
-export default injectSheet(styles)(Start);
+const mapStateToProps = state => ({
+  projects: state.app.projects
+});
+
+const actions = { getAllProjects, createNewProject };
+
+const StartContainerWithSheet = injectSheet(styles)(Start);
+export default connect(mapStateToProps, actions)(StartContainerWithSheet);
