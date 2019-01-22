@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
 import styles from './Project.styles';
 import NavBar from '../../components/NavBar/NavBar';
 import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
-import * as backend from '../../services/backendrequest.service';
 
 class Project extends Component {
   state = {
@@ -28,4 +28,9 @@ class Project extends Component {
   }
 }
 
-export default injectSheet(styles)(Project);
+const mapStateToProps = (state, ownProps) => ({
+  project: state.app.projects.find(project => project.id === ownProps.match.params.id)
+});
+
+const ProjectContainerWithStyles = injectSheet(styles)(Project);
+export default connect(mapStateToProps)(ProjectContainerWithStyles);
