@@ -16,9 +16,12 @@ class Start extends Component {
     this.createNewProject = this.createNewProject.bind(this);
   }
 
+  navigateToProject = projectId => {
+    this.props.history.push(`projects/${projectId}`);
+  }
+
   createNewProject() {
-    this.props.createNewProject();
-    // This.props.history.push(`projects/newProject`);
+    this.props.createNewProject(this.navigateToProject);
   }
 
   componentDidMount() {
@@ -48,7 +51,12 @@ class Start extends Component {
               </div>
               <ElementGrid>
                 { this.props.projects.map(project =>
-                  <ButtonTile key={ project.id } titleBelow>{ project.name }</ButtonTile>
+                  <ButtonTile
+                    key={ project.id }
+                    titleBelow
+                    onClick={ () => this.navigateToProject(project.id ) }>
+                    { project.name }
+                  </ButtonTile>
                 )}
                 <Button
                   className="ghost"
@@ -73,5 +81,5 @@ const mapStateToProps = state => ({
 
 const actions = { getAllProjects, createNewProject };
 
-const StartContainerWithSheet = injectSheet(styles)(Start);
-export default connect(mapStateToProps, actions)(StartContainerWithSheet);
+const StartContainerWithStyles = injectSheet(styles)(Start);
+export default connect(mapStateToProps, actions)(StartContainerWithStyles);

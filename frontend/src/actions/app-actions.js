@@ -15,7 +15,7 @@ const getAllProjects = () => async dispatch => {
   });
 };
 
-const createNewProject = () => async dispatch => {
+const createNewProject = navigateToProject => async dispatch => {
   const response = await http.post('/projects');
   const project = await response.json();
 
@@ -23,6 +23,8 @@ const createNewProject = () => async dispatch => {
     type: actionNames.PROJECT_CREATED,
     project
   });
+
+  navigateToProject(project.id);
 };
 
 export {
