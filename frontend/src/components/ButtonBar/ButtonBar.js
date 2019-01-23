@@ -1,19 +1,10 @@
 import React from 'react';
 import injectSheet from 'react-jss';
 import styles from './ButtonBar.styles';
-import CircleButton from '../Button/CircleButton';
 
-export const ButtonBar = ({ classes }) => (
+export const ButtonBar = ({ classes, children }) => (
   <div className={ classes.ButtonBar }>
-    <div className={classes.ButtonBarItem + ' button-left'}>
-      <CircleButton />
-    </div>
-    <div className={classes.ButtonBarItem + ' button-center'}>
-      <CircleButton />
-    </div>
-    <div className={classes.ButtonBarItem + ' button-right'}>
-      <CircleButton />
-    </div>
+    { children }
   </div>
 );
 

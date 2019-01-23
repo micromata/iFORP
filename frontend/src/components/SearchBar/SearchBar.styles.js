@@ -1,4 +1,4 @@
-export default (theme) => ({
+export default () => ({
   SearchBar: {
     width: '100%',
     height: '60px',
