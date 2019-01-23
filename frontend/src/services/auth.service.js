@@ -1,19 +1,33 @@
 import jwt from 'jsonwebtoken';
 
-let currentToken;
+const tokenSecret = 'TODO: make configurable';
+const storageKey = 'iforp-token';
 
 export const setToken = token => {
-  currentToken = token;
+  sessionStorage.setItem(storageKey, token);
 };
 
 export const getToken = () => {
-  return currentToken;
+  return sessionStorage.getItem(storageKey);
 };
 
-export const getUserFromToken = (token = currentToken) => {
+export const getUserFromToken = () => {
+  const token = getToken();
   return jwt.decode(token);
 };
 
 export const deleteToken = () => {
-  currentToken = null;
+  sessionStorage.removeItem(storageKey);
+};
+
+export const verifyToken = () => {
+  const token = getToken();
+
+  try {
+    jwt.verify(token, tokenSecret);
+    return true;
+  } catch (error) {
+    deleteToken()
+    return false;
+  }
 };

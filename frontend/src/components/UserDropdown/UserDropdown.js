@@ -40,20 +40,6 @@ class UserDropdown extends React.Component {
             >
               Logout
             </DropdownItem>
-            <DropdownItem
-              onClick={() => {
-                this.logout();
-              }}
-            >
-              Logout
-            </DropdownItem>
-            <DropdownItem
-              onClick={() => {
-                this.logout();
-              }}
-            >
-              Logout
-            </DropdownItem>
           </div>
         )}
       </div>

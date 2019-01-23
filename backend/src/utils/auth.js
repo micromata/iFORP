@@ -1,6 +1,8 @@
 import BCrypt from 'bcrypt';
 import { sign, verify } from 'jsonwebtoken';
 
+const tokenSecret = 'TODO: make configurable';
+
 export const createHash = async plainTextString =>
   BCrypt.hash(plainTextString, 10);
 export const hashMatches = async (hashedString, plainTextString) =>
@@ -18,11 +20,10 @@ export const createTokenFor = async subject =>
       emailAddress: subject.emailAddress,
       username: subject.username
     },
-    'TODO: make configurable',
+    tokenSecret,
     {
       algorithm: 'HS256',
       expiresIn: '1 day'
     }
   );
-export const validateToken = async token =>
-  verify(token, 'TODO: make configurable');
+export const validateToken = async token => verify(token, tokenSecret);

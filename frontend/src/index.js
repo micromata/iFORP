@@ -7,7 +7,8 @@ import { JssProvider } from 'react-jss';
 import camelCase from 'jss-camel-case';
 import nested from 'jss-nested';
 import globals from 'jss-global';
-// import './index.css';
+import { verifyToken } from './services/auth.service';
+// Import './index.css';
 
 import App from './app';
 import registerServiceWorker from './registerServiceWorker';
@@ -18,6 +19,8 @@ const store = configureStore();
 const jss = createJss();
 jss.use(nested(), camelCase(), globals());
 
+verifyToken();
+
 ReactDOM.render(
   <JssProvider jss={jss}>
     <Provider store={ store }>
@@ -26,7 +29,7 @@ ReactDOM.render(
       </ThemeSwitch>
     </Provider>
   </JssProvider>,
-  document.getElementById('root')
+  document.querySelector('#root')
 );
 
 registerServiceWorker();

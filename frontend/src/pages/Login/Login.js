@@ -7,7 +7,7 @@ import IForpBrand from '../../assets/img/IForpBrand';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import * as backend from '../../services/backendrequest.service';
 import styles from './Login.styles';
-import { setToken, getToken } from '../../services/auth.service';
+import { setToken, getToken, verifyToken } from '../../services/auth.service';
 
 class Login extends Component {
 
@@ -34,10 +34,10 @@ class Login extends Component {
   }
 
   render() {
-    const token = getToken();
-    return token ? (
-      <Redirect to="/" />
-    ) : (
+    const isTokenValid = verifyToken();
+    if (isTokenValid) return (<Redirect to="/" />);
+
+    return (
       <div>
         <main>
           <div className={this.props.classes.Hero}>
