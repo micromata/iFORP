@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router';
 import injectSheet from 'react-jss';
 import MicromataBrand from '../../assets/img/MicromataBrand';
@@ -7,7 +8,8 @@ import IForpBrand from '../../assets/img/IForpBrand';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import * as backend from '../../services/backendrequest.service';
 import styles from './Login.styles';
-import { setToken, getToken, verifyToken } from '../../services/auth.service';
+import { setToken, verifyToken } from '../../services/auth.service';
+import { getAllProjects } from '../../actions/app-actions';
 
 class Login extends Component {
 
@@ -17,6 +19,7 @@ class Login extends Component {
       const json = await response.json();
       setToken(json.token);
       this.props.history.push('/');
+      this.props.getAllProjects();
     } catch (error) {
       console.error(error);
     }
@@ -28,6 +31,7 @@ class Login extends Component {
       const json = await response.json();
       setToken(json.token);
       this.props.history.push('/');
+      this.props.getAllProjects();
     } catch (error) {
       console.error(error);
     }
@@ -67,4 +71,8 @@ class Login extends Component {
   }
 }
 
-export default injectSheet(styles)(Login);
+const mapStateToProps = null;
+const actions = { getAllProjects };
+
+const LoginWithStyles = injectSheet(styles)(Login);
+export default connect(mapStateToProps, actions)(LoginWithStyles);

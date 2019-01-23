@@ -8,6 +8,7 @@ import camelCase from 'jss-camel-case';
 import nested from 'jss-nested';
 import globals from 'jss-global';
 import { verifyToken } from './services/auth.service';
+import { getAllProjects } from './actions/app-actions';
 // Import './index.css';
 
 import App from './app';
@@ -19,7 +20,9 @@ const store = configureStore();
 const jss = createJss();
 jss.use(nested(), camelCase(), globals());
 
-verifyToken();
+if (verifyToken()) {
+  getAllProjects()(store.dispatch);
+}
 
 ReactDOM.render(
   <JssProvider jss={jss}>

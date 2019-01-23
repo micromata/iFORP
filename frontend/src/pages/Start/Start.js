@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getAllProjects, createNewProject } from '../../actions/app-actions';
+import { createNewProject } from '../../actions/app-actions';
 import NavBar from '../../components/NavBar/NavBar';
 import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
@@ -26,10 +26,6 @@ class Start extends Component {
 
   createNewProject() {
     this.props.createNewProject(this.navigateToProject);
-  }
-
-  componentDidMount() {
-    this.props.getAllProjects();
   }
 
   render() {
@@ -81,7 +77,7 @@ const mapStateToProps = state => ({
   projects: state.app.projects.slice(0, 3)
 });
 
-const actions = { getAllProjects, createNewProject };
+const actions = { createNewProject };
 
 const StartContainerWithStyles = injectSheet(styles)(Start);
 export default connect(mapStateToProps, actions)(StartContainerWithStyles);
