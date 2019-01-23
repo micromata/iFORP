@@ -76,7 +76,7 @@ class Start extends Component {
 }
 
 const mapStateToProps = state => ({
-  projects: state.app.projects
+  projects: state.app.projects.slice(0, 3)
 });
 
 const actions = { getAllProjects, createNewProject };
