@@ -16,6 +16,10 @@ class Start extends Component {
     this.createNewProject = this.createNewProject.bind(this);
   }
 
+  navigateToProjectOverview = () => {
+    this.props.history.push(`projects`);
+  }
+
   navigateToProject = projectId => {
     this.props.history.push(`projects/${projectId}`);
   }
@@ -60,9 +64,7 @@ class Start extends Component {
                 )}
                 <Button
                   className="ghost"
-                  onClick={() => {
-                    console.log('Link to project overview');
-                  }}
+                  onClick={this.navigateToProjectOverview}
                   >
                   <Dots />
                 </Button>

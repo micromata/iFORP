@@ -6,6 +6,7 @@ import { dottedBackground } from './theme';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import Start from './pages/Start/Start';
 import PageNotFound from './pages/PageNotFound/PageNotFound';
+import ProjectOverview from './pages/ProjectOverview/ProjectOverview';
 import Project from './pages/Project/Project';
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
             <Switch>
               <Route path="/login" component={Login} />
               <ProtectedRoute exact path="/" component={Start} />
+              <ProtectedRoute exact path="/projects" component={ProjectOverview} />
               <ProtectedRoute path="/projects/:id" component={Project} />
               <Route path="**" component={PageNotFound} />
             </Switch>
