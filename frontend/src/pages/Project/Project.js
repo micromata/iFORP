@@ -10,6 +10,7 @@ import ButtonTile from '../../components/Button/ButtonTile';
 import PlusIcon from '../../assets/img/Plus';
 import ListIcon from '../../assets/img/List';
 import { createNewWhiteboard } from '../../actions/app-actions';
+import { findProjectWithId } from '../../utils';
 
 class Project extends Component {
   componentWillMount() {
@@ -18,6 +19,10 @@ class Project extends Component {
 
   handleAddWhiteboadClick = () => {
     this.props.createNewWhiteboard(this.props.project.id);
+  }
+
+  navigateToWhiteboard = whiteboardId => {
+    this.props.history.push(`/projects/${this.props.project.id}/${whiteboardId}`);
   }
 
   render() {
@@ -30,7 +35,8 @@ class Project extends Component {
           { this.props.project.whiteboards.map(whiteboard =>
             <ButtonTile
               key={ whiteboard.id }
-              titleBelow>
+              titleBelow
+              onClick={ () => this.navigateToWhiteboard(whiteboard.id) }>
               { whiteboard.name }
             </ButtonTile>
           )}
@@ -54,7 +60,7 @@ const actions = { createNewWhiteboard };
 const mapStateToProps = (state, ownProps) => {
   const projectId = parseInt(ownProps.match.params.id, 10);
   return {
-    project: state.app.projects.find(project => project.id === projectId)
+    project: findProjectWithId(state.app.projects, projectId)
   }
 };
 

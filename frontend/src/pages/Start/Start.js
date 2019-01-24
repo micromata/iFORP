@@ -21,7 +21,7 @@ class Start extends Component {
   }
 
   navigateToProject = projectId => {
-    this.props.history.push(`projects/${projectId}`);
+    this.props.history.push(`/projects/${projectId}`);
   }
 
   createNewProject() {
