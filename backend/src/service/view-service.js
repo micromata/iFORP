@@ -1,3 +1,4 @@
+import superb from 'superb';
 import { getRepository } from 'typeorm';
 import { Whiteboard } from '../orm/entity/whiteboard';
 import { View } from '../orm/entity/view';
@@ -33,6 +34,7 @@ export const save = async (whiteboardId, base) => {
   const view = base;
   view.whiteboard = whiteboard;
   view.hasFile = false;
+  view.name = view.name || `${superb.random()} View`;
   return viewRepo.save(view);
 };
 

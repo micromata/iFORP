@@ -3,14 +3,22 @@ import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
 import styles from './Whiteboard.styles';
 import NavBar from '../../components/NavBar/NavBar';
+import ButtonBar from '../../components/ButtonBar/ButtonBar';
+import CircleButton from '../../components/Button/CircleButton';
 import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
-import { getViewsForWhiteboard } from '../../actions/app-actions';
+import { getViewsForWhiteboard, createNewView } from '../../actions/app-actions';
 import { findWhiteboardWithId } from '../../utils';
+import PlusIcon from '../../assets/img/Plus';
 
 class Whiteboard extends Component {
   componentDidMount = () => {
     this.props.getViewsForWhiteboard(this.props.projectId, this.props.whiteboardId);
+  }
+
+
+  handleAddViewClick = () => {
+    this.props.createNewView(this.props.projectId, this.props.whiteboardId);
   }
 
   render() {
@@ -28,12 +36,19 @@ class Whiteboard extends Component {
             </ButtonTile>
           )}
         </ElementGrid>
+        <ButtonBar>
+          <div/>
+          <CircleButton onClick={ this.handleAddViewClick }>
+            <PlusIcon />
+          </CircleButton>
+          <div/>
+        </ButtonBar>
       </React.Fragment>
     );
   }
 }
 
-const actions = { getViewsForWhiteboard };
+const actions = { getViewsForWhiteboard, createNewView };
 
 const mapStateToProps = (state, ownProps) => {
   const projectId = parseInt(ownProps.match.params.projectId, 10);

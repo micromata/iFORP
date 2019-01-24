@@ -1,10 +1,11 @@
 import * as http from '../services/backendrequest.service';
-import { findProjectWithId, findWhiteboardWithId } from '../utils';
+import { findWhiteboardWithId } from '../utils';
 
 const actionNames = {
   PROJECTS_RECEIVED: 'PROJECTS_RECEIVED',
   PROJECT_CREATED: 'PROJECT_CREATED',
   WHITEBOARD_CREATED: 'WHITEBOARD_CREATED',
+  VIEW_CREATED: 'VIEW_CREATED',
   VIEWS_LIST_RECEIVED: 'VIEWS_LIST_RECEIVED'
 };
 
@@ -41,6 +42,18 @@ const createNewWhiteboard = projectId => async dispatch => {
   });
 }
 
+const createNewView = (projectId, whiteboardId) => async dispatch => {
+  const response = await http.post(`/projects/${projectId}/whiteboards/${whiteboardId}/views`);
+  const view = await response.json();
+
+  dispatch({
+    type: actionNames.VIEW_CREATED,
+    projectId,
+    whiteboardId,
+    view
+  });
+};
+
 const getViewsForWhiteboard = (projectId, whiteboardId) => async (dispatch, getState) => {
   const whiteboard = findWhiteboardWithId(getState().app.projects, projectId, whiteboardId);
 
@@ -62,5 +75,6 @@ export {
   getAllProjects,
   createNewProject,
   createNewWhiteboard,
+  createNewView,
   getViewsForWhiteboard
 };

@@ -15,15 +15,25 @@ const addWhiteboardToProject = (newState, projectId, whiteboard) => {
   project.whiteboards.push(whiteboard);
 }
 
-const addViewListToWhiteboard = (newState, projectId, whiteboardId, views) => {
+const setViewListOfWhiteboard = (newState, projectId, whiteboardId, views) => {
   const whiteboard = findWhiteboardWithId(newState.projects, projectId, whiteboardId);
 
-  if (!whiteboard) throw new Error(`whiteboard with id ${whiteboard} (project ${projectId}) not found`);
+  if (!whiteboard) throw new Error(`whiteboard with id ${whiteboardId} (project ${projectId}) not found`);
 
   whiteboard.views = views.map(view => {
     view.hasDetails = false;
     return view;
   });
+}
+
+const addViewToWhiteboard = (newState, projectId, whiteboardId, view) => {
+  const whiteboardForView = findWhiteboardWithId(newState.projects, projectId, whiteboardId);
+
+  if (!whiteboardForView) throw new Error(`whiteboard with id ${whiteboardId} (project ${projectId}) not found`);
+
+  const { whiteboard, ...viewToAdd } = view;
+  viewToAdd.hasDetails = true;
+  whiteboardForView.views.push(viewToAdd);
 }
 
 export default (state = initialState, action) => {
@@ -42,7 +52,10 @@ export default (state = initialState, action) => {
       addWhiteboardToProject(newState, action.projectId, action.whiteboard);
       return newState;
     case actionNames.VIEWS_LIST_RECEIVED:
-      addViewListToWhiteboard(newState, action.projectId, action.whiteboardId, action.views);
+      setViewListOfWhiteboard(newState, action.projectId, action.whiteboardId, action.views);
+      return newState;
+    case actionNames.VIEW_CREATED:
+      addViewToWhiteboard(newState, action.projectId, action.whiteboardId, action.view);
       return newState;
     default:
       return state;

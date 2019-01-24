@@ -15,24 +15,26 @@ import App from './app';
 import registerServiceWorker from './registerServiceWorker';
 import ThemeSwitch from './ThemeSwitch';
 
-const store = configureStore();
+(async() => {
+  const store = configureStore();
 
-const jss = createJss();
-jss.use(nested(), camelCase(), globals());
+  const jss = createJss();
+  jss.use(nested(), camelCase(), globals());
 
-if (verifyToken()) {
-  getAllProjects()(store.dispatch);
-}
+  if (verifyToken()) {
+    await getAllProjects()(store.dispatch);
+  }
 
-ReactDOM.render(
-  <JssProvider jss={jss}>
-    <Provider store={ store }>
-      <ThemeSwitch>
-        <App />
-      </ThemeSwitch>
-    </Provider>
-  </JssProvider>,
-  document.querySelector('#root')
-);
+  ReactDOM.render(
+    <JssProvider jss={jss}>
+      <Provider store={ store }>
+        <ThemeSwitch>
+          <App />
+        </ThemeSwitch>
+      </Provider>
+    </JssProvider>,
+    document.querySelector('#root')
+  );
 
-registerServiceWorker();
+  registerServiceWorker();
+})();
