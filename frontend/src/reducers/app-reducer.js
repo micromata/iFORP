@@ -36,6 +36,15 @@ const addViewToWhiteboard = (newState, projectId, whiteboardId, view) => {
   whiteboardForView.views.push(viewToAdd);
 }
 
+const removeViewFromWhiteboard = (newState, projectId, whiteboardId, viewId) => {
+  const whiteboard = findWhiteboardWithId(newState.projects, projectId, whiteboardId);
+
+  if (!whiteboard) throw new Error(`whiteboard with id ${whiteboardId} (project ${projectId}) not found`);
+  if (!whiteboard.views) return;
+
+  whiteboard.views = whiteboard.views.filter(view => view.id !== viewId);
+}
+
 export default (state = initialState, action) => {
   const newState = deepClone(state);
 
@@ -56,6 +65,9 @@ export default (state = initialState, action) => {
       return newState;
     case actionNames.VIEW_CREATED:
       addViewToWhiteboard(newState, action.projectId, action.whiteboardId, action.view);
+      return newState;
+    case actionNames.VIEW_DELETED:
+      removeViewFromWhiteboard(newState, action.projectId, action.whiteboardId, action.viewId);
       return newState;
     default:
       return state;

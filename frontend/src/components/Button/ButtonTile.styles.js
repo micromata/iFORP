@@ -16,8 +16,12 @@ export default {
     },
     marginBottom: "2rem"
   },
+  DeleteButton: {
+    position: 'relative',
+    top: '150px',
+    left: '-20px'
+  },
   ProjectName: {
-    cursor: 'pointer',
     color: '#FFF',
     textDecoration: 'none',
     display: 'flex',

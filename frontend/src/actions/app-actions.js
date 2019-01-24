@@ -6,7 +6,8 @@ const actionNames = {
   PROJECT_CREATED: 'PROJECT_CREATED',
   WHITEBOARD_CREATED: 'WHITEBOARD_CREATED',
   VIEW_CREATED: 'VIEW_CREATED',
-  VIEWS_LIST_RECEIVED: 'VIEWS_LIST_RECEIVED'
+  VIEWS_LIST_RECEIVED: 'VIEWS_LIST_RECEIVED',
+  VIEW_DELETED: 'VIEW_DELETED'
 };
 
 const getAllProjects = () => async dispatch => {
@@ -70,11 +71,25 @@ const getViewsForWhiteboard = (projectId, whiteboardId) => async (dispatch, getS
   });
 }
 
+const deleteView = (projectId, whiteboardId, viewId) => async dispatch => {
+  const response = await http.deleteEntity(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}`);
+
+  if (response.ok) {
+    dispatch({
+      type: actionNames.VIEW_DELETED,
+      projectId,
+      whiteboardId,
+      viewId
+    })
+  }
+}
+
 export {
   actionNames,
   getAllProjects,
   createNewProject,
   createNewWhiteboard,
   createNewView,
-  getViewsForWhiteboard
+  getViewsForWhiteboard,
+  deleteView
 };

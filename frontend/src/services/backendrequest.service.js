@@ -11,7 +11,7 @@ export const post = (path, payload = {}) =>
       Authorization: `Bearer ${getToken() || ''}`,
     },
     mode: isDev ? 'cors' : 'same-origin',
-    method: 'POST',
+    method: 'POST'
   });
 
 export const get = (path = {}) =>
@@ -22,5 +22,17 @@ export const get = (path = {}) =>
       Authorization: `Bearer ${getToken() || ''}`,
     },
     mode: isDev ? 'cors' : 'same-origin',
-    method: 'GET',
+    method: 'GET'
+  });
+
+export const deleteEntity = (path, payload = {}) =>
+  fetch(baseURL + path, {
+    body: JSON.stringify(payload),
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${getToken() || ''}`,
+    },
+    mode: isDev ? 'cors' : 'same-origin',
+    method: 'DELETE'
   });

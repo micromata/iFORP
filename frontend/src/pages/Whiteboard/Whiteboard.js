@@ -7,7 +7,7 @@ import ButtonBar from '../../components/ButtonBar/ButtonBar';
 import CircleButton from '../../components/Button/CircleButton';
 import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
-import { getViewsForWhiteboard, createNewView } from '../../actions/app-actions';
+import { getViewsForWhiteboard, createNewView, deleteView } from '../../actions/app-actions';
 import { findWhiteboardWithId } from '../../utils';
 import PlusIcon from '../../assets/img/Plus';
 
@@ -16,9 +16,12 @@ class Whiteboard extends Component {
     this.props.getViewsForWhiteboard(this.props.projectId, this.props.whiteboardId);
   }
 
-
-  handleAddViewClick = () => {
+  handleCreateViewClick = () => {
     this.props.createNewView(this.props.projectId, this.props.whiteboardId);
+  }
+
+  handleDeleteViewClick = viewId => {
+    this.props.deleteView(this.props.projectId, this.props.whiteboardId, viewId);
   }
 
   render() {
@@ -31,6 +34,7 @@ class Whiteboard extends Component {
           { this.props.views.map(view =>
             <ButtonTile
               key={ view.id }
+              onDeleteClick={() => this.handleDeleteViewClick(view.id)}
               titleBelow>
               { view.name }
             </ButtonTile>
@@ -38,7 +42,7 @@ class Whiteboard extends Component {
         </ElementGrid>
         <ButtonBar>
           <div/>
-          <CircleButton onClick={ this.handleAddViewClick }>
+          <CircleButton onClick={ this.handleCreateViewClick }>
             <PlusIcon />
           </CircleButton>
           <div/>
@@ -48,7 +52,7 @@ class Whiteboard extends Component {
   }
 }
 
-const actions = { getViewsForWhiteboard, createNewView };
+const actions = { getViewsForWhiteboard, createNewView, deleteView };
 
 const mapStateToProps = (state, ownProps) => {
   const projectId = parseInt(ownProps.match.params.projectId, 10);
