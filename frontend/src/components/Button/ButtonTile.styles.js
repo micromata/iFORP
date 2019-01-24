@@ -18,8 +18,11 @@ export default {
   },
   DeleteButton: {
     position: 'relative',
-    top: '150px',
-    left: '-20px'
+    top: '144px',
+    left: '-20px',
+    '& button': {
+      backgroundColor: '#666666'
+    }
   },
   ProjectName: {
     color: '#FFF',
