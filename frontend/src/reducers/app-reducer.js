@@ -36,6 +36,15 @@ const addViewToWhiteboard = (newState, projectId, whiteboardId, view) => {
   whiteboardForView.views.push(viewToAdd);
 }
 
+const removeWhiteboardFromProject = (newState, projectId, whiteboardId) => {
+  const project = findProjectWithId(newState.projects, projectId);
+
+  if (!project) throw new Error(`project with id ${projectId} not found`);
+  if (!project.whiteboards) return;
+
+  project.whiteboards = project.whiteboards.filter(whiteboard => whiteboard.id !== whiteboardId);
+}
+
 const removeViewFromWhiteboard = (newState, projectId, whiteboardId, viewId) => {
   const whiteboard = findWhiteboardWithId(newState.projects, projectId, whiteboardId);
 
@@ -65,6 +74,9 @@ export default (state = initialState, action) => {
       return newState;
     case actionNames.VIEW_CREATED:
       addViewToWhiteboard(newState, action.projectId, action.whiteboardId, action.view);
+      return newState;
+    case actionNames.WHITEBOARD_DELETED:
+      removeWhiteboardFromProject(newState, action.projectId, action.whiteboardId);
       return newState;
     case actionNames.VIEW_DELETED:
       removeViewFromWhiteboard(newState, action.projectId, action.whiteboardId, action.viewId);

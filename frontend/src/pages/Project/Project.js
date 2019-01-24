@@ -9,7 +9,7 @@ import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
 import PlusIcon from '../../assets/img/Plus';
 import ListIcon from '../../assets/img/List';
-import { createNewWhiteboard } from '../../actions/app-actions';
+import { createNewWhiteboard, deleteWhiteboard } from '../../actions/app-actions';
 import { findProjectWithId } from '../../utils';
 
 class Project extends Component {
@@ -17,8 +17,12 @@ class Project extends Component {
     console.log(this.props.match.params.id)
   }
 
-  handleAddWhiteboadClick = () => {
+  handleCreateWhiteboadClick = () => {
     this.props.createNewWhiteboard(this.props.project.id);
+  }
+
+  handleDeleteWhiteboardClick = whiteboardId => {
+    this.props.deleteWhiteboard(this.props.project.id, whiteboardId);
   }
 
   navigateToWhiteboard = whiteboardId => {
@@ -36,14 +40,15 @@ class Project extends Component {
             <ButtonTile
               key={ whiteboard.id }
               titleBelow
-              onClick={ () => this.navigateToWhiteboard(whiteboard.id) }>
+              onClick={ () => this.navigateToWhiteboard(whiteboard.id) }
+              onDeleteClick={() => this.handleDeleteWhiteboardClick(whiteboard.id)}>
               { whiteboard.name }
             </ButtonTile>
           )}
         </ElementGrid>
         <ButtonBar>
           <div />
-          <CircleButton onClick={ this.handleAddWhiteboadClick }>
+          <CircleButton onClick={ this.handleCreateWhiteboadClick }>
             <PlusIcon />
           </CircleButton>
           <CircleButton>
@@ -55,7 +60,7 @@ class Project extends Component {
   }
 }
 
-const actions = { createNewWhiteboard };
+const actions = { createNewWhiteboard, deleteWhiteboard };
 
 const mapStateToProps = (state, ownProps) => {
   const projectId = parseInt(ownProps.match.params.id, 10);
