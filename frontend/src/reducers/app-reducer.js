@@ -7,6 +7,26 @@ const initialState = {
 
 const deepClone = obj => JSON.parse(JSON.stringify(obj));
 
+const updateHasDetailsFlagOfViews = project => {
+  if (!project || !project.whiteboards) return project;
+
+  const clonedProject = deepClone(project);
+
+  clonedProject.whiteboards = clonedProject.whiteboards.
+    map(whiteboard => {
+      if (!whiteboard.views) return whiteboard;
+
+      whiteboard.views.map(view => {
+        view.hasDetails = view.hasOwnProperty('body'); // eslint-disable-line no-prototype-builtins
+        return view;
+      })
+
+      return whiteboard;
+    });
+
+  return clonedProject;
+};
+
 const addWhiteboardToProject = (newState, projectId, whiteboard) => {
   const project = findProjectWithId(newState.projects, projectId);
 
@@ -64,7 +84,7 @@ export default (state = initialState, action) => {
         projects: action.projects
       };
     case actionNames.PROJECT_CREATED:
-      newState.projects.push(action.project);
+      newState.projects.push(updateHasDetailsFlagOfViews(action.project));
       return newState;
     case actionNames.WHITEBOARD_CREATED:
       addWhiteboardToProject(newState, action.projectId, action.whiteboard);

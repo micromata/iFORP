@@ -13,10 +13,6 @@ import { createNewWhiteboard, deleteWhiteboard } from '../../actions/app-actions
 import { findProjectWithId } from '../../utils';
 
 class Project extends Component {
-  componentWillMount() {
-    console.log(this.props.match.params.id)
-  }
-
   handleCreateWhiteboadClick = () => {
     this.props.createNewWhiteboard(this.props.project.id);
   }

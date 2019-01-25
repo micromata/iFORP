@@ -24,8 +24,16 @@ class Start extends Component {
     this.props.history.push(`/projects/${projectId}`);
   }
 
+  navigateToWhiteboard = (projectId, whiteboardId) => {
+    this.props.history.push(`/projects/${projectId}/${whiteboardId}`);
+  };
+
   createNewProject() {
-    this.props.createNewProject(this.navigateToProject);
+    this.props.
+      createNewProject(this.navigateToProject).
+      then(project => {
+        this.navigateToWhiteboard(project.id, project.whiteboards[0].id);
+      });
   }
 
   render() {

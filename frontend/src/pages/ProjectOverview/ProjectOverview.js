@@ -3,14 +3,22 @@ import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
 import styles from './ProjectOverview.styles';
 import NavBar from '../../components/NavBar/NavBar';
+import ButtonBar from '../../components/ButtonBar/ButtonBar';
+import CircleButton from '../../components/Button/CircleButton';
 import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
 import SearchBar from '../../components/SearchBar/SearchBar';
+import { createNewProject } from '../../actions/app-actions';
+import PlusIcon from '../../assets/img/Plus';
 
 class ProjectOverview extends Component {
   constructor(props) {
     super(props);
     this.state = { searchTerm: ''}
+  }
+
+  handleCreateProjectClick = () => {
+    this.props.createNewProject();
   }
 
   navigateToProject = projectId => {
@@ -42,14 +50,23 @@ class ProjectOverview extends Component {
             </ButtonTile>
           )}
         </ElementGrid>
+        <ButtonBar>
+          <div />
+          <CircleButton onClick={ this.handleCreateProjectClick }>
+            <PlusIcon />
+          </CircleButton>
+          <div />
+        </ButtonBar>
       </React.Fragment>
     );
   }
 }
+
+const actions = { createNewProject };
 
 const mapStateToProps = state => ({
   projects: state.app.projects
 });
 
 const ProjectOverviewContainerWithStyles = injectSheet(styles)(ProjectOverview);
-export default connect(mapStateToProps)(ProjectOverviewContainerWithStyles);
+export default connect(mapStateToProps, actions)(ProjectOverviewContainerWithStyles);

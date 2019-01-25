@@ -21,7 +21,7 @@ const getAllProjects = () => async dispatch => {
   });
 };
 
-const createNewProject = navigateToProject => async dispatch => {
+const createNewProject = () => async dispatch => {
   const response = await http.post('/projects');
   const project = await response.json();
 
@@ -30,7 +30,7 @@ const createNewProject = navigateToProject => async dispatch => {
     project
   });
 
-  navigateToProject(project.id);
+  return project;
 };
 
 const createNewWhiteboard = projectId => async dispatch => {
@@ -42,6 +42,8 @@ const createNewWhiteboard = projectId => async dispatch => {
     projectId,
     whiteboard
   });
+
+  return whiteboard;
 }
 
 const createNewView = (projectId, whiteboardId) => async dispatch => {
@@ -54,6 +56,8 @@ const createNewView = (projectId, whiteboardId) => async dispatch => {
     whiteboardId,
     view
   });
+
+  return view;
 };
 
 const getViewsForWhiteboard = (projectId, whiteboardId) => async (dispatch, getState) => {
@@ -70,6 +74,8 @@ const getViewsForWhiteboard = (projectId, whiteboardId) => async (dispatch, getS
     whiteboardId,
     views
   });
+
+  return views;
 }
 
 const deleteWhiteboard = (projectId, whiteboardId) => async dispatch => {
