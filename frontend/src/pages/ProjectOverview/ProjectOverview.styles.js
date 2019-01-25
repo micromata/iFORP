@@ -1,3 +1,5 @@
 export default () => ({
-  ProjectOverview: {}
+  ProjectOverview: {
+    marginBottom: '80px'
+  }
 });

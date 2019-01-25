@@ -30,16 +30,18 @@ class Whiteboard extends Component {
     return (
       <React.Fragment>
         <NavBar title={ `iFORP > ${ this.props.project.name } > ${ this.props.whiteboard.name }` } />
-        <ElementGrid>
-          { this.props.views.map(view =>
-            <ButtonTile
-              key={ view.id }
-              onDeleteClick={() => this.handleDeleteViewClick(view.id)}
-              titleBelow>
-              { view.name }
-            </ButtonTile>
-          )}
-        </ElementGrid>
+        <div className={this.props.classes.Whiteboard}>
+          <ElementGrid>
+            { this.props.views.map(view =>
+              <ButtonTile
+                key={ view.id }
+                onDeleteClick={() => this.handleDeleteViewClick(view.id)}
+                titleBelow>
+                { view.name }
+              </ButtonTile>
+            )}
+          </ElementGrid>
+        </div>
         <ButtonBar>
           <div/>
           <CircleButton onClick={ this.handleCreateViewClick }>

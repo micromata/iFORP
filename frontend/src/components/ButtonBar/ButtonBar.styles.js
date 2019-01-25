@@ -6,11 +6,15 @@ export default () => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     position: 'fixed',
-    padding: '0 20px 20px 20px',
+    padding: '20px 20px',
+    backgroundColor: 'rgba(100, 100, 100, 0.9)',
     bottom: 0,
     zIndex: 10,
     '& div:empty': {
       minWidth: '56px'
+    },
+    '& button': {
+      marginTop: '-40px'
     }
   }
 });

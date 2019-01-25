@@ -1,3 +1,5 @@
 export default () => ({
-  Whiteboard: {}
+  Whiteboard: {
+    marginBottom: '80px'
+  }
 });

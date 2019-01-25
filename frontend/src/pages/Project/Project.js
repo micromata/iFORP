@@ -31,17 +31,19 @@ class Project extends Component {
     return (
       <React.Fragment>
         <NavBar exit title={ `iFORP > ${ this.props.project.name }` } />
-        <ElementGrid>
-          { this.props.project.whiteboards.map(whiteboard =>
-            <ButtonTile
-              key={ whiteboard.id }
-              titleBelow
-              onClick={ () => this.navigateToWhiteboard(whiteboard.id) }
-              onDeleteClick={() => this.handleDeleteWhiteboardClick(whiteboard.id)}>
-              { whiteboard.name }
-            </ButtonTile>
-          )}
-        </ElementGrid>
+        <div className={this.props.classes.Project}>
+          <ElementGrid>
+            { this.props.project.whiteboards.map(whiteboard =>
+              <ButtonTile
+                key={ whiteboard.id }
+                titleBelow
+                onClick={ () => this.navigateToWhiteboard(whiteboard.id) }
+                onDeleteClick={() => this.handleDeleteWhiteboardClick(whiteboard.id)}>
+                { whiteboard.name }
+              </ButtonTile>
+            )}
+          </ElementGrid>
+        </div>
         <ButtonBar>
           <div />
           <CircleButton onClick={ this.handleCreateWhiteboadClick }>

@@ -43,18 +43,20 @@ class ProjectOverview extends Component {
     return (
       <React.Fragment>
         <NavBar title={ `iFORP > Projektübersicht` } />
-        <SearchBar searchTerm={ this.state.searchTerm } onChange={ this.handleSearchTermChange } />
-        <ElementGrid>
-          { filteredProjects.map(project =>
-            <ButtonTile
-              key={ project.id }
-              titleBelow
-              onClick={ () => this.navigateToProject(project.id ) }
-              onDeleteClick={() => this.handleDeleteProjectClick(project.id)}>
-              { project.name }
-            </ButtonTile>
-          )}
-        </ElementGrid>
+        <div className={ this.props.classes.ProjectOverview }>
+          <SearchBar searchTerm={ this.state.searchTerm } onChange={ this.handleSearchTermChange } />
+          <ElementGrid>
+            { filteredProjects.map(project =>
+              <ButtonTile
+                key={ project.id }
+                titleBelow
+                onClick={ () => this.navigateToProject(project.id ) }
+                onDeleteClick={() => this.handleDeleteProjectClick(project.id)}>
+                { project.name }
+              </ButtonTile>
+            )}
+          </ElementGrid>
+        </div>
         <ButtonBar>
           <div />
           <CircleButton onClick={ this.handleCreateProjectClick }>
