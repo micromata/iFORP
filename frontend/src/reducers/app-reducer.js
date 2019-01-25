@@ -95,6 +95,9 @@ export default (state = initialState, action) => {
     case actionNames.VIEW_CREATED:
       addViewToWhiteboard(newState, action.projectId, action.whiteboardId, action.view);
       return newState;
+    case actionNames.PROJECT_DELETED:
+      newState.projects = newState.projects.filter(project => project.id !== action.projectId);
+      return newState;
     case actionNames.WHITEBOARD_DELETED:
       removeWhiteboardFromProject(newState, action.projectId, action.whiteboardId);
       return newState;

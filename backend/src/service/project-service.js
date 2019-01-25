@@ -50,3 +50,15 @@ export const update = async (id, base) => {
   const patched = { ...origProject, ...base };
   return repo.save(patched);
 };
+
+export const remove = async id => {
+  const repo = getRepository(Project);
+  const found = await repo.findOne(id);
+  if (!found) {
+    throw exceptionWithHttpStatus(
+      `Cannot delete non-existent project with ID ${id}`,
+      404
+    );
+  }
+  return repo.remove(found);
+};

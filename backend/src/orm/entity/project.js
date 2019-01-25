@@ -21,7 +21,8 @@ export class Project {
 
   @OneToMany(() => Whiteboard, whiteboard => whiteboard.project, {
     cascade: true,
-    eager: true
+    eager: true,
+    onDelete: 'CASCADE'
   })
   whiteboards = undefined;
 }

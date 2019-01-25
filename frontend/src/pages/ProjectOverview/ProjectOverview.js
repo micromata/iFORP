@@ -8,7 +8,7 @@ import CircleButton from '../../components/Button/CircleButton';
 import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import { createNewProject } from '../../actions/app-actions';
+import { createNewProject, deleteProject } from '../../actions/app-actions';
 import PlusIcon from '../../assets/img/Plus';
 
 class ProjectOverview extends Component {
@@ -19,6 +19,10 @@ class ProjectOverview extends Component {
 
   handleCreateProjectClick = () => {
     this.props.createNewProject();
+  }
+
+  handleDeleteProjectClick = projectId => {
+    this.props.deleteProject(projectId);
   }
 
   navigateToProject = projectId => {
@@ -45,7 +49,8 @@ class ProjectOverview extends Component {
             <ButtonTile
               key={ project.id }
               titleBelow
-              onClick={ () => this.navigateToProject(project.id ) }>
+              onClick={ () => this.navigateToProject(project.id ) }
+              onDeleteClick={() => this.handleDeleteProjectClick(project.id)}>
               { project.name }
             </ButtonTile>
           )}
@@ -62,7 +67,7 @@ class ProjectOverview extends Component {
   }
 }
 
-const actions = { createNewProject };
+const actions = { createNewProject, deleteProject };
 
 const mapStateToProps = state => ({
   projects: state.app.projects

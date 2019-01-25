@@ -45,6 +45,13 @@ projects.patch(
   })
 );
 
+projects.delete(
+  '/:projectId',
+  handleRequest(async (req, res) => {
+    return res.send(await projectService.remove(req.params.projectId));
+  })
+);
+
 projects.get(
   '/:projectId/whiteboards',
   handleRequest(async (req, res) => {

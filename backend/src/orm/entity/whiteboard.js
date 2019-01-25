@@ -17,10 +17,13 @@ export class Whiteboard {
   name = undefined;
 
   @OneToMany(() => View, view => view.whiteboard, {
-    cascade: true
+    cascade: true,
+    onDelete: 'CASCADE'
   })
   views = undefined;
 
-  @ManyToOne(() => Project)
+  @ManyToOne(() => Project, project => project.whiteboards, {
+    onDelete: 'CASCADE'
+  })
   project = undefined;
 }
