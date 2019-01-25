@@ -42,7 +42,7 @@ class ProjectOverview extends Component {
 
     return (
       <React.Fragment>
-        <NavBar title={ `iFORP` } />
+        <NavBar title={ `iFORP > Projektübersicht` } />
         <SearchBar searchTerm={ this.state.searchTerm } onChange={ this.handleSearchTermChange } />
         <ElementGrid>
           { filteredProjects.map(project =>

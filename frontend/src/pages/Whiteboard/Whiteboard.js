@@ -8,7 +8,7 @@ import CircleButton from '../../components/Button/CircleButton';
 import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
 import { getViewsForWhiteboard, createNewView, deleteView } from '../../actions/app-actions';
-import { findWhiteboardWithId } from '../../utils';
+import { findProjectWithId, findWhiteboardWithId } from '../../utils';
 import PlusIcon from '../../assets/img/Plus';
 
 class Whiteboard extends Component {
@@ -29,7 +29,7 @@ class Whiteboard extends Component {
 
     return (
       <React.Fragment>
-        <NavBar title={ `iFORP` } />
+        <NavBar title={ `iFORP > ${ this.props.project.name } > ${ this.props.whiteboard.name }` } />
         <ElementGrid>
           { this.props.views.map(view =>
             <ButtonTile
@@ -57,12 +57,15 @@ const actions = { getViewsForWhiteboard, createNewView, deleteView };
 const mapStateToProps = (state, ownProps) => {
   const projectId = parseInt(ownProps.match.params.projectId, 10);
   const whiteboardId = parseInt(ownProps.match.params.whiteboardId, 10);
+  const project = findProjectWithId(state.app.projects, projectId);
   const whiteboard = findWhiteboardWithId(state.app.projects, projectId, whiteboardId);
   const views = whiteboard && whiteboard.views;
 
   return {
     projectId,
     whiteboardId,
+    project,
+    whiteboard,
     views
   }
 };
