@@ -43,6 +43,9 @@ class SignInForm extends Component {
                 this.setState({ password: event.target.value })
               }
             />
+            { this.props.error &&
+              <p className={this.props.classes.SignInError}>{this.props.error}</p>
+            }
           </div>
           <Button
             type="submit"
@@ -69,6 +72,10 @@ const styles = {
   FormInputs: {
     height: '100%',
   },
+  SignInError: {
+    color: '#c0392b',
+    textAlign: 'center'
+  }
 };
 
 export default injectSheet(styles)(SignInForm);

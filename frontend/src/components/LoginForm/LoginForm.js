@@ -31,10 +31,10 @@ class LoginForm extends Component {
           }}
         />
         {this.state.mode === 'signIn' && (
-          <SignInForm handleSignIn={this.props.handleSignIn} />
+          <SignInForm handleSignIn={this.props.handleSignIn} error={this.props.signInError} />
         )}
         {this.state.mode === 'signUp' && (
-          <SignUpForm handleSignUp={this.props.handleSignUp} />
+          <SignUpForm handleSignUp={this.props.handleSignUp} error={this.props.signUpError} />
         )}
       </Card>
     );

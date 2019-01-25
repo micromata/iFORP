@@ -56,6 +56,9 @@ class SignUpForm extends Component {
                 this.setState({ passwordRepeat: event.target.value })
               }
             />
+            { this.props.error &&
+              <p className={this.props.classes.SignUpError}>{this.props.error}</p>
+            }
           </div>
           <Button
             type="submit"
@@ -82,6 +85,9 @@ const styles = {
   FormInputs: {
     height: '100%',
   },
+  SignUpError: {
+    color: '#c0392b'
+  }
 };
 
 export default injectSheet(styles)(SignUpForm);

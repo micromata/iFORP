@@ -12,28 +12,49 @@ import { setToken, verifyToken } from '../../services/auth.service';
 import { getAllProjects } from '../../actions/app-actions';
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { signInError: null, signUpError: null };
+  }
+
+  resetErrors = () => {
+    this.setState({signInError: null, signUpError: null});
+  }
 
   handleSignIn = async credentials => {
     try {
       const response = await backend.post('/auth/login', credentials);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText);
+      }
+
       const json = await response.json();
       setToken(json.token);
       this.props.history.push('/');
       this.props.getAllProjects();
     } catch (error) {
-      console.error(error);
+      this.setState({ signInError: error.message });
     }
   }
 
   handleSignUp = async userData => {
     try {
       const response = await backend.post('/auth/register', userData);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText);
+      }
+
       const json = await response.json();
       setToken(json.token);
       this.props.history.push('/');
       this.props.getAllProjects();
     } catch (error) {
-      console.error(error);
+      this.setState({ signUpError: error.message });
     }
   }
 
@@ -53,6 +74,8 @@ class Login extends Component {
           <LoginForm
             handleSignIn={this.handleSignIn}
             handleSignUp={this.handleSignUp}
+            signInError={this.state.signInError}
+            signUpError={this.state.signUpError}
           />
         </main>
         <footer className={this.props.classes.Footer}>
