@@ -3,13 +3,11 @@ import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
 import styles from './Whiteboard.styles';
 import NavBar from '../../components/NavBar/NavBar';
-import ButtonBar from '../../components/ButtonBar/ButtonBar';
-import CircleButton from '../../components/Button/CircleButton';
+import ProjectButtonBar from '../../components/ProjectButtonBar/ProjectButtonBar';
 import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
 import { getViewsForWhiteboard, createNewView, deleteView } from '../../actions/app-actions';
 import { findProjectWithId, findWhiteboardWithId } from '../../utils';
-import PlusIcon from '../../assets/img/Plus';
 
 class Whiteboard extends Component {
   componentDidMount = () => {
@@ -42,13 +40,7 @@ class Whiteboard extends Component {
             )}
           </ElementGrid>
         </div>
-        <ButtonBar>
-          <div/>
-          <CircleButton onClick={ this.handleCreateViewClick }>
-            <PlusIcon />
-          </CircleButton>
-          <div/>
-        </ButtonBar>
+        <ProjectButtonBar onPlusButtonClick={this.handleCreateViewClick} />
       </React.Fragment>
     );
   }

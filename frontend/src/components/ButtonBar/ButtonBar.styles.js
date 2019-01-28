@@ -1,4 +1,4 @@
-export default () => ({
+export default (theme) => ({
   ButtonBar: {
     width: '100%',
     display: 'flex',
@@ -7,9 +7,15 @@ export default () => ({
     justifyContent: 'space-between',
     position: 'fixed',
     padding: '20px 20px',
-    backgroundColor: 'rgba(100, 100, 100, 0.9)',
+    backgroundColor: theme.ButtonBar.backgroundColor,
     bottom: 0,
+    visibility: 'visible',
+    transition: 'bottom 0.5s, visibility 0.5s',
     zIndex: 10,
+    '&.fade': {
+      bottom: '-80px',
+      visibility: 'hidden'
+    },
     '& div:empty': {
       minWidth: '56px'
     },

@@ -3,12 +3,9 @@ import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
 import styles from './Project.styles';
 import NavBar from '../../components/NavBar/NavBar';
-import ButtonBar from '../../components/ButtonBar/ButtonBar';
-import CircleButton from '../../components/Button/CircleButton';
+import ProjectButtonBar from '../../components/ProjectButtonBar/ProjectButtonBar';
 import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
-import PlusIcon from '../../assets/img/Plus';
-import ListIcon from '../../assets/img/List';
 import { createNewWhiteboard, deleteWhiteboard } from '../../actions/app-actions';
 import { findProjectWithId } from '../../utils';
 
@@ -44,15 +41,7 @@ class Project extends Component {
             )}
           </ElementGrid>
         </div>
-        <ButtonBar>
-          <div />
-          <CircleButton onClick={ this.handleCreateWhiteboadClick }>
-            <PlusIcon />
-          </CircleButton>
-          <CircleButton>
-            <ListIcon />
-          </CircleButton>
-        </ButtonBar>
+        <ProjectButtonBar onPlusButtonClick={this.handleCreateWhiteboadClick} />
       </React.Fragment>
     );
   }

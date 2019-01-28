@@ -86,7 +86,8 @@ const styles = {
     height: '100%',
   },
   SignUpError: {
-    color: '#c0392b'
+    color: '#c0392b',
+    textAlign: 'center'
   }
 };
 

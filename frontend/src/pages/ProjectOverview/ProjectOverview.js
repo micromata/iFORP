@@ -3,18 +3,16 @@ import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
 import styles from './ProjectOverview.styles';
 import NavBar from '../../components/NavBar/NavBar';
-import ButtonBar from '../../components/ButtonBar/ButtonBar';
-import CircleButton from '../../components/Button/CircleButton';
 import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
 import SearchBar from '../../components/SearchBar/SearchBar';
+import ProjectButtonBar from '../../components/ProjectButtonBar/ProjectButtonBar';
 import { createNewProject, deleteProject } from '../../actions/app-actions';
-import PlusIcon from '../../assets/img/Plus';
 
 class ProjectOverview extends Component {
   constructor(props) {
     super(props);
-    this.state = { searchTerm: ''}
+    this.state = { searchTerm: '' }
   }
 
   handleCreateProjectClick = () => {
@@ -57,13 +55,7 @@ class ProjectOverview extends Component {
             )}
           </ElementGrid>
         </div>
-        <ButtonBar>
-          <div />
-          <CircleButton onClick={ this.handleCreateProjectClick }>
-            <PlusIcon />
-          </CircleButton>
-          <div />
-        </ButtonBar>
+        <ProjectButtonBar onPlusButtonClick={this.handleCreateProjectClick} />
       </React.Fragment>
     );
   }

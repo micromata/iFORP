@@ -22,6 +22,13 @@ export default {
       backgroundColor: '#5E5E5E',
       textColor: '#FFF',
     },
+    ProjectNav: {
+      backgroundColor: '#5E5E5E',
+      textColor: '#FFF',
+    },
+    ButtonBar: {
+      backgroundColor: 'rgba(100, 100, 100, 0.9)'
+    }
   },
   light: {
     backgroundColor: '#FFF',
@@ -34,6 +41,13 @@ export default {
       backgroundColor: '#E9E9E9',
       textColor: '#FFFFFF',
     },
+    ProjectNav: {
+      backgroundColor: '#E9E9E9',
+      textColor: '#FFFFFF',
+    },
+    ButtonBar: {
+      backgroundColor: 'rgba(100, 100, 100, 0.9)'
+    }
   },
   purple: {
     backgroundColor: '#32394C',
@@ -46,5 +60,12 @@ export default {
       backgroundColor: '#485578',
       textColor: '#FFFFFF',
     },
+    ProjectNav: {
+      backgroundColor: '#485578',
+      textColor: '#FFFFFF',
+    },
+    ButtonBar: {
+      backgroundColor: 'rgba(100, 100, 100, 0.9)'
+    }
   },
 };
