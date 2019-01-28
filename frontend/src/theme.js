@@ -13,6 +13,7 @@ export default {
   dark: {
     backgroundColor: '#3D3D3D',
     textColor: '#5E5E5E',
+    textColorLight: '#FFF',
     accentColor: '#F9BB1F',
     DottedBackground: {
       backgroundColor: '#3D3D3D',

@@ -9,6 +9,7 @@ import PageNotFound from './pages/PageNotFound/PageNotFound';
 import ProjectOverview from './pages/ProjectOverview/ProjectOverview';
 import Project from './pages/Project/Project';
 import Whiteboard from './pages/Whiteboard/Whiteboard';
+import Library from './pages/Library/Library';
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
               <ProtectedRoute exact path="/projects" component={ProjectOverview} />
               <ProtectedRoute exact path="/projects/:id" component={Project} />
               <ProtectedRoute path="/projects/:projectId/:whiteboardId" component={Whiteboard} />
+              <ProtectedRoute path="/library/:projectId?/:whiteboardId?/:viewId?" component={Library} />
               <Route path="**" component={PageNotFound} />
             </Switch>
           </React.Fragment>
