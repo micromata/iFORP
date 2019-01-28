@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
+import { Link } from 'react-router-dom';
 import ButtonBar from '../ButtonBar/ButtonBar';
 import ProjectNav from './ProjectNav';
 import CircleButton from '../Button/CircleButton';
@@ -35,9 +36,12 @@ export class ProjectButtonBar extends Component {
         </ButtonBar>
         <ProjectNav onClose={ this.handleHideProjectNavClick } className={ this.state.projectNavVisible ? 'visible' : '' }>
           <ul>
-            <li>Home</li>
-            <li>Bibliothek</li>
-            <li>Projektübersicht</li>
+            <li>
+              <Link to='/'>Home</Link>
+            </li>
+            <li>
+              <Link to='/library'>Bibliothek</Link>
+            </li>
           </ul>
         </ProjectNav>
       </React.Fragment>

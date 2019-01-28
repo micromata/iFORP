@@ -25,6 +25,7 @@ export default {
     ProjectNav: {
       backgroundColor: '#5E5E5E',
       textColor: '#FFF',
+      accentColor: '#F9BB1F'
     },
     ButtonBar: {
       backgroundColor: 'rgba(100, 100, 100, 0.9)'
@@ -44,6 +45,7 @@ export default {
     ProjectNav: {
       backgroundColor: '#E9E9E9',
       textColor: '#FFFFFF',
+      accentColor: '#F9BB1F',
     },
     ButtonBar: {
       backgroundColor: 'rgba(100, 100, 100, 0.9)'
@@ -63,6 +65,7 @@ export default {
     ProjectNav: {
       backgroundColor: '#485578',
       textColor: '#FFFFFF',
+      accentColor: '#F9BB1F',
     },
     ButtonBar: {
       backgroundColor: 'rgba(100, 100, 100, 0.9)'
