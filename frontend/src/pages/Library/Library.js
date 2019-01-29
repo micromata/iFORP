@@ -4,6 +4,8 @@ import injectSheet from 'react-jss';
 import styles from './Library.styles';
 import NavBar from '../../components/NavBar/NavBar';
 import LibraryFilter from '../../components/Library/LibraryFilter';
+import LibrarySidebar from '../../components/Library/LibrarySidebar';
+import { getLibraryDirectories, uploadZipFile } from '../../actions/app-actions';
 
 class Library extends Component {
   constructor(props) {
@@ -12,21 +14,34 @@ class Library extends Component {
     this.state = { selectedFilter: 'html' };
   }
 
+  componentDidMount() {
+    this.props.getLibraryDirectories();
+  }
+
   handleFilterChange = selectedFilter => {
     this.setState({ selectedFilter });
   }
 
+  handleZipFileSelected = event => {
+    const fileToUpload = event.target.files[0];
+    event.target.value = null;
+    this.props.uploadZipFile(fileToUpload);
+  }
+
   render() {
     return (
-      <React.Fragment>
+      <div className={ this.props.classes.Library }>
         <NavBar title={ `iFORP > Bibliothek` } />
         <LibraryFilter selectedFilter={ this.state.selectedFilter } onFilterChange={ this.handleFilterChange } />
-      </React.Fragment>
+        <main>
+          <LibrarySidebar directories={ this.props.directories } onZipFileSelected={ this.handleZipFileSelected } />
+        </main>
+      </div>
     );
   }
 }
 
-const actions = { };
+const actions = { getLibraryDirectories, uploadZipFile };
 
 const mapStateToProps = (state, ownProps) => {
   /* eslint-disable no-prototype-builtins */
@@ -35,10 +50,13 @@ const mapStateToProps = (state, ownProps) => {
   const viewId = ownProps.match.params.hasOwnProperty('viewId') ? parseInt(ownProps.match.params.viewId, 10) : null;
   /* eslint-enable no-prototype-builtins */
 
+  const { directories } = state.app.library;
+
   return {
     projectId,
     whiteboardId,
-    viewId
+    viewId,
+    directories
   }
 };
 

@@ -14,6 +14,22 @@ export const post = (path, payload = {}) =>
     method: 'POST'
   });
 
+export const uploadFile = (path, file) => {
+  const formData = new FormData();
+  formData.append('file', file);
+  const config = {
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${getToken() || ''}`,
+    },
+    body: formData,
+    mode: isDev ? 'cors' : 'same-origin',
+    method: 'POST'
+  };
+
+  return fetch(baseURL + path, config);
+}
+
 export const get = (path = {}) =>
   fetch(baseURL + path, {
     headers: {

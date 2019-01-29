@@ -2,7 +2,10 @@ import { actionNames } from '../actions/app-actions';
 import { findProjectWithId, findWhiteboardWithId } from '../utils';
 
 const initialState = {
-  projects: []
+  projects: [],
+  library: {
+    directories: []
+  }
 };
 
 const deepClone = obj => JSON.parse(JSON.stringify(obj));
@@ -74,10 +77,24 @@ const removeViewFromWhiteboard = (newState, projectId, whiteboardId, viewId) => 
   whiteboard.views = whiteboard.views.filter(view => view.id !== viewId);
 }
 
+const addDirectoryToLibrary = (newState, directory) => {
+  newState.library.directories.push(directory);
+}
+
 export default (state = initialState, action) => {
   const newState = deepClone(state);
 
   switch(action.type) {
+    case actionNames.LIBRARY_DIRECTORIES_RECEIVED:
+      return {
+        ...newState,
+        library: {
+          directories: action.directories
+        }
+      };
+    case actionNames.LIBRARY_DIRECTORY_IMPORTED:
+      addDirectoryToLibrary(newState, action.directory);
+      return newState;
     case actionNames.PROJECTS_RECEIVED:
       return {
         ...newState,

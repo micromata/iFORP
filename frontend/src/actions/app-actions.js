@@ -9,7 +9,9 @@ const actionNames = {
   VIEWS_LIST_RECEIVED: 'VIEWS_LIST_RECEIVED',
   PROJECT_DELETED: 'PROJECT_DELETED',
   WHITEBOARD_DELETED: 'WHITEBOARD_DELETED',
-  VIEW_DELETED: 'VIEW_DELETED'
+  VIEW_DELETED: 'VIEW_DELETED',
+  LIBRARY_DIRECTORIES_RECEIVED: 'LIBRARY_DIRECTORIES_RECEIVED',
+  LIBRARY_DIRECTORY_IMPORTED: 'LIBRARY_DIRECTORY_IMPORTED'
 };
 
 const getAllProjects = () => async dispatch => {
@@ -115,6 +117,26 @@ const deleteView = (projectId, whiteboardId, viewId) => async dispatch => {
   }
 }
 
+const getLibraryDirectories = () => async dispatch => {
+  const response = await http.get('/library/files');
+  const directories = await response.json();
+
+  dispatch({
+    type: actionNames.LIBRARY_DIRECTORIES_RECEIVED,
+    directories
+  });
+}
+
+const uploadZipFile = file => async dispatch => {
+  const response = await http.uploadFile('/library/upload', file);
+  const directory = await response.json();
+
+  dispatch({
+    type: actionNames.LIBRARY_DIRECTORY_IMPORTED,
+    directory
+  });
+}
+
 export {
   actionNames,
   getAllProjects,
@@ -124,5 +146,7 @@ export {
   getViewsForWhiteboard,
   deleteProject,
   deleteWhiteboard,
-  deleteView
+  deleteView,
+  getLibraryDirectories,
+  uploadZipFile
 };
