@@ -81,6 +81,13 @@ const addDirectoryToLibrary = (newState, directory) => {
   newState.library.directories.push(directory);
 }
 
+const addDetailsToPage = (newState, pageDetails) => {
+  newState.library.directories.map(directory => {
+    directory.pages = directory.pages.map(page => page.id === pageDetails.id ? pageDetails : page);
+    return directory;
+  });
+}
+
 export default (state = initialState, action) => {
   const newState = deepClone(state);
 
@@ -94,6 +101,9 @@ export default (state = initialState, action) => {
       };
     case actionNames.LIBRARY_DIRECTORY_IMPORTED:
       addDirectoryToLibrary(newState, action.directory);
+      return newState;
+    case actionNames.LIBRARY_PAGE_DETAILS_RECEIVED:
+      addDetailsToPage(newState, action.pageDetails);
       return newState;
     case actionNames.PROJECTS_RECEIVED:
       return {

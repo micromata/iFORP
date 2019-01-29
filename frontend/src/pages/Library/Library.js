@@ -5,13 +5,14 @@ import styles from './Library.styles';
 import NavBar from '../../components/NavBar/NavBar';
 import LibraryFilter from '../../components/Library/LibraryFilter';
 import LibrarySidebar from '../../components/Library/LibrarySidebar';
-import { getLibraryDirectories, uploadZipFile } from '../../actions/app-actions';
+import HTMLPage from '../../components/HTMLPage/HTMLPage';
+import { getLibraryDirectories, getPageDetails, uploadZipFile } from '../../actions/app-actions';
 
 class Library extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { selectedFilter: 'html' };
+    this.state = { selectedFilter: 'html', selectedPageId: null };
   }
 
   componentDidMount() {
@@ -22,6 +23,11 @@ class Library extends Component {
     this.setState({ selectedFilter });
   }
 
+  handleSelectPage = selectedPageId => {
+    this.setState({ selectedPageId });
+    this.props.getPageDetails(selectedPageId);
+  }
+
   handleZipFileSelected = event => {
     const fileToUpload = event.target.files[0];
     event.target.value = null;
@@ -29,19 +35,42 @@ class Library extends Component {
   }
 
   render() {
+    const selectedPage = this.state.selectedPageId && this.props.directories.reduce((pageWithId, directory) => {
+      return pageWithId || directory.pages.find(page => page.id === this.state.selectedPageId);
+    }, null);
+
+    const hasSelectedPageDetails = selectedPage && selectedPage.hasOwnProperty('body'); // eslint-disable-line no-prototype-builtins
+
     return (
       <div className={ this.props.classes.Library }>
         <NavBar title={ `iFORP > Bibliothek` } />
         <LibraryFilter selectedFilter={ this.state.selectedFilter } onFilterChange={ this.handleFilterChange } />
         <main>
-          <LibrarySidebar directories={ this.props.directories } onZipFileSelected={ this.handleZipFileSelected } />
+          <LibrarySidebar
+            directories={ this.props.directories }
+            selectedPageId={ this.state.selectedPageId }
+            onSelectPage={ this.handleSelectPage }
+            onZipFileSelected={ this.handleZipFileSelected }
+          />
+
+          <div className='content'>
+            { hasSelectedPageDetails &&
+              <HTMLPage
+                htmlElementAttributes={ selectedPage.htmlElementAttributes || {} }
+                head={ selectedPage.head }
+                body={ selectedPage.body }
+                assets={ selectedPage.assets }
+                viewportSize="desktop"
+              />
+            }
+          </div>
         </main>
       </div>
     );
   }
 }
 
-const actions = { getLibraryDirectories, uploadZipFile };
+const actions = { getLibraryDirectories, getPageDetails, uploadZipFile };
 
 const mapStateToProps = (state, ownProps) => {
   /* eslint-disable no-prototype-builtins */

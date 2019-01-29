@@ -15,6 +15,11 @@ class LibraryTreeView extends Component {
     this.setState(prevState => ({ expandedDirectory: prevState.expandedDirectory ? null : directoryId }));
   }
 
+  handleSelectPage = (event, pageId) => {
+    event.stopPropagation();
+    this.props.onSelectPage(pageId);
+  }
+
   render() {
     if (!this.props.directories) return null;
 
@@ -31,7 +36,9 @@ class LibraryTreeView extends Component {
               { this.state.expandedDirectory === directory.id &&
                 <ul>
                   { directory.pages.map(page =>
-                    <li key={ `page-${page.id}` }>{ page.name }</li>
+                    <li key={ `page-${page.id}` } onClick={event => this.handleSelectPage(event, page.id)}>
+                      { page.name }
+                    </li>
                   )}
                 </ul>
               }

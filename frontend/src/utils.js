@@ -1,3 +1,6 @@
+const isDev = process.env.NODE_ENV === 'development';
+const baseURL = isDev ? 'http://localhost:3001' : '';
+
 const findProjectWithId = (projects, projectId) => projects.find(project => project.id === projectId);
 
 const findWhiteboardWithId = (projects, projectId, whiteboardId) => {
@@ -9,6 +12,8 @@ const findWhiteboardWithId = (projects, projectId, whiteboardId) => {
 }
 
 export {
+  isDev,
+  baseURL,
   findProjectWithId,
   findWhiteboardWithId
 };

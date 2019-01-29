@@ -11,7 +11,8 @@ const actionNames = {
   WHITEBOARD_DELETED: 'WHITEBOARD_DELETED',
   VIEW_DELETED: 'VIEW_DELETED',
   LIBRARY_DIRECTORIES_RECEIVED: 'LIBRARY_DIRECTORIES_RECEIVED',
-  LIBRARY_DIRECTORY_IMPORTED: 'LIBRARY_DIRECTORY_IMPORTED'
+  LIBRARY_DIRECTORY_IMPORTED: 'LIBRARY_DIRECTORY_IMPORTED',
+  LIBRARY_PAGE_DETAILS_RECEIVED: 'LIBRARY_PAGE_DETAILS_RECEIVED'
 };
 
 const getAllProjects = () => async dispatch => {
@@ -127,6 +128,16 @@ const getLibraryDirectories = () => async dispatch => {
   });
 }
 
+const getPageDetails = pageId => async dispatch => {
+  const response = await http.get(`/library/files/${pageId}`);
+  const pageDetails = await response.json();
+
+  dispatch({
+    type: actionNames.LIBRARY_PAGE_DETAILS_RECEIVED,
+    pageDetails
+  });
+}
+
 const uploadZipFile = file => async dispatch => {
   const response = await http.uploadFile('/library/upload', file);
   const directory = await response.json();
@@ -148,5 +159,6 @@ export {
   deleteWhiteboard,
   deleteView,
   getLibraryDirectories,
-  uploadZipFile
+  uploadZipFile,
+  getPageDetails
 };
