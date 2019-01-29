@@ -12,7 +12,7 @@ class LibraryTreeView extends Component {
   }
 
   handleExpandDirectory = directoryId => {
-    this.setState(prevState => ({ expandedDirectory: prevState.expandedDirectory ? null : directoryId }));
+    this.setState(prevState => ({ expandedDirectory: prevState.expandedDirectory === directoryId ? null : directoryId }));
   }
 
   handleSelectPage = (event, pageId) => {
