@@ -42,9 +42,9 @@ class Library extends Component {
   render() {
     const selectedPage = this.state.selectedPageId && this.props.directories.reduce((pageWithId, directory) => {
       return pageWithId || directory.pages.find(page => page.id === this.state.selectedPageId);
-    }, null);
+    }, null) || {};
 
-    const hasSelectedPageDetails = selectedPage && selectedPage.hasOwnProperty('body'); // eslint-disable-line no-prototype-builtins
+    // Const hasSelectedPageDetails = selectedPage && selectedPage.hasOwnProperty('body'); // eslint-disable-line no-prototype-builtins
 
     return (
       <div className={ this.props.classes.Library }>
@@ -58,15 +58,13 @@ class Library extends Component {
           />
 
           <div className='content'>
-            { hasSelectedPageDetails &&
-              <HTMLPage
-                htmlElementAttributes={ selectedPage.htmlElementAttributes || {} }
-                head={ selectedPage.head }
-                body={ selectedPage.body }
-                assets={ selectedPage.assets }
-                viewportSize="desktop"
-              />
-            }
+            <HTMLPage
+              htmlElementAttributes={ selectedPage.htmlElementAttributes || {} }
+              head={ selectedPage.head || '' }
+              body={ selectedPage.body || '' }
+              assets={ selectedPage.assets || [] }
+              viewportSize="desktop"
+            />
           </div>
         </main>
         <ProjectButtonBar includeNavigationMenu={ !this.props.isViewSpecific }>
