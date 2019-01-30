@@ -4,8 +4,13 @@ import injectSheet from 'react-jss';
 import styles from './Library.styles';
 import NavBar from '../../components/NavBar/NavBar';
 import LibraryFilter from '../../components/Library/LibraryFilter';
-import LibrarySidebar from '../../components/Library/LibrarySidebar';
+import LibraryTreeView from '../../components/Library/LibraryTreeView';
+import ProjectButtonBar from '../../components/ProjectButtonBar/ProjectButtonBar';
+import LibraryZipUpload from '../../components/Library/LibraryZipUpload';
 import HTMLPage from '../../components/HTMLPage/HTMLPage';
+import Button from '../../components/Button/Button';
+import CircleButton from '../../components/Button/CircleButton';
+import PlusIcon from '../../assets/img/Plus';
 import { getLibraryDirectories, getPageDetails, uploadZipFile } from '../../actions/app-actions';
 
 class Library extends Component {
@@ -46,11 +51,10 @@ class Library extends Component {
         <NavBar title={ `iFORP > Bibliothek` } />
         <LibraryFilter selectedFilter={ this.state.selectedFilter } onFilterChange={ this.handleFilterChange } />
         <main>
-          <LibrarySidebar
+          <LibraryTreeView
             directories={ this.props.directories }
             selectedPageId={ this.state.selectedPageId }
             onSelectPage={ this.handleSelectPage }
-            onZipFileSelected={ this.handleZipFileSelected }
           />
 
           <div className='content'>
@@ -65,6 +69,12 @@ class Library extends Component {
             }
           </div>
         </main>
+        <ProjectButtonBar includeNavigationMenu={ !this.props.isViewSpecific }>
+          <LibraryZipUpload onZipFileSelected={ this.handleZipFileSelected } />
+          { this.props.isViewSpecific &&
+            <Button buttonStyle='round'>use</Button>
+          }
+        </ProjectButtonBar>
       </div>
     );
   }
@@ -85,6 +95,7 @@ const mapStateToProps = (state, ownProps) => {
     projectId,
     whiteboardId,
     viewId,
+    isViewSpecific: Boolean(projectId && whiteboardId && viewId),
     directories
   }
 };

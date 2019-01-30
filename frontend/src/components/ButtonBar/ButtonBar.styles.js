@@ -19,7 +19,7 @@ export default (theme) => ({
     '& div:empty': {
       minWidth: '56px'
     },
-    '& button': {
+    '& button[class^=CircleButton]': {
       marginTop: '-40px'
     }
   }

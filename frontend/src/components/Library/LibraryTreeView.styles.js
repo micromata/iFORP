@@ -1,5 +1,11 @@
 export default (theme) => ({
   LibraryTreeView: {
+    width: '240px',
+    color: theme.textColorLight,
+    padding: '20px',
+    fontSize: '14px',
+    borderRight: `1px solid ${theme.textColorLight}`,
+    marginBottom: '80px',
     '& ul': {
       listStyle: 'none',
       margin: '0',

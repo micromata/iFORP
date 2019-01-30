@@ -1,13 +1,5 @@
 export default (theme) => ({
-  LibrarySidebar: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    width: '240px',
-    color: theme.textColorLight,
-    padding: '20px',
-    fontSize: '14px',
-    borderRight: `1px solid ${theme.textColorLight}`,
+  LibraryZipUpload: {
     '& input[type=file]': {
       width: '0.1px',
       height: '0.1px',
