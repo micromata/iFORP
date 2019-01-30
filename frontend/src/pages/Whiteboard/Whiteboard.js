@@ -66,6 +66,9 @@ const mapStateToProps = (state, ownProps) => {
   const whiteboard = findWhiteboardWithId(state.app.projects, projectId, whiteboardId);
   const views = whiteboard && whiteboard.views;
 
+  const whiteboardNavEntries = project.whiteboards.
+    map(item => ({ title: item.name, url: `/projects/${projectId}/${item.id}` }));
+
   return {
     projectId,
     whiteboardId,
@@ -75,7 +78,8 @@ const mapStateToProps = (state, ownProps) => {
     navigationMenuEntries: [
       { title: 'Home', url: '/'},
       { title: 'Bibliothek', url: '/library'},
-      { title: 'Projektübersicht', url: '/projects'}
+      { title: 'Projektübersicht', url: '/projects'},
+      ...whiteboardNavEntries
     ]
   }
 };

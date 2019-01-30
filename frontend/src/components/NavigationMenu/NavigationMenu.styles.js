@@ -2,19 +2,21 @@ export default (theme) => ({
   NavigationMenu: {
     position: 'fixed',
     right: '0',
-    bottom: '-200px',
-    width: '200px',
+    bottom: '-400px',
     backgroundColor: theme.NavigationMenu.backgroundColor,
     color: theme.NavigationMenu.textColor,
     zIndex: '9',
     padding: '20px',
+    minWidth: '230px',
     transition: 'right 0.5s, bottom 0.5s',
     '&.visible': {
       bottom: '0'
     },
     '& ul': {
-      listStyle: 'none',
+      maxHeight: '300px',
+      overflow: 'scroll',
       padding: '0 20px',
+      listStyle: 'none',
       '& li': {
         margin: '10px 0',
         '& a': {
