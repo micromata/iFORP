@@ -1,11 +1,11 @@
 export default (theme) => ({
-  ProjectNav: {
+  NavigationMenu: {
     position: 'fixed',
     right: '0',
     bottom: '-200px',
     width: '200px',
-    backgroundColor: theme.ProjectNav.backgroundColor,
-    color: theme.ProjectNav.textColor,
+    backgroundColor: theme.NavigationMenu.backgroundColor,
+    color: theme.NavigationMenu.textColor,
     zIndex: '9',
     padding: '20px',
     transition: 'right 0.5s, bottom 0.5s',
@@ -19,10 +19,10 @@ export default (theme) => ({
         margin: '10px 0',
         '& a': {
           textDecoration: 'none',
-          color: theme.ProjectNav.textColor,
+          color: theme.NavigationMenu.textColor,
           outline: 'none',
           '&:hover, &:active, &:focus': {
-            color: theme.ProjectNav.accentColor
+            color: theme.NavigationMenu.accentColor
           }
         }
       }

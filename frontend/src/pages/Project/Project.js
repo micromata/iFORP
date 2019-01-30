@@ -7,6 +7,8 @@ import ProjectButtonBar from '../../components/ProjectButtonBar/ProjectButtonBar
 import EditableName from '../../components/EditableName/EditableName';
 import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
+import CircleButton from '../../components/Button/CircleButton';
+import PlusIcon from '../../assets/img/Plus';
 import { createNewWhiteboard, renameWhiteboard, deleteWhiteboard } from '../../actions/app-actions';
 import { findProjectWithId } from '../../utils';
 
@@ -45,7 +47,12 @@ class Project extends Component {
             )}
           </ElementGrid>
         </div>
-        <ProjectButtonBar onPlusButtonClick={this.handleCreateWhiteboadClick} />
+        <ProjectButtonBar includeNavigationMenu={ true }>
+          <div />
+          <CircleButton onClick={ this.handleCreateWhiteboadClick }>
+            <PlusIcon />
+          </CircleButton>
+        </ProjectButtonBar>
       </React.Fragment>
     );
   }

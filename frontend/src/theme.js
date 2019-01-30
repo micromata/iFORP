@@ -23,7 +23,7 @@ export default {
       backgroundColor: '#5E5E5E',
       textColor: '#FFF',
     },
-    ProjectNav: {
+    NavigationMenu: {
       backgroundColor: '#5E5E5E',
       textColor: '#FFF',
       accentColor: '#F9BB1F'
@@ -43,7 +43,7 @@ export default {
       backgroundColor: '#E9E9E9',
       textColor: '#FFFFFF',
     },
-    ProjectNav: {
+    NavigationMenu: {
       backgroundColor: '#E9E9E9',
       textColor: '#FFFFFF',
       accentColor: '#F9BB1F',
@@ -63,7 +63,7 @@ export default {
       backgroundColor: '#485578',
       textColor: '#FFFFFF',
     },
-    ProjectNav: {
+    NavigationMenu: {
       backgroundColor: '#485578',
       textColor: '#FFFFFF',
       accentColor: '#F9BB1F',

@@ -8,6 +8,8 @@ import ButtonTile from '../../components/Button/ButtonTile';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import ProjectButtonBar from '../../components/ProjectButtonBar/ProjectButtonBar';
 import EditableName from '../../components/EditableName/EditableName';
+import CircleButton from '../../components/Button/CircleButton';
+import PlusIcon from '../../assets/img/Plus';
 import { createNewProject, renameProject, deleteProject } from '../../actions/app-actions';
 
 class ProjectOverview extends Component {
@@ -59,7 +61,12 @@ class ProjectOverview extends Component {
             )}
           </ElementGrid>
         </div>
-        <ProjectButtonBar onPlusButtonClick={this.handleCreateProjectClick} />
+        <ProjectButtonBar includeNavigationMenu={ true }>
+          <div />
+          <CircleButton onClick={ this.handleCreateProjectClick }>
+            <PlusIcon />
+          </CircleButton>
+        </ProjectButtonBar>
       </React.Fragment>
     );
   }

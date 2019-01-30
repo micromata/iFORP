@@ -1,11 +1,11 @@
 import React from 'react';
 import injectSheet from 'react-jss';
-import styles from './ProjectNav.styles';
+import styles from './NavigationMenu.styles';
 import CircleButton from '../Button/CircleButton';
 import CloseIcon from '../../assets/img/CloseSmall';
 
-export const ProjectNav = ({ classes, className, children, onClose }) => (
-  <div className={ `${classes.ProjectNav} ${className}` }>
+export const NavigationMenu = ({ classes, className, children, onClose }) => (
+  <div className={ `${classes.NavigationMenu} ${className}` }>
     <CircleButton className={ classes.CloseButton } onClick={ onClose } >
       <CloseIcon />
     </CircleButton>
@@ -13,4 +13,4 @@ export const ProjectNav = ({ classes, className, children, onClose }) => (
   </div>
 );
 
-export default injectSheet(styles)(ProjectNav);
+export default injectSheet(styles)(NavigationMenu);
