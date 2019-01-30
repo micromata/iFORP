@@ -26,21 +26,20 @@ export class ProjectButtonBar extends Component {
       <React.Fragment>
         <ButtonBar className={ this.state.navigationMenuVisible ? 'fade' : '' }>
           { this.props.children }
-          { this.props.includeNavigationMenu &&
+          { this.props.entries && this.props.entries.length &&
             <CircleButton onClick={ this.handleShowNavigationMenuClick }>
               <ListIcon />
             </CircleButton>
           }
         </ButtonBar>
-        { this.props.includeNavigationMenu &&
+        { this.props.entries && this.props.entries.length &&
           <NavigationMenu onClose={ this.handleHideNavigationMenuClick } className={ this.state.navigationMenuVisible ? 'visible' : '' }>
             <ul>
-              <li>
-                <Link to='/'>Home</Link>
-              </li>
-              <li>
-                <Link to='/library'>Bibliothek</Link>
-              </li>
+              { this.props.entries.map((entry, index) =>
+                <li key={ index }>
+                  <Link to={ entry.url }>{ entry.title }</Link>
+                </li>
+              )}
             </ul>
           </NavigationMenu>
         }

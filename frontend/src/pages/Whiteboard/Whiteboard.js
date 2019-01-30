@@ -46,7 +46,7 @@ class Whiteboard extends Component {
             )}
           </ElementGrid>
         </div>
-        <ProjectButtonBar includeNavigationMenu={ true }>
+        <ProjectButtonBar entries={ this.props.navigationMenuEntries }>
           <div />
           <CircleButton onClick={ this.handleCreateViewClick }>
             <PlusIcon />
@@ -71,7 +71,12 @@ const mapStateToProps = (state, ownProps) => {
     whiteboardId,
     project,
     whiteboard,
-    views
+    views,
+    navigationMenuEntries: [
+      { title: 'Home', url: '/'},
+      { title: 'Bibliothek', url: '/library'},
+      { title: 'Projektübersicht', url: '/projects'}
+    ]
   }
 };
 

@@ -61,7 +61,7 @@ class ProjectOverview extends Component {
             )}
           </ElementGrid>
         </div>
-        <ProjectButtonBar includeNavigationMenu={ true }>
+        <ProjectButtonBar entries={ this.props.navigationMenuEntries }>
           <div />
           <CircleButton onClick={ this.handleCreateProjectClick }>
             <PlusIcon />
@@ -75,7 +75,11 @@ class ProjectOverview extends Component {
 const actions = { createNewProject, renameProject, deleteProject };
 
 const mapStateToProps = state => ({
-  projects: state.app.projects
+  projects: state.app.projects,
+  navigationMenuEntries: [
+    { title: 'Home', url: '/'},
+    { title: 'Bibliothek', url: '/library'}
+  ]
 });
 
 const ProjectOverviewContainerWithStyles = injectSheet(styles)(ProjectOverview);

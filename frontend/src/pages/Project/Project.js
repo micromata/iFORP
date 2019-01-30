@@ -47,7 +47,7 @@ class Project extends Component {
             )}
           </ElementGrid>
         </div>
-        <ProjectButtonBar includeNavigationMenu={ true }>
+        <ProjectButtonBar entries={ this.props.navigationMenuEntries }>
           <div />
           <CircleButton onClick={ this.handleCreateWhiteboadClick }>
             <PlusIcon />
@@ -63,7 +63,12 @@ const actions = { createNewWhiteboard, renameWhiteboard, deleteWhiteboard };
 const mapStateToProps = (state, ownProps) => {
   const projectId = parseInt(ownProps.match.params.id, 10);
   return {
-    project: findProjectWithId(state.app.projects, projectId)
+    project: findProjectWithId(state.app.projects, projectId),
+    navigationMenuEntries: [
+      { title: 'Home', url: '/'},
+      { title: 'Bibliothek', url: '/library'},
+      { title: 'Projektübersicht', url: '/projects'}
+    ]
   }
 };
 
