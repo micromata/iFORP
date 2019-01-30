@@ -5,11 +5,13 @@ const actionNames = {
   PROJECTS_RECEIVED: 'PROJECTS_RECEIVED',
   PROJECT_CREATED: 'PROJECT_CREATED',
   PROJECT_RENAMED: 'PROJECT_RENAMED',
-  WHITEBOARD_CREATED: 'WHITEBOARD_CREATED',
-  VIEW_CREATED: 'VIEW_CREATED',
-  VIEWS_LIST_RECEIVED: 'VIEWS_LIST_RECEIVED',
   PROJECT_DELETED: 'PROJECT_DELETED',
+  WHITEBOARD_CREATED: 'WHITEBOARD_CREATED',
+  WHITEBOARD_RENAMED: 'WHITEBOARD_RENAMED',
   WHITEBOARD_DELETED: 'WHITEBOARD_DELETED',
+  VIEWS_LIST_RECEIVED: 'VIEWS_LIST_RECEIVED',
+  VIEW_CREATED: 'VIEW_CREATED',
+  VIEW_RENAMED: 'VIEW_RENAMED',
   VIEW_DELETED: 'VIEW_DELETED',
   LIBRARY_DIRECTORIES_RECEIVED: 'LIBRARY_DIRECTORIES_RECEIVED',
   LIBRARY_DIRECTORY_IMPORTED: 'LIBRARY_DIRECTORY_IMPORTED',
@@ -51,6 +53,17 @@ const renameProject = (projectId, newName) => async dispatch => {
   return project;
 };
 
+const deleteProject = projectId => async dispatch => {
+  const response = await http.deleteEntity(`/projects/${projectId}`);
+
+  if (response.ok) {
+    dispatch({
+      type: actionNames.PROJECT_DELETED,
+      projectId
+    })
+  }
+}
+
 const createNewWhiteboard = projectId => async dispatch => {
   const response = await http.post(`/projects/${projectId}/whiteboards`);
   const whiteboard = await response.json();
@@ -62,6 +75,32 @@ const createNewWhiteboard = projectId => async dispatch => {
   });
 
   return whiteboard;
+}
+
+const renameWhiteboard = (projectId, whiteboardId, newName) => async dispatch => {
+  const response = await http.patch(`/projects/${projectId}/whiteboards/${whiteboardId}`, { name: newName });
+  const whiteboard = await response.json();
+
+  dispatch({
+    type: actionNames.WHITEBOARD_RENAMED,
+    projectId,
+    whiteboardId,
+    newName
+  });
+
+  return whiteboard;
+};
+
+const deleteWhiteboard = (projectId, whiteboardId) => async dispatch => {
+  const response = await http.deleteEntity(`/projects/${projectId}/whiteboards/${whiteboardId}`);
+
+  if (response.ok) {
+    dispatch({
+      type: actionNames.WHITEBOARD_DELETED,
+      projectId,
+      whiteboardId
+    })
+  }
 }
 
 const createNewView = (projectId, whiteboardId) => async dispatch => {
@@ -77,6 +116,34 @@ const createNewView = (projectId, whiteboardId) => async dispatch => {
 
   return view;
 };
+
+const renameView = (projectId, whiteboardId, viewId, newName) => async dispatch => {
+  const response = await http.patch(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}`, { name: newName });
+  const view = await response.json();
+
+  dispatch({
+    type: actionNames.VIEW_RENAMED,
+    projectId,
+    whiteboardId,
+    viewId,
+    newName
+  });
+
+  return view;
+};
+
+const deleteView = (projectId, whiteboardId, viewId) => async dispatch => {
+  const response = await http.deleteEntity(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}`);
+
+  if (response.ok) {
+    dispatch({
+      type: actionNames.VIEW_DELETED,
+      projectId,
+      whiteboardId,
+      viewId
+    })
+  }
+}
 
 const getViewsForWhiteboard = (projectId, whiteboardId) => async (dispatch, getState) => {
   const whiteboard = findWhiteboardWithId(getState().app.projects, projectId, whiteboardId);
@@ -94,42 +161,6 @@ const getViewsForWhiteboard = (projectId, whiteboardId) => async (dispatch, getS
   });
 
   return views;
-}
-
-const deleteProject = projectId => async dispatch => {
-  const response = await http.deleteEntity(`/projects/${projectId}`);
-
-  if (response.ok) {
-    dispatch({
-      type: actionNames.PROJECT_DELETED,
-      projectId
-    })
-  }
-}
-
-const deleteWhiteboard = (projectId, whiteboardId) => async dispatch => {
-  const response = await http.deleteEntity(`/projects/${projectId}/whiteboards/${whiteboardId}`);
-
-  if (response.ok) {
-    dispatch({
-      type: actionNames.WHITEBOARD_DELETED,
-      projectId,
-      whiteboardId
-    })
-  }
-}
-
-const deleteView = (projectId, whiteboardId, viewId) => async dispatch => {
-  const response = await http.deleteEntity(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}`);
-
-  if (response.ok) {
-    dispatch({
-      type: actionNames.VIEW_DELETED,
-      projectId,
-      whiteboardId,
-      viewId
-    })
-  }
 }
 
 const getLibraryDirectories = () => async dispatch => {
@@ -164,16 +195,18 @@ const uploadZipFile = file => async dispatch => {
 
 export {
   actionNames,
-  getAllProjects,
   createNewProject,
-  renameProject,
-  createNewWhiteboard,
   createNewView,
-  getViewsForWhiteboard,
+  createNewWhiteboard,
   deleteProject,
-  deleteWhiteboard,
   deleteView,
+  deleteWhiteboard,
+  getAllProjects,
   getLibraryDirectories,
-  uploadZipFile,
-  getPageDetails
+  getPageDetails,
+  getViewsForWhiteboard,
+  renameProject,
+  renameView,
+  renameWhiteboard,
+  uploadZipFile
 };

@@ -4,9 +4,10 @@ import injectSheet from 'react-jss';
 import styles from './Project.styles';
 import NavBar from '../../components/NavBar/NavBar';
 import ProjectButtonBar from '../../components/ProjectButtonBar/ProjectButtonBar';
+import EditableName from '../../components/EditableName/EditableName';
 import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
-import { createNewWhiteboard, deleteWhiteboard } from '../../actions/app-actions';
+import { createNewWhiteboard, renameWhiteboard, deleteWhiteboard } from '../../actions/app-actions';
 import { findProjectWithId } from '../../utils';
 
 class Project extends Component {
@@ -36,7 +37,10 @@ class Project extends Component {
                 titleBelow
                 onClick={ () => this.navigateToWhiteboard(whiteboard.id) }
                 onDeleteClick={() => this.handleDeleteWhiteboardClick(whiteboard.id)}>
-                { whiteboard.name }
+                <EditableName
+                  name={ whiteboard.name }
+                  onEditingConfirmed={ newName => this.props.renameWhiteboard(this.props.project.id, whiteboard.id, newName) }
+                />
               </ButtonTile>
             )}
           </ElementGrid>
@@ -47,7 +51,7 @@ class Project extends Component {
   }
 }
 
-const actions = { createNewWhiteboard, deleteWhiteboard };
+const actions = { createNewWhiteboard, renameWhiteboard, deleteWhiteboard };
 
 const mapStateToProps = (state, ownProps) => {
   const projectId = parseInt(ownProps.match.params.id, 10);

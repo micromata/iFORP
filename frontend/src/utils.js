@@ -11,9 +11,18 @@ const findWhiteboardWithId = (projects, projectId, whiteboardId) => {
   return project.whiteboards.find(whiteboard => whiteboard.id === whiteboardId);
 }
 
+const findViewWithId = (projects, projectId, whiteboardId, viewId) => {
+  const whiteboard = findWhiteboardWithId(projects, projectId, whiteboardId);
+
+  if (!whiteboard || !whiteboard.views) return null;
+
+  return whiteboard.views.find(view => view.id === viewId);
+}
+
 export {
   isDev,
   baseURL,
   findProjectWithId,
-  findWhiteboardWithId
+  findWhiteboardWithId,
+  findViewWithId
 };
