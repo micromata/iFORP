@@ -88,6 +88,14 @@ const addDetailsToPage = (newState, pageDetails) => {
   });
 }
 
+const changeProjectName = (newState, projectId, newName) => {
+  newState.projects = newState.projects.map(project => {
+    project.name = project.id === projectId ? newName : project.name;
+
+    return project;
+  })
+}
+
 export default (state = initialState, action) => {
   const newState = deepClone(state);
 
@@ -112,6 +120,9 @@ export default (state = initialState, action) => {
       };
     case actionNames.PROJECT_CREATED:
       newState.projects.push(updateHasDetailsFlagOfViews(action.project));
+      return newState;
+    case actionNames.PROJECT_RENAMED:
+      changeProjectName(newState, action.projectId, action.newName);
       return newState;
     case actionNames.WHITEBOARD_CREATED:
       addWhiteboardToProject(newState, action.projectId, action.whiteboard);

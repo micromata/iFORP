@@ -27,7 +27,7 @@ export class ProjectButtonBar extends Component {
       <React.Fragment>
         <ButtonBar className={ this.state.projectNavVisible ? 'fade' : '' }>
           <div />
-          <CircleButton onClick={ this.onPlusButtonClick }>
+          <CircleButton onClick={ this.props.onPlusButtonClick }>
             <PlusIcon />
           </CircleButton>
           <CircleButton onClick={ this.handleShowProjectNavClick }>

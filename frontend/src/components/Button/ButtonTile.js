@@ -5,7 +5,7 @@ import CircleButton from './CircleButton';
 import Folder from '../../assets/img/Folder';
 import DeleteIcon from '../../assets/img/Delete';
 
-const Button = ({
+const ButtonTile = ({
   classes,
   onClick,
   onDeleteClick,
@@ -40,4 +40,4 @@ const Button = ({
   </div>
 );
 
-export default injectSheet(styles)(Button);
+export default injectSheet(styles)(ButtonTile);

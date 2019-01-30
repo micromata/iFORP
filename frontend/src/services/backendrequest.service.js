@@ -13,6 +13,18 @@ export const post = (path, payload = {}) =>
     method: 'POST'
   });
 
+export const patch = (path, payload = {}) =>
+  fetch(baseURL + path, {
+    body: JSON.stringify(payload),
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${getToken() || ''}`,
+    },
+    mode: isDev ? 'cors' : 'same-origin',
+    method: 'PATCH'
+  });
+
 export const uploadFile = (path, file) => {
   const formData = new FormData();
   formData.append('file', file);

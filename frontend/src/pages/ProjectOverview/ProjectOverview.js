@@ -7,7 +7,8 @@ import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import ProjectButtonBar from '../../components/ProjectButtonBar/ProjectButtonBar';
-import { createNewProject, deleteProject } from '../../actions/app-actions';
+import EditableName from '../../components/EditableName/EditableName';
+import { createNewProject, renameProject, deleteProject } from '../../actions/app-actions';
 
 class ProjectOverview extends Component {
   constructor(props) {
@@ -50,7 +51,10 @@ class ProjectOverview extends Component {
                 titleBelow
                 onClick={ () => this.navigateToProject(project.id ) }
                 onDeleteClick={() => this.handleDeleteProjectClick(project.id)}>
-                { project.name }
+                <EditableName
+                  name={ project.name }
+                  onEditingConfirmed={ newName => this.props.renameProject(project.id, newName) }
+                />
               </ButtonTile>
             )}
           </ElementGrid>
@@ -61,7 +65,7 @@ class ProjectOverview extends Component {
   }
 }
 
-const actions = { createNewProject, deleteProject };
+const actions = { createNewProject, renameProject, deleteProject };
 
 const mapStateToProps = state => ({
   projects: state.app.projects

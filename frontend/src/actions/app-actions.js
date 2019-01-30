@@ -4,6 +4,7 @@ import { findWhiteboardWithId } from '../utils';
 const actionNames = {
   PROJECTS_RECEIVED: 'PROJECTS_RECEIVED',
   PROJECT_CREATED: 'PROJECT_CREATED',
+  PROJECT_RENAMED: 'PROJECT_RENAMED',
   WHITEBOARD_CREATED: 'WHITEBOARD_CREATED',
   VIEW_CREATED: 'VIEW_CREATED',
   VIEWS_LIST_RECEIVED: 'VIEWS_LIST_RECEIVED',
@@ -32,6 +33,19 @@ const createNewProject = () => async dispatch => {
   dispatch({
     type: actionNames.PROJECT_CREATED,
     project
+  });
+
+  return project;
+};
+
+const renameProject = (projectId, newName) => async dispatch => {
+  const response = await http.patch(`/projects/${projectId}`, { name: newName });
+  const project = await response.json();
+
+  dispatch({
+    type: actionNames.PROJECT_RENAMED,
+    projectId,
+    newName
   });
 
   return project;
@@ -152,6 +166,7 @@ export {
   actionNames,
   getAllProjects,
   createNewProject,
+  renameProject,
   createNewWhiteboard,
   createNewView,
   getViewsForWhiteboard,
