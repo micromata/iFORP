@@ -1,5 +1,6 @@
 import appReducer from './reducers/app-reducer';
 import reduxThunk from 'redux-thunk';
+import reduxLogger from 'redux-logger';
 
 import {
   applyMiddleware,
@@ -13,7 +14,7 @@ const baseReducers = {
 };
 
 const configureStore = () => {
-  const middlewares = [ reduxThunk ];
+  const middlewares = [ reduxThunk, reduxLogger ];
 
   const composeEnhancers =
     (typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ?
