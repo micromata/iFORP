@@ -9,7 +9,7 @@ import {
   PrimaryGeneratedColumn
 } from 'typeorm';
 import { Asset } from './asset';
-import { InteractionElement } from './interaction-element';
+import { ViewLink } from './view-link';
 
 @Entity()
 export class View {
@@ -46,18 +46,18 @@ export class View {
   })
   htmlElementAttributes = undefined;
 
-  @OneToMany(() => InteractionElement, ie => ie.view, {
-    cascade: true,
-    eager: true
-  })
-  interactionElements = undefined;
-
   @ManyToMany(() => Asset, {
     cascade: true,
     eager: true
   })
   @JoinTable()
   assets = undefined;
+
+  @OneToMany(() => ViewLink, viewLink => viewLink.fromView, {
+    cascade: true,
+    onDelete: 'CASCADE'
+  })
+  viewLinks = undefined;
 
   @ManyToOne(() => Whiteboard, whiteboard => whiteboard.views, {
     onDelete: 'CASCADE'

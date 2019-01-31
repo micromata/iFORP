@@ -2,6 +2,7 @@ import cheerio from 'cheerio';
 import path from 'path';
 import { Asset } from '../orm/entity/asset';
 import fs from 'fs-extra';
+import uuid from 'uuid/v4';
 
 export function extractScriptAssets(markup, relPath) {
   const $ = cheerio.load(markup);
@@ -12,7 +13,6 @@ export function extractScriptAssets(markup, relPath) {
     return asset;
   });
 }
-
 export function extractStyleAssets(markup, relPath) {
   const $ = cheerio.load(markup);
   const inlineStyles = $('style');
@@ -62,32 +62,43 @@ function mapElementToAsset(el, relPath) {
   return asset;
 }
 
+function enrichWithInteractionIds(fileContents) {
+  const $ = cheerio.load(fileContents);
+  $('a,button,input[type=button]').attr(
+    'data-interaction-id',
+    (el, val) => val || uuid()
+  );
+  return { markup: $.html() };
+}
+
 export function processHtmlFile(file, uploadDirectory, extractionBasePath) {
   const filePath = path.resolve(extractionBasePath, file);
-  const fileContents = fs.readFileSync(filePath).toString();
+  const { markup } = enrichWithInteractionIds(
+    fs.readFileSync(filePath).toString()
+  );
   const name = filePath
     .split('/')
     .filter(Boolean)
     .pop();
   const assets = [
     ...extractStyleAssets(
-      fileContents,
+      markup,
       path.relative(
         uploadDirectory,
         path.join(extractionBasePath, path.dirname(file))
       )
     ),
     ...extractScriptAssets(
-      fileContents,
+      markup,
       path.relative(
         uploadDirectory,
         path.join(extractionBasePath, path.dirname(file))
       )
     )
   ];
-  const body = extractDocumentBody(fileContents);
-  const head = extractDocumentHead(fileContents);
-  const htmlElementAttributes = extractHtmlElementAttributes(fileContents);
+  const body = extractDocumentBody(markup);
+  const head = extractDocumentHead(markup);
+  const htmlElementAttributes = extractHtmlElementAttributes(markup);
   return {
     name,
     body,
