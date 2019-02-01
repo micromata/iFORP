@@ -10,7 +10,7 @@ import ProjectButtonBar from '../../components/ProjectButtonBar/ProjectButtonBar
 import LibraryZipUpload from '../../components/Library/LibraryZipUpload';
 import HTMLPage from '../../components/HTMLPage/HTMLPage';
 import Button from '../../components/Button/Button';
-import { getLibraryDirectories, getViewsForWhiteboard, getViewDetails, getPageDetails, uploadZipFile, updateView } from '../../actions/app-actions';
+import { getLibraryDirectories, getViewsForWhiteboard, getViewDetails, getPageDetails, uploadZipFile, usePageForView, saveLinksForView } from '../../actions/app-actions';
 import { findWhiteboardWithId, findViewWithId, findPageWithId } from '../../utils';
 
 class Library extends Component {
@@ -43,11 +43,7 @@ class Library extends Component {
     this.props.getPageDetails(selectedPageId);
   }
 
-  handleUsePage = () => {
-    this.setState(prevState => ({ usedPageId: prevState.selectedPageId }));
-  }
-
-  handleCancelUsePage = () => {
+  handleCancelLinkEditing = () => {
     this.setState({ usedPageId: null });
   }
 
@@ -65,9 +61,14 @@ class Library extends Component {
     });
   }
 
-  handleSaveView = () => {
+  handleUsePage = async () => {
     const page = findPageWithId(this.props.directories, this.state.selectedPageId) || {};
-    this.props.updateView(this.props.projectId, this.props.whiteboardId, this.props.viewId, page, this.state.links);
+    await this.props.usePageForView(this.props.projectId, this.props.whiteboardId, this.props.viewId, page);
+    this.setState({ usedPageId: page.id });
+  }
+
+  handleSaveLinksForView = () => {
+    this.props.saveLinksForView(this.props.projectId, this.props.whiteboardId, this.props.viewId, this.state.links);
   }
 
   render() {
@@ -116,8 +117,8 @@ class Library extends Component {
           }
           { this.props.isViewSpecific && this.state.usedPageId &&
             <React.Fragment>
-              <Button buttonStyle='round' onClick={ this.handleCancelUsePage }>cancel</Button>
-              <Button buttonStyle='round' onClick={ this.handleSaveView }>save</Button>
+              <Button buttonStyle='round' onClick={ this.handleCancelLinkEditing }>cancel</Button>
+              <Button buttonStyle='round' onClick={ this.handleSaveLinksForView }>save</Button>
             </React.Fragment>
           }
         </ProjectButtonBar>
@@ -126,7 +127,7 @@ class Library extends Component {
   }
 }
 
-const actions = { getLibraryDirectories, getViewsForWhiteboard, getViewDetails, getPageDetails, uploadZipFile, updateView };
+const actions = { getLibraryDirectories, getViewsForWhiteboard, getViewDetails, getPageDetails, uploadZipFile, usePageForView, saveLinksForView };
 
 const mapStateToProps = (state, ownProps) => {
   /* eslint-disable no-prototype-builtins */
@@ -142,7 +143,7 @@ const mapStateToProps = (state, ownProps) => {
 
   const { directories } = state.app.library;
   const viewLinkOptions = (whiteboard && whiteboard.views) ?
-    [{value: 0, title: 'none'}].concat(whiteboard.views.map(view => ({ value: view.id, title: view.name }))):
+    [{value: 0, title: '-'}].concat(whiteboard.views.map(view => ({ value: view.id, title: view.name }))):
     [];
 
 
@@ -152,6 +153,7 @@ const mapStateToProps = (state, ownProps) => {
     viewId,
     isViewSpecific,
     directories,
+    view,
     viewLinkOptions
   }
 };

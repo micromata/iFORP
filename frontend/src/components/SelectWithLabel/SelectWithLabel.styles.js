@@ -18,12 +18,17 @@ export default theme => ({
       cursor: 'pointer',
       width: '100%',
       borderRadius: '20px',
-      color: '#FFFFFF',
+      color: '#000000',
       fontSize: '14px',
       backgroundColor: '#868686',
       outline: 'none',
       appearance: 'none',
-      '-webkit-appearance': 'none'
+      '-webkit-appearance': 'none',
+      '&:not(.default-value)': {
+        backgroundColor: '#5A5A5A',
+        border: `1px solid ${theme.accentColor}`,
+        color: theme.accentColor
+      }
     },
     '& svg': {
       position: 'absolute',

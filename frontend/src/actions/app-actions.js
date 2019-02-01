@@ -219,17 +219,27 @@ const getViewDetails = (projectId, whiteboardId, viewId) => async dispatch => {
   });
 }
 
-const updateView = (projectId, whiteboardId, viewId, page, links) => async (dispatch, getState) => {
+const usePageForView = (projectId, whiteboardId, viewId, page) => async (dispatch, getState) => {
   const view = findViewWithId(getState().app.projects, projectId, whiteboardId, viewId);
-  const viewLinks = Object.keys(links).
-    map(key => ({ interactionId: key, fromView: viewId, toView: Number(links[key])})).
-    filter(link => link.toView);
 
   view.hasFile = true;
   view.head = page.head;
   view.body = page.body;
   view.htmlElementAttributes = page.htmlElementAttributes;
   view.assets = page.assets;
+  view.viewLinks = [];
+
+  const response = await http.put(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}`, view);
+  const updatedView = await response.json();
+  return updatedView;
+}
+
+const saveLinksForView = (projectId, whiteboardId, viewId, links) => async (dispatch, getState) => {
+  const view = findViewWithId(getState().app.projects, projectId, whiteboardId, viewId);
+  const viewLinks = Object.keys(links).
+    map(key => ({ interactionId: key, fromView: viewId, toView: Number(links[key])})).
+    filter(link => link.toView);
+
   view.viewLinks = viewLinks;
 
   const response = await http.put(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}`, view);
@@ -254,5 +264,6 @@ export {
   renameWhiteboard,
   uploadZipFile,
   getViewDetails,
-  updateView
+  usePageForView,
+  saveLinksForView
 };

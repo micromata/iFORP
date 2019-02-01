@@ -22,7 +22,7 @@ class Project extends Component {
   }
 
   navigateToWhiteboard = whiteboardId => {
-    this.props.history.push(`/projects/${this.props.project.id}/${whiteboardId}`);
+    this.props.history.push(`/projects/${this.props.project.id}/whiteboards/${whiteboardId}`);
   }
 
   render() {

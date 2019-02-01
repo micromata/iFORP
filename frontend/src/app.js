@@ -22,7 +22,7 @@ class App extends Component {
               <ProtectedRoute exact path="/" component={Start} />
               <ProtectedRoute exact path="/projects" component={ProjectOverview} />
               <ProtectedRoute exact path="/projects/:id" component={Project} />
-              <ProtectedRoute path="/projects/:projectId/:whiteboardId" component={Whiteboard} />
+              <ProtectedRoute exact path="/projects/:projectId/whiteboards/:whiteboardId" component={Whiteboard} />
               <ProtectedRoute path="/library/:projectId?/:whiteboardId?/:viewId?" component={Library} />
               <Route path="**" component={PageNotFound} />
             </Switch>

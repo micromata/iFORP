@@ -3,6 +3,8 @@ import injectSheet from 'react-jss';
 import styles from './SelectWithLabel.styles';
 import ArrowDownIcon from '../../assets/img/ArrowDown';
 
+const isDefaultValue = value => !value || value === '0';
+
 const SelectWithLabel = ({
   classes,
   label,
@@ -16,6 +18,7 @@ const SelectWithLabel = ({
     </label>
     <div className={classes.SelectHelper}>
       <select
+        className={ isDefaultValue(value) ? 'default-value' : '' }
         value={value}
         onChange={onChange}
         >
@@ -24,7 +27,7 @@ const SelectWithLabel = ({
           ))
         }
       </select>
-      <ArrowDownIcon color='#3D3D3D'/>
+      <ArrowDownIcon color={ isDefaultValue(value) ? '#3D3D3D' : '#F9BB1F' } />
     </div>
   </div>
 );
