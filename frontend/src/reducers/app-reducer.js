@@ -1,5 +1,5 @@
 import { actionNames } from '../actions/app-actions';
-import { findProjectWithId, findWhiteboardWithId, findViewWithId } from '../utils';
+import { deepClone, findProjectWithId, findWhiteboardWithId, findViewWithId } from '../utils';
 
 const initialState = {
   projects: [],
@@ -7,8 +7,6 @@ const initialState = {
     directories: []
   }
 };
-
-const deepClone = obj => JSON.parse(JSON.stringify(obj));
 
 const updateHasDetailsFlagOfViews = project => {
   if (!project || !project.whiteboards) return project;
@@ -112,6 +110,11 @@ const changeViewName = (newState, projectId, whiteboardId, viewId, newName) => {
   view.name = newName;
 }
 
+const setViewDetails = (newState, projectId, whiteboardId, viewDetails) => {
+  const whiteboard = findWhiteboardWithId(newState.projects, projectId, whiteboardId);
+  whiteboard.views = whiteboard.views.map(view => view.id === viewDetails.id ? viewDetails : view);
+}
+
 export default (state = initialState, action) => {
   const newState = deepClone(state);
 
@@ -130,10 +133,7 @@ export default (state = initialState, action) => {
       addDetailsToPage(newState, action.pageDetails);
       return newState;
     case actionNames.PROJECTS_RECEIVED:
-      return {
-        ...newState,
-        projects: action.projects
-      };
+      return { ...newState, projects: action.projects };
     case actionNames.PROJECT_CREATED:
       newState.projects.push(updateHasDetailsFlagOfViews(action.project));
       return newState;
@@ -141,8 +141,8 @@ export default (state = initialState, action) => {
       changeProjectName(newState, action.projectId, action.newName);
       return newState;
     case actionNames.PROJECT_DELETED:
-    newState.projects = newState.projects.filter(project => project.id !== action.projectId);
-    return newState;
+      newState.projects = newState.projects.filter(project => project.id !== action.projectId);
+      return newState;
     case actionNames.WHITEBOARD_CREATED:
       addWhiteboardToProject(newState, action.projectId, action.whiteboard);
       return newState;
@@ -150,8 +150,8 @@ export default (state = initialState, action) => {
       changeWhiteboardName(newState, action.projectId, action.whiteboardId, action.newName);
       return newState;
     case actionNames.WHITEBOARD_DELETED:
-    removeWhiteboardFromProject(newState, action.projectId, action.whiteboardId);
-    return newState;
+      removeWhiteboardFromProject(newState, action.projectId, action.whiteboardId);
+      return newState;
     case actionNames.VIEW_CREATED:
       addViewToWhiteboard(newState, action.projectId, action.whiteboardId, action.view);
       return newState;
@@ -162,8 +162,11 @@ export default (state = initialState, action) => {
       removeViewFromWhiteboard(newState, action.projectId, action.whiteboardId, action.viewId);
       return newState;
     case actionNames.VIEWS_LIST_RECEIVED:
-    setViewListOfWhiteboard(newState, action.projectId, action.whiteboardId, action.views);
-    return newState;
+      setViewListOfWhiteboard(newState, action.projectId, action.whiteboardId, action.views);
+      return newState;
+    case actionNames.VIEWS_DETAILS_RECEIVED:
+      setViewDetails(newState, action.projectId, action.whiteboardId, action.viewDetails);
+      return newState;
     default:
       return state;
   }

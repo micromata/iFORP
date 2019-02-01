@@ -1,19 +1,17 @@
-import { Entity, Column, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, ManyToOne, PrimaryColumn } from 'typeorm';
 import { View } from './view';
 
 @Entity()
 export class ViewLink {
-  @PrimaryGeneratedColumn()
-  id = undefined;
-
-  @Column('text')
+  @PrimaryColumn('text')
   interactionId = undefined;
 
+  @PrimaryColumn('int')
   @ManyToOne(() => View, view => view.viewLinks, {
     onDelete: 'CASCADE'
   })
   fromView = undefined;
 
-  @Column('int')
+  @PrimaryColumn('int')
   toView = undefined;
 }

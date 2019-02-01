@@ -8,7 +8,7 @@ export default (theme) => ({
     zIndex: '9',
     padding: '20px',
     minWidth: '230px',
-    transition: 'right 0.5s, bottom 0.5s',
+    transition: 'bottom ease-out 0.75s',
     '&.visible': {
       bottom: '0'
     },

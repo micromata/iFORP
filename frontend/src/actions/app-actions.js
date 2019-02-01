@@ -1,5 +1,6 @@
 import * as http from '../services/backendrequest.service';
-import { findWhiteboardWithId } from '../utils';
+import { findWhiteboardWithId, findViewWithId } from '../utils';
+import cheerio from 'cheerio';
 
 const actionNames = {
   PROJECTS_RECEIVED: 'PROJECTS_RECEIVED',
@@ -10,6 +11,7 @@ const actionNames = {
   WHITEBOARD_RENAMED: 'WHITEBOARD_RENAMED',
   WHITEBOARD_DELETED: 'WHITEBOARD_DELETED',
   VIEWS_LIST_RECEIVED: 'VIEWS_LIST_RECEIVED',
+  VIEWS_DETAILS_RECEIVED: 'VIEWS_DETAILS_RECEIVED',
   VIEW_CREATED: 'VIEW_CREATED',
   VIEW_RENAMED: 'VIEW_RENAMED',
   VIEW_DELETED: 'VIEW_DELETED',
@@ -177,6 +179,17 @@ const getPageDetails = pageId => async dispatch => {
   const response = await http.get(`/library/files/${pageId}`);
   const pageDetails = await response.json();
 
+  const $ = cheerio.load(pageDetails.body);
+  const interactionElements = $('[data-interaction-id]').
+    map((index, element) => (
+      {
+        id: $(element).attr('data-interaction-id'),
+        title: $(element).text().trim() || '- no text -'
+      }
+    )).get();
+
+  pageDetails.interactionElements = interactionElements;
+
   dispatch({
     type: actionNames.LIBRARY_PAGE_DETAILS_RECEIVED,
     pageDetails
@@ -191,6 +204,37 @@ const uploadZipFile = file => async dispatch => {
     type: actionNames.LIBRARY_DIRECTORY_IMPORTED,
     directory
   });
+}
+
+
+const getViewDetails = (projectId, whiteboardId, viewId) => async dispatch => {
+  const response = await http.get(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}`);
+  const viewDetails = await response.json();
+
+  return dispatch({
+    type: actionNames.VIEWS_DETAILS_RECEIVED,
+    projectId,
+    whiteboardId,
+    viewDetails
+  });
+}
+
+const updateView = (projectId, whiteboardId, viewId, page, links) => async (dispatch, getState) => {
+  const view = findViewWithId(getState().app.projects, projectId, whiteboardId, viewId);
+  const viewLinks = Object.keys(links).
+    map(key => ({ interactionId: key, fromView: viewId, toView: Number(links[key])})).
+    filter(link => link.toView);
+
+  view.hasFile = true;
+  view.head = page.head;
+  view.body = page.body;
+  view.htmlElementAttributes = page.htmlElementAttributes;
+  view.assets = page.assets;
+  view.viewLinks = viewLinks;
+
+  const response = await http.put(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}`, view);
+  const updatedView = await response.json();
+  return updatedView;
 }
 
 export {
@@ -208,5 +252,7 @@ export {
   renameProject,
   renameView,
   renameWhiteboard,
-  uploadZipFile
+  uploadZipFile,
+  getViewDetails,
+  updateView
 };

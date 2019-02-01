@@ -1,7 +1,8 @@
 import superb from 'superb';
-import { getRepository } from 'typeorm';
+import { getConnection, getRepository } from 'typeorm';
 import { Whiteboard } from '../orm/entity/whiteboard';
 import { View } from '../orm/entity/view';
+import { ViewLink } from '../orm/entity/view-link';
 import { exceptionWithHttpStatus } from '../utils/request';
 
 export const getByWhiteboardId = async whiteboardId => {
@@ -66,6 +67,14 @@ export const replace = async (id, base) => {
   view.body = base.body;
   view.htmlElementAttributes = base.htmlElementAttributes;
   view.assets = base.assets;
+  view.viewLinks = base.viewLinks;
+
+  getConnection()
+    .createQueryBuilder()
+    .delete()
+    .from(ViewLink)
+    .where('fromView = :viewId', { viewId: id })
+    .execute();
 
   return viewRepo.save(view);
 };

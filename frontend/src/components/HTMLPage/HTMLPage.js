@@ -55,11 +55,23 @@ export class HTMLPage extends Component {
     });
     const webpackPubPath = this.iframeDocument.createElement('script');
     this.iframeDocument.body.append(webpackPubPath);
+
+
+    this.iframeDocument.body.
+      querySelectorAll('[data-interaction-id]').
+      forEach(link =>
+        link.addEventListener('click', event => {
+          event.preventDefault();
+          console.log(event.target.innerText);
+        }
+      )
+    );
+
     // Insert Script to highjack interaction elements
-    const pageChanger = this.iframeDocument.createElement('script');
-    pageChanger.src = '/assets/js/view.content.page-changer.js';
-    pageChanger.async = false;
-    this.iframeDocument.body.append(pageChanger);
+    // const pageChanger = this.iframeDocument.createElement('script');
+    // pageChanger.src = '/assets/js/view.content.page-changer.js';
+    // pageChanger.async = false;
+    // this.iframeDocument.body.append(pageChanger);
   }
 
   getLinkElement(iframe, asset) {

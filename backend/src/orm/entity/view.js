@@ -55,6 +55,7 @@ export class View {
 
   @OneToMany(() => ViewLink, viewLink => viewLink.fromView, {
     cascade: true,
+    eager: true,
     onDelete: 'CASCADE'
   })
   viewLinks = undefined;
