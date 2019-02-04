@@ -43,7 +43,7 @@ class ProjectOverview extends Component {
 
     return (
       <React.Fragment>
-        <NavBar title={ `iFORP > Projektübersicht` } />
+        <NavBar exit title={ `iFORP > Projektübersicht` } />
         <div className={ this.props.classes.ProjectOverview }>
           <SearchBar searchTerm={ this.state.searchTerm } onChange={ this.handleSearchTermChange } />
           <ElementGrid>

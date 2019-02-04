@@ -30,7 +30,11 @@ class Project extends Component {
 
     return (
       <React.Fragment>
-        <NavBar exit title={ `iFORP > ${ this.props.project.name }` } />
+        <NavBar
+          exit
+          exitUrl={ `/projects` }
+          title={ `iFORP > ${ this.props.project.name }` }
+        />
         <div className={this.props.classes.Project}>
           <ElementGrid>
             { this.props.project.whiteboards.map(whiteboard =>

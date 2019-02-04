@@ -11,7 +11,7 @@ import LibraryZipUpload from '../../components/Library/LibraryZipUpload';
 import HTMLPage from '../../components/HTMLPage/HTMLPage';
 import Button from '../../components/Button/Button';
 import { getLibraryDirectories, getViewsForWhiteboard, getViewDetails, getPageDetails, uploadZipFile, usePageForView, saveLinksForView } from '../../actions/app-actions';
-import { findWhiteboardWithId, findViewWithId, findPageWithId } from '../../utils';
+import { findProjectWithId, findWhiteboardWithId, findViewWithId, findPageWithId } from '../../utils';
 
 class View extends Component {
   constructor(props) {
@@ -74,7 +74,7 @@ class View extends Component {
     const page = findPageWithId(this.props.directories, this.state.selectedPageId) || {};
     const view = await this.props.usePageForView(this.props.projectId, this.props.whiteboardId, this.props.viewId, page);
     const links = this.getLinksFromView(view);
-    this.setState({ links, librarySelectMode: false });
+    this.setState({ links,  librarySelectMode: false });
   }
 
   handleSaveLinksForView = async () => {
@@ -97,7 +97,11 @@ class View extends Component {
 
     return (
       <div className={ this.props.classes.Library }>
-        <NavBar title={ `iFORP > View` } />
+        <NavBar
+          exit
+          exitUrl={ `/projects/${ this.props.projectId }/whiteboards/${ this.props.whiteboardId}` }
+          title={ `iFORP > ${this.props.projectName} > ${this.props.whiteboardName} > ${this.props.view && this.props.view.name}` }
+        />
         { showLibrary &&
           <LibraryFilter selectedFilter={ this.state.selectedFilter } onFilterChange={ this.handleFilterChange } />
         }
@@ -155,6 +159,7 @@ const mapStateToProps = (state, ownProps) => {
   const whiteboardId = Number(ownProps.match.params.whiteboardId);
   const viewId = Number(ownProps.match.params.viewId);
 
+  const project = findProjectWithId(state.app.projects, projectId);
   const whiteboard = findWhiteboardWithId(state.app.projects, projectId, whiteboardId);
   const view = findViewWithId(state.app.projects, projectId, whiteboardId, viewId);
 
@@ -168,6 +173,8 @@ const mapStateToProps = (state, ownProps) => {
     projectId,
     whiteboardId,
     viewId,
+    projectName: project.name,
+    whiteboardName: whiteboard.name,
     directories,
     view,
     viewLinkOptions

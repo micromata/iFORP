@@ -14,7 +14,6 @@ export default (theme) => ({
   },
   NavItem: {
     display: 'flex',
-    flexBasis: '30%',
     padding: '0 18px',
     justifyContent: 'center',
     color: theme.NavBar.textColor,

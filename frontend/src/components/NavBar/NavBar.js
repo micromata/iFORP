@@ -7,14 +7,14 @@ import UserDropdown from '../UserDropdown/UserDropdown';
 
 export const NavBarHeight = '53px';
 
-export const NavBar = ({ classes, title, exit = false }) => (
+export const NavBar = ({ classes, title, exit = false, exitUrl = '/' }) => (
   <div className={classes.NavBar + ' nav-bar'}>
     <div className={classes.NavItem + ' nav-left'}>
-      {exit && (
-        <Link to="/">
+      {exit && exitUrl &&
+        <Link to={ exitUrl }>
           <CloseIcon className={classes.BackNavigation} />
         </Link>
-      )}
+      }
     </div>
     <Link className={classes.NavItem + ' nav-center'} to="/login">
       {title}

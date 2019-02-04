@@ -34,7 +34,11 @@ class Whiteboard extends Component {
 
     return (
       <React.Fragment>
-        <NavBar title={ `iFORP > ${ this.props.project.name } > ${ this.props.whiteboard.name }` } />
+        <NavBar
+          exit
+          exitUrl={ `/projects/${ this.props.projectId }` }
+          title={ `iFORP > ${ this.props.project.name } > ${ this.props.whiteboard.name }` }
+        />
         <div className={this.props.classes.Whiteboard}>
           <ElementGrid>
             { this.props.views.map(view =>
