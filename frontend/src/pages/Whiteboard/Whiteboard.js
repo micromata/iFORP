@@ -8,6 +8,7 @@ import EditableName from '../../components/EditableName/EditableName';
 import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
 import CircleButton from '../../components/Button/CircleButton';
+import EyeIcon from '../../assets/img/Eye';
 import PlusIcon from '../../assets/img/Plus';
 import { getViewsForWhiteboard, createNewView, renameView, deleteView } from '../../actions/app-actions';
 import { findProjectWithId, findWhiteboardWithId } from '../../utils';
@@ -23,6 +24,10 @@ class Whiteboard extends Component {
 
   navigateToView = viewId => {
     this.props.history.push(`/projects/${this.props.project.id}/whiteboards/${this.props.whiteboardId}/views/${viewId}`);
+  }
+
+  handleStartPreview = () => {
+    this.props.history.push(`/projects/${this.props.project.id}/whiteboards/${this.props.whiteboardId}/preview`);
   }
 
   handleDeleteViewClick = viewId => {
@@ -56,7 +61,9 @@ class Whiteboard extends Component {
           </ElementGrid>
         </div>
         <ProjectButtonBar entries={ this.props.navigationMenuEntries }>
-          <div />
+          <CircleButton onClick={ this.handleStartPreview }>
+            <EyeIcon />
+          </CircleButton>
           <CircleButton onClick={ this.handleCreateViewClick }>
             <PlusIcon />
           </CircleButton>
