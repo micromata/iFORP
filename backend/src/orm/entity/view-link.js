@@ -6,12 +6,11 @@ export class ViewLink {
   @PrimaryColumn('text')
   interactionId = undefined;
 
-  @PrimaryColumn('int')
   @ManyToOne(() => View, view => view.viewLinks, {
     onDelete: 'CASCADE'
   })
   fromView = undefined;
 
   @PrimaryColumn('int')
-  toView = undefined;
+  toViewId = undefined;
 }

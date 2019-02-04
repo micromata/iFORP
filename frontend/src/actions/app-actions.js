@@ -237,8 +237,8 @@ const usePageForView = (projectId, whiteboardId, viewId, page) => async (dispatc
 const saveLinksForView = (projectId, whiteboardId, viewId, links) => async (dispatch, getState) => {
   const view = findViewWithId(getState().app.projects, projectId, whiteboardId, viewId);
   const viewLinks = Object.keys(links).
-    map(key => ({ interactionId: key, fromView: viewId, toView: Number(links[key])})).
-    filter(link => link.toView);
+    map(key => ({ interactionId: key, fromViewId: viewId, toViewId: Number(links[key])})).
+    filter(link => link.toViewId);
 
   view.viewLinks = viewLinks;
 
