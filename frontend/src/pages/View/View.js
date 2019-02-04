@@ -27,9 +27,20 @@ class View extends Component {
   }
 
   async componentDidMount() {
-    await this.props.getViewsForWhiteboard(this.props.projectId, this.props.whiteboardId);
-    await this.props.getViewDetails(this.props.projectId, this.props.whiteboardId, this.props.viewId);
     await this.props.getLibraryDirectories();
+    await this.props.getViewsForWhiteboard(this.props.projectId, this.props.whiteboardId);
+    const viewDetails = await this.props.getViewDetails(this.props.projectId, this.props.whiteboardId, this.props.viewId);
+    const links = this.getLinksFromView(viewDetails);
+    this.setState({ links });
+  }
+
+  getLinksFromView = view => {
+    if (!view || !view.viewLinks) return {};
+
+    return view.viewLinks.reduce((acc, link) => {
+      acc[link.interactionId] = link.toViewId;
+      return acc;
+    }, {});
   }
 
   handleFilterChange = selectedFilter => {
@@ -61,8 +72,9 @@ class View extends Component {
 
   handleUsePage = async () => {
     const page = findPageWithId(this.props.directories, this.state.selectedPageId) || {};
-    await this.props.usePageForView(this.props.projectId, this.props.whiteboardId, this.props.viewId, page);
-    this.setState({ librarySelectMode: false });
+    const view = await this.props.usePageForView(this.props.projectId, this.props.whiteboardId, this.props.viewId, page);
+    const links = this.getLinksFromView(view);
+    this.setState({ links, librarySelectMode: false });
   }
 
   handleSaveLinksForView = async () => {

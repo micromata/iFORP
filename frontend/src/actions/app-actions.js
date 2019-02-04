@@ -173,6 +173,8 @@ const getLibraryDirectories = () => async dispatch => {
     type: actionNames.LIBRARY_DIRECTORIES_RECEIVED,
     directories
   });
+
+  return directories;
 }
 
 const getInteractionElementsFromMarkup = markup => {
@@ -197,6 +199,8 @@ const getPageDetails = pageId => async dispatch => {
     type: actionNames.LIBRARY_PAGE_DETAILS_RECEIVED,
     pageDetails
   });
+
+  return pageDetails;
 }
 
 const uploadZipFile = file => async dispatch => {
@@ -207,6 +211,8 @@ const uploadZipFile = file => async dispatch => {
     type: actionNames.LIBRARY_DIRECTORY_IMPORTED,
     directory
   });
+
+  return directory;
 }
 
 
@@ -216,12 +222,14 @@ const getViewDetails = (projectId, whiteboardId, viewId) => async dispatch => {
 
   viewDetails.interactionElements = getInteractionElementsFromMarkup(viewDetails.body);
 
-  return dispatch({
+  dispatch({
     type: actionNames.VIEWS_DETAILS_RECEIVED,
     projectId,
     whiteboardId,
     viewDetails
   });
+
+  return viewDetails;
 }
 
 const usePageForView = (projectId, whiteboardId, viewId, page) => async (dispatch, getState) => {
@@ -238,12 +246,14 @@ const usePageForView = (projectId, whiteboardId, viewId, page) => async (dispatc
   const updatedView = await response.json();
   updatedView.interactionElements = getInteractionElementsFromMarkup(updatedView.body);
 
-  return dispatch({
+  dispatch({
     type: actionNames.VIEWS_DETAILS_RECEIVED,
     projectId,
     whiteboardId,
     viewDetails: updatedView
   });
+
+  return updatedView;
 }
 
 const saveLinksForView = (projectId, whiteboardId, viewId, links) => async (dispatch, getState) => {
