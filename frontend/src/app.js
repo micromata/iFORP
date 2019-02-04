@@ -43,8 +43,12 @@ const styles = theme => ({
     '*, *:before, *:after': {
       boxSizing: 'inherit',
     },
-    'html,body,#root,.App': {
+    'html,body,#root': {
       height: '100%',
+      width: '100%',
+    },
+    '.App': {
+      minHeight: '100%',
       width: '100%',
     },
     body: {
