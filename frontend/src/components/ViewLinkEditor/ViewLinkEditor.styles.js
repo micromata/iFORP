@@ -1,5 +1,5 @@
 export default (theme) => ({
-  LibraryLinkEditor: {
+  ViewLinkEditor: {
     width: '240px',
     color: theme.textColorLight,
     padding: '20px',

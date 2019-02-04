@@ -34,12 +34,6 @@ class Library extends Component {
     this.props.getPageDetails(selectedPageId);
   }
 
-  handleZipFileSelected = event => {
-    const fileToUpload = event.target.files[0];
-    event.target.value = null;
-    this.props.uploadZipFile(fileToUpload);
-  }
-
   render() {
     const selectedPage = findPageWithId(this.props.directories, this.state.selectedPageId) || {};
 
@@ -65,7 +59,7 @@ class Library extends Component {
           </div>
         </main>
         <ProjectButtonBar includeNavigationMenu={ true }>
-          <LibraryZipUpload onZipFileSelected={ this.handleZipFileSelected } />
+          <LibraryZipUpload onZipFileSelected={ this.props.uploadZipFile } />
         </ProjectButtonBar>
       </div>
     );

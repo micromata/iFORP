@@ -5,7 +5,7 @@ import styles from './View.styles';
 import NavBar from '../../components/NavBar/NavBar';
 import LibraryFilter from '../../components/Library/LibraryFilter';
 import LibraryTreeView from '../../components/Library/LibraryTreeView';
-import LibraryLinkEditor from '../../components/Library/LibraryLinkEditor';
+import ViewLinkEditor from '../../components/ViewLinkEditor/ViewLinkEditor';
 import ProjectButtonBar from '../../components/ProjectButtonBar/ProjectButtonBar';
 import LibraryZipUpload from '../../components/Library/LibraryZipUpload';
 import HTMLPage from '../../components/HTMLPage/HTMLPage';
@@ -54,12 +54,6 @@ class View extends Component {
 
   handleShowLibrarySelection = () => {
     this.setState({ librarySelectMode: true });
-  }
-
-  handleZipFileSelected = event => {
-    const fileToUpload = event.target.files[0];
-    event.target.value = null;
-    this.props.uploadZipFile(fileToUpload);
   }
 
   handleSetLinkTarget = (interactionId, viewId) => {
@@ -125,7 +119,7 @@ class View extends Component {
           </div>
 
           { !showLibrary &&
-            <LibraryLinkEditor
+            <ViewLinkEditor
               availableInteractionElements={ previewData.interactionElements || [] }
               viewLinkOptions={ this.props.viewLinkOptions }
               links={ this.state.links }
@@ -135,7 +129,7 @@ class View extends Component {
         </main>
         <ProjectButtonBar includeNavigationMenu={ false }>
           { showLibrary &&
-            <LibraryZipUpload onZipFileSelected={ this.handleZipFileSelected } />
+            <LibraryZipUpload onZipFileSelected={ this.props.uploadZipFile } />
           }
           { showLibrary &&
             <Button buttonStyle='round' onClick={ this.handleUsePage } disable={ !this.state.selectedPageId }>use</Button>
@@ -165,9 +159,11 @@ const mapStateToProps = (state, ownProps) => {
 
   const { directories } = state.app.library;
 
-  const viewsToLinkTo = whiteboard.views.
-    filter(view => view.id !== viewId).
-    map(view => ({ value: view.id, title: view.name }));
+  const viewsToLinkTo = (whiteboard && whiteboard.views) ?
+    whiteboard.views.
+      filter(view => view.id !== viewId).
+      map(view => ({ value: view.id, title: view.name })) :
+    [];
 
   const viewLinkOptions = (whiteboard && whiteboard.views) ?
     [{value: 0, title: '-'}].concat(viewsToLinkTo):

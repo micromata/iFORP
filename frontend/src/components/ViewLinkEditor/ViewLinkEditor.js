@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
-import styles from './LibraryLinkEditor.styles';
-import SelectWithLabel from '../../components/SelectWithLabel/SelectWithLabel';
+import styles from './ViewLinkEditor.styles';
+import SelectWithLabel from '../SelectWithLabel/SelectWithLabel';
 
-class LibraryLinkEditor extends Component {
+class ViewLinkEditor extends Component {
   render() {
     if (!this.props.availableInteractionElements || !this.props.viewLinkOptions) return null;
 
     return (
-      <div className={ this.props.classes.LibraryLinkEditor }>
+      <div className={ this.props.classes.ViewLinkEditor }>
         <h3>Verlinkungen</h3>
         {
           this.props.availableInteractionElements.map((element, index) => (
@@ -26,4 +26,4 @@ class LibraryLinkEditor extends Component {
   }
 }
 
-export default injectSheet(styles)(LibraryLinkEditor);
+export default injectSheet(styles)(ViewLinkEditor);
