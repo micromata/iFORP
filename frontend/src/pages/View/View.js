@@ -164,8 +164,13 @@ const mapStateToProps = (state, ownProps) => {
   const view = findViewWithId(state.app.projects, projectId, whiteboardId, viewId);
 
   const { directories } = state.app.library;
+
+  const viewsToLinkTo = whiteboard.views.
+    filter(view => view.id !== viewId).
+    map(view => ({ value: view.id, title: view.name }));
+
   const viewLinkOptions = (whiteboard && whiteboard.views) ?
-    [{value: 0, title: '-'}].concat(whiteboard.views.map(view => ({ value: view.id, title: view.name }))):
+    [{value: 0, title: '-'}].concat(viewsToLinkTo):
     [];
 
 
