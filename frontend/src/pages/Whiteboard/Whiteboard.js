@@ -83,7 +83,8 @@ const mapStateToProps = (state, ownProps) => {
   const views = whiteboard && whiteboard.views;
 
   const whiteboardNavEntries = project.whiteboards.
-    map(item => ({ title: item.name, url: `/projects/${projectId}/${item.id}` }));
+    filter(item => item.id !== whiteboardId).
+    map(item => ({ title: item.name, url: `/projects/${projectId}/whiteboards/${item.id}` }));
 
   return {
     projectId,

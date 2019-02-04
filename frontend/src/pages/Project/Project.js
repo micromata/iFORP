@@ -68,6 +68,7 @@ const mapStateToProps = (state, ownProps) => {
   const projectId = parseInt(ownProps.match.params.id, 10);
 
   const projectNavEntries = state.app.projects.
+    filter(item => item.id !== projectId).
     map(item => ({ title: item.name, url: `/projects/${item.id}` }));
 
   return {
