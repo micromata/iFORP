@@ -175,20 +175,23 @@ const getLibraryDirectories = () => async dispatch => {
   });
 }
 
-const getPageDetails = pageId => async dispatch => {
-  const response = await http.get(`/library/files/${pageId}`);
-  const pageDetails = await response.json();
-
-  const $ = cheerio.load(pageDetails.body);
-  const interactionElements = $('[data-interaction-id]').
+const getInteractionElementsFromMarkup = markup => {
+  if (!markup) return [];
+  const $ = cheerio.load(markup);
+  return $('[data-interaction-id]').
     map((index, element) => (
       {
         id: $(element).attr('data-interaction-id'),
         title: $(element).text().trim() || '- no text -'
       }
     )).get();
+}
 
-  pageDetails.interactionElements = interactionElements;
+const getPageDetails = pageId => async dispatch => {
+  const response = await http.get(`/library/files/${pageId}`);
+  const pageDetails = await response.json();
+
+  pageDetails.interactionElements = getInteractionElementsFromMarkup(pageDetails.body);
 
   dispatch({
     type: actionNames.LIBRARY_PAGE_DETAILS_RECEIVED,
@@ -211,6 +214,8 @@ const getViewDetails = (projectId, whiteboardId, viewId) => async dispatch => {
   const response = await http.get(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}`);
   const viewDetails = await response.json();
 
+  viewDetails.interactionElements = getInteractionElementsFromMarkup(viewDetails.body);
+
   return dispatch({
     type: actionNames.VIEWS_DETAILS_RECEIVED,
     projectId,
@@ -231,7 +236,14 @@ const usePageForView = (projectId, whiteboardId, viewId, page) => async (dispatc
 
   const response = await http.put(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}`, view);
   const updatedView = await response.json();
-  return updatedView;
+  updatedView.interactionElements = getInteractionElementsFromMarkup(updatedView.body);
+
+  return dispatch({
+    type: actionNames.VIEWS_DETAILS_RECEIVED,
+    projectId,
+    whiteboardId,
+    viewDetails: updatedView
+  });
 }
 
 const saveLinksForView = (projectId, whiteboardId, viewId, links) => async (dispatch, getState) => {

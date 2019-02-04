@@ -21,6 +21,10 @@ class Whiteboard extends Component {
     this.props.createNewView(this.props.projectId, this.props.whiteboardId);
   }
 
+  navigateToView = viewId => {
+    this.props.history.push(`/projects/${this.props.project.id}/whiteboards/${this.props.whiteboardId}/views/${viewId}`);
+  }
+
   handleDeleteViewClick = viewId => {
     this.props.deleteView(this.props.projectId, this.props.whiteboardId, viewId);
   }
@@ -36,6 +40,7 @@ class Whiteboard extends Component {
             { this.props.views.map(view =>
               <ButtonTile
                 key={ view.id }
+                onClick={ () => this.navigateToView(view.id) }
                 onDeleteClick={() => this.handleDeleteViewClick(view.id)}
                 titleBelow>
                 <EditableName
