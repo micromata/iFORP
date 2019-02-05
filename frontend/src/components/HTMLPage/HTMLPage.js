@@ -21,10 +21,17 @@ export class HTMLPage extends Component {
   }
 
   handleInteractionElementClick = event => {
-      event.preventDefault();
-      if (!this.props.onInteractionElementClick) return;
+    event.preventDefault();
+    if (!this.props.onInteractionElementClick) return;
 
-      this.props.onInteractionElementClick(event.target.attributes['data-interaction-id'].value);
+    this.props.onInteractionElementClick(event.target.attributes['data-interaction-id'].value);
+  }
+
+  handleBodyClick = event => {
+    event.preventDefault();
+    if (!this.props.onAnnotate || !this.props.showAnnotations) return;
+
+    this.props.onAnnotate({x: event.pageX - 15, y: event.pageY - 15 });
   }
 
   injectIframeContent() {
@@ -38,14 +45,37 @@ export class HTMLPage extends Component {
         );
     });
 
+    const annotationCSS = this.props.showAnnotations ? `
+    <head>
+      <style>
+        .annotation {
+          position: absolute;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          z-index: 999999;
+          background: #F9BB1F;
+          color: #FFF;
+          line-height: 30px;
+          text-align: center;
+        }
+      </style>
+    ` : '';
+    const annotationsMarkup = this.props.showAnnotations ?
+      this.props.annotations.map((annotation, index) => `
+      <div class='annotation' style='top: ${annotation.y}px; left: ${annotation.x}px;'>
+        ${index+1}
+      </div>
+    `).join('') : '';
+
     htmlElement.style = 'visibility: hidden';
 
     // Fill head element
-    this.iframeDocument.head.innerHTML = this.props.head;
+    this.iframeDocument.head.innerHTML = `${this.props.head} ${annotationCSS}`;
 
 
     // Fill body element
-    this.iframeDocument.body.innerHTML = this.props.body;
+    this.iframeDocument.body.innerHTML = `${this.props.body} ${annotationsMarkup}`;
 
     // Insert JavaScript and CSS assets to the view
     this.props.assets.forEach(asset => {
@@ -60,9 +90,12 @@ export class HTMLPage extends Component {
       }
     });
 
+
     this.iframeDocument.body.
       querySelectorAll('[data-interaction-id]').
       forEach(link => link.addEventListener('click', this.handleInteractionElementClick));
+
+    this.iframeDocument.body.addEventListener('click', this.handleBodyClick);
 
     setTimeout(() => { htmlElement.style = ''; }, 100);
   }

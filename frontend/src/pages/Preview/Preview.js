@@ -11,7 +11,7 @@ import { findViewWithId } from '../../utils';
 export class Preview extends Component {
   constructor(props) {
     super(props);
-    this.state = { showAnnotations: false };
+    this.state = { showAnnotations: false, annotations: [] };
   }
 
   componentDidMount() {
@@ -40,6 +40,11 @@ export class Preview extends Component {
     this.setState({ showAnnotations })
   }
 
+  handleAnnotate = coords => {
+    if (!this.state.showAnnotations) return;
+    this.setState(prevState => ({ annotations: prevState.annotations.concat([coords]) }))
+  }
+
   render() {
     const previewData = this.props.view || {};
 
@@ -57,7 +62,10 @@ export class Preview extends Component {
               head={ previewData.head || '' }
               body={ previewData.body || '' }
               assets={ previewData.assets || [] }
+              showAnnotations={ this.state.showAnnotations }
+              annotations={ this.state.annotations }
               onInteractionElementClick={ this.handleInteractionElementClick }
+              onAnnotate={ this.handleAnnotate }
               viewportSize="desktop"
             />
             <div className='annotation-panel'>
@@ -69,6 +77,15 @@ export class Preview extends Component {
                 isActive={this.state.showAnnotations}
                 onToggle={this.handleToggleAnnotations}
               />
+              { this.state.showAnnotations &&
+                <ul className='annotations'>
+                  { this.state.annotations.map((annotation, index) =>
+                    <li key={ index } className='annotation'>
+                      Annotation { index + 1}
+                    </li>
+                  ) }
+                </ul>
+              }
             </div>
           </div>
         </main>

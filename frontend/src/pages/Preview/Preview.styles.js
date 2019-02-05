@@ -20,9 +20,32 @@ export default theme => ({
           flexShrink: 0,
           flexGrow: 1,
           minWidth: '280px',
+          maxWidth: '400px',
           '& h3': {
             color: theme.textColorLight,
             textAlign: 'center'
+          },
+          '& ul.annotations': {
+            margin: 0,
+            padding: 0,
+            counterReset: 'annotationCounter',
+            listStyle: 'none',
+            '& li.annotation': {
+              margin: '10px 0',
+              color: theme.textColorLight,
+              '&:before': {
+                counterIncrement: 'annotationCounter',
+                content: 'counter(annotationCounter)',
+                display: 'inline-block',
+                textAlign: 'center',
+                width: '30px',
+                height: '30px',
+                borderRadius: '50%',
+                background: theme.accentColor,
+                lineHeight: '30px',
+                marginRight: '20px'
+              },
+            }
           }
         }
       }
