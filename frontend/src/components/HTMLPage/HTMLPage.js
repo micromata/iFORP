@@ -12,16 +12,19 @@ export class HTMLPage extends Component {
     // Create and insert html5 doctype
     const doctype = this.iframeDocument.implementation.createDocumentType('html', '', '');
     this.iframeDocument.insertBefore(doctype, this.iframeDocument.querySelector('html'));
-
-    // This.iframeDocument.addEventListener('DOMNodeInserted', event => {
-    //   console.log(event);
-    // });
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.viewportSize === this.props.viewportSize) {
       this.injectIframeContent();
     }
+  }
+
+  handleInteractionElementClick = event => {
+      event.preventDefault();
+      if (!this.props.onInteractionElementClick) return;
+
+      this.props.onInteractionElementClick(event.target.attributes['data-interaction-id'].value);
   }
 
   injectIframeContent() {
@@ -35,8 +38,11 @@ export class HTMLPage extends Component {
         );
     });
 
+    htmlElement.style = 'visibility: hidden';
+
     // Fill head element
     this.iframeDocument.head.innerHTML = this.props.head;
+
 
     // Fill body element
     this.iframeDocument.body.innerHTML = this.props.body;
@@ -53,25 +59,12 @@ export class HTMLPage extends Component {
         );
       }
     });
-    const webpackPubPath = this.iframeDocument.createElement('script');
-    this.iframeDocument.body.append(webpackPubPath);
-
 
     this.iframeDocument.body.
       querySelectorAll('[data-interaction-id]').
-      forEach(link =>
-        link.addEventListener('click', event => {
-          event.preventDefault();
-          console.log(event.target.innerText);
-        }
-      )
-    );
+      forEach(link => link.addEventListener('click', this.handleInteractionElementClick));
 
-    // Insert Script to highjack interaction elements
-    // const pageChanger = this.iframeDocument.createElement('script');
-    // pageChanger.src = '/assets/js/view.content.page-changer.js';
-    // pageChanger.async = false;
-    // this.iframeDocument.body.append(pageChanger);
+    setTimeout(() => { htmlElement.style = ''; }, 100);
   }
 
   getLinkElement(iframe, asset) {
@@ -109,9 +102,7 @@ export class HTMLPage extends Component {
         <iframe
           className={`preview ${this.props.viewportSize}`}
           frameBorder="0"
-          ref={node => {
-            this.node = node;
-          }}
+          ref={node => { this.node = node }}
         />
       </div>
     );

@@ -27,7 +27,8 @@ class Whiteboard extends Component {
   }
 
   handleStartPreview = () => {
-    this.props.history.push(`/projects/${this.props.project.id}/whiteboards/${this.props.whiteboardId}/preview`);
+    const viewId = this.props.views[0].id;
+    this.props.history.push(`/projects/${this.props.project.id}/whiteboards/${this.props.whiteboardId}/views/${viewId}/preview`);
   }
 
   handleDeleteViewClick = viewId => {
@@ -61,7 +62,7 @@ class Whiteboard extends Component {
           </ElementGrid>
         </div>
         <ProjectButtonBar entries={ this.props.navigationMenuEntries }>
-          <CircleButton onClick={ this.handleStartPreview }>
+          <CircleButton onClick={ this.handleStartPreview } disabled={ !(this.props.views && this.props.views.length) }>
             <EyeIcon />
           </CircleButton>
           <CircleButton onClick={ this.handleCreateViewClick }>

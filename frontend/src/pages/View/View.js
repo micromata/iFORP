@@ -90,7 +90,7 @@ class View extends Component {
       };
 
     return (
-      <div className={ this.props.classes.Library }>
+      <div className={ this.props.classes.View }>
         <NavBar
           exit
           exitUrl={ `/projects/${ this.props.projectId }/whiteboards/${ this.props.whiteboardId}` }
