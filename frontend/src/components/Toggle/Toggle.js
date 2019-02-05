@@ -23,6 +23,7 @@ export const Toggle = ({
       className="toggle-checkbox"
       name="toggle"
       id="toggle"
+      checked={isActive}
       onChange={() => {
         onToggle(!isActive);
       }}
@@ -48,23 +49,26 @@ const styles = theme => ({
       left: '24px',
     },
     '& label': {
-      color: theme.textColor || '#999'
+      cursor: 'pointer',
+      color: props => props.colorInactive || theme.accentColor || '#5E5E5E',
     },
     '& label.active': {
-      color: props => props.color || theme.accentColor || '#5E5E5E',
+      color: props => props.textColorActive || theme.textColor || '#999'
     },
     '& .toggle-button': {
       margin: '0 30px',
       border: '1px solid #E0E0E0',
+      backgroundColor: '#FFFFFF',
       borderRadius: '25px',
       boxShadow: 'inset rgba(0,0,0,0.5) 0 3px 3px 0',
       position: 'relative',
       height: '26px',
       width: '50px',
+      cursor: 'pointer',
       '&:before': {
         content: '""',
         padding: '12px',
-        backgroundColor: props => props.color || theme.accentColor || '#5E5E5E',
+        backgroundColor: props => props.colorActive || theme.accentColor || '#5E5E5E',
         position: 'absolute',
         borderRadius: '15px',
         boxShadow: 'rgba(0,0,0,0.5) 0 1px 3px 0',

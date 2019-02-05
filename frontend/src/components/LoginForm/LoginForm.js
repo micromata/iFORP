@@ -25,9 +25,9 @@ class LoginForm extends Component {
         <Toggle
           labelLeft="Sign In"
           labelRight="Sign Up"
-          isActive={this.state.mode === 'signIn'}
+          isActive={this.state.mode === 'signUp'}
           onToggle={enabled => {
-            this.setState({ mode: enabled === true ? 'signIn' : 'signUp' });
+            this.setState({ mode: enabled === true ? 'signUp' : 'signIn' });
           }}
         />
         {this.state.mode === 'signIn' && (

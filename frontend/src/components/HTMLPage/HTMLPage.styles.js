@@ -13,7 +13,7 @@ export default (theme) => ({
         	right: '0',
         	margin: 'auto',
         	height: '100%',
-        	'&.desktop': { width: '100%' },
+        	'&.desktop': { width: '1280px' },
         	'&.tablet': { width: '768px' },
         	'&.phone': { width: '375px' }
         }

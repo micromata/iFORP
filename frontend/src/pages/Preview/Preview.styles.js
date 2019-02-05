@@ -1,4 +1,4 @@
-export default () => ({
+export default theme => ({
   Preview: {
     height: '100%',
     width: '100%',
@@ -6,14 +6,24 @@ export default () => ({
       margin: 0
     },
     '& main': {
-      height: 'calc(100% - 120px)',
-      display: 'flex',
-      alignItems: 'stretch',
       '& .content': {
-        flexGrow: 1,
+        display: 'flex',
         '& .preview-wrapper': {
-          padding: '0 0 100vh 0',
-          margin: 0
+          height: '100vh',
+          flexShrink: 0,
+          '&.desktop': { width: '1280px' },
+        	'&.tablet': { width: '768px' },
+        	'&.phone': { width: '375px' }
+        },
+        '& .annotation-panel': {
+          padding: '20px',
+          flexShrink: 0,
+          flexGrow: 1,
+          minWidth: '280px',
+          '& h3': {
+            color: theme.textColorLight,
+            textAlign: 'center'
+          }
         }
       }
     }

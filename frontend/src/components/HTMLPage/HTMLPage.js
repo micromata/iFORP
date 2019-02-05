@@ -98,7 +98,7 @@ export class HTMLPage extends Component {
 
   render() {
     return (
-      <div className={ `${this.props.classes.HTMLPage} preview-wrapper` }>
+      <div className={ `${this.props.classes.HTMLPage} preview-wrapper ${this.props.viewportSize}` }>
         <iframe
           className={`preview ${this.props.viewportSize}`}
           frameBorder="0"

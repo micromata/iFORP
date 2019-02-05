@@ -4,10 +4,16 @@ import injectSheet from 'react-jss';
 import styles from './Preview.styles';
 import NavBar from '../../components/NavBar/NavBar';
 import HTMLPage from '../../components/HTMLPage/HTMLPage';
+import Toggle from '../../components/Toggle/Toggle';
 import { getViewsForWhiteboard, getViewDetails } from '../../actions/app-actions';
 import { findViewWithId } from '../../utils';
 
 export class Preview extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { showAnnotations: false };
+  }
+
   componentDidMount() {
     this.ensureViewDetailsAvailable()
   }
@@ -25,10 +31,14 @@ export class Preview extends Component {
 
   handleInteractionElementClick = interactionId => {
     const viewLink = this.props.view.viewLinks.find(link => link.interactionId === interactionId);
-    if (!viewLink) return;
+    if (!viewLink || this.state.showAnnotations) return;
 
     this.props.history.push(`/projects/${this.props.projectId}/whiteboards/${this.props.whiteboardId}/views/${viewLink.toViewId}/preview`);
   };
+
+  handleToggleAnnotations = showAnnotations => {
+    this.setState({ showAnnotations })
+  }
 
   render() {
     const previewData = this.props.view || {};
@@ -50,6 +60,16 @@ export class Preview extends Component {
               onInteractionElementClick={ this.handleInteractionElementClick }
               viewportSize="desktop"
             />
+            <div className='annotation-panel'>
+              <h3>Annotations</h3>
+              <Toggle
+                labelLeft="Off"
+                labelRight="On"
+                textColorActive="#FFFFFF"
+                isActive={this.state.showAnnotations}
+                onToggle={this.handleToggleAnnotations}
+              />
+            </div>
           </div>
         </main>
       </div>
