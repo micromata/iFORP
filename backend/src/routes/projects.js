@@ -4,6 +4,7 @@ import { View } from '../orm/entity/view';
 import * as projectService from '../service/project-service';
 import * as whiteboardService from '../service/whiteboard-service';
 import * as viewService from '../service/view-service';
+import * as viewAnnotationService from '../service/view-annotation-service';
 import { getLogger } from '../lib/get-logger';
 import { getRequestHandler } from '../utils/request';
 import { ensureAuthentication } from '../utils/middleware';
@@ -131,6 +132,42 @@ projects.put(
   '/:projectId/whiteboards/:whiteboardId/views/:viewId',
   handleRequest(async (req, res) => {
     return res.send(await viewService.replace(req.params.viewId, req.body));
+  })
+);
+
+projects.post(
+  '/:projectId/whiteboards/:whiteboardId/views/:viewId/annotations',
+  handleRequest(async (req, res) => {
+    return res.send(
+      await viewAnnotationService.save(req.params.viewId, req.body)
+    );
+  })
+);
+
+projects.get(
+  '/:projectId/whiteboards/:whiteboardId/views/:viewId/annotations/:annotationId',
+  handleRequest(async (req, res) => {
+    return res.send(
+      await viewAnnotationService.findById(req.params.annotationId)
+    );
+  })
+);
+
+projects.delete(
+  '/:projectId/whiteboards/:whiteboardId/views/:viewId/annotations/:annotationId',
+  handleRequest(async (req, res) => {
+    return res.send(
+      await viewAnnotationService.remove(req.params.annotationId)
+    );
+  })
+);
+
+projects.put(
+  '/:projectId/whiteboards/:whiteboardId/views/:viewId/annotations/:annotationId',
+  handleRequest(async (req, res) => {
+    return res.send(
+      await viewAnnotationService.replace(req.params.annotationId, req.body)
+    );
   })
 );
 

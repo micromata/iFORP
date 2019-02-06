@@ -68,6 +68,7 @@ export const replace = async (id, base) => {
   view.htmlElementAttributes = base.htmlElementAttributes;
   view.assets = base.assets;
   view.viewLinks = base.viewLinks;
+  view.annotations = base.annotations;
 
   getConnection()
     .createQueryBuilder()

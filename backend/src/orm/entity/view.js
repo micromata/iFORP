@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import { Asset } from './asset';
 import { ViewLink } from './view-link';
+import { ViewAnnotation } from './view-annotation';
 
 @Entity()
 export class View {
@@ -64,4 +65,11 @@ export class View {
     onDelete: 'CASCADE'
   })
   whiteboard = undefined;
+
+  @OneToMany(() => ViewAnnotation, viewAnnotation => viewAnnotation.view, {
+    cascade: true,
+    eager: true,
+    onDelete: 'CASCADE'
+  })
+  annotations = undefined;
 }
