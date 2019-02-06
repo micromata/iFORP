@@ -1,5 +1,6 @@
 export default (theme) => ({
-  EditableName: {
+  EditableText: {
+    display: 'inline-block',
     '& input[type=text]': {
       'fontSize': '16px',
       'background': 'transparent',

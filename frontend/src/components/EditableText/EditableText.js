@@ -1,19 +1,19 @@
 /* eslint-disable filenames/match-exported */
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
-import styles from './EditableName.styles';
+import styles from './EditableText.styles';
 
-export class EditableName extends Component {
+export class EditableText extends Component {
   constructor(props) {
     super(props);
 
     this.inputRef = React.createRef();
-    this.state = { isEditing: false, editedName: null };
+    this.state = { isEditing: false, editedText: null };
   }
 
   handleSetEditMode = () => {
     this.setState(
-      { isEditing: true, editedName: this.props.name },
+      { isEditing: true, editedText: this.props.text },
       () => {
         this.inputRef.current.focus();
         this.inputRef.current.select();
@@ -22,15 +22,15 @@ export class EditableName extends Component {
   }
 
   handleInputChange = event => {
-    this.setState({ editedName: event.target.value });
+    this.setState({ editedText: event.target.value });
   }
 
   cancelEditing = () => {
-    this.setState({ isEditing: false, editedName: null });
+    this.setState({ isEditing: false, editedText: null });
   }
 
   confirmEditing = async () => {
-    await this.props.onEditingConfirmed(this.state.editedName);
+    await this.props.onEditingConfirmed(this.state.editedText);
     this.cancelEditing();
   }
 
@@ -46,22 +46,22 @@ export class EditableName extends Component {
 
   render() {
     return (
-      <div className={ this.props.classes.EditableName } onClick={ this.handleSetEditMode }>
+      <div className={ this.props.classes.EditableText } onClick={ this.handleSetEditMode }>
         { !this.state.isEditing &&
           <React.Fragment>
-            { this.props.name }
+            { this.props.text }
           </React.Fragment>
         }
         { this.state.isEditing &&
           <input
             type='text'
             ref={ this.inputRef }
-            value={ this.state.editedName }
+            value={ this.state.editedText }
             onChange={ this.handleInputChange }
             onBlur={ this.cancelEditing }
             onKeyDown={ this.handleInputKeyDown }
-            minLength={ 5 }
-            maxLength={ 20 }
+            minLength={ this.props.minLength || 5 }
+            maxLength={ this.props.maxLength || 20 }
           />
         }
       </div>
@@ -69,4 +69,4 @@ export class EditableName extends Component {
   }
 }
 
-export default injectSheet(styles)(EditableName);
+export default injectSheet(styles)(EditableText);

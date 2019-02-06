@@ -4,7 +4,7 @@ import injectSheet from 'react-jss';
 import styles from './Whiteboard.styles';
 import NavBar from '../../components/NavBar/NavBar';
 import ProjectButtonBar from '../../components/ProjectButtonBar/ProjectButtonBar';
-import EditableName from '../../components/EditableName/EditableName';
+import EditableText from '../../components/EditableText/EditableText';
 import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
 import CircleButton from '../../components/Button/CircleButton';
@@ -53,8 +53,8 @@ class Whiteboard extends Component {
                 onClick={ () => this.navigateToView(view.id) }
                 onDeleteClick={() => this.handleDeleteViewClick(view.id)}
                 titleBelow>
-                <EditableName
-                  name={ view.name }
+                <EditableText
+                  text={ view.name }
                   onEditingConfirmed={ newName => this.props.renameView(this.props.projectId, this.props.whiteboardId, view.id, newName) }
                 />
               </ButtonTile>

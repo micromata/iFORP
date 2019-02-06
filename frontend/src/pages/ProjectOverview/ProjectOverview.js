@@ -7,7 +7,7 @@ import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import ProjectButtonBar from '../../components/ProjectButtonBar/ProjectButtonBar';
-import EditableName from '../../components/EditableName/EditableName';
+import EditableText from '../../components/EditableText/EditableText';
 import CircleButton from '../../components/Button/CircleButton';
 import PlusIcon from '../../assets/img/Plus';
 import { createNewProject, renameProject, deleteProject } from '../../actions/app-actions';
@@ -53,8 +53,8 @@ class ProjectOverview extends Component {
                 titleBelow
                 onClick={ () => this.navigateToProject(project.id ) }
                 onDeleteClick={() => this.handleDeleteProjectClick(project.id)}>
-                <EditableName
-                  name={ project.name }
+                <EditableText
+                  text={ project.name }
                   onEditingConfirmed={ newName => this.props.renameProject(project.id, newName) }
                 />
               </ButtonTile>
