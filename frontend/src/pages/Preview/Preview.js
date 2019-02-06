@@ -5,7 +5,7 @@ import styles from './Preview.styles';
 import NavBar from '../../components/NavBar/NavBar';
 import HTMLPage from '../../components/HTMLPage/HTMLPage';
 import Toggle from '../../components/Toggle/Toggle';
-import EditableText from '../../components/EditableText/EditableText';
+import ViewAnnotationList from '../../components/ViewAnnotation/ViewAnnotationList';
 import { getViewsForWhiteboard, getViewDetails, addAnnotationToView, changeViewAnnotationText } from '../../actions/app-actions';
 import { findViewWithId } from '../../utils';
 
@@ -83,16 +83,10 @@ export class Preview extends Component {
                 onToggle={this.handleToggleAnnotations}
               />
               { this.state.showAnnotations &&
-                <ul className='annotations'>
-                  { this.props.annotations.map((annotation, index) =>
-                    <li key={ index } className='annotation'>
-                      <EditableText
-                        text={ annotation.text }
-                        onEditingConfirmed={ newText => this.handleChangeAnnotationText(annotation.id, newText) }
-                      />
-                    </li>
-                  ) }
-                </ul>
+                <ViewAnnotationList
+                  annotations={ this.props.annotations }
+                  onChangeAnnotationText={ this.handleChangeAnnotationText }
+                />
               }
             </div>
           </div>

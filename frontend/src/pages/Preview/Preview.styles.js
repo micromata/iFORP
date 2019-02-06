@@ -21,33 +21,11 @@ export default theme => ({
           flexGrow: 1,
           minWidth: '280px',
           maxWidth: '400px',
+          maxHeight: '100vh',
+          overflow: 'scroll',
           '& h3': {
             color: theme.textColorLight,
             textAlign: 'center'
-          },
-          '& ul.annotations': {
-            margin: 0,
-            padding: 0,
-            counterReset: 'annotationCounter',
-            listStyle: 'none',
-            '& li.annotation': {
-              margin: '10px 0',
-              color: theme.textColorLight,
-              display: 'flex',
-              alignItems: 'center',
-              '&:before': {
-                counterIncrement: 'annotationCounter',
-                content: 'counter(annotationCounter)',
-                display: 'inline-block',
-                textAlign: 'center',
-                width: '30px',
-                height: '30px',
-                borderRadius: '50%',
-                background: theme.accentColor,
-                lineHeight: '30px',
-                marginRight: '20px'
-              },
-            }
           }
         }
       }

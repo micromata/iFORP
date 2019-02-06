@@ -35,6 +35,7 @@ export default {
   light: {
     backgroundColor: '#FFF',
     accentColor: '#F9BB1F',
+    textColorLight: '#000',
     DottedBackground: {
       backgroundColor: '',
       dotColor: '',
@@ -55,6 +56,7 @@ export default {
   purple: {
     backgroundColor: '#32394C',
     accentColor: '#F9BB1F',
+    textColorLight: '#FFF',
     DottedBackground: {
       backgroundColor: '',
       dotColor: '',

@@ -31,6 +31,7 @@ export default {
     justifyContent: 'center',
     marginTop: '1rem',
     fontSize: '1rem',
-    userSelect: 'none'
+    userSelect: 'none',
+    textAlign: 'center'
   },
 };
