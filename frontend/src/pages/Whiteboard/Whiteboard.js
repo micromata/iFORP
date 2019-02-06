@@ -8,7 +8,7 @@ import EditableName from '../../components/EditableName/EditableName';
 import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
 import CircleButton from '../../components/Button/CircleButton';
-import EyeIcon from '../../assets/img/Eye';
+import PreviewIcon from '../../assets/img/Preview';
 import PlusIcon from '../../assets/img/Plus';
 import { getViewsForWhiteboard, createNewView, renameView, deleteView } from '../../actions/app-actions';
 import { findProjectWithId, findWhiteboardWithId } from '../../utils';
@@ -63,7 +63,7 @@ class Whiteboard extends Component {
         </div>
         <ProjectButtonBar entries={ this.props.navigationMenuEntries }>
           <CircleButton onClick={ this.handleStartPreview } disabled={ !(this.props.views && this.props.views.length) }>
-            <EyeIcon />
+            <PreviewIcon />
           </CircleButton>
           <CircleButton onClick={ this.handleCreateViewClick }>
             <PlusIcon />

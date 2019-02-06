@@ -5,13 +5,13 @@ import styles from './Preview.styles';
 import NavBar from '../../components/NavBar/NavBar';
 import HTMLPage from '../../components/HTMLPage/HTMLPage';
 import Toggle from '../../components/Toggle/Toggle';
-import { getViewsForWhiteboard, getViewDetails } from '../../actions/app-actions';
+import { getViewsForWhiteboard, getViewDetails, addAnnotationToView } from '../../actions/app-actions';
 import { findViewWithId } from '../../utils';
 
 export class Preview extends Component {
   constructor(props) {
     super(props);
-    this.state = { showAnnotations: false, annotations: [] };
+    this.state = { showAnnotations: false };
   }
 
   componentDidMount() {
@@ -42,7 +42,7 @@ export class Preview extends Component {
 
   handleAnnotate = coords => {
     if (!this.state.showAnnotations) return;
-    this.setState(prevState => ({ annotations: prevState.annotations.concat([coords]) }))
+    this.props.addAnnotationToView(this.props.projectId, this.props.whiteboardId, this.props.viewId, 'desktop', coords.x, coords.y);
   }
 
   render() {
@@ -63,7 +63,7 @@ export class Preview extends Component {
               body={ previewData.body || '' }
               assets={ previewData.assets || [] }
               showAnnotations={ this.state.showAnnotations }
-              annotations={ this.state.annotations }
+              annotations={ previewData.annotations }
               onInteractionElementClick={ this.handleInteractionElementClick }
               onAnnotate={ this.handleAnnotate }
               viewportSize="desktop"
@@ -79,9 +79,9 @@ export class Preview extends Component {
               />
               { this.state.showAnnotations &&
                 <ul className='annotations'>
-                  { this.state.annotations.map((annotation, index) =>
+                  { this.props.annotations.map((annotation, index) =>
                     <li key={ index } className='annotation'>
-                      Annotation { index + 1}
+                      { annotation.text }
                     </li>
                   ) }
                 </ul>
@@ -94,19 +94,23 @@ export class Preview extends Component {
   }
 }
 
-const actions = { getViewsForWhiteboard, getViewDetails };
+const actions = { getViewsForWhiteboard, getViewDetails, addAnnotationToView };
 
 const mapStateToProps = (state, ownProps) => {
   const projectId = Number(ownProps.match.params.projectId);
   const whiteboardId = Number(ownProps.match.params.whiteboardId);
   const viewId = Number(ownProps.match.params.viewId);
   const view = findViewWithId(state.app.projects, projectId, whiteboardId, viewId);
+  const annotations = (view && view.annotations) ?
+    [...view.annotations].sort((a, b) => a.id - b.id) :
+    [];
 
   return {
     projectId,
     whiteboardId,
     viewId,
-    view
+    view,
+    annotations
   }
 };
 

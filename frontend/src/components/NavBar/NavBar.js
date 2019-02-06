@@ -1,7 +1,7 @@
 import React from 'react';
 import injectSheet from 'react-jss';
 import { Link } from 'react-router-dom';
-import CloseIcon from '../../assets/img/Close';
+import BackIcon from '../../assets/img/Back';
 import styles from './NavBar.styles';
 import UserDropdown from '../UserDropdown/UserDropdown';
 
@@ -12,7 +12,7 @@ export const NavBar = ({ classes, title, exit = false, exitUrl = '/' }) => (
     <div className={classes.NavItem + ' nav-left'}>
       {exit && exitUrl &&
         <Link to={ exitUrl }>
-          <CloseIcon className={classes.BackNavigation} />
+          <BackIcon className={classes.BackNavigation} />
         </Link>
       }
     </div>

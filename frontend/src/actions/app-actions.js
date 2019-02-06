@@ -15,6 +15,7 @@ const actionNames = {
   VIEW_CREATED: 'VIEW_CREATED',
   VIEW_RENAMED: 'VIEW_RENAMED',
   VIEW_DELETED: 'VIEW_DELETED',
+  VIEW_ANNOTATION_ADDED: 'VIEW_ANNOTATION_ADDED',
   LIBRARY_DIRECTORIES_RECEIVED: 'LIBRARY_DIRECTORIES_RECEIVED',
   LIBRARY_DIRECTORY_IMPORTED: 'LIBRARY_DIRECTORY_IMPORTED',
   LIBRARY_PAGE_DETAILS_RECEIVED: 'LIBRARY_PAGE_DETAILS_RECEIVED'
@@ -147,6 +148,21 @@ const deleteView = (projectId, whiteboardId, viewId) => async dispatch => {
   }
 }
 
+const addAnnotationToView = (projectId, whiteboardId, viewId, viewportSize, x, y) => async dispatch => {
+  const response = await http.post(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}/annotations`, { viewportSize, x, y});
+  const annotation = await response.json();
+
+  dispatch({
+    type: actionNames.VIEW_ANNOTATION_ADDED,
+    projectId,
+    whiteboardId,
+    viewId,
+    annotation
+  });
+
+  return annotation;
+}
+
 const getViewsForWhiteboard = (projectId, whiteboardId) => async (dispatch, getState) => {
   const whiteboard = findWhiteboardWithId(getState().app.projects, projectId, whiteboardId);
 
@@ -215,7 +231,6 @@ const uploadZipFile = file => async dispatch => {
   return directory;
 }
 
-
 const getViewDetails = (projectId, whiteboardId, viewId) => async dispatch => {
   const response = await http.get(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}`);
   const viewDetails = await response.json();
@@ -271,6 +286,7 @@ const saveLinksForView = (projectId, whiteboardId, viewId, links) => async (disp
 
 export {
   actionNames,
+  addAnnotationToView,
   createNewProject,
   createNewView,
   createNewWhiteboard,

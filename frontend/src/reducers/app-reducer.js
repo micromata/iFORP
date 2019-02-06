@@ -115,6 +115,14 @@ const setViewDetails = (newState, projectId, whiteboardId, viewDetails) => {
   whiteboard.views = whiteboard.views.map(view => view.id === viewDetails.id ? viewDetails : view);
 }
 
+const addViewAnnotation = (newState, projectId, whiteboardId, viewId, annotation) => {
+  const view = findViewWithId(newState.projects, projectId, whiteboardId, viewId);
+
+  if (!view) throw new Error(`view with id ${viewId} (project ${projectId}, whiteboard ${whiteboardId}) not found`);
+
+  view.annotations.push(annotation);
+}
+
 export default (state = initialState, action) => {
   const newState = deepClone(state);
 
@@ -166,6 +174,9 @@ export default (state = initialState, action) => {
       return newState;
     case actionNames.VIEWS_DETAILS_RECEIVED:
       setViewDetails(newState, action.projectId, action.whiteboardId, action.viewDetails);
+      return newState;
+    case actionNames.VIEW_ANNOTATION_ADDED:
+      addViewAnnotation(newState, action.projectId, action.whiteboardId, action.viewId, action.annotation);
       return newState;
     default:
       return state;
