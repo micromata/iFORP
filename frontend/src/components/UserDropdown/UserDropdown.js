@@ -5,6 +5,7 @@ import PersonIcon from '../../assets/img/Person';
 import ChevronDown from '../../assets/img/ChevronDown';
 import { getUserFromToken, deleteToken } from '../../services/auth.service';
 import DropdownItem from '../DropdownItem/DropdownItem';
+import { switchTheme } from '../../ThemeSwitch';
 
 class UserDropdown extends React.Component {
   constructor(props) {
@@ -13,6 +14,12 @@ class UserDropdown extends React.Component {
       isOpen: false,
     };
   }
+
+  changeThemeDark = () => switchTheme('dark');
+
+  changeThemeLight = () => switchTheme('light');
+
+  changeThemePurple = () => switchTheme('purple');
 
   logout() {
     deleteToken();
@@ -33,11 +40,16 @@ class UserDropdown extends React.Component {
         </div>
         {this.state.isOpen && (
           <div className={classes.Drop}>
-            <DropdownItem
-              onClick={() => {
-                this.logout();
-              }}
-            >
+            <DropdownItem onClick={ this.changeThemeDark }>
+              Theme Dark
+            </DropdownItem>
+            <DropdownItem onClick={ this.changeThemeLight }>
+              Theme Light
+            </DropdownItem>
+            <DropdownItem onClick={ this.changeThemePurple }>
+              Theme Purple
+            </DropdownItem>
+            <DropdownItem onClick={ this.logout }>
               Logout
             </DropdownItem>
           </div>

@@ -6,7 +6,7 @@ let currentTheme = availableThemes[0];
 const themeChangeListeners = [];
 
 export const switchTheme = theme => {
-  if (!availableThemes.indexOf(theme)) {
+  if (availableThemes.indexOf(theme) === -1) {
     return;
   }
 
