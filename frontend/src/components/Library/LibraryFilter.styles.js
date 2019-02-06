@@ -4,7 +4,7 @@ export default (theme) => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-    color: theme.textColorLight,
+    color: theme.textColorOnBackground,
     '& input[type=radio]': {
       visibility: 'hidden',
       '&:checked + label': {
@@ -14,7 +14,7 @@ export default (theme) => ({
     '& label': {
       cursor: 'pointer',
       '&:not(:first-of-type)': {
-        borderLeft: `1px solid ${theme.textColorLight}`,
+        borderLeft: `1px solid ${theme.textColorOnBackground}`,
         paddingLeft: '20px'
       }
     },

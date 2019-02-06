@@ -13,7 +13,7 @@ export default {
   dark: {
     backgroundColor: '#3D3D3D',
     textColor: '#5E5E5E',
-    textColorLight: '#FFF',
+    textColorOnBackground: '#FFF',
     accentColor: '#F9BB1F',
     DottedBackground: {
       backgroundColor: '#3D3D3D',
@@ -30,36 +30,60 @@ export default {
     },
     ButtonBar: {
       backgroundColor: 'rgba(100, 100, 100, 0.9)'
+    },
+    Select: {
+      default: {
+        textColor: '#000',
+        backgroundColor: '#5A5A5A'
+      },
+      notDefault: {
+        textColor: '#F9BB1F',
+        backgroundColor: '#5A5A5A',
+        borderColor: '#F9BB1F'
+      }
     }
   },
   light: {
     backgroundColor: '#FFF',
     accentColor: '#F9BB1F',
-    textColorLight: '#000',
+    textColor: '#5E5E5E',
+    textColorOnBackground: '#5E5E5E',
     DottedBackground: {
-      backgroundColor: '',
-      dotColor: '',
+      backgroundColor: '#FFF',
+      dotColor: '#E9E9E9',
     },
     NavBar: {
       backgroundColor: '#E9E9E9',
-      textColor: '#FFFFFF',
+      textColor: '#5E5E5E',
     },
     NavigationMenu: {
       backgroundColor: '#E9E9E9',
-      textColor: '#FFFFFF',
+      textColor: '#5E5E5E',
       accentColor: '#F9BB1F',
     },
     ButtonBar: {
       backgroundColor: 'rgba(100, 100, 100, 0.9)'
+    },
+    Select: {
+      default: {
+        textColor: '#5E5E5E',
+        backgroundColor: '#E9E9E9'
+      },
+      notDefault: {
+        textColor: '#868686',
+        backgroundColor: '#E9E9E9',
+        borderColor: '#868686'
+      }
     }
   },
   purple: {
     backgroundColor: '#32394C',
     accentColor: '#F9BB1F',
-    textColorLight: '#FFF',
+    textColor: '#5E5E5E',
+    textColorOnBackground: '#FFF',
     DottedBackground: {
-      backgroundColor: '',
-      dotColor: '',
+      backgroundColor: '#32394C',
+      dotColor: '#485578',
     },
     NavBar: {
       backgroundColor: '#485578',
@@ -71,7 +95,18 @@ export default {
       accentColor: '#F9BB1F',
     },
     ButtonBar: {
-      backgroundColor: 'rgba(100, 100, 100, 0.9)'
+      backgroundColor: 'rgba(74, 85, 117, 0.9)'
+    },
+    Select: {
+      default: {
+        textColor: '#000',
+        backgroundColor: '#5A5A5A'
+      },
+      notDefault: {
+        textColor: '#F9BB1F',
+        backgroundColor: '#5A5A5A',
+        borderColor: '#F9BB1F'
+      }
     }
   },
 };

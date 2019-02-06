@@ -24,7 +24,7 @@ export default theme => ({
           maxHeight: '100vh',
           overflow: 'scroll',
           '& h3': {
-            color: theme.textColorLight,
+            color: theme.textColorOnBackground,
             textAlign: 'center'
           }
         }

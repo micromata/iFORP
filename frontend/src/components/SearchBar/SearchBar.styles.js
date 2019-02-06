@@ -1,4 +1,4 @@
-export default () => ({
+export default theme => ({
   SearchBar: {
     width: '100%',
     height: '60px',
@@ -13,7 +13,7 @@ export default () => ({
       backgroundColor: 'transparent',
       maxWidth: '250px',
       marginLeft: '40px',
-      color: 'white'
+      color: theme.textColorOnBackground
     }
   }
 });

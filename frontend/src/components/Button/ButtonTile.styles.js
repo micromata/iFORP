@@ -1,4 +1,4 @@
-export default {
+export default theme => ({
   ButtonTile: {
     '& button.btn': {
       backgroundColor: '#D9D9D9',
@@ -18,14 +18,15 @@ export default {
   },
   DeleteButton: {
     position: 'relative',
-    top: '144px',
-    left: '-20px',
+    top: '150px',
+    left: '-44px',
+    transform: 'scale(0.7)',
     '& button': {
       backgroundColor: '#666666'
     }
   },
   ProjectName: {
-    color: '#FFF',
+    color: theme.textColorOnBackground,
     textDecoration: 'none',
     display: 'flex',
     justifyContent: 'center',
@@ -34,4 +35,4 @@ export default {
     userSelect: 'none',
     textAlign: 'center'
   },
-};
+});

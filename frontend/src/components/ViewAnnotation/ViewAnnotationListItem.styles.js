@@ -1,7 +1,7 @@
 export default (theme) => ({
   ViewAnnotationListItem: {
     margin: '20px 0',
-    color: theme.textColorLight,
+    color: theme.textColorOnBackground,
     display: 'flex',
     alignItems: 'flex-start',
     width: '100%',

@@ -1,7 +1,7 @@
 export default (theme) => ({
   ViewLinkEditor: {
     width: '240px',
-    color: theme.textColorLight,
+    color: theme.textColorOnBackground,
     padding: '20px',
     fontSize: '14px',
     marginBottom: '80px',

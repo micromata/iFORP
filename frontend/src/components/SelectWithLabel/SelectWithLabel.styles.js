@@ -18,16 +18,16 @@ export default theme => ({
       cursor: 'pointer',
       width: '100%',
       borderRadius: '20px',
-      color: '#000000',
+      color: theme.Select.default.textColor,
+      backgroundColor: theme.Select.default.backgroundColor,
       fontSize: '14px',
-      backgroundColor: '#868686',
       outline: 'none',
       appearance: 'none',
       '-webkit-appearance': 'none',
       '&:not(.default-value)': {
-        backgroundColor: '#5A5A5A',
-        border: `1px solid ${theme.accentColor}`,
-        color: theme.accentColor
+        backgroundColor: theme.Select.notDefault.backgroundColor,
+        border: `1px solid ${theme.Select.notDefault.borderColor}`,
+        color: theme.Select.notDefault.textColor
       }
     },
     '& svg': {

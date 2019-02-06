@@ -1,10 +1,10 @@
 export default (theme) => ({
   LibraryTreeView: {
     width: '240px',
-    color: theme.textColorLight,
+    color: theme.textColorOnBackground,
     padding: '20px',
     fontSize: '14px',
-    borderRight: `1px solid ${theme.textColorLight}`,
+    borderRight: `1px solid ${theme.textColorOnBackground}`,
     marginBottom: '80px',
     '& ul': {
       listStyle: 'none',

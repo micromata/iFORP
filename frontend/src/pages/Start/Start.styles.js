@@ -1,6 +1,6 @@
-export default () => ({
+export default theme => ({
   Start: {
-    color: '#FFF',
+    color: theme.textColorOnBackground,
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',

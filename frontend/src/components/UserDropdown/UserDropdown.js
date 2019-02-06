@@ -27,8 +27,8 @@ class UserDropdown extends React.Component {
           className="dropdown-toggle"
           onClick={() => this.setState({ isOpen: !this.state.isOpen })}
         >
-          <ChevronDown />
-          <PersonIcon />
+          <ChevronDown color={ this.props.theme.NavBar.textColor }/>
+          <PersonIcon color={this.props.theme.NavBar.textColor } />
           {getUserFromToken().username}
         </div>
         {this.state.isOpen && (

@@ -29,8 +29,8 @@ class LibraryTreeView extends Component {
           { this.props.directories.map(directory =>
             <li key={`directory-${directory.id}`} onClick={() => this.handleExpandDirectory(directory.id)}>
               { this.state.expandedDirectory === directory.id ?
-                <ArrowDownIcon /> :
-                <ArrowRightIcon />
+                <ArrowDownIcon color={ this.props.theme.textColorOnBackground }/> :
+                <ArrowRightIcon color={ this.props.theme.textColorOnBackground }/>
               }
               { directory.name }
               { this.state.expandedDirectory === directory.id &&

@@ -7,6 +7,7 @@ const isDefaultValue = value => !value || value === '0';
 
 const SelectWithLabel = ({
   classes,
+  theme,
   label,
   options,
   value,
@@ -27,7 +28,7 @@ const SelectWithLabel = ({
           ))
         }
       </select>
-      <ArrowDownIcon color={ isDefaultValue(value) ? '#3D3D3D' : '#F9BB1F' } />
+      <ArrowDownIcon color={ isDefaultValue(value) ? theme.Select.default.textColor : theme.Select.notDefault.textColor } />
     </div>
   </div>
 );

@@ -70,7 +70,7 @@ class Start extends Component {
                   className="ghost"
                   onClick={this.navigateToProjectOverview}
                   >
-                  <Dots />
+                  <Dots color={ this.props.theme.textColorOnBackground } />
                 </Button>
               </ElementGrid>
             </React.Fragment>
