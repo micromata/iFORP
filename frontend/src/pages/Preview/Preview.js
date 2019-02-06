@@ -5,7 +5,8 @@ import styles from './Preview.styles';
 import NavBar from '../../components/NavBar/NavBar';
 import HTMLPage from '../../components/HTMLPage/HTMLPage';
 import Toggle from '../../components/Toggle/Toggle';
-import { getViewsForWhiteboard, getViewDetails, addAnnotationToView } from '../../actions/app-actions';
+import EditableText from '../../components/EditableText/EditableText';
+import { getViewsForWhiteboard, getViewDetails, addAnnotationToView, changeViewAnnotationText } from '../../actions/app-actions';
 import { findViewWithId } from '../../utils';
 
 export class Preview extends Component {
@@ -45,6 +46,10 @@ export class Preview extends Component {
     this.props.addAnnotationToView(this.props.projectId, this.props.whiteboardId, this.props.viewId, 'desktop', coords.x, coords.y);
   }
 
+  handleChangeAnnotationText = (annotationId, text) => {
+    this.props.changeViewAnnotationText(this.props.projectId, this.props.whiteboardId, this.props.viewId, annotationId, text);
+  }
+
   render() {
     const previewData = this.props.view || {};
 
@@ -81,7 +86,10 @@ export class Preview extends Component {
                 <ul className='annotations'>
                   { this.props.annotations.map((annotation, index) =>
                     <li key={ index } className='annotation'>
-                      { annotation.text }
+                      <EditableText
+                        text={ annotation.text }
+                        onEditingConfirmed={ newText => this.handleChangeAnnotationText(annotation.id, newText) }
+                      />
                     </li>
                   ) }
                 </ul>
@@ -94,7 +102,7 @@ export class Preview extends Component {
   }
 }
 
-const actions = { getViewsForWhiteboard, getViewDetails, addAnnotationToView };
+const actions = { getViewsForWhiteboard, getViewDetails, addAnnotationToView, changeViewAnnotationText };
 
 const mapStateToProps = (state, ownProps) => {
   const projectId = Number(ownProps.match.params.projectId);

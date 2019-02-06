@@ -1,5 +1,5 @@
 import { actionNames } from '../actions/app-actions';
-import { deepClone, findProjectWithId, findWhiteboardWithId, findViewWithId } from '../utils';
+import { deepClone, findProjectWithId, findWhiteboardWithId, findViewWithId, findViewAnnotationWithId } from '../utils';
 
 const initialState = {
   projects: [],
@@ -123,6 +123,14 @@ const addViewAnnotation = (newState, projectId, whiteboardId, viewId, annotation
   view.annotations.push(annotation);
 }
 
+const changeViewAnnotationText = (newState, projectId, whiteboardId, viewId, annotationId, text) => {
+  const annotation = findViewAnnotationWithId(newState.projects, projectId, whiteboardId, viewId, annotationId);
+
+  if (!annotation) throw new Error(`view annotation with id ${annotationId} (project ${projectId}, whiteboard ${whiteboardId}, view ${viewId}) not found`);
+
+  annotation.text = text;
+}
+
 export default (state = initialState, action) => {
   const newState = deepClone(state);
 
@@ -177,6 +185,9 @@ export default (state = initialState, action) => {
       return newState;
     case actionNames.VIEW_ANNOTATION_ADDED:
       addViewAnnotation(newState, action.projectId, action.whiteboardId, action.viewId, action.annotation);
+      return newState;
+    case actionNames.VIEW_ANNOTATION_TEXT_CHANGED:
+      changeViewAnnotationText(newState, action.projectId, action.whiteboardId, action.viewId, action.annotationId, action.text);
       return newState;
     default:
       return state;

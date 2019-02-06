@@ -33,6 +33,8 @@ export default theme => ({
             '& li.annotation': {
               margin: '10px 0',
               color: theme.textColorLight,
+              display: 'flex',
+              alignItems: 'center',
               '&:before': {
                 counterIncrement: 'annotationCounter',
                 content: 'counter(annotationCounter)',

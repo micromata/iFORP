@@ -21,6 +21,14 @@ const findViewWithId = (projects, projectId, whiteboardId, viewId) => {
   return whiteboard.views.find(view => view.id === viewId);
 }
 
+const findViewAnnotationWithId = (projects, projectId, whiteboardId, viewId, annotationId) => {
+  const view = findViewWithId(projects, projectId, whiteboardId, viewId);
+
+  if (!view || !view.annotations) return null;
+
+  return view.annotations.find(annotation => annotation.id === annotationId);
+}
+
 const findPageWithId = (directories, pageId) => {
   return directories.reduce((pageWithId, directory) => {
     return pageWithId || directory.pages.find(page => page.id === pageId);
@@ -34,5 +42,6 @@ export {
   findProjectWithId,
   findWhiteboardWithId,
   findViewWithId,
+  findViewAnnotationWithId,
   findPageWithId
 };

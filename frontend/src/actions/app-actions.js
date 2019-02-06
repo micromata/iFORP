@@ -10,6 +10,7 @@ const actionNames = {
   WHITEBOARD_CREATED: 'WHITEBOARD_CREATED',
   WHITEBOARD_RENAMED: 'WHITEBOARD_RENAMED',
   WHITEBOARD_DELETED: 'WHITEBOARD_DELETED',
+  VIEW_ANNOTATION_TEXT_CHANGED: 'VIEW_ANNOTATION_TEXT_CHANGED',
   VIEWS_LIST_RECEIVED: 'VIEWS_LIST_RECEIVED',
   VIEWS_DETAILS_RECEIVED: 'VIEWS_DETAILS_RECEIVED',
   VIEW_CREATED: 'VIEW_CREATED',
@@ -163,6 +164,22 @@ const addAnnotationToView = (projectId, whiteboardId, viewId, viewportSize, x, y
   return annotation;
 }
 
+const changeViewAnnotationText = (projectId, whiteboardId, viewId, annotationId, text) => async dispatch => {
+  const response = await http.put(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}/annotations/${annotationId}`, { text });
+  const annotation = await response.json();
+
+  dispatch({
+    type: actionNames.VIEW_ANNOTATION_TEXT_CHANGED,
+    projectId,
+    whiteboardId,
+    viewId,
+    annotationId,
+    text
+  });
+
+  return annotation;
+}
+
 const getViewsForWhiteboard = (projectId, whiteboardId) => async (dispatch, getState) => {
   const whiteboard = findWhiteboardWithId(getState().app.projects, projectId, whiteboardId);
 
@@ -287,6 +304,7 @@ const saveLinksForView = (projectId, whiteboardId, viewId, links) => async (disp
 export {
   actionNames,
   addAnnotationToView,
+  changeViewAnnotationText,
   createNewProject,
   createNewView,
   createNewWhiteboard,
