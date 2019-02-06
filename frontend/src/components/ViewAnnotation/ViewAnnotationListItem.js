@@ -7,7 +7,8 @@ import DeleteIcon from '../../assets/img/Delete';
 const ViewAnnotationListItem = ({
   classes,
   annotation,
-  onChangeAnnotationText
+  onChangeAnnotationText,
+  onDeleteAnnotation
 }) => (
   <li className={ classes.ViewAnnotationListItem}>
     <div className={ classes.AnnotationText}>
@@ -17,7 +18,7 @@ const ViewAnnotationListItem = ({
         maxLength={ 140 }
       />
     </div>
-    <div className={classes.DeleteButton}>
+    <div className={classes.DeleteButton} onClick={() => onDeleteAnnotation(annotation.id)}>
       <DeleteIcon />
     </div>
   </li>

@@ -6,7 +6,7 @@ import NavBar from '../../components/NavBar/NavBar';
 import HTMLPage from '../../components/HTMLPage/HTMLPage';
 import Toggle from '../../components/Toggle/Toggle';
 import ViewAnnotationList from '../../components/ViewAnnotation/ViewAnnotationList';
-import { getViewsForWhiteboard, getViewDetails, addAnnotationToView, changeViewAnnotationText } from '../../actions/app-actions';
+import { getViewsForWhiteboard, getViewDetails, addAnnotationToView, changeViewAnnotationText, deleteViewAnnotation } from '../../actions/app-actions';
 import { findViewWithId } from '../../utils';
 
 export class Preview extends Component {
@@ -50,6 +50,10 @@ export class Preview extends Component {
     this.props.changeViewAnnotationText(this.props.projectId, this.props.whiteboardId, this.props.viewId, annotationId, text);
   }
 
+  handleDeleteAnnotation = annotationId => {
+    this.props.deleteViewAnnotation(this.props.projectId, this.props.whiteboardId, this.props.viewId, annotationId);
+  }
+
   render() {
     const previewData = this.props.view || {};
 
@@ -86,6 +90,7 @@ export class Preview extends Component {
                 <ViewAnnotationList
                   annotations={ this.props.annotations }
                   onChangeAnnotationText={ this.handleChangeAnnotationText }
+                  onDeleteAnnotation={ this.handleDeleteAnnotation }
                 />
               }
             </div>
@@ -96,7 +101,7 @@ export class Preview extends Component {
   }
 }
 
-const actions = { getViewsForWhiteboard, getViewDetails, addAnnotationToView, changeViewAnnotationText };
+const actions = { getViewsForWhiteboard, getViewDetails, addAnnotationToView, changeViewAnnotationText, deleteViewAnnotation };
 
 const mapStateToProps = (state, ownProps) => {
   const projectId = Number(ownProps.match.params.projectId);

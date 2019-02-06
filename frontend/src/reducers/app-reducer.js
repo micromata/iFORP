@@ -131,6 +131,15 @@ const changeViewAnnotationText = (newState, projectId, whiteboardId, viewId, ann
   annotation.text = text;
 }
 
+const removeAnnotationFromView = (newState, projectId, whiteboardId, viewId, annotationId) => {
+  const view = findViewWithId(newState.projects, projectId, whiteboardId, viewId);
+
+  if (!view) throw new Error(`view with id ${viewId} (project ${projectId}, whiteboard ${whiteboardId}) not found`);
+
+  view.annotations = view.annotations.filter(annotation => annotation.id !== annotationId);
+}
+
+
 export default (state = initialState, action) => {
   const newState = deepClone(state);
 
@@ -188,6 +197,9 @@ export default (state = initialState, action) => {
       return newState;
     case actionNames.VIEW_ANNOTATION_TEXT_CHANGED:
       changeViewAnnotationText(newState, action.projectId, action.whiteboardId, action.viewId, action.annotationId, action.text);
+      return newState;
+    case actionNames.VIEW_ANNOTATION_DELETED:
+      removeAnnotationFromView(newState, action.projectId, action.whiteboardId, action.viewId, action.annotationId);
       return newState;
     default:
       return state;

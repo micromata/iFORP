@@ -6,7 +6,8 @@ import ViewAnnotationListItem from './ViewAnnotationListItem';
 const ViewAnnotationList = ({
   classes,
   annotations,
-  onChangeAnnotationText
+  onChangeAnnotationText,
+  onDeleteAnnotation
 }) => (
   <ul className={ classes.ViewAnnotationList }>
     { annotations.map(annotation =>
@@ -14,6 +15,7 @@ const ViewAnnotationList = ({
         key={ annotation.id }
         annotation={ annotation }
         onChangeAnnotationText={ onChangeAnnotationText }
+        onDeleteAnnotation={ onDeleteAnnotation }
       />
     ) }
   </ul>

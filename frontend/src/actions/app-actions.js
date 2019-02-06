@@ -11,6 +11,7 @@ const actionNames = {
   WHITEBOARD_RENAMED: 'WHITEBOARD_RENAMED',
   WHITEBOARD_DELETED: 'WHITEBOARD_DELETED',
   VIEW_ANNOTATION_TEXT_CHANGED: 'VIEW_ANNOTATION_TEXT_CHANGED',
+  VIEW_ANNOTATION_DELETED: 'VIEW_ANNOTATION_DELETED',
   VIEWS_LIST_RECEIVED: 'VIEWS_LIST_RECEIVED',
   VIEWS_DETAILS_RECEIVED: 'VIEWS_DETAILS_RECEIVED',
   VIEW_CREATED: 'VIEW_CREATED',
@@ -180,6 +181,20 @@ const changeViewAnnotationText = (projectId, whiteboardId, viewId, annotationId,
   return annotation;
 }
 
+const deleteViewAnnotation = (projectId, whiteboardId, viewId, annotationId) => async dispatch => {
+  const response = await http.deleteEntity(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}/annotations/${annotationId}`);
+
+  if (response.ok) {
+    dispatch({
+      type: actionNames.VIEW_ANNOTATION_DELETED,
+      projectId,
+      whiteboardId,
+      viewId,
+      annotationId
+    });
+  }
+}
+
 const getViewsForWhiteboard = (projectId, whiteboardId) => async (dispatch, getState) => {
   const whiteboard = findWhiteboardWithId(getState().app.projects, projectId, whiteboardId);
 
@@ -310,6 +325,7 @@ export {
   createNewWhiteboard,
   deleteProject,
   deleteView,
+  deleteViewAnnotation,
   deleteWhiteboard,
   getAllProjects,
   getLibraryDirectories,
