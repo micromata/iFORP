@@ -23,12 +23,18 @@ export default (theme) => ({
       color: theme.NavBar.textColor,
     },
     '&.nav-left': {
+      minWidth: '200px',
       justifyContent: 'flex-start',
     },
     '&.nav-center': {
       fontSize: '18px',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
+      minWith: 0
     },
     '&.nav-right': {
+      minWidth: '200px',
       justifyContent: 'flex-end',
       fontSize: '12px',
       height: '100%',

@@ -201,7 +201,12 @@ const getViewsForWhiteboard = (projectId, whiteboardId) => async (dispatch, getS
   if (whiteboard && whiteboard.views) return;
 
   const response = await http.get(`/projects/${projectId}/whiteboards/${whiteboardId}/views`);
-  const views = await response.json();
+  const json = await response.json();
+  const views = json.map(view => {
+    view.interactionElements = getInteractionElementsFromMarkup(view.body);
+    return view;
+  })
+
 
   dispatch({
     type: actionNames.VIEWS_LIST_RECEIVED,
@@ -263,7 +268,11 @@ const uploadZipFile = file => async dispatch => {
   return directory;
 }
 
-const getViewDetails = (projectId, whiteboardId, viewId) => async dispatch => {
+const getViewDetails = (projectId, whiteboardId, viewId) => async (dispatch, getState) => {
+  const view = findViewWithId(getState().app.projects, projectId, whiteboardId, viewId);
+
+  if (view) return view;
+
   const response = await http.get(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}`);
   const viewDetails = await response.json();
 
@@ -283,6 +292,7 @@ const usePageForView = (projectId, whiteboardId, viewId, page) => async (dispatc
   const view = findViewWithId(getState().app.projects, projectId, whiteboardId, viewId);
 
   view.hasFile = true;
+  view.fileType = 'html';
   view.head = page.head;
   view.body = page.body;
   view.htmlElementAttributes = page.htmlElementAttributes;

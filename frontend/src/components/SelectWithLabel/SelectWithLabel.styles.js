@@ -11,6 +11,7 @@ export default theme => ({
     }
   },
   SelectHelper: {
+    display: 'flex',
     '& select': {
       height: '40px',
       padding: '0 15px',
@@ -31,12 +32,10 @@ export default theme => ({
       }
     },
     '& svg': {
-      position: 'absolute',
-      right: '0',
+      marginLeft: '-30px',
       marginTop: '16px',
-      marginRight: '36px',
       cursor: 'pointer',
-      transform: 'scale(1.5, 1.5)'
+      transform: 'scale(1.5, 1.5)',
     }
   }
 });

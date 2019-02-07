@@ -14,11 +14,7 @@ export const getByWhiteboardId = async whiteboardId => {
       404
     );
   }
-  return byWhiteboardId.map(view => ({
-    id: view.id,
-    name: view.name,
-    hasFile: view.hasFile
-  }));
+  return byWhiteboardId;
 };
 
 export const save = async (whiteboardId, base) => {
@@ -35,6 +31,7 @@ export const save = async (whiteboardId, base) => {
   const view = base;
   view.whiteboard = whiteboard;
   view.hasFile = false;
+  view.fileType = null;
   view.name = view.name || `${superb.random()} View`;
   return viewRepo.save(view);
 };
@@ -63,6 +60,7 @@ export const replace = async (id, base) => {
   }
 
   view.hasFile = true;
+  view.fileType = base.fileType;
   view.head = base.head;
   view.body = base.body;
   view.htmlElementAttributes = base.htmlElementAttributes;

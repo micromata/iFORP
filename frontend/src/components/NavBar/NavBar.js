@@ -16,9 +16,9 @@ export const NavBar = ({ classes, theme, title, exit = false, exitUrl = '/' }) =
         </Link>
       }
     </div>
-    <Link className={classes.NavItem + ' nav-center'} to="/login">
+    <div className={classes.NavItem + ' nav-center'}>
       {title}
-    </Link>
+    </div>
     <div className={classes.NavItem + ' nav-right'}>
       <UserDropdown />
     </div>

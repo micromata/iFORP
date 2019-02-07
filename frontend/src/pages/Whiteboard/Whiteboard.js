@@ -7,6 +7,8 @@ import ProjectButtonBar from '../../components/ProjectButtonBar/ProjectButtonBar
 import EditableText from '../../components/EditableText/EditableText';
 import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
+import TileViewHtmlIcon from '../../assets/img/TileViewHtml';
+import TileViewImageIcon from '../../assets/img/TileViewImage';
 import CircleButton from '../../components/Button/CircleButton';
 import PreviewIcon from '../../assets/img/Preview';
 import PlusIcon from '../../assets/img/Plus';
@@ -38,6 +40,17 @@ class Whiteboard extends Component {
   render() {
     if (!this.props.views) return null;
 
+    const getIconForView = view => {
+      switch (view.fileType) {
+        case 'html':
+          return TileViewHtmlIcon;
+        case 'image':
+          return TileViewImageIcon;
+        default:
+          return null;
+      }
+    };
+
     return (
       <React.Fragment>
         <NavBar
@@ -50,9 +63,10 @@ class Whiteboard extends Component {
             { this.props.views.map(view =>
               <ButtonTile
                 key={ view.id }
+                titleBelow
+                TileIcon={ getIconForView(view) }
                 onClick={ () => this.navigateToView(view.id) }
-                onDeleteClick={() => this.handleDeleteViewClick(view.id)}
-                titleBelow>
+                onDeleteClick={() => this.handleDeleteViewClick(view.id)}>
                 <EditableText
                   text={ view.name }
                   onEditingConfirmed={ newName => this.props.renameView(this.props.projectId, this.props.whiteboardId, view.id, newName) }

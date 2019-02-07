@@ -7,6 +7,7 @@ import ProjectButtonBar from '../../components/ProjectButtonBar/ProjectButtonBar
 import EditableText from '../../components/EditableText/EditableText';
 import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
+import TileWhiteboardIcon from '../../assets/img/TileWhiteboard';
 import CircleButton from '../../components/Button/CircleButton';
 import PlusIcon from '../../assets/img/Plus';
 import { createNewWhiteboard, renameWhiteboard, deleteWhiteboard } from '../../actions/app-actions';
@@ -41,6 +42,7 @@ class Project extends Component {
               <ButtonTile
                 key={ whiteboard.id }
                 titleBelow
+                TileIcon={ TileWhiteboardIcon }
                 onClick={ () => this.navigateToWhiteboard(whiteboard.id) }
                 onDeleteClick={() => this.handleDeleteWhiteboardClick(whiteboard.id)}>
                 <EditableText

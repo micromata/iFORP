@@ -5,6 +5,7 @@ import styles from './ProjectOverview.styles';
 import NavBar from '../../components/NavBar/NavBar';
 import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
+import TileProjectIcon from '../../assets/img/TileProject';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import ProjectButtonBar from '../../components/ProjectButtonBar/ProjectButtonBar';
 import EditableText from '../../components/EditableText/EditableText';
@@ -51,6 +52,7 @@ class ProjectOverview extends Component {
               <ButtonTile
                 key={ project.id }
                 titleBelow
+                TileIcon={ TileProjectIcon }
                 onClick={ () => this.navigateToProject(project.id ) }
                 onDeleteClick={() => this.handleDeleteProjectClick(project.id)}>
                 <EditableText

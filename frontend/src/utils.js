@@ -3,7 +3,7 @@ const baseURL = isDev ? 'http://localhost:3001' : '';
 
 const deepClone = obj => JSON.parse(JSON.stringify(obj));
 
-const findProjectWithId = (projects, projectId) => projects.find(project => project.id === projectId);
+const findProjectWithId = (projects, projectId) => projects && projects.find(project => project.id === projectId);
 
 const findWhiteboardWithId = (projects, projectId, whiteboardId) => {
   const project = findProjectWithId(projects, projectId);

@@ -4,6 +4,7 @@ import { createNewProject } from '../../actions/app-actions';
 import NavBar from '../../components/NavBar/NavBar';
 import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
+import TileProjectIcon from '../../assets/img/TileProject';
 import injectSheet from 'react-jss';
 import styles from './Start.styles';
 import Button from '../../components/Button/Button';
@@ -62,6 +63,7 @@ class Start extends Component {
                   <ButtonTile
                     key={ project.id }
                     titleBelow
+                    TileIcon={ TileProjectIcon }
                     onClick={ () => this.navigateToProject(project.id ) }>
                     { project.name }
                   </ButtonTile>

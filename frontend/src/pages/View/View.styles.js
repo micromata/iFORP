@@ -8,7 +8,14 @@ export default () => ({
       alignItems: 'stretch',
       '& .content': {
         padding: '20px',
-        flexGrow: 1
+        display: 'flex',
+        '& .preview-wrapper': {
+          height: '100vh',
+          flexShrink: 0,
+          '&.desktop': { width: '1280px' },
+        	'&.tablet': { width: '768px' },
+        	'&.phone': { width: '375px' }
+        },
       }
     }
   }

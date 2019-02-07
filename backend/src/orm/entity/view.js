@@ -24,6 +24,9 @@ export class View {
   hasFile = undefined;
 
   @Column('text', { nullable: true })
+  fileType = undefined;
+
+  @Column('text', { nullable: true })
   head = undefined;
 
   @Column('text', { nullable: true })

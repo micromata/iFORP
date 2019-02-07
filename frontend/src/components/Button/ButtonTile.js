@@ -2,7 +2,6 @@ import React from 'react';
 import injectSheet from 'react-jss';
 import styles from './ButtonTile.styles.js';
 import CircleButton from './CircleButton';
-import Folder from '../../assets/img/Folder';
 import DeleteIcon from '../../assets/img/Delete';
 
 const ButtonTile = ({
@@ -12,6 +11,7 @@ const ButtonTile = ({
   disabled = false,
   children,
   titleBelow = false,
+  TileIcon
 }) => (
   <div className={classes.ButtonTile}>
     {children &&
@@ -29,7 +29,7 @@ const ButtonTile = ({
       </div>
     }
     <button className={`btn`} onClick={onClick} disabled={disabled}>
-      <Folder />
+      { TileIcon &&<TileIcon /> }
     </button>
     {children &&
       titleBelow && (

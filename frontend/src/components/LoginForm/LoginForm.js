@@ -16,11 +16,11 @@ class LoginForm extends Component {
   render() {
     return (
       <Card
-        position={'absolute'}
-        top={'150px'}
-        right={'150px'}
-        width={'420px'}
-        height={'620px'}
+        position='absolute'
+        top='150px'
+        right='150px'
+        width='420px'
+        height='426px'
       >
         <Toggle
           labelLeft="Sign In"

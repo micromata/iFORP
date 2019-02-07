@@ -12,6 +12,7 @@ export class HTMLPage extends Component {
     // Create and insert html5 doctype
     const doctype = this.iframeDocument.implementation.createDocumentType('html', '', '');
     this.iframeDocument.insertBefore(doctype, this.iframeDocument.querySelector('html'));
+    this.injectIframeContent();
   }
 
   componentDidUpdate(prevProps) {
