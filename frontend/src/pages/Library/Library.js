@@ -39,7 +39,7 @@ class Library extends Component {
   }
 
   getPreviewData = () => {
-    if (this.state.seletedFilter === 'html') {
+    if (this.state.selectedFilter === 'html') {
       const page = findPageWithId(this.props.directories, this.state.selectedDirectoryItemId);
       if (!page) return {};
 
