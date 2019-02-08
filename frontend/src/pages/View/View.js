@@ -11,7 +11,7 @@ import LibraryZipUpload from '../../components/Library/LibraryZipUpload';
 import LibraryImagesUpload from '../../components/Library/LibraryImagesUpload';
 import HTMLPage from '../../components/HTMLPage/HTMLPage';
 import Button from '../../components/Button/Button';
-import { getLibraryDirectories, getViewsForWhiteboard, getViewDetails, getPageDetails, uploadImages, uploadZipFile, useImageForView, usePageForView, saveLinksForView } from '../../actions/app-actions';
+import { getLibraryDirectories, getViewsForWhiteboard, getViewDetails, getPageDetails, uploadImages, uploadZipFile, useImageForView, usePageForView, saveLinksForView, addInteractionElementToView } from '../../actions/app-actions';
 import { baseURL, findProjectWithId, findWhiteboardWithId, findViewWithId, findPageWithId, findImageWithId } from '../../utils';
 
 class View extends Component {
@@ -103,7 +103,8 @@ class View extends Component {
         head: '<style>html, body { margin: 0; padding: 0; }</style>',
         body: `<div style='width: ${image.width}px; height: ${image.height}px; background-image: url(${baseURL}/library/images/${image.name});' />`,
         assets: [],
-        interactionElements: this.props.view.imageInteractionElements
+        interactionElements: this.props.view.imageInteractionElements,
+        fileType: 'image'
       };
     }
 
@@ -123,7 +124,8 @@ class View extends Component {
       head: '<style>html, body { margin: 0; padding: 0; }</style>',
       body: `<div style='width: ${this.props.view.imageWidth}px; height: ${this.props.view.imageHeight}px; background-image: url(${baseURL}/library/images/${this.props.view.imageName});' />`,
       assets: [],
-      interactionElements: this.props.view.imageInteractionElements
+      interactionElements: this.props.view.imageInteractionElements,
+      fileType: this.props.view.fileType
     };
   }
 
@@ -158,6 +160,8 @@ class View extends Component {
               body={ previewData.body || '' }
               assets={ previewData.assets || [] }
               viewportSize="desktop"
+              allowInteractionElementCreation={ !showLibrary && previewData.fileType === 'image' }
+              onCreateInteractionElement={ coords => this.props.addInteractionElementToView(this.props.projectId, this.props.whiteboardId, this.props.view.id, coords) }
             />
           </div>
 
@@ -192,7 +196,7 @@ class View extends Component {
   }
 }
 
-const actions = { getLibraryDirectories, getViewsForWhiteboard, getViewDetails, getPageDetails, uploadImages, uploadZipFile, useImageForView, usePageForView, saveLinksForView };
+const actions = { getLibraryDirectories, getViewsForWhiteboard, getViewDetails, getPageDetails, uploadImages, uploadZipFile, useImageForView, usePageForView, saveLinksForView, addInteractionElementToView};
 
 const mapStateToProps = (state, ownProps) => {
   const projectId = Number(ownProps.match.params.projectId);

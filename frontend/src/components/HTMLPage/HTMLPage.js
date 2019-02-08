@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 import styles from './HTMLPage.styles';
 import { baseURL } from '../../utils';
+import { initInteractionElementDrawing } from './interaction-element-drawing';
 
 export class HTMLPage extends Component {
   iframeDocument = '';
@@ -28,7 +29,7 @@ export class HTMLPage extends Component {
     this.props.onInteractionElementClick(event.target.attributes['data-interaction-id'].value);
   }
 
-  handleBodyClick = event => {
+  handleAddAnnotation = event => {
     event.preventDefault();
     if (!this.props.onAnnotate || !this.props.showAnnotations) return;
 
@@ -46,9 +47,12 @@ export class HTMLPage extends Component {
         );
     });
 
-    const annotationCSS = this.props.showAnnotations ? `
-    <head>
+    const annotationCSS = this.props.showAnnotations || this.props.allowInteractionElementCreation ? `
       <style>
+        body {
+          cursor: ${ this.props.allowInteractionElementCreation ? 'crosshair' : 'default' };
+        }
+
         .annotation {
           position: absolute;
           width: 30px;
@@ -61,8 +65,14 @@ export class HTMLPage extends Component {
           text-align: center;
           font-family: Verdana, Sans Serif;
         }
-      </style>
-    ` : '';
+
+        #interaction-element-rect {
+          border: 1px dashed rgb(255, 80, 80);
+          background-color: rgb(255, 80, 80, 0.4);
+          position: absolute;
+          visibility: hidden;
+        }
+      </style>` : '';
     const annotationsMarkup = this.props.showAnnotations ?
       this.props.annotations.map((annotation, index) => `
       <div class='annotation' style='top: ${annotation.y}px; left: ${annotation.x}px;'>
@@ -72,12 +82,14 @@ export class HTMLPage extends Component {
 
     htmlElement.style = 'visibility: hidden';
 
+    const interactionElementMarkup = `<div id='interaction-element-rect' />`;
+
     // Fill head element
     this.iframeDocument.head.innerHTML = `${this.props.head} ${annotationCSS}`;
 
 
     // Fill body element
-    this.iframeDocument.body.innerHTML = `${this.props.body} ${annotationsMarkup}`;
+    this.iframeDocument.body.innerHTML = `${this.props.body} ${annotationsMarkup} ${interactionElementMarkup}`;
 
     // Insert JavaScript and CSS assets to the view
     this.props.assets.forEach(asset => {
@@ -97,7 +109,13 @@ export class HTMLPage extends Component {
       querySelectorAll('[data-interaction-id]').
       forEach(link => link.addEventListener('click', this.handleInteractionElementClick));
 
-    this.iframeDocument.body.addEventListener('click', this.handleBodyClick);
+    if (this.props.showAnnotations) {
+      this.iframeDocument.body.addEventListener('click', this.handleAddAnnotation);
+    }
+
+    if (this.props.allowInteractionElementCreation && this.props.onCreateInteractionElement) {
+      initInteractionElementDrawing(this.iframeDocument.body, this.iframeDocument.body.querySelector('#interaction-element-rect'), this.props.onCreateInteractionElement);
+    }
 
     setTimeout(() => { htmlElement.style = ''; }, 100);
   }

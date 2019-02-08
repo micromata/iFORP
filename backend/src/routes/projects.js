@@ -5,6 +5,7 @@ import * as projectService from '../service/project-service';
 import * as whiteboardService from '../service/whiteboard-service';
 import * as viewService from '../service/view-service';
 import * as viewAnnotationService from '../service/view-annotation-service';
+import * as viewImageInteractionElementService from '../service/view-image-interaction-element-service';
 import { getLogger } from '../lib/get-logger';
 import { getRequestHandler } from '../utils/request';
 import { ensureAuthentication } from '../utils/middleware';
@@ -167,6 +168,15 @@ projects.put(
   handleRequest(async (req, res) => {
     return res.send(
       await viewAnnotationService.replace(req.params.annotationId, req.body)
+    );
+  })
+);
+
+projects.post(
+  '/:projectId/whiteboards/:whiteboardId/views/:viewId/interaction-elements',
+  handleRequest(async (req, res) => {
+    return res.send(
+      await viewImageInteractionElementService.save(req.params.viewId, req.body)
     );
   })
 );

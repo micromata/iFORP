@@ -18,6 +18,7 @@ const actionNames = {
   VIEW_RENAMED: 'VIEW_RENAMED',
   VIEW_DELETED: 'VIEW_DELETED',
   VIEW_ANNOTATION_ADDED: 'VIEW_ANNOTATION_ADDED',
+  VIEW_INERACTION_ELEMENT_ADDED: 'VIEW_INERACTION_ELEMENT_ADDED',
   LIBRARY_DIRECTORIES_RECEIVED: 'LIBRARY_DIRECTORIES_RECEIVED',
   LIBRARY_DIRECTORY_IMPORTED: 'LIBRARY_DIRECTORY_IMPORTED',
   LIBRARY_IMAGES_IMPORTED: 'LIBRARY_IMAGES_IMPORTED',
@@ -164,6 +165,21 @@ const addAnnotationToView = (projectId, whiteboardId, viewId, viewportSize, x, y
   });
 
   return annotation;
+}
+
+const addInteractionElementToView = (projectId, whiteboardId, viewId, coords) => async dispatch => {
+  const response = await http.post(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}/interaction-elements`, coords);
+  const interactionElement = await response.json();
+
+  dispatch({
+    type: actionNames.VIEW_INERACTION_ELEMENT_ADDED,
+    projectId,
+    whiteboardId,
+    viewId,
+    interactionElement
+  });
+
+  return interactionElement;
 }
 
 const changeViewAnnotationText = (projectId, whiteboardId, viewId, annotationId, text) => async dispatch => {
@@ -366,6 +382,7 @@ const saveLinksForView = (projectId, whiteboardId, viewId, links) => async (disp
 export {
   actionNames,
   addAnnotationToView,
+  addInteractionElementToView,
   changeViewAnnotationText,
   createNewProject,
   createNewView,
