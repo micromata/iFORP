@@ -78,7 +78,8 @@ export class HTMLPage extends Component {
           border: 1px dashed rgb(255, 80, 80);
           background-color: rgb(255, 80, 80, 0.4);
           position: absolute;
-          cursor: ${ this.props.allowInteractionElementCreation ? 'default' : 'pointer' }
+          opacity: ${this.props.allowInteractionElementCreation ? '1' : '0'};
+          cursor: ${ this.props.allowInteractionElementCreation ? 'default' : 'pointer' };
         }
 
         .interaction-element-rect::before {
@@ -96,6 +97,7 @@ export class HTMLPage extends Component {
           font-size: 10px;
           margin-top: -10px;
           margin-left: -10px;
+          visibility: ${this.props.allowInteractionElementCreation ? 'visible' : 'hidden'}
         }
       </style>`;
     const annotationsMarkup = this.props.showAnnotations ?
