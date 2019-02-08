@@ -18,7 +18,7 @@ const actionNames = {
   VIEW_RENAMED: 'VIEW_RENAMED',
   VIEW_DELETED: 'VIEW_DELETED',
   VIEW_ANNOTATION_ADDED: 'VIEW_ANNOTATION_ADDED',
-  VIEW_INERACTION_ELEMENT_ADDED: 'VIEW_INERACTION_ELEMENT_ADDED',
+  VIEW_IMAGE_INTERACTION_ELEMENT_ADDED: 'VIEW_IMAGE_INTERACTION_ELEMENT_ADDED',
   LIBRARY_DIRECTORIES_RECEIVED: 'LIBRARY_DIRECTORIES_RECEIVED',
   LIBRARY_DIRECTORY_IMPORTED: 'LIBRARY_DIRECTORY_IMPORTED',
   LIBRARY_IMAGES_IMPORTED: 'LIBRARY_IMAGES_IMPORTED',
@@ -172,7 +172,7 @@ const addInteractionElementToView = (projectId, whiteboardId, viewId, coords) =>
   const interactionElement = await response.json();
 
   dispatch({
-    type: actionNames.VIEW_INERACTION_ELEMENT_ADDED,
+    type: actionNames.VIEW_IMAGE_INTERACTION_ELEMENT_ADDED,
     projectId,
     whiteboardId,
     viewId,
@@ -220,7 +220,10 @@ const getViewsForWhiteboard = (projectId, whiteboardId) => async (dispatch, getS
   const response = await http.get(`/projects/${projectId}/whiteboards/${whiteboardId}/views`);
   const json = await response.json();
   const views = json.map(view => {
-    view.interactionElements = getInteractionElementsFromMarkup(view.body);
+    if (view.fileType === 'html') {
+      view.interactionElements = getInteractionElementsFromMarkup(view.body);
+    }
+
     return view;
   })
 
@@ -305,7 +308,9 @@ const getViewDetails = (projectId, whiteboardId, viewId) => async (dispatch, get
   const response = await http.get(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}`);
   const viewDetails = await response.json();
 
-  viewDetails.interactionElements = getInteractionElementsFromMarkup(viewDetails.body);
+  if (viewDetails.fileType === 'html') {
+    viewDetails.interactionElements = getInteractionElementsFromMarkup(viewDetails.body);
+  }
 
   dispatch({
     type: actionNames.VIEWS_DETAILS_RECEIVED,
@@ -327,10 +332,17 @@ const usePageForView = (projectId, whiteboardId, viewId, page) => async (dispatc
   view.htmlElementAttributes = page.htmlElementAttributes;
   view.assets = page.assets;
   view.viewLinks = [];
+  view.imageName = null;
+  view.imageWidth = null;
+  view.imageHeight = null;
+  view.imageInteractionElements = [];
 
   const response = await http.put(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}`, view);
   const updatedView = await response.json();
-  updatedView.interactionElements = getInteractionElementsFromMarkup(updatedView.body);
+
+  if (updatedView.fileType === 'html') {
+    updatedView.interactionElements = getInteractionElementsFromMarkup(updatedView.body);
+  }
 
   dispatch({
     type: actionNames.VIEWS_DETAILS_RECEIVED,
@@ -350,11 +362,19 @@ const useImageForView = (projectId, whiteboardId, viewId, image) => async (dispa
   view.imageName = image.name;
   view.imageWidth = image.width;
   view.imageHeight = image.height;
+  view.head = null;
+  view.body = null;
+  view.htmlElementAttributes = [];
+  view.assets = [];
   view.viewLinks = [];
+  view.imageInteractionElements = [];
 
   const response = await http.put(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}`, view);
   const updatedView = await response.json();
-  updatedView.interactionElements = getInteractionElementsFromMarkup(updatedView.body);
+
+  if (updatedView.fileType === 'html') {
+    updatedView.interactionElements = getInteractionElementsFromMarkup(updatedView.body);
+  }
 
   dispatch({
     type: actionNames.VIEWS_DETAILS_RECEIVED,

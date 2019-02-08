@@ -5,6 +5,9 @@ export default (theme) => ({
     padding: '20px',
     fontSize: '14px',
     marginBottom: '80px',
+    '&.large': {
+      width: '290px'
+    },
     '& h3': {
       fontSize: '16px',
       fontWeight: 'normal',

@@ -103,7 +103,7 @@ class View extends Component {
         head: '<style>html, body { margin: 0; padding: 0; }</style>',
         body: `<div style='width: ${image.width}px; height: ${image.height}px; background-image: url(${baseURL}/library/images/${image.name});' />`,
         assets: [],
-        interactionElements: this.props.view.imageInteractionElements,
+        interactionElements: [],
         fileType: 'image'
       };
     }
@@ -124,7 +124,7 @@ class View extends Component {
       head: '<style>html, body { margin: 0; padding: 0; }</style>',
       body: `<div style='width: ${this.props.view.imageWidth}px; height: ${this.props.view.imageHeight}px; background-image: url(${baseURL}/library/images/${this.props.view.imageName});' />`,
       assets: [],
-      interactionElements: this.props.view.imageInteractionElements,
+      interactionElements: [...this.props.view.imageInteractionElements].sort((a, b) => a.id - b.id),
       fileType: this.props.view.fileType
     };
   }
@@ -161,12 +161,14 @@ class View extends Component {
               assets={ previewData.assets || [] }
               viewportSize="desktop"
               allowInteractionElementCreation={ !showLibrary && previewData.fileType === 'image' }
+              interactionElements={ previewData.interactionElements }
               onCreateInteractionElement={ coords => this.props.addInteractionElementToView(this.props.projectId, this.props.whiteboardId, this.props.view.id, coords) }
             />
           </div>
 
           { !showLibrary &&
             <ViewLinkEditor
+              fileType={ previewData.fileType }
               availableInteractionElements={ previewData.interactionElements || [] }
               viewLinkOptions={ this.props.viewLinkOptions }
               links={ this.state.links }

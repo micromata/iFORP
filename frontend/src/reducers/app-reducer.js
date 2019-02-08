@@ -132,6 +132,14 @@ const removeAnnotationFromView = (newState, projectId, whiteboardId, viewId, ann
   view.annotations = view.annotations.filter(annotation => annotation.id !== annotationId);
 }
 
+const addViewImageInteractionElement = (newState, projectId, whiteboardId, viewId, interactionElement) => {
+  const view = findViewWithId(newState.projects, projectId, whiteboardId, viewId);
+
+  if (!view) throw new Error(`view with id ${viewId} (project ${projectId}, whiteboard ${whiteboardId}) not found`);
+
+  view.imageInteractionElements = view.imageInteractionElements || [];
+  view.imageInteractionElements.push(interactionElement);
+}
 
 export default (state = initialState, action) => {
   const newState = deepClone(state);
@@ -196,6 +204,9 @@ export default (state = initialState, action) => {
       return newState;
     case actionNames.VIEW_ANNOTATION_DELETED:
       removeAnnotationFromView(newState, action.projectId, action.whiteboardId, action.viewId, action.annotationId);
+      return newState;
+    case actionNames.VIEW_IMAGE_INTERACTION_ELEMENT_ADDED:
+      addViewImageInteractionElement(newState, action.projectId, action.whiteboardId, action.viewId, action.interactionElement);
       return newState;
     default:
       return state;

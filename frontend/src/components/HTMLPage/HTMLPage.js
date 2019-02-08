@@ -50,6 +50,7 @@ export class HTMLPage extends Component {
     const annotationCSS = this.props.showAnnotations || this.props.allowInteractionElementCreation ? `
       <style>
         body {
+          counter-reset: interactionElementCounter;
           cursor: ${ this.props.allowInteractionElementCreation ? 'crosshair' : 'default' };
         }
 
@@ -66,11 +67,34 @@ export class HTMLPage extends Component {
           font-family: Verdana, Sans Serif;
         }
 
-        #interaction-element-rect {
+        #new-interaction-element-rect {
           border: 1px dashed rgb(255, 80, 80);
           background-color: rgb(255, 80, 80, 0.4);
           position: absolute;
           visibility: hidden;
+        }
+
+        .interaction-element-rect {
+          border: 1px dashed rgb(255, 80, 80);
+          background-color: rgb(255, 80, 80, 0.4);
+          position: absolute;
+        }
+
+        .interaction-element-rect::before {
+          counter-increment: interactionElementCounter;
+          content: counter(interactionElementCounter);
+          color: #FFF;
+          width: 20px;
+          height: 20px;
+          background: rgb(255, 80, 80);
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-family: Arial;
+          font-size: 10px;
+          margin-top: -10px;
+          margin-left: -10px;
         }
       </style>` : '';
     const annotationsMarkup = this.props.showAnnotations ?
@@ -82,14 +106,25 @@ export class HTMLPage extends Component {
 
     htmlElement.style = 'visibility: hidden';
 
-    const interactionElementMarkup = `<div id='interaction-element-rect' />`;
+    const newInteractionElementMarkup = this.props.allowInteractionElementCreation ?
+      `<div id='new-interaction-element-rect'></div>` :
+      '';
+
+    const existingInteractionElementsMarkup = this.props.allowInteractionElementCreation ?
+      this.props.interactionElements.map((item, index) => `
+        <div class='interaction-element-rect' style='left: ${item.x}px; top: ${item.y}px; width: ${item.width}px; height: ${item.height}px'></div>
+      `).join('') : '';
 
     // Fill head element
     this.iframeDocument.head.innerHTML = `${this.props.head} ${annotationCSS}`;
 
 
     // Fill body element
-    this.iframeDocument.body.innerHTML = `${this.props.body} ${annotationsMarkup} ${interactionElementMarkup}`;
+    this.iframeDocument.body.innerHTML = `
+      ${this.props.body}
+      ${annotationsMarkup}
+      ${newInteractionElementMarkup}
+      ${existingInteractionElementsMarkup}`;
 
     // Insert JavaScript and CSS assets to the view
     this.props.assets.forEach(asset => {
@@ -114,7 +149,10 @@ export class HTMLPage extends Component {
     }
 
     if (this.props.allowInteractionElementCreation && this.props.onCreateInteractionElement) {
-      initInteractionElementDrawing(this.iframeDocument.body, this.iframeDocument.body.querySelector('#interaction-element-rect'), this.props.onCreateInteractionElement);
+      initInteractionElementDrawing(
+        this.iframeDocument.body,
+        this.iframeDocument.body.querySelector('#new-interaction-element-rect'),
+        this.props.onCreateInteractionElement);
     }
 
     setTimeout(() => { htmlElement.style = ''; }, 100);

@@ -16,5 +16,13 @@ export const save = async (viewId, base) => {
   }
   const interactionElement = base;
   interactionElement.view = view;
-  return interactionElementRepo.save(interactionElement);
+  const saved = await interactionElementRepo.save(interactionElement);
+
+  return {
+    id: saved.id,
+    x: saved.x,
+    y: saved.y,
+    width: saved.width,
+    height: saved.height
+  };
 };
