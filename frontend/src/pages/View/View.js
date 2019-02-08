@@ -161,7 +161,7 @@ class View extends Component {
               assets={ previewData.assets || [] }
               viewportSize="desktop"
               allowInteractionElementCreation={ !showLibrary && previewData.fileType === 'image' }
-              interactionElements={ previewData.interactionElements }
+              imageInteractionElements={ previewData.fileType === 'image' ? previewData.interactionElements : [] }
               onCreateInteractionElement={ coords => this.props.addInteractionElementToView(this.props.projectId, this.props.whiteboardId, this.props.view.id, coords) }
             />
           </div>

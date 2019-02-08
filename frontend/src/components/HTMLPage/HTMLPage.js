@@ -47,7 +47,7 @@ export class HTMLPage extends Component {
         );
     });
 
-    const annotationCSS = this.props.showAnnotations || this.props.allowInteractionElementCreation ? `
+    const additionalCSS = `
       <style>
         body {
           counter-reset: interactionElementCounter;
@@ -78,6 +78,7 @@ export class HTMLPage extends Component {
           border: 1px dashed rgb(255, 80, 80);
           background-color: rgb(255, 80, 80, 0.4);
           position: absolute;
+          cursor: ${ this.props.allowInteractionElementCreation ? 'default' : 'pointer' }
         }
 
         .interaction-element-rect::before {
@@ -96,7 +97,7 @@ export class HTMLPage extends Component {
           margin-top: -10px;
           margin-left: -10px;
         }
-      </style>` : '';
+      </style>`;
     const annotationsMarkup = this.props.showAnnotations ?
       this.props.annotations.map((annotation, index) => `
       <div class='annotation' style='top: ${annotation.y}px; left: ${annotation.x}px;'>
@@ -110,13 +111,18 @@ export class HTMLPage extends Component {
       `<div id='new-interaction-element-rect'></div>` :
       '';
 
-    const existingInteractionElementsMarkup = this.props.allowInteractionElementCreation ?
-      this.props.interactionElements.map((item, index) => `
-        <div class='interaction-element-rect' style='left: ${item.x}px; top: ${item.y}px; width: ${item.width}px; height: ${item.height}px'></div>
+    const existingInteractionElementsMarkup = this.props.imageInteractionElements ?
+      this.props.imageInteractionElements.map((item, index) => `
+        <div
+          class='interaction-element-rect'
+          data-interaction-id='${item.id}'
+          style='left: ${item.x}px; top: ${item.y}px; width: ${item.width}px; height: ${item.height}px'
+        >
+        </div>
       `).join('') : '';
 
     // Fill head element
-    this.iframeDocument.head.innerHTML = `${this.props.head} ${annotationCSS}`;
+    this.iframeDocument.head.innerHTML = `${this.props.head} ${additionalCSS}`;
 
 
     // Fill body element

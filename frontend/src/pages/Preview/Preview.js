@@ -4,7 +4,6 @@ import injectSheet from 'react-jss';
 import styles from './Preview.styles';
 import NavBar from '../../components/NavBar/NavBar';
 import HTMLPage from '../../components/HTMLPage/HTMLPage';
-import ImagePreview from '../../components/ImagePreview/ImagePreview';
 import Toggle from '../../components/Toggle/Toggle';
 import ViewAnnotationList from '../../components/ViewAnnotation/ViewAnnotationList';
 import { getViewsForWhiteboard, getViewDetails, addAnnotationToView, changeViewAnnotationText, deleteViewAnnotation } from '../../actions/app-actions';
@@ -100,6 +99,7 @@ export class Preview extends Component {
               assets={ previewData.assets || [] }
               showAnnotations={ this.state.showAnnotations }
               annotations={ previewData.annotations }
+              imageInteractionElements={ previewData.fileType === 'image' ? previewData.interactionElements : [] }
               onInteractionElementClick={ this.handleInteractionElementClick }
               onAnnotate={ this.handleAnnotate }
               viewportSize="desktop"
