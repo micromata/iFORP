@@ -65,6 +65,9 @@ export const replace = async (id, base) => {
   view.body = base.body;
   view.htmlElementAttributes = base.htmlElementAttributes;
   view.assets = base.assets;
+  view.imageName = base.imageName;
+  view.imageWidth = base.imageWidth;
+  view.imageHeight = base.imageHeight;
   view.viewLinks = base.viewLinks;
   view.annotations = base.annotations;
 

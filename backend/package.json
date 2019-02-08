@@ -45,6 +45,7 @@
   "dependencies": {
     "@sindresorhus/slugify": "0.3.0",
     "body-parser": "1.18.3",
+    "buffer-image-size": "0.6.4",
     "cheerio": "1.0.0-rc.2",
     "cors": "2.8.4",
     "express": "4.16.3",

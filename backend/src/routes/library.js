@@ -40,13 +40,22 @@ library.get(
 );
 
 library.post(
-  '/upload',
+  '/upload/zip',
   upload.single('file'),
   [],
   handleRequest(async (req, res) => {
     return res.send(
       await libraryService.uploadZip(req.file, req.body.directoryName)
     );
+  })
+);
+
+library.post(
+  '/upload/images',
+  upload.array('files'),
+  [],
+  handleRequest(async (req, res) => {
+    return res.send(await libraryService.uploadImages(req.files));
   })
 );
 

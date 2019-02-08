@@ -37,9 +37,27 @@ export const put = (path, payload = {}) =>
     method: 'PUT'
   });
 
-export const uploadFile = (path, file) => {
+export const uploadSingleFile = (path, file) => {
   const formData = new FormData();
   formData.append('file', file);
+  const config = {
+    headers: {
+      Accept: 'application/json',
+      Authorization: `Bearer ${getToken() || ''}`,
+    },
+    body: formData,
+    mode: isDev ? 'cors' : 'same-origin',
+    method: 'POST'
+  };
+
+  return fetch(baseURL + path, config);
+}
+
+export const uploadMultipleFiles = (path, files) => {
+  const formData = new FormData();
+  files.forEach(file => {
+    formData.append('files', file);
+  });
   const config = {
     headers: {
       Accept: 'application/json',

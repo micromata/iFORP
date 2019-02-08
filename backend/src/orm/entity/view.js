@@ -11,6 +11,7 @@ import {
 import { Asset } from './asset';
 import { ViewLink } from './view-link';
 import { ViewAnnotation } from './view-annotation';
+import { ViewImageInteractionElement } from './view-image-interaction-element';
 
 @Entity()
 export class View {
@@ -56,6 +57,26 @@ export class View {
   })
   @JoinTable()
   assets = undefined;
+
+  @Column('text', { nullable: true })
+  imageName = undefined;
+
+  @Column('int', { nullable: true })
+  imageWidth = undefined;
+
+  @Column('int', { nullable: true })
+  imageHeight = undefined;
+
+  @OneToMany(
+    () => ViewImageInteractionElement,
+    imageInteractionElement => imageInteractionElement.view,
+    {
+      cascade: true,
+      eager: true,
+      onDelete: 'CASCADE'
+    }
+  )
+  imageInteractionElements = undefined;
 
   @OneToMany(() => ViewLink, viewLink => viewLink.fromView, {
     cascade: true,

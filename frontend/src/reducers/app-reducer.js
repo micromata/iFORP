@@ -8,26 +8,6 @@ const initialState = {
   }
 };
 
-const updateHasDetailsFlagOfViews = project => {
-  if (!project || !project.whiteboards) return project;
-
-  const clonedProject = deepClone(project);
-
-  clonedProject.whiteboards = clonedProject.whiteboards.
-    map(whiteboard => {
-      if (!whiteboard.views) return whiteboard;
-
-      whiteboard.views.map(view => {
-        view.hasDetails = view.hasOwnProperty('body'); // eslint-disable-line no-prototype-builtins
-        return view;
-      })
-
-      return whiteboard;
-    });
-
-  return clonedProject;
-};
-
 const addWhiteboardToProject = (newState, projectId, whiteboard) => {
   const project = findProjectWithId(newState.projects, projectId);
 
@@ -76,6 +56,19 @@ const removeViewFromWhiteboard = (newState, projectId, whiteboardId, viewId) => 
 }
 
 const addDirectoryToLibrary = (newState, directory) => {
+  newState.library.directories.push(directory);
+}
+
+const existsDirectoryWithName = (newState, directoryName) => {
+  return newState.library.directories.find(dir => dir.name === directoryName);
+}
+
+const updateDirectoryInLibrary = (newState, directory) => {
+  if (existsDirectoryWithName(newState, directory.name)) {
+    newState.library.directories = newState.library.directories.map(dir => dir.name === directory.name ? directory : dir);
+    return;
+  }
+
   newState.library.directories.push(directory);
 }
 
@@ -154,13 +147,16 @@ export default (state = initialState, action) => {
     case actionNames.LIBRARY_DIRECTORY_IMPORTED:
       addDirectoryToLibrary(newState, action.directory);
       return newState;
+    case actionNames.LIBRARY_IMAGES_IMPORTED:
+      updateDirectoryInLibrary(newState, action.directory);
+      return newState;
     case actionNames.LIBRARY_PAGE_DETAILS_RECEIVED:
       addDetailsToPage(newState, action.pageDetails);
       return newState;
     case actionNames.PROJECTS_RECEIVED:
       return { ...newState, projects: action.projects };
     case actionNames.PROJECT_CREATED:
-      newState.projects.push(updateHasDetailsFlagOfViews(action.project));
+      newState.projects.push(action.project);
       return newState;
     case actionNames.PROJECT_RENAMED:
       changeProjectName(newState, action.projectId, action.newName);

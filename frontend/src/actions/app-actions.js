@@ -20,6 +20,7 @@ const actionNames = {
   VIEW_ANNOTATION_ADDED: 'VIEW_ANNOTATION_ADDED',
   LIBRARY_DIRECTORIES_RECEIVED: 'LIBRARY_DIRECTORIES_RECEIVED',
   LIBRARY_DIRECTORY_IMPORTED: 'LIBRARY_DIRECTORY_IMPORTED',
+  LIBRARY_IMAGES_IMPORTED: 'LIBRARY_IMAGES_IMPORTED',
   LIBRARY_PAGE_DETAILS_RECEIVED: 'LIBRARY_PAGE_DETAILS_RECEIVED'
 };
 
@@ -257,11 +258,23 @@ const getPageDetails = pageId => async dispatch => {
 }
 
 const uploadZipFile = file => async dispatch => {
-  const response = await http.uploadFile('/library/upload', file);
+  const response = await http.uploadSingleFile('/library/upload/zip', file);
   const directory = await response.json();
 
   dispatch({
     type: actionNames.LIBRARY_DIRECTORY_IMPORTED,
+    directory
+  });
+
+  return directory;
+}
+
+const uploadImages = files => async dispatch => {
+  const response = await http.uploadMultipleFiles('/library/upload/images', files);
+  const directory = await response.json();
+
+  dispatch({
+    type: actionNames.LIBRARY_IMAGES_IMPORTED,
     directory
   });
 
@@ -313,6 +326,30 @@ const usePageForView = (projectId, whiteboardId, viewId, page) => async (dispatc
   return updatedView;
 }
 
+const useImageForView = (projectId, whiteboardId, viewId, image) => async (dispatch, getState) => {
+  const view = findViewWithId(getState().app.projects, projectId, whiteboardId, viewId);
+
+  view.hasFile = true;
+  view.fileType = 'image';
+  view.imageName = image.name;
+  view.imageWidth = image.width;
+  view.imageHeight = image.height;
+  view.viewLinks = [];
+
+  const response = await http.put(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}`, view);
+  const updatedView = await response.json();
+  updatedView.interactionElements = getInteractionElementsFromMarkup(updatedView.body);
+
+  dispatch({
+    type: actionNames.VIEWS_DETAILS_RECEIVED,
+    projectId,
+    whiteboardId,
+    viewDetails: updatedView
+  });
+
+  return updatedView;
+}
+
 const saveLinksForView = (projectId, whiteboardId, viewId, links) => async (dispatch, getState) => {
   const view = findViewWithId(getState().app.projects, projectId, whiteboardId, viewId);
   const viewLinks = Object.keys(links).
@@ -345,7 +382,9 @@ export {
   renameView,
   renameWhiteboard,
   uploadZipFile,
+  uploadImages,
   getViewDetails,
+  useImageForView,
   usePageForView,
   saveLinksForView
 };

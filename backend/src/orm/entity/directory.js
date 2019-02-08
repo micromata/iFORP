@@ -1,5 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Page } from './page';
+import { Image } from './image';
 
 @Entity()
 export class Directory {
@@ -14,4 +15,10 @@ export class Directory {
     eager: true
   })
   pages = undefined;
+
+  @OneToMany(() => Image, image => image.directory, {
+    cascade: true,
+    eager: true
+  })
+  images = undefined;
 }

@@ -15,34 +15,39 @@ class LibraryTreeView extends Component {
     this.setState(prevState => ({ expandedDirectory: prevState.expandedDirectory === directoryId ? null : directoryId }));
   }
 
-  handleSelectPage = (event, pageId) => {
+  handleSelectItem = (event, itemId) => {
     event.stopPropagation();
-    this.props.onSelectPage(pageId);
+    this.props.onSelectItem(itemId);
   }
 
   render() {
     if (!this.props.directories) return null;
 
+    const itemsKey = this.props.fileTypeFilter === 'html' ? 'pages' : 'images';
+
+
     return (
       <div className={ this.props.classes.LibraryTreeView }>
         <ul>
-          { this.props.directories.map(directory =>
-            <li key={`directory-${directory.id}`} onClick={() => this.handleExpandDirectory(directory.id)}>
-              { this.state.expandedDirectory === directory.id ?
-                <ArrowDownIcon color={ this.props.theme.textColorOnBackground }/> :
-                <ArrowRightIcon color={ this.props.theme.textColorOnBackground }/>
-              }
-              { directory.name }
-              { this.state.expandedDirectory === directory.id &&
-                <ul>
-                  { directory.pages.map(page =>
-                    <li key={ `page-${page.id}` } onClick={event => this.handleSelectPage(event, page.id)}>
-                      { page.name }
-                    </li>
-                  )}
-                </ul>
-              }
-            </li>
+            { this.props.directories.
+              filter(directory => directory[itemsKey] && directory[itemsKey].length)
+              .map(directory =>
+                <li key={`directory-${directory.id}`} onClick={() => this.handleExpandDirectory(directory.id)}>
+                  { this.state.expandedDirectory === directory.id ?
+                    <ArrowDownIcon color={ this.props.theme.textColorOnBackground }/> :
+                    <ArrowRightIcon color={ this.props.theme.textColorOnBackground }/>
+                  }
+                  { directory.name }
+                  { this.state.expandedDirectory === directory.id &&
+                    <ul>
+                      { directory[itemsKey].map(item =>
+                        <li key={ `${itemsKey}-${item.id}` } onClick={event => this.handleSelectItem(event, item.id)}>
+                          { item.name }
+                        </li>
+                      )}
+                    </ul>
+                  }
+                </li>
             )
           }
         </ul>

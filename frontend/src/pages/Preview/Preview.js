@@ -4,6 +4,7 @@ import injectSheet from 'react-jss';
 import styles from './Preview.styles';
 import NavBar from '../../components/NavBar/NavBar';
 import HTMLPage from '../../components/HTMLPage/HTMLPage';
+import ImagePreview from '../../components/ImagePreview/ImagePreview';
 import Toggle from '../../components/Toggle/Toggle';
 import ViewAnnotationList from '../../components/ViewAnnotation/ViewAnnotationList';
 import { getViewsForWhiteboard, getViewDetails, addAnnotationToView, changeViewAnnotationText, deleteViewAnnotation } from '../../actions/app-actions';
@@ -54,8 +55,33 @@ export class Preview extends Component {
     this.props.deleteViewAnnotation(this.props.projectId, this.props.whiteboardId, this.props.viewId, annotationId);
   }
 
+  getPreviewData = () => {
+    if (!this.props.view) return {};
+
+    if (this.props.view.fileType === 'html') {
+      return {
+        htmlElementAttributes:  this.props.view.htmlElementAttributes,
+        head: this.props.view.head,
+        body: this.props.view.body,
+        assets: this.props.view.assets,
+        interactionElements: this.props.view.interactionElements,
+        annotations: this.props.view.annotations,
+        fileType: this.props.view.fileType
+      }
+    }
+
+    return {
+      fileType: this.props.view.fileType,
+      name: this.props.view.imageName,
+      width: this.props.view.imageWidth,
+      height: this.props.view.imageHeight,
+      interactionElements: this.props.view.imageInteractionElements,
+      annotations: this.props.view.annotations,
+    };
+  }
+
   render() {
-    const previewData = this.props.view || {};
+    const previewData = this.getPreviewData();
 
     return (
       <div className={ this.props.classes.Preview }>
@@ -66,17 +92,25 @@ export class Preview extends Component {
         />
         <main>
           <div className='content'>
-            <HTMLPage
-              htmlElementAttributes={ previewData.htmlElementAttributes || {} }
-              head={ previewData.head || '' }
-              body={ previewData.body || '' }
-              assets={ previewData.assets || [] }
-              showAnnotations={ this.state.showAnnotations }
-              annotations={ previewData.annotations }
-              onInteractionElementClick={ this.handleInteractionElementClick }
-              onAnnotate={ this.handleAnnotate }
-              viewportSize="desktop"
-            />
+            { previewData.fileType === 'html' &&
+              <HTMLPage
+                htmlElementAttributes={ previewData.htmlElementAttributes || {} }
+                head={ previewData.head || '' }
+                body={ previewData.body || '' }
+                assets={ previewData.assets || [] }
+                showAnnotations={ this.state.showAnnotations }
+                annotations={ previewData.annotations }
+                onInteractionElementClick={ this.handleInteractionElementClick }
+                onAnnotate={ this.handleAnnotate }
+                viewportSize="desktop"
+              />
+            }
+            { previewData.fileType === 'image' &&
+              <ImagePreview
+                image={ previewData }
+                viewportSize="desktop"
+              />
+            }
             <div className='annotation-panel'>
               <h3>Annotations</h3>
               <Toggle

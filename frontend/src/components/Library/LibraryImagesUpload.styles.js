@@ -1,5 +1,5 @@
 export default theme => ({
-  LibraryZipUpload: {
+  LibraryImagesUpload: {
     '& input[type=file]': {
       width: '0.1px',
       height: '0.1px',

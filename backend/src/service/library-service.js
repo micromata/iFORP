@@ -13,6 +13,7 @@ import {
 import { processHtmlFile } from '../utils/markup';
 import { Directory } from '../orm/entity/directory';
 import { Page } from '../orm/entity/page';
+import { Image } from '../orm/entity/image';
 import { getConfiguration } from '../get-configuration';
 import {
   ensureFileSize,
@@ -20,6 +21,7 @@ import {
   ensureValue,
   exceptionWithHttpStatus
 } from '../utils/request';
+import getImageDimensions from 'buffer-image-size';
 
 const logger = getLogger('library');
 
@@ -79,6 +81,68 @@ export const uploadZip = async (file, userDefinedDirName = '') => {
 
   const saved = await getRepository(Directory).save(directory);
   logger.info('Saved the directory to the database.');
+  return saved;
+};
+
+const getImagePath = (imagesDirPath, fileName, extension, ranTimes = 0) => {
+  const filePathToCheck = path.resolve(
+    imagesDirPath,
+    ranTimes ? `${fileName}-${ranTimes}${extension}` : `${fileName}${extension}`
+  );
+  if (fs.existsSync(filePathToCheck)) {
+    return getImagePath(imagesDirPath, fileName, extension, ranTimes + 1);
+  }
+  return filePathToCheck;
+};
+
+const ensureDirectoryExists = path => {
+  if (fs.existsSync(path)) return;
+  fs.mkdirSync(path);
+};
+
+export const uploadImages = async files => {
+  logger.info(`Images upload`);
+
+  const imagesDirPath = path.resolve(uploadOptions.directory, 'images');
+  ensureDirectoryExists(uploadOptions.directory);
+  ensureDirectoryExists(imagesDirPath);
+
+  const directoryRepository = getRepository(Directory);
+  const foundDirectoriesWithName = await directoryRepository.find({
+    name: 'images'
+  });
+  const directory = foundDirectoriesWithName[0] || new Directory();
+  directory.name = 'images';
+  directory.images = directory.images || [];
+
+  files.forEach(file => {
+    logger.info(`Processing image "${file.originalname}"`);
+
+    const extname = path.extname(file.originalname);
+    const filename = path.basename(file.originalname, extname);
+    const imageFilePath = getImagePath(imagesDirPath, filename, extname);
+    const dimensions = getImageDimensions(file.buffer);
+    const image = new Image();
+    image.name = path.basename(imageFilePath);
+    image.width = dimensions.width;
+    image.height = dimensions.height;
+    directory.images.push(image);
+    logger.info(
+      `... image "${image.name}" (${image.width}x${
+        image.height
+      }) added to directory entity`
+    );
+
+    fs.writeFileSync(imageFilePath, file.buffer);
+    logger.info(
+      `... image "${image.name}" (${image.width}x${
+        image.height
+      }) written to disk`
+    );
+  });
+
+  const saved = await directoryRepository.save(directory);
+  logger.info('Saved directory with new images to database.');
   return saved;
 };
 

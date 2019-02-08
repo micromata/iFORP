@@ -31,7 +31,13 @@ const findViewAnnotationWithId = (projects, projectId, whiteboardId, viewId, ann
 
 const findPageWithId = (directories, pageId) => {
   return directories.reduce((pageWithId, directory) => {
-    return pageWithId || directory.pages.find(page => page.id === pageId);
+    return pageWithId || (directory.pages && directory.pages.find(page => page.id === pageId));
+  }, null);
+}
+
+const findImageWithId = (directories, imageId) => {
+  return directories.reduce((imageWithId, directory) => {
+    return imageWithId || (directory.images && directory.images.find(image => image.id === imageId));
   }, null);
 }
 
@@ -43,5 +49,6 @@ export {
   findWhiteboardWithId,
   findViewWithId,
   findViewAnnotationWithId,
-  findPageWithId
+  findPageWithId,
+  findImageWithId
 };

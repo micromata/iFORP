@@ -8,10 +8,12 @@ import LibraryTreeView from '../../components/Library/LibraryTreeView';
 import ViewLinkEditor from '../../components/ViewLinkEditor/ViewLinkEditor';
 import ProjectButtonBar from '../../components/ProjectButtonBar/ProjectButtonBar';
 import LibraryZipUpload from '../../components/Library/LibraryZipUpload';
+import LibraryImagesUpload from '../../components/Library/LibraryImagesUpload';
 import HTMLPage from '../../components/HTMLPage/HTMLPage';
+import ImagePreview from '../../components/ImagePreview/ImagePreview';
 import Button from '../../components/Button/Button';
-import { getLibraryDirectories, getViewsForWhiteboard, getViewDetails, getPageDetails, uploadZipFile, usePageForView, saveLinksForView } from '../../actions/app-actions';
-import { findProjectWithId, findWhiteboardWithId, findViewWithId, findPageWithId } from '../../utils';
+import { getLibraryDirectories, getViewsForWhiteboard, getViewDetails, getPageDetails, uploadImages, uploadZipFile, useImageForView, usePageForView, saveLinksForView } from '../../actions/app-actions';
+import { findProjectWithId, findWhiteboardWithId, findViewWithId, findPageWithId, findImageWithId } from '../../utils';
 
 class View extends Component {
   constructor(props) {
@@ -19,7 +21,7 @@ class View extends Component {
 
     this.state = {
       selectedFilter: 'html',
-      selectedPageId: null,
+      selectedDirectoryItemId: null,
       usedPageId: null,
       links: {},
       librarySelectMode: false
@@ -44,12 +46,15 @@ class View extends Component {
   }
 
   handleFilterChange = selectedFilter => {
-    this.setState({ selectedFilter });
+    this.setState({ selectedFilter, selectedDirectoryItemId: null });
   }
 
-  handleSelectPage = selectedPageId => {
-    this.setState({ selectedPageId });
-    this.props.getPageDetails(selectedPageId);
+  handleSelectDirectoryItem = selectedDirectoryItemId => {
+    this.setState({ selectedDirectoryItemId });
+
+    if (this.state.selectedFilter === 'html') {
+      this.props.getPageDetails(selectedDirectoryItemId);
+    }
   }
 
   handleShowLibrarySelection = () => {
@@ -64,9 +69,19 @@ class View extends Component {
     });
   }
 
-  handleUsePage = async () => {
-    const page = findPageWithId(this.props.directories, this.state.selectedPageId) || {};
-    const view = await this.props.usePageForView(this.props.projectId, this.props.whiteboardId, this.props.viewId, page);
+  handleUseDirectoryItem = async () => {
+    let view;
+    if (this.state.selectedFilter === 'html') {
+      const page = findPageWithId(this.props.directories, this.state.selectedDirectoryItemId) || {};
+      view = await this.props.usePageForView(this.props.projectId, this.props.whiteboardId, this.props.viewId, page);
+    }
+    else if (this.state.selectedFilter === 'image') {
+      const image = findImageWithId(this.props.directories, this.state.selectedDirectoryItemId) || {};
+      view = await this.props.useImageForView(this.props.projectId, this.props.whiteboardId, this.props.viewId, image);
+    } else {
+      return;
+    }
+
     const links = this.getLinksFromView(view);
     this.setState({ links,  librarySelectMode: false });
   }
@@ -76,18 +91,39 @@ class View extends Component {
     this.props.history.push(`/projects/${this.props.projectId}/whiteboards/${this.props.whiteboardId}`);
   }
 
-  render() {
-    const selectedPage = findPageWithId(this.props.directories, this.state.selectedPageId) || {};
-    const showLibrary = this.state.librarySelectMode || !(this.props.view && this.props.view.hasFile);
-    const previewData = showLibrary ?
-      selectedPage :
-      {
+  getPreviewData = showLibrary => {
+    if (showLibrary) {
+      const fromLibrary = this.state.selectedFilter === 'html' ?
+        (findPageWithId(this.props.directories, this.state.selectedDirectoryItemId) || {}) :
+        (findImageWithId(this.props.directories, this.state.selectedDirectoryItemId) || {});
+
+      return { ...fromLibrary, fileType: this.state.selectedFilter };
+    }
+
+    if (this.props.view.fileType === 'html') {
+      return {
         htmlElementAttributes:  this.props.view.htmlElementAttributes,
         head: this.props.view.head,
         body: this.props.view.body,
         assets: this.props.view.assets,
-        interactionElements: this.props.view.interactionElements
-      };
+        interactionElements: this.props.view.interactionElements,
+        fileType: this.props.view.fileType
+      }
+    }
+
+    return {
+      fileType: this.props.view.fileType,
+      name: this.props.view.imageName,
+      width: this.props.view.imageWidth,
+      height: this.props.view.imageHeight,
+      interactionElements: this.props.view.imageInteractionElements
+    };
+  }
+
+  render() {
+    const showLibrary = this.state.librarySelectMode || !(this.props.view && this.props.view.hasFile);
+
+    const previewData = this.getPreviewData(showLibrary);
 
     return (
       <div className={ this.props.classes.View }>
@@ -103,19 +139,27 @@ class View extends Component {
           { showLibrary &&
             <LibraryTreeView
               directories={ this.props.directories }
-              selectedPageId={ this.state.selectedPageId }
-              onSelectPage={ this.handleSelectPage }
+              fileTypeFilter={ this.state.selectedFilter }
+              onSelectItem={ this.handleSelectDirectoryItem }
             />
           }
 
           <div className='content'>
-            <HTMLPage
-              htmlElementAttributes={ previewData.htmlElementAttributes || {} }
-              head={ previewData.head || '' }
-              body={ previewData.body || '' }
-              assets={ previewData.assets || [] }
-              viewportSize="desktop"
-            />
+            { previewData.fileType === 'html' &&
+              <HTMLPage
+                htmlElementAttributes={ previewData.htmlElementAttributes || {} }
+                head={ previewData.head || '' }
+                body={ previewData.body || '' }
+                assets={ previewData.assets || [] }
+                viewportSize="desktop"
+              />
+            }
+            { previewData.fileType === 'image' &&
+              <ImagePreview
+                image={ previewData }
+                viewportSize="desktop"
+              />
+            }
           </div>
 
           { !showLibrary &&
@@ -128,11 +172,14 @@ class View extends Component {
           }
         </main>
         <ProjectButtonBar includeNavigationMenu={ false }>
-          { showLibrary &&
-            <LibraryZipUpload onZipFileSelected={ this.props.uploadZipFile } />
+          { showLibrary && this.state.selectedFilter === 'html' &&
+              <LibraryZipUpload onZipFileSelected={ this.props.uploadZipFile } />
+          }
+          { showLibrary && this.state.selectedFilter === 'image' &&
+            <LibraryImagesUpload onImagesSelected={ this.props.uploadImages } />
           }
           { showLibrary &&
-            <Button buttonStyle='round' onClick={ this.handleUsePage } disable={ !this.state.selectedPageId }>use</Button>
+            <Button buttonStyle='round' onClick={ this.handleUseDirectoryItem } disable={ !this.state.selectedDirectoryItemId }>use</Button>
           }
           { !showLibrary &&
             <React.Fragment>
@@ -146,7 +193,7 @@ class View extends Component {
   }
 }
 
-const actions = { getLibraryDirectories, getViewsForWhiteboard, getViewDetails, getPageDetails, uploadZipFile, usePageForView, saveLinksForView };
+const actions = { getLibraryDirectories, getViewsForWhiteboard, getViewDetails, getPageDetails, uploadImages, uploadZipFile, useImageForView, usePageForView, saveLinksForView };
 
 const mapStateToProps = (state, ownProps) => {
   const projectId = Number(ownProps.match.params.projectId);

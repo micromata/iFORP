@@ -6,8 +6,8 @@ export const LibraryFilter = ({classes, selectedFilter, onFilterChange}) => (
   <div className={ classes.LibraryFilter }>
     <input type="radio" id="library-filter" name="libary-filter" value="html" checked={selectedFilter === 'html'} onChange={() => onFilterChange('html')} />
     <label htmlFor="html" onClick={() => onFilterChange('html')}>HTML</label>
-    <input type="radio" id="library-filter" name="libary-filter" value="images" checked={selectedFilter === 'images'} onChange={() => onFilterChange('images')} />
-    <label htmlFor="images" onClick={() => onFilterChange('images')}>Images</label>
+    <input type="radio" id="library-filter" name="libary-filter" value="image" checked={selectedFilter === 'image'} onChange={() => onFilterChange('image')} />
+    <label htmlFor="image" onClick={() => onFilterChange('image')}>Images</label>
   </div>
 );
 
