@@ -9,9 +9,8 @@ import ProjectButtonBar from '../../components/ProjectButtonBar/ProjectButtonBar
 import LibraryZipUpload from '../../components/Library/LibraryZipUpload';
 import LibraryImagesUpload from '../../components/Library/LibraryImagesUpload';
 import HTMLPage from '../../components/HTMLPage/HTMLPage';
-import ImagePreview from '../../components/ImagePreview/ImagePreview';
 import { getLibraryDirectories, getViewsForWhiteboard, getViewDetails, getPageDetails, uploadZipFile, uploadImages, usePageForView, saveLinksForView } from '../../actions/app-actions';
-import { findPageWithId, findImageWithId } from '../../utils';
+import { baseURL, findPageWithId, findImageWithId } from '../../utils';
 
 class Library extends Component {
   constructor(props) {
@@ -39,9 +38,31 @@ class Library extends Component {
     }
   }
 
+  getPreviewData = () => {
+    if (this.state.seletedFilter === 'html') {
+      const page = findPageWithId(this.props.directories, this.state.selectedDirectoryItemId);
+      if (!page) return {};
+
+      return {
+        htmlElementAttributes:  page.htmlElementAttributes,
+        head: page.head,
+        body: page.body,
+        assets: page.assets
+      }
+    }
+
+    const image = findImageWithId(this.props.directories, this.state.selectedDirectoryItemId);
+    if (!image) return {};
+    return {
+      htmlElementAttributes: { lang: 'en'},
+      head: '<style>html, body { margin: 0; padding: 0; }</style>',
+      body: `<div style='width: ${image.width}px; height: ${image.height}px; background-image: url(${baseURL}/library/images/${image.name});' />`,
+      assets: []
+    };
+  }
+
   render() {
-    const selectedPage = this.state.selectedFilter === 'html' && (findPageWithId(this.props.directories, this.state.selectedDirectoryItemId) || {});
-    const selectedImage = this.state.selectedFilter === 'image' && (findImageWithId(this.props.directories, this.state.selectedDirectoryItemId) || {});
+    const previewData = this.getPreviewData();
 
     return (
       <div className={ this.props.classes.Library }>
@@ -55,21 +76,13 @@ class Library extends Component {
           />
 
           <div className='content'>
-            { this.state.selectedFilter === 'html' &&
-              <HTMLPage
-                htmlElementAttributes={ selectedPage.htmlElementAttributes || {} }
-                head={ selectedPage.head || '' }
-                body={ selectedPage.body || '' }
-                assets={ selectedPage.assets || [] }
-                viewportSize="desktop"
-              />
-            }
-            { this.state.selectedFilter === 'image' &&
-              <ImagePreview
-                image={ selectedImage }
-                viewportSize="desktop"
-              />
-            }
+            <HTMLPage
+              htmlElementAttributes={ previewData.htmlElementAttributes || {} }
+              head={ previewData.head || '' }
+              body={ previewData.body || '' }
+              assets={ previewData.assets || [] }
+              viewportSize="desktop"
+            />
           </div>
         </main>
         <ProjectButtonBar includeNavigationMenu={ true }>

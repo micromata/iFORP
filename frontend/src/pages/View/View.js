@@ -10,10 +10,9 @@ import ProjectButtonBar from '../../components/ProjectButtonBar/ProjectButtonBar
 import LibraryZipUpload from '../../components/Library/LibraryZipUpload';
 import LibraryImagesUpload from '../../components/Library/LibraryImagesUpload';
 import HTMLPage from '../../components/HTMLPage/HTMLPage';
-import ImagePreview from '../../components/ImagePreview/ImagePreview';
 import Button from '../../components/Button/Button';
 import { getLibraryDirectories, getViewsForWhiteboard, getViewDetails, getPageDetails, uploadImages, uploadZipFile, useImageForView, usePageForView, saveLinksForView } from '../../actions/app-actions';
-import { findProjectWithId, findWhiteboardWithId, findViewWithId, findPageWithId, findImageWithId } from '../../utils';
+import { baseURL, findProjectWithId, findWhiteboardWithId, findViewWithId, findPageWithId, findImageWithId } from '../../utils';
 
 class View extends Component {
   constructor(props) {
@@ -93,11 +92,19 @@ class View extends Component {
 
   getPreviewData = showLibrary => {
     if (showLibrary) {
-      const fromLibrary = this.state.selectedFilter === 'html' ?
-        (findPageWithId(this.props.directories, this.state.selectedDirectoryItemId) || {}) :
-        (findImageWithId(this.props.directories, this.state.selectedDirectoryItemId) || {});
+      if (this.state.selectedFilter === 'html') {
+        return findPageWithId(this.props.directories, this.state.selectedDirectoryItemId) || {};
+      }
 
-      return { ...fromLibrary, fileType: this.state.selectedFilter };
+      const image = findImageWithId(this.props.directories, this.state.selectedDirectoryItemId) || {};
+
+      return {
+        htmlElementAttributes: { lang: 'en'},
+        head: '<style>html, body { margin: 0; padding: 0; }</style>',
+        body: `<div style='width: ${image.width}px; height: ${image.height}px; background-image: url(${baseURL}/library/images/${image.name});' />`,
+        assets: [],
+        interactionElements: this.props.view.imageInteractionElements
+      };
     }
 
     if (this.props.view.fileType === 'html') {
@@ -112,10 +119,10 @@ class View extends Component {
     }
 
     return {
-      fileType: this.props.view.fileType,
-      name: this.props.view.imageName,
-      width: this.props.view.imageWidth,
-      height: this.props.view.imageHeight,
+      htmlElementAttributes: { lang: 'en'},
+      head: '<style>html, body { margin: 0; padding: 0; }</style>',
+      body: `<div style='width: ${this.props.view.imageWidth}px; height: ${this.props.view.imageHeight}px; background-image: url(${baseURL}/library/images/${this.props.view.imageName});' />`,
+      assets: [],
       interactionElements: this.props.view.imageInteractionElements
     };
   }
@@ -145,21 +152,13 @@ class View extends Component {
           }
 
           <div className='content'>
-            { previewData.fileType === 'html' &&
-              <HTMLPage
-                htmlElementAttributes={ previewData.htmlElementAttributes || {} }
-                head={ previewData.head || '' }
-                body={ previewData.body || '' }
-                assets={ previewData.assets || [] }
-                viewportSize="desktop"
-              />
-            }
-            { previewData.fileType === 'image' &&
-              <ImagePreview
-                image={ previewData }
-                viewportSize="desktop"
-              />
-            }
+            <HTMLPage
+              htmlElementAttributes={ previewData.htmlElementAttributes || {} }
+              head={ previewData.head || '' }
+              body={ previewData.body || '' }
+              assets={ previewData.assets || [] }
+              viewportSize="desktop"
+            />
           </div>
 
           { !showLibrary &&

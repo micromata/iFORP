@@ -59,6 +59,7 @@ export class HTMLPage extends Component {
           color: #FFF;
           line-height: 30px;
           text-align: center;
+          font-family: Verdana, Sans Serif;
         }
       </style>
     ` : '';

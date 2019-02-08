@@ -8,7 +8,7 @@ import ImagePreview from '../../components/ImagePreview/ImagePreview';
 import Toggle from '../../components/Toggle/Toggle';
 import ViewAnnotationList from '../../components/ViewAnnotation/ViewAnnotationList';
 import { getViewsForWhiteboard, getViewDetails, addAnnotationToView, changeViewAnnotationText, deleteViewAnnotation } from '../../actions/app-actions';
-import { findViewWithId } from '../../utils';
+import { baseURL, findViewWithId } from '../../utils';
 
 export class Preview extends Component {
   constructor(props) {
@@ -71,10 +71,11 @@ export class Preview extends Component {
     }
 
     return {
+      htmlElementAttributes: { lang: 'en'},
+      head: '<style>html, body { margin: 0; padding: 0; }</style>',
+      body: `<div style='width: ${this.props.view.imageWidth}px; height: ${this.props.view.imageHeight}px; background-image: url(${baseURL}/library/images/${this.props.view.imageName});' />`,
+      assets: [],
       fileType: this.props.view.fileType,
-      name: this.props.view.imageName,
-      width: this.props.view.imageWidth,
-      height: this.props.view.imageHeight,
       interactionElements: this.props.view.imageInteractionElements,
       annotations: this.props.view.annotations,
     };
@@ -92,25 +93,17 @@ export class Preview extends Component {
         />
         <main>
           <div className='content'>
-            { previewData.fileType === 'html' &&
-              <HTMLPage
-                htmlElementAttributes={ previewData.htmlElementAttributes || {} }
-                head={ previewData.head || '' }
-                body={ previewData.body || '' }
-                assets={ previewData.assets || [] }
-                showAnnotations={ this.state.showAnnotations }
-                annotations={ previewData.annotations }
-                onInteractionElementClick={ this.handleInteractionElementClick }
-                onAnnotate={ this.handleAnnotate }
-                viewportSize="desktop"
-              />
-            }
-            { previewData.fileType === 'image' &&
-              <ImagePreview
-                image={ previewData }
-                viewportSize="desktop"
-              />
-            }
+            <HTMLPage
+              htmlElementAttributes={ previewData.htmlElementAttributes || {} }
+              head={ previewData.head || '' }
+              body={ previewData.body || '' }
+              assets={ previewData.assets || [] }
+              showAnnotations={ this.state.showAnnotations }
+              annotations={ previewData.annotations }
+              onInteractionElementClick={ this.handleInteractionElementClick }
+              onAnnotate={ this.handleAnnotate }
+              viewportSize="desktop"
+            />
             <div className='annotation-panel'>
               <h3>Annotations</h3>
               <Toggle
