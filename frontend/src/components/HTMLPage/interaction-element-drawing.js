@@ -1,7 +1,7 @@
 let isMouseDown = false;
 let rect;
 let onCreateInteractionElement;
-
+let touchIdentifier;
 const posStart = { x: 0, y: 0 };
 const posCurrent = { x: 0, y: 0 };
 
@@ -17,7 +17,7 @@ const calculateRectangleCoords = () => (
 const createInteractionElement = () => {
   const coords = calculateRectangleCoords();
 
-  if (coords.width < 20 || coords.height < 20) return;
+  if (coords.width < 16 || coords.height < 16) return;
 
   onCreateInteractionElement(coords);
 };
@@ -71,15 +71,38 @@ const handleMouseUp = event => {
 
 const handleTouchStart = event => {
   event.preventDefault();
-  if (event.changedTouches.length > 1) return;
   const touch = event.changedTouches[0];
+  touchIdentifier = touch.identifier;
+  isMouseDown = true;
   setPosStart(touch);
+}
+
+const handleTouchMove = event => {
+  event.preventDefault();
+  if (!event.changedTouches) return;
+  const touch = [...event.changedTouches].find(t => t.identifier === touchIdentifier);
+  if (!touch) return;
+  setPosCurrent(touch);
+}
+
+const handleTouchCancel = event => {
+  event.preventDefault();
+  if (!event.changedTouches) return;
+  const touch = [...event.changedTouches].find(t => t.identifier === touchIdentifier);
+  if (!touch) return;
+  touchIdentifier = null;
+  isMouseDown = false;
+  setPosStart(touch);
+  setPosCurrent(touch);
 }
 
 const handleTouchEnd = event => {
   event.preventDefault();
-  if (event.changedTouches.length > 1) return;
-  const touch = event.changedTouches[0];
+  if (!event.changedTouches) return;
+  const touch = [...event.changedTouches].find(t => t.identifier === touchIdentifier);
+  if (!touch) return;
+  touchIdentifier = null;
+  isMouseDown = false;
   setPosCurrent(touch);
   createInteractionElement();
 }
@@ -92,13 +115,15 @@ export const initInteractionElementDrawing = (container, rectNode, onCreateInter
   container.removeEventListener('mousemove', handleMouseMove);
   container.removeEventListener('mouseup', handleMouseUp);
   container.removeEventListener('touchstart', handleTouchStart);
-  container.removeEventListener('touchmove', handleTouchEnd);
+  container.removeEventListener('touchmove', handleTouchMove);
+  container.removeEventListener('touchcancel', handleTouchCancel);
   container.removeEventListener('touchend', handleTouchEnd);
 
   container.addEventListener('mousedown', handleMouseDown);
   container.addEventListener('mousemove', handleMouseMove);
   container.addEventListener('mouseup', handleMouseUp);
-  container.addEventListener('touchstart', handleTouchStart);
-  container.addEventListener('touchmove', handleTouchEnd);
-  container.addEventListener('touchend', handleTouchEnd);
+  container.addEventListener('touchstart', handleTouchStart, {passive: false});
+  container.addEventListener('touchmove', handleTouchMove, {passive: false});
+  container.addEventListener('touchcancel', handleTouchCancel, {passive: false});
+  container.addEventListener('touchend', handleTouchEnd, {passive: false});
 };
