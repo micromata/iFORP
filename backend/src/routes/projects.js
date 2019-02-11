@@ -181,4 +181,13 @@ projects.post(
   })
 );
 
+projects.delete(
+  '/:projectId/whiteboards/:whiteboardId/views/:viewId/interaction-elements/:interactionId',
+  handleRequest(async (req, res) => {
+    return res.send(
+      await viewImageInteractionElementService.remove(req.params.interactionId)
+    );
+  })
+);
+
 export default projects;

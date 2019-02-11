@@ -19,6 +19,7 @@ const actionNames = {
   VIEW_DELETED: 'VIEW_DELETED',
   VIEW_ANNOTATION_ADDED: 'VIEW_ANNOTATION_ADDED',
   VIEW_IMAGE_INTERACTION_ELEMENT_ADDED: 'VIEW_IMAGE_INTERACTION_ELEMENT_ADDED',
+  VIEW_IMAGE_INTERACTION_ELEMENT_DELETED: 'VIEW_IMAGE_INTERACTION_ELEMENT_DELETED',
   LIBRARY_DIRECTORIES_RECEIVED: 'LIBRARY_DIRECTORIES_RECEIVED',
   LIBRARY_DIRECTORY_IMPORTED: 'LIBRARY_DIRECTORY_IMPORTED',
   LIBRARY_IMAGES_IMPORTED: 'LIBRARY_IMAGES_IMPORTED',
@@ -148,6 +149,20 @@ const deleteView = (projectId, whiteboardId, viewId) => async dispatch => {
       projectId,
       whiteboardId,
       viewId
+    })
+  }
+}
+
+const deleteImageInteractionElement = (projectId, whiteboardId, viewId, interactionId) => async dispatch => {
+  const response = await http.deleteEntity(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}/interaction-elements/${interactionId}`);
+
+  if (response.ok) {
+    dispatch({
+      type: actionNames.VIEW_IMAGE_INTERACTION_ELEMENT_DELETED,
+      projectId,
+      whiteboardId,
+      viewId,
+      interactionId
     })
   }
 }
@@ -407,6 +422,7 @@ export {
   createNewProject,
   createNewView,
   createNewWhiteboard,
+  deleteImageInteractionElement,
   deleteProject,
   deleteView,
   deleteViewAnnotation,

@@ -26,3 +26,8 @@ export const save = async (viewId, base) => {
     height: saved.height
   };
 };
+
+export const remove = async id => {
+  const interactionElementRepo = getRepository(ViewImageInteractionElement);
+  return interactionElementRepo.delete(id);
+};

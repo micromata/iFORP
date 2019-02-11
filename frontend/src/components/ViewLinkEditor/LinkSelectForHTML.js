@@ -1,22 +1,22 @@
 import React from 'react';
 import injectSheet from 'react-jss';
-import styles from './SelectWithNumber.styles';
+import styles from './LinkSelectForHTML.styles';
 import ArrowDownIcon from '../../assets/img/ArrowDown';
 
 const isDefaultValue = value => !value || value === '0';
 
-const SelectWithNumber = ({
+const LinkSelectForHTML = ({
   classes,
   theme,
-  number,
+  label,
   options,
   value,
   onChange,
 }) => (
-  <div className={classes.SelectWithNumber}>
-    <div className={classes.Number}>
-      { number }
-    </div>
+  <div className={classes.LinkSelectForHTML}>
+    <label>
+      { label }
+    </label>
     <div className={classes.SelectHelper}>
       <select
         className={ isDefaultValue(value) ? 'default-value' : '' }
@@ -33,4 +33,4 @@ const SelectWithNumber = ({
   </div>
 );
 
-export default injectSheet(styles)(SelectWithNumber);
+export default injectSheet(styles)(LinkSelectForHTML);

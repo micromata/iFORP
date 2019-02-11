@@ -11,8 +11,27 @@ import LibraryZipUpload from '../../components/Library/LibraryZipUpload';
 import LibraryImagesUpload from '../../components/Library/LibraryImagesUpload';
 import HTMLPage from '../../components/HTMLPage/HTMLPage';
 import Button from '../../components/Button/Button';
-import { getLibraryDirectories, getViewsForWhiteboard, getViewDetails, getPageDetails, uploadImages, uploadZipFile, useImageForView, usePageForView, saveLinksForView, addInteractionElementToView } from '../../actions/app-actions';
-import { baseURL, findProjectWithId, findWhiteboardWithId, findViewWithId, findPageWithId, findImageWithId } from '../../utils';
+import {
+  deleteImageInteractionElement,
+  getLibraryDirectories,
+  getViewsForWhiteboard,
+  getViewDetails,
+  getPageDetails,
+  uploadImages,
+  uploadZipFile,
+  useImageForView,
+  usePageForView,
+  saveLinksForView,
+  addInteractionElementToView
+} from '../../actions/app-actions';
+import {
+  baseURL,
+  findProjectWithId,
+  findWhiteboardWithId,
+  findViewWithId,
+  findPageWithId,
+  findImageWithId
+} from '../../utils';
 
 class View extends Component {
   constructor(props) {
@@ -66,6 +85,10 @@ class View extends Component {
       newState.links[interactionId] = viewId;
       return newState;
     });
+  }
+
+  handleDeleteImageInteractionElement = interactionId => {
+    this.props.deleteImageInteractionElement(this.props.projectId, this.props.whiteboardId, this.props.viewId, interactionId);
   }
 
   handleUseDirectoryItem = async () => {
@@ -173,6 +196,7 @@ class View extends Component {
               viewLinkOptions={ this.props.viewLinkOptions }
               links={ this.state.links }
               setLinkTarget={ this.handleSetLinkTarget }
+              deleteImageInteractionElement={ this.handleDeleteImageInteractionElement }
             />
           }
         </main>
@@ -198,7 +222,19 @@ class View extends Component {
   }
 }
 
-const actions = { getLibraryDirectories, getViewsForWhiteboard, getViewDetails, getPageDetails, uploadImages, uploadZipFile, useImageForView, usePageForView, saveLinksForView, addInteractionElementToView};
+const actions = {
+  getLibraryDirectories,
+  getViewsForWhiteboard,
+  getViewDetails,
+  getPageDetails,
+  uploadImages,
+  uploadZipFile,
+  useImageForView,
+  usePageForView,
+  saveLinksForView,
+  addInteractionElementToView,
+  deleteImageInteractionElement
+};
 
 const mapStateToProps = (state, ownProps) => {
   const projectId = Number(ownProps.match.params.projectId);

@@ -141,6 +141,14 @@ const addViewImageInteractionElement = (newState, projectId, whiteboardId, viewI
   view.imageInteractionElements.push(interactionElement);
 }
 
+const removeViewImageInteractionElement = (newState, projectId, whiteboardId, viewId, interactionId) => {
+  const view = findViewWithId(newState.projects, projectId, whiteboardId, viewId);
+
+  if (!view) throw new Error(`view with id ${viewId} (project ${projectId}, whiteboard ${whiteboardId}) not found`);
+
+  view.imageInteractionElements = view.imageInteractionElements.filter(item => item.id !== interactionId);
+}
+
 export default (state = initialState, action) => {
   const newState = deepClone(state);
 
@@ -207,6 +215,9 @@ export default (state = initialState, action) => {
       return newState;
     case actionNames.VIEW_IMAGE_INTERACTION_ELEMENT_ADDED:
       addViewImageInteractionElement(newState, action.projectId, action.whiteboardId, action.viewId, action.interactionElement);
+      return newState;
+    case actionNames.VIEW_IMAGE_INTERACTION_ELEMENT_DELETED:
+      removeViewImageInteractionElement(newState, action.projectId, action.whiteboardId, action.viewId, action.interactionId);
       return newState;
     default:
       return state;

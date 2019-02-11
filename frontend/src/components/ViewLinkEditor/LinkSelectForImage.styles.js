@@ -1,16 +1,28 @@
 export default theme => ({
-  SelectWithLabel: {
+  LinkSelectForImage: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
+    alignItems: 'center',
     margin: '16px 0',
     '& label': {
       lineHeight: 2,
       whiteSpace: 'nowrap',
       overflow: 'hidden',
       textOverflow: 'ellipsis'
-    }
+    },
+  },
+  Number: {
+    width: '40px',
+    height: '40px',
+    textAlign: 'center',
+    lineHeight: '40px',
+    backgroundColor: theme.accentColor,
+    color: theme.textColorOnBackground,
+    borderRadius: '50%',
+    marginRight: '10px'
   },
   SelectHelper: {
+    flexGrow: 1,
     display: 'flex',
     '& select': {
       height: '40px',
@@ -36,6 +48,16 @@ export default theme => ({
       marginTop: '16px',
       cursor: 'pointer',
       transform: 'scale(1.5, 1.5)',
+    }
+  },
+  DeleteButton: {
+    cursor: 'pointer',
+    marginLeft: '12px',
+    '& svg g': {
+      stroke: theme.textColor
+    },
+    '&:hover svg g': {
+      stroke: theme.accentColor
     }
   }
 });

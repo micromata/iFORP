@@ -1,28 +1,16 @@
 export default theme => ({
-  SelectWithNumber: {
+  LinkSelectForHTML: {
     display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: 'column',
     margin: '16px 0',
     '& label': {
       lineHeight: 2,
       whiteSpace: 'nowrap',
       overflow: 'hidden',
       textOverflow: 'ellipsis'
-    },
-  },
-  Number: {
-    width: '40px',
-    height: '40px',
-    textAlign: 'center',
-    lineHeight: '40px',
-    backgroundColor: theme.accentColor,
-    color: theme.textColorOnBackground,
-    borderRadius: '50%',
-    marginRight: '10px'
+    }
   },
   SelectHelper: {
-    flexGrow: 1,
     display: 'flex',
     '& select': {
       height: '40px',
