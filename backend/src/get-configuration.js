@@ -11,7 +11,8 @@ const defaults = {
   upload: {
     directory: path.resolve(os.homedir(), '.iforp/library/'),
     maxFileSize: 5 * 1024 * 1024,
-    acceptedMimes: ['application/zip']
+    acceptedMimesZip: ['application/zip'],
+    acceptedMimesImage: ['image/jpeg', 'image/png']
   }
 };
 
@@ -19,7 +20,8 @@ const test = {
   upload: {
     directory: path.resolve(os.tmpdir(), '.iforp/library/'),
     maxFileSize: 5 * 1024 * 1024,
-    acceptedMimes: ['application/zip']
+    acceptedMimesZip: ['application/zip'],
+    acceptedMimesImage: ['image/jpeg', 'image/png']
   }
 };
 

@@ -16,9 +16,11 @@ import { Page } from '../orm/entity/page';
 import { Image } from '../orm/entity/image';
 import { getConfiguration } from '../get-configuration';
 import {
-  ensureFileSize,
+  ensureZipFileSize,
   ensureMimeType,
-  ensureValue,
+  ensureZipFileValue,
+  ensureImageFilesValue,
+  ensureImageFileSizes,
   exceptionWithHttpStatus
 } from '../utils/request';
 import getImageDimensions from 'buffer-image-size';
@@ -40,9 +42,9 @@ function getExtractionBasePath(baseDir, directoryName, ranTimes = 0) {
 
 // Service methods
 export const uploadZip = async (file, userDefinedDirName = '') => {
-  ensureValue(file);
-  ensureFileSize(file, uploadOptions.maxFileSize);
-  ensureMimeType(file, uploadOptions.acceptedMimes);
+  ensureZipFileValue(file);
+  ensureZipFileSize(file, uploadOptions.maxFileSize);
+  ensureMimeType(file, uploadOptions.acceptedMimesZip);
 
   logger.info(`Processing "${file.originalname}"`);
 
@@ -101,6 +103,9 @@ const ensureDirectoryExists = path => {
 };
 
 export const uploadImages = async files => {
+  ensureImageFilesValue(files);
+  ensureImageFileSizes(files, uploadOptions.maxFileSize);
+  files.forEach(file => ensureMimeType(file, uploadOptions.acceptedMimesImage));
   logger.info(`Images upload`);
 
   const imagesDirPath = path.resolve(uploadOptions.directory, 'images');

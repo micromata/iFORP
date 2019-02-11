@@ -6,14 +6,31 @@ export const exceptionWithHttpStatus = (message, statusCode) => {
   return error;
 };
 
-export const ensureValue = file => {
+export const ensureZipFileValue = file => {
   if (!file) {
     throw exceptionWithHttpStatus('We need a file.', 400);
   }
 };
 
-export const ensureFileSize = (file, maxFileSize) => {
+export const ensureImageFilesValue = files => {
+  if (!files || !files.length) {
+    throw exceptionWithHttpStatus('We need a file.', 400);
+  }
+};
+
+export const ensureZipFileSize = (file, maxFileSize) => {
   if (file.size > maxFileSize) {
+    throw exceptionWithHttpStatus(
+      `Maximum file size of ${bytesToMegaBytes(maxFileSize)} MB exceeded.`,
+      413
+    );
+  }
+};
+
+export const ensureImageFileSizes = (files, maxFileSize) => {
+  const filesAboveLimit = files.filter(file => file.size > maxFileSize);
+
+  if (filesAboveLimit.length) {
     throw exceptionWithHttpStatus(
       `Maximum file size of ${bytesToMegaBytes(maxFileSize)} MB exceeded.`,
       413
