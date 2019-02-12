@@ -6,6 +6,7 @@ export default theme => ({
       opacity: '0',
       overflow: 'hidden',
       position: 'absolute',
+      userSelect: 'none',
       zIndex: '-1',
       '& + label': {
         backgroundColor: theme.accentColor,

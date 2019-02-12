@@ -18,6 +18,7 @@ export default (theme) => ({
     justifyContent: 'center',
     color: theme.NavBar.textColor,
     textDecoration: 'none',
+    userSelect: 'none',
     '& a': {
       textDecoration: 'none',
       color: theme.NavBar.textColor,

@@ -8,6 +8,7 @@ export default (theme) => ({
     zIndex: '9',
     padding: '20px',
     minWidth: '230px',
+    userSelect: 'none',
     transition: 'bottom ease-out 0.75s',
     '&.visible': {
       bottom: '0'

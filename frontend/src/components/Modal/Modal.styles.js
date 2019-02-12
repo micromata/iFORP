@@ -24,13 +24,15 @@ export default (theme) => ({
     textAlign: 'center',
     paddingBottom: '20px',
     fontWeight: 'bold',
-    borderBottom: '1px solid gray'
+    borderBottom: '1px solid gray',
+    userSelect: 'none',
   },
   ModalBody: {
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
-    padding: '20px 0'
+    padding: '20px 0',
+    userSelect: 'none',
   },
   ModalFooter: {
     display: 'flex',

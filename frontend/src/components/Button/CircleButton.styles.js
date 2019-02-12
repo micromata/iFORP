@@ -4,6 +4,7 @@ export default {
     border: 'none',
     fontSize: '18px',
     color: '#fff',
+    userSelect: 'none',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

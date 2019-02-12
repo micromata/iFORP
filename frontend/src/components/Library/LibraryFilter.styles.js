@@ -4,6 +4,7 @@ export default (theme) => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
+    userSelect: 'none',
     color: theme.textColorOnBackground,
     '& input[type=radio]': {
       visibility: 'hidden',

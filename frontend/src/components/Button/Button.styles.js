@@ -12,6 +12,7 @@ export default theme => ({
     border: 'none',
     fontSize: '18px',
     color: '#fff',
+    userSelect: 'none',
     padding: '8px 45px',
     outlineStyle: 'none',
     cursor: 'pointer',

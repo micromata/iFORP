@@ -5,6 +5,7 @@ export default (theme) => ({
     padding: '20px',
     fontSize: '14px',
     borderRight: `1px solid ${theme.textColorOnBackground}`,
+    userSelect: 'none',
     marginBottom: '80px',
     '& ul': {
       listStyle: 'none',
