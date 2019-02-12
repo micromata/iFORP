@@ -1,5 +1,6 @@
-import { getRepository } from 'typeorm';
+import { getConnection, getRepository } from 'typeorm';
 import { View } from '../orm/entity/view';
+import { ViewLink } from '../orm/entity/view-link';
 import { ViewImageInteractionElement } from '../orm/entity/view-image-interaction-element';
 import { exceptionWithHttpStatus } from '../utils/request';
 
@@ -29,5 +30,13 @@ export const save = async (viewId, base) => {
 
 export const remove = async id => {
   const interactionElementRepo = getRepository(ViewImageInteractionElement);
+
+  getConnection()
+    .createQueryBuilder()
+    .delete()
+    .from(ViewLink)
+    .where('interactionId = :interactionId', { interactionId: `${id}` })
+    .execute();
+
   return interactionElementRepo.delete(id);
 };
