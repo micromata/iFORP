@@ -39,7 +39,7 @@ class View extends Component {
     super(props);
 
     this.state = {
-      selectedFilter: 'html',
+      selectedFilter: window.localStorage.getItem('iforp.library.selectedFilter') || 'html',
       selectedDirectoryItemId: null,
       usedPageId: null,
       links: {},
@@ -66,6 +66,7 @@ class View extends Component {
   }
 
   handleFilterChange = selectedFilter => {
+    window.localStorage.setItem('iforp.library.selectedFilter', selectedFilter);
     this.setState({ selectedFilter, selectedDirectoryItemId: null });
   }
 
