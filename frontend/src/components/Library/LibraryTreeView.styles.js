@@ -14,7 +14,10 @@ export default (theme) => ({
     },
     '& li': {
       padding: '6px 0',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      '&.selected': {
+        color: theme.accentColor
+      }
     },
     '& li svg': {
       width: '20px',

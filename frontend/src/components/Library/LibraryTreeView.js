@@ -59,7 +59,10 @@ class LibraryTreeView extends Component {
                   { directoryToExpand === directory.id &&
                     <ul>
                       { directory[itemsKey].map(item =>
-                        <li key={ `${itemsKey}-${item.id}` } onClick={event => this.handleSelectItem(event, item.id)}>
+                        <li
+                          key={ `${itemsKey}-${item.id}` }
+                          className={ `${this.props.selectedItemId === item.id ? 'selected' : '' }` }
+                          onClick={event => this.handleSelectItem(event, item.id)}>
                           { item.name }
                         </li>
                       )}

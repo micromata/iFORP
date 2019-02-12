@@ -184,6 +184,7 @@ class View extends Component {
             <LibraryTreeView
               directories={ this.props.directories }
               fileTypeFilter={ this.state.selectedFilter }
+              selectedItemId={ this.state.selectedDirectoryItemId }
               onSelectItem={ this.handleSelectDirectoryItem }
             />
           }

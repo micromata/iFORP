@@ -68,6 +68,7 @@ export class HTMLPage extends Component {
           counter-reset: interactionElementCounter;
           cursor: ${ this.props.allowInteractionElementCreation ? 'crosshair' : 'default' };
           background: #FFF;
+          width: 1280px;
         }
 
         .annotation {
