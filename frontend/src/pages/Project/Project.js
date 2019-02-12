@@ -32,8 +32,8 @@ class Project extends Component {
     this.props.history.push(`/projects/${this.props.project.id}/whiteboards/${whiteboardId}`);
   }
 
-  handleConfirmDeleteWhiteboard = () => {
-    this.props.deleteWhiteboard(this.props.project.id, this.state.deleteWhiteboardId);
+  handleConfirmDeleteWhiteboard = async () => {
+    await this.props.deleteWhiteboard(this.props.project.id, this.state.deleteWhiteboardId);
     this.setState({ deleteWhiteboardId: null });
   }
 
@@ -75,7 +75,7 @@ class Project extends Component {
           </CircleButton>
         </ProjectButtonBar>
         <Modal
-          show={ this.state.deleteWhiteboardId }
+          show={ Boolean(this.state.deleteWhiteboardId) }
           headerText='Whiteboard löschen'
           bodyText={ 'Möchten Sie das Whiteboard wirklich löschen?' }
           labelCancel='Nein'

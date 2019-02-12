@@ -43,8 +43,8 @@ class Whiteboard extends Component {
     this.setState({ deleteViewId: viewId });
   }
 
-  handleConfirmDeleteView = () => {
-    this.props.deleteView(this.props.projectId, this.props.whiteboardId, this.state.deleteViewId);
+  handleConfirmDeleteView = async () => {
+    await this.props.deleteView(this.props.projectId, this.props.whiteboardId, this.state.deleteViewId);
     this.setState({ deleteViewId: null });
   }
 
@@ -99,7 +99,7 @@ class Whiteboard extends Component {
           </CircleButton>
         </ProjectButtonBar>
         <Modal
-          show={ this.state.deleteViewId }
+          show={ Boolean(this.state.deleteViewId) }
           headerText='View löschen'
           bodyText={ 'Möchten Sie die View wirklich löschen?' }
           labelCancel='Nein'

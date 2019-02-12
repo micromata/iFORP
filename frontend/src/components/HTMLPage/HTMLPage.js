@@ -67,6 +67,7 @@ export class HTMLPage extends Component {
         body {
           counter-reset: interactionElementCounter;
           cursor: ${ this.props.allowInteractionElementCreation ? 'crosshair' : 'default' };
+          background: #FFF;
         }
 
         .annotation {
@@ -189,7 +190,7 @@ export class HTMLPage extends Component {
         this.props.onCreateInteractionElement);
     }
 
-    setTimeout(() => { htmlElement.style = ''; }, 100); // eslint-disable-line
+    setTimeout(() => { htmlElement.style = ''; }, 100); // eslint-disable-line max-statements-per-line
   }
 
   getLinkElement(iframe, asset) {

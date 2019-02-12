@@ -9,7 +9,7 @@ class ViewLinkEditor extends Component {
     if (!this.props.availableInteractionElements || !this.props.viewLinkOptions) return null;
 
     return (
-      <div className={ `${this.props.classes.ViewLinkEditor} ${ this.props.fileType === 'image' ? 'large' : '' }` }>
+      <div className={ this.props.classes.ViewLinkEditor }>
         <h3>Verlinkungen</h3>
         { this.props.fileType === 'html' &&
           this.props.availableInteractionElements.map(element => (

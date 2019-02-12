@@ -20,7 +20,7 @@ export default theme => ({
           padding: '20px',
           flexShrink: 0,
           flexGrow: 1,
-          minWidth: '280px',
+          width: '400px',
           maxWidth: '400px',
           maxHeight: '100vh',
           overflow: 'scroll',

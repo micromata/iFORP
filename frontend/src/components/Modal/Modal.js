@@ -18,7 +18,6 @@ class Modal extends Component {
   }
 
   handleKeyDown = event => {
-    console.log('keydown');
     if (event.code === 'Escape') return this.props.onCancel();
     if (event.code === 'Enter') return this.props.onConfirm();
   }

@@ -28,8 +28,8 @@ class ProjectOverview extends Component {
     this.setState({ deleteProjectId: projectId });
   }
 
-  handleConfirmDeleteProject = () => {
-    this.props.deleteProject(this.state.deleteProjectId);
+  handleConfirmDeleteProject = async () => {
+    await this.props.deleteProject(this.state.deleteProjectId);
     this.setState({ deleteProjectId: null });
   }
 
