@@ -24,6 +24,7 @@ export class HTMLPage extends Component {
 
   handleInteractionElementClick = event => {
     event.preventDefault();
+    event.stopPropagation();
     if (!this.props.onInteractionElementClick) return;
 
     this.props.onInteractionElementClick(event.target.attributes['data-interaction-id'].value);
@@ -34,6 +35,20 @@ export class HTMLPage extends Component {
     if (!this.props.onAnnotate || !this.props.showAnnotations) return;
 
     this.props.onAnnotate({x: event.pageX - 15, y: event.pageY - 15 });
+  }
+
+  unhighlightInteractionElements = () => {
+    this.iframeDocument.body.
+      querySelectorAll('.interaction-element-rect').
+      forEach(item => item.classList.remove('interaction-element-rect-highlighted'));
+  }
+
+  highlightInteractionElements = () => {
+    this.iframeDocument.body.
+      querySelectorAll('.interaction-element-rect').
+      forEach(item => item.classList.add('interaction-element-rect-highlighted'));
+
+    window.setTimeout(this.unhighlightInteractionElements, 500);
   }
 
   injectIframeContent() {
@@ -82,6 +97,13 @@ export class HTMLPage extends Component {
           cursor: ${ this.props.allowInteractionElementCreation ? 'default' : 'pointer' };
         }
 
+        .interaction-element-rect-highlighted {
+          border: 1px dashed rgb(255, 80, 80);
+          background-color: rgb(255, 80, 80, 0.4);
+          position: absolute;
+          opacity: 1;
+        }
+
         .interaction-element-rect::before {
           counter-increment: interactionElementCounter;
           content: counter(interactionElementCounter);
@@ -114,7 +136,7 @@ export class HTMLPage extends Component {
       '';
 
     const existingInteractionElementsMarkup = this.props.imageInteractionElements ?
-      this.props.imageInteractionElements.map((item, index) => `
+      this.props.imageInteractionElements.map(item => `
         <div
           class='interaction-element-rect'
           data-interaction-id='${item.id}'
@@ -156,6 +178,10 @@ export class HTMLPage extends Component {
       this.iframeDocument.body.addEventListener('click', this.handleAddAnnotation);
     }
 
+    if (this.props.imageInteractionElements && !this.props.showAnnotations) {
+      this.iframeDocument.body.addEventListener('click', this.highlightInteractionElements);
+    }
+
     if (this.props.allowInteractionElementCreation && this.props.onCreateInteractionElement) {
       initInteractionElementDrawing(
         this.iframeDocument.body,
@@ -163,7 +189,7 @@ export class HTMLPage extends Component {
         this.props.onCreateInteractionElement);
     }
 
-    setTimeout(() => { htmlElement.style = ''; }, 100);
+    setTimeout(() => { htmlElement.style = ''; }, 100); // eslint-disable-line
   }
 
   getLinkElement(iframe, asset) {
