@@ -9,12 +9,14 @@ export default () => ({
       '& .content': {
         padding: '20px',
         display: 'flex',
+        flexGrow: 1,
         '& .preview-wrapper': {
           height: '100vh',
+          flexGrow: 1,
           flexShrink: 0,
-          '&.desktop': { width: '1280px' },
-        	'&.tablet': { width: '768px' },
-        	'&.phone': { width: '375px' }
+          '&.desktop': { maxWidth: '1280px' },
+        	'&.tablet': { maxWidth: '768px' },
+        	'&.phone': { maxWidth: '375px' }
         },
       }
     }

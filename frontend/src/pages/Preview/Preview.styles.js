@@ -11,9 +11,10 @@ export default theme => ({
         '& .preview-wrapper': {
           height: '100vh',
           flexShrink: 0,
-          '&.desktop': { width: '1280px' },
-        	'&.tablet': { width: '768px' },
-        	'&.phone': { width: '375px' }
+          flexGrow: 1,
+          '&.desktop': { maxWidth: '1280px' },
+        	'&.tablet': { maxWidth: '768px' },
+        	'&.phone': { maxWidth: '375px' }
         },
         '& .annotation-panel': {
           padding: '20px',
