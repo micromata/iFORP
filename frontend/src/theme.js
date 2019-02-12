@@ -41,6 +41,9 @@ export default {
         backgroundColor: '#5A5A5A',
         borderColor: '#F9BB1F'
       }
+    },
+    Modal: {
+      backgroundColor: 'rgba(100, 100, 100, 0.9)'
     }
   },
   light: {
@@ -74,6 +77,9 @@ export default {
         backgroundColor: '#E9E9E9',
         borderColor: '#868686'
       }
+    },
+    Modal: {
+      backgroundColor: 'rgba(100, 100, 100, 0.9)'
     }
   },
   purple: {
@@ -107,6 +113,9 @@ export default {
         backgroundColor: '#5A5A5A',
         borderColor: '#F9BB1F'
       }
+    },
+    Modal: {
+      backgroundColor: 'rgba(74, 85, 117, 0.9)'
     }
   },
 };

@@ -12,18 +12,33 @@ import CircleButton from '../../components/Button/CircleButton';
 import PlusIcon from '../../assets/img/Plus';
 import { createNewWhiteboard, renameWhiteboard, deleteWhiteboard } from '../../actions/app-actions';
 import { findProjectWithId } from '../../utils';
+import Modal from '../../components/Modal/Modal';
 
 class Project extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { deleteWhiteboardId: null }
+  }
+
   handleCreateWhiteboadClick = () => {
     this.props.createNewWhiteboard(this.props.project.id);
   }
 
   handleDeleteWhiteboardClick = whiteboardId => {
-    this.props.deleteWhiteboard(this.props.project.id, whiteboardId);
+    this.setState({ deleteWhiteboardId: whiteboardId });
   }
 
   navigateToWhiteboard = whiteboardId => {
     this.props.history.push(`/projects/${this.props.project.id}/whiteboards/${whiteboardId}`);
+  }
+
+  handleConfirmDeleteWhiteboard = () => {
+    this.props.deleteWhiteboard(this.props.project.id, this.state.deleteWhiteboardId);
+    this.setState({ deleteWhiteboardId: null });
+  }
+
+  handleCancelDeleteWhiteboard = () => {
+    this.setState({ deleteWhiteboardId: null });
   }
 
   render() {
@@ -59,6 +74,15 @@ class Project extends Component {
             <PlusIcon />
           </CircleButton>
         </ProjectButtonBar>
+        <Modal
+          show={ this.state.deleteWhiteboardId }
+          headerText='Whiteboard löschen?'
+          bodyText={ 'Möchten Sie das Whiteboard wirklich löschen?' }
+          labelCancel='Nein'
+          labelConfirm='Ja'
+          onCancel={ this.handleCancelDeleteWhiteboard }
+          onConfirm={ this.handleConfirmDeleteWhiteboard }
+        />
       </React.Fragment>
     );
   }

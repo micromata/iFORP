@@ -11,12 +11,13 @@ import ProjectButtonBar from '../../components/ProjectButtonBar/ProjectButtonBar
 import EditableText from '../../components/EditableText/EditableText';
 import CircleButton from '../../components/Button/CircleButton';
 import PlusIcon from '../../assets/img/Plus';
+import Modal from '../../components/Modal/Modal';
 import { createNewProject, renameProject, deleteProject } from '../../actions/app-actions';
 
 class ProjectOverview extends Component {
   constructor(props) {
     super(props);
-    this.state = { searchTerm: '' }
+    this.state = { searchTerm: '', deleteProjectId: null }
   }
 
   handleCreateProjectClick = () => {
@@ -24,7 +25,16 @@ class ProjectOverview extends Component {
   }
 
   handleDeleteProjectClick = projectId => {
-    this.props.deleteProject(projectId);
+    this.setState({ deleteProjectId: projectId });
+  }
+
+  handleConfirmDeleteProject = () => {
+    this.props.deleteProject(this.state.deleteProjectId);
+    this.setState({ deleteProjectId: null });
+  }
+
+  handleCancelDeleteProject = () => {
+    this.setState({ deleteProjectId: null });
   }
 
   navigateToProject = projectId => {
@@ -69,6 +79,15 @@ class ProjectOverview extends Component {
             <PlusIcon />
           </CircleButton>
         </ProjectButtonBar>
+        <Modal
+          show={ this.state.deleteProjectId }
+          headerText='Projekt löschen?'
+          bodyText={ 'Möchten Sie das Projekt wirklich löschen?' }
+          labelCancel='Nein'
+          labelConfirm='Ja'
+          onCancel={ this.handleCancelDeleteProject }
+          onConfirm={ this.handleConfirmDeleteProject }
+        />
       </React.Fragment>
     );
   }

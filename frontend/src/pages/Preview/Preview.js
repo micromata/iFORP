@@ -6,13 +6,14 @@ import NavBar from '../../components/NavBar/NavBar';
 import HTMLPage from '../../components/HTMLPage/HTMLPage';
 import Toggle from '../../components/Toggle/Toggle';
 import ViewAnnotationList from '../../components/ViewAnnotation/ViewAnnotationList';
+import Modal from '../../components/Modal/Modal';
 import { getViewsForWhiteboard, getViewDetails, addAnnotationToView, changeViewAnnotationText, deleteViewAnnotation } from '../../actions/app-actions';
 import { baseURL, findViewWithId } from '../../utils';
 
 export class Preview extends Component {
   constructor(props) {
     super(props);
-    this.state = { showAnnotations: false };
+    this.state = { showAnnotations: false, deleteAnnotationId: null };
   }
 
   componentDidMount() {
@@ -51,7 +52,16 @@ export class Preview extends Component {
   }
 
   handleDeleteAnnotation = annotationId => {
-    this.props.deleteViewAnnotation(this.props.projectId, this.props.whiteboardId, this.props.viewId, annotationId);
+    this.setState({ deleteAnnotationId: annotationId });
+  }
+
+  handleConfirmDeleteAnnotation = () => {
+    this.props.deleteViewAnnotation(this.props.projectId, this.props.whiteboardId, this.props.viewId, this.state.deleteAnnotationId);
+    this.setState({ deleteAnnotationId: null });
+  }
+
+  handleCancelDeleteAnnotation = () => {
+    this.setState({ deleteAnnotationId: null });
   }
 
   getPreviewData = () => {
@@ -84,46 +94,57 @@ export class Preview extends Component {
     const previewData = this.getPreviewData();
 
     return (
-      <div className={ this.props.classes.Preview }>
-        <NavBar
-          exit
-          exitUrl={ `/projects/${ this.props.projectId }/whiteboards/${ this.props.whiteboardId}` }
-          title={ `iFORP > Preview` }
-        />
-        <main>
-          <div className='content'>
-            <HTMLPage
-              htmlElementAttributes={ previewData.htmlElementAttributes || {} }
-              head={ previewData.head || '' }
-              body={ previewData.body || '' }
-              assets={ previewData.assets || [] }
-              showAnnotations={ this.state.showAnnotations }
-              annotations={ previewData.annotations }
-              imageInteractionElements={ previewData.fileType === 'image' ? previewData.interactionElements : [] }
-              onInteractionElementClick={ this.handleInteractionElementClick }
-              onAnnotate={ this.handleAnnotate }
-              viewportSize="desktop"
-            />
-            <div className='annotation-panel'>
-              <h3>Annotations</h3>
-              <Toggle
-                labelLeft="Off"
-                labelRight="On"
-                textColorActive="#FFFFFF"
-                isActive={this.state.showAnnotations}
-                onToggle={this.handleToggleAnnotations}
+      <React.Fragment>
+        <div className={ this.props.classes.Preview }>
+          <NavBar
+            exit
+            exitUrl={ `/projects/${ this.props.projectId }/whiteboards/${ this.props.whiteboardId}` }
+            title={ `iFORP > Preview` }
+          />
+          <main>
+            <div className='content'>
+              <HTMLPage
+                htmlElementAttributes={ previewData.htmlElementAttributes || {} }
+                head={ previewData.head || '' }
+                body={ previewData.body || '' }
+                assets={ previewData.assets || [] }
+                showAnnotations={ this.state.showAnnotations }
+                annotations={ previewData.annotations }
+                imageInteractionElements={ previewData.fileType === 'image' ? previewData.interactionElements : [] }
+                onInteractionElementClick={ this.handleInteractionElementClick }
+                onAnnotate={ this.handleAnnotate }
+                viewportSize="desktop"
               />
-              { this.state.showAnnotations &&
-                <ViewAnnotationList
-                  annotations={ this.props.annotations }
-                  onChangeAnnotationText={ this.handleChangeAnnotationText }
-                  onDeleteAnnotation={ this.handleDeleteAnnotation }
+              <div className='annotation-panel'>
+                <h3>Anmerkungen</h3>
+                <Toggle
+                  labelLeft="Off"
+                  labelRight="On"
+                  textColorActive="#FFFFFF"
+                  isActive={this.state.showAnnotations}
+                  onToggle={this.handleToggleAnnotations}
                 />
-              }
+                { this.state.showAnnotations &&
+                  <ViewAnnotationList
+                    annotations={ this.props.annotations }
+                    onChangeAnnotationText={ this.handleChangeAnnotationText }
+                    onDeleteAnnotation={ this.handleDeleteAnnotation }
+                  />
+                }
+              </div>
             </div>
-          </div>
-        </main>
-      </div>
+          </main>
+        </div>
+        <Modal
+          show={ this.state.deleteAnnotationId }
+          headerText='Anmerkung löschen?'
+          bodyText={ 'Möchten Sie die Anmerkung wirklich löschen?' }
+          labelCancel='Nein'
+          labelConfirm='Ja'
+          onCancel={ this.handleCancelDeleteAnnotation }
+          onConfirm={ this.handleConfirmDeleteAnnotation }
+        />
+      </React.Fragment>
     );
   }
 }

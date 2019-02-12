@@ -6,9 +6,9 @@ const getBorderRadius = props => {
   return 0;
 }
 
-export default {
+export default theme => ({
   button: {
-    backgroundColor: '#F9BB1F',
+    backgroundColor: theme.accentColor,
     border: 'none',
     fontSize: '18px',
     color: '#fff',
@@ -19,7 +19,7 @@ export default {
     minHeight: '30px',
     minWidth: props => props.minimumWidth || 0,
     '&:hover':{
-      backgroundColor: '#FFB600',
+      backgroundColor: theme.accentColor,
     },
     '&[disabled]':{
       background: '#FCDD8F',
@@ -29,7 +29,15 @@ export default {
     '&.ghost': {
       backgroundColor: 'transparent',
       border: 'none',
-
+    },
+    '&.light': {
+      backgroundColor: 'transparent',
+      border: `1px solid ${theme.accentColor}`,
+      color: theme.accentColor,
+      '&:hover':{
+        backgroundColor: theme.accentColor,
+        color: '#fff'
+      },
     }
   },
-};
+});

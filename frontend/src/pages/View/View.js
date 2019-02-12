@@ -11,6 +11,7 @@ import LibraryZipUpload from '../../components/Library/LibraryZipUpload';
 import LibraryImagesUpload from '../../components/Library/LibraryImagesUpload';
 import HTMLPage from '../../components/HTMLPage/HTMLPage';
 import Button from '../../components/Button/Button';
+import Modal from '../../components/Modal/Modal';
 import {
   deleteImageInteractionElement,
   getLibraryDirectories,
@@ -42,7 +43,8 @@ class View extends Component {
       selectedDirectoryItemId: null,
       usedPageId: null,
       links: {},
-      librarySelectMode: false
+      librarySelectMode: false,
+      deleteImageInteractionElementId: null
     };
   }
 
@@ -88,7 +90,16 @@ class View extends Component {
   }
 
   handleDeleteImageInteractionElement = interactionId => {
-    this.props.deleteImageInteractionElement(this.props.projectId, this.props.whiteboardId, this.props.viewId, interactionId);
+    this.setState({ deleteImageInteractionElementId: interactionId });
+  }
+
+  handleConfirmDeleteImageInteractionElement = () => {
+    this.props.deleteImageInteractionElement(this.props.projectId, this.props.whiteboardId, this.props.viewId, this.state.deleteImageInteractionElementId);
+    this.setState({ deleteImageInteractionElementId: null });
+  }
+
+  handleCancelDeleteImageInteractionElement = () => {
+    this.setState({ deleteImageInteractionElementId: null });
   }
 
   handleUseDirectoryItem = async () => {
@@ -217,6 +228,15 @@ class View extends Component {
             </React.Fragment>
           }
         </ProjectButtonBar>
+        <Modal
+          show={ this.state.deleteImageInteractionElementId }
+          headerText='Interaktionselement löschen?'
+          bodyText={ 'Möchten Sie das Interaktionselement wirklich löschen?' }
+          labelCancel='Nein'
+          labelConfirm='Ja'
+          onCancel={ this.handleCancelDeleteImageInteractionElement }
+          onConfirm={ this.handleConfirmDeleteImageInteractionElement }
+        />
       </div>
     );
   }

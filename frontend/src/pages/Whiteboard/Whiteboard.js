@@ -12,10 +12,16 @@ import TileViewImageIcon from '../../assets/img/TileViewImage';
 import CircleButton from '../../components/Button/CircleButton';
 import PreviewIcon from '../../assets/img/Preview';
 import PlusIcon from '../../assets/img/Plus';
+import Modal from '../../components/Modal/Modal';
 import { getViewsForWhiteboard, createNewView, renameView, deleteView } from '../../actions/app-actions';
 import { findProjectWithId, findWhiteboardWithId } from '../../utils';
 
 class Whiteboard extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { deleteViewId: null }
+  }
+
   componentDidMount = () => {
     this.props.getViewsForWhiteboard(this.props.projectId, this.props.whiteboardId);
   }
@@ -34,7 +40,16 @@ class Whiteboard extends Component {
   }
 
   handleDeleteViewClick = viewId => {
-    this.props.deleteView(this.props.projectId, this.props.whiteboardId, viewId);
+    this.setState({ deleteViewId: viewId });
+  }
+
+  handleConfirmDeleteView = () => {
+    this.props.deleteView(this.props.projectId, this.props.whiteboardId, this.state.deleteViewId);
+    this.setState({ deleteViewId: null });
+  }
+
+  handleCancelDeleteView = () => {
+    this.setState({ deleteViewId: null });
   }
 
   render() {
@@ -83,6 +98,15 @@ class Whiteboard extends Component {
             <PlusIcon />
           </CircleButton>
         </ProjectButtonBar>
+        <Modal
+          show={ this.state.deleteViewId }
+          headerText='View löschen?'
+          bodyText={ 'Möchten Sie die View wirklich löschen?' }
+          labelCancel='Nein'
+          labelConfirm='Ja'
+          onCancel={ this.handleCancelDeleteView }
+          onConfirm={ this.handleConfirmDeleteView }
+        />
       </React.Fragment>
     );
   }
