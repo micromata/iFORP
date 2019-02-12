@@ -18,7 +18,8 @@ export default (theme) => ({
     padding: '20px',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    marginBottom: '20vh'
   },
   ModalHeader: {
     textAlign: 'center',

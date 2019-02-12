@@ -13,7 +13,10 @@ import { baseURL, findViewWithId } from '../../utils';
 export class Preview extends Component {
   constructor(props) {
     super(props);
-    this.state = { showAnnotations: false, deleteAnnotationId: null };
+    this.state = {
+      showAnnotations: window.localStorage.getItem('iforp.preview.showAnnotations') || false,
+      deleteAnnotationId: null
+    };
   }
 
   componentDidMount() {
@@ -39,6 +42,9 @@ export class Preview extends Component {
   };
 
   handleToggleAnnotations = showAnnotations => {
+    showAnnotations ? // eslint-disable-line
+      window.localStorage.setItem('iforp.preview.showAnnotations', '1') :
+      window.localStorage.removeItem('iforp.preview.showAnnotations');
     this.setState({ showAnnotations })
   }
 
@@ -109,7 +115,7 @@ export class Preview extends Component {
                 body={ previewData.body || '' }
                 assets={ previewData.assets || [] }
                 showAnnotations={ this.state.showAnnotations }
-                annotations={ previewData.annotations }
+                annotations={ previewData.annotations || [] }
                 imageInteractionElements={ previewData.fileType === 'image' ? previewData.interactionElements : [] }
                 onInteractionElementClick={ this.handleInteractionElementClick }
                 onAnnotate={ this.handleAnnotate }
@@ -137,7 +143,7 @@ export class Preview extends Component {
         </div>
         <Modal
           show={ this.state.deleteAnnotationId }
-          headerText='Anmerkung löschen?'
+          headerText='Anmerkung löschen'
           bodyText={ 'Möchten Sie die Anmerkung wirklich löschen?' }
           labelCancel='Nein'
           labelConfirm='Ja'

@@ -76,7 +76,7 @@ class Project extends Component {
         </ProjectButtonBar>
         <Modal
           show={ this.state.deleteWhiteboardId }
-          headerText='Whiteboard löschen?'
+          headerText='Whiteboard löschen'
           bodyText={ 'Möchten Sie das Whiteboard wirklich löschen?' }
           labelCancel='Nein'
           labelConfirm='Ja'

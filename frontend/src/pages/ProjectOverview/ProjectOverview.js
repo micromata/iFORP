@@ -81,7 +81,7 @@ class ProjectOverview extends Component {
         </ProjectButtonBar>
         <Modal
           show={ this.state.deleteProjectId }
-          headerText='Projekt löschen?'
+          headerText='Projekt löschen'
           bodyText={ 'Möchten Sie das Projekt wirklich löschen?' }
           labelCancel='Nein'
           labelConfirm='Ja'

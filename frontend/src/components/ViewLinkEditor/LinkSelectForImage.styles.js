@@ -14,6 +14,8 @@ export default theme => ({
   Number: {
     width: '40px',
     height: '40px',
+    minWidth: '40px',
+    minHeight: '40px',
     textAlign: 'center',
     lineHeight: '40px',
     backgroundColor: theme.accentColor,

@@ -231,7 +231,7 @@ class View extends Component {
         </ProjectButtonBar>
         <Modal
           show={ this.state.deleteImageInteractionElementId }
-          headerText='Interaktionselement löschen?'
+          headerText='Interaktionselement löschen'
           bodyText={ 'Möchten Sie das Interaktionselement wirklich löschen?' }
           labelCancel='Nein'
           labelConfirm='Ja'

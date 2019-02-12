@@ -100,7 +100,7 @@ class Whiteboard extends Component {
         </ProjectButtonBar>
         <Modal
           show={ this.state.deleteViewId }
-          headerText='View löschen?'
+          headerText='View löschen'
           bodyText={ 'Möchten Sie die View wirklich löschen?' }
           labelCancel='Nein'
           labelConfirm='Ja'
