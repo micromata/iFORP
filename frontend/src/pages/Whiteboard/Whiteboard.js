@@ -90,12 +90,38 @@ class Whiteboard extends Component {
 
 const actions = { getViewsForWhiteboard, createNewView, renameView, deleteView };
 
+const getViewLinkMapping = views => {
+  if (!views || !views.length) return {};
+
+  const ensureMappingForViewExists = (mapping, viewId) => {
+    if (!mapping[viewId]) {
+      mapping[viewId] = { fromViews: [], toViews: [] };
+    }
+  }
+
+  return views.reduce((mapping, view) => {
+    ensureMappingForViewExists(mapping, view.id);
+
+    if (!view.viewLinks || !view.viewLinks.length) return mapping;
+
+    view.viewLinks.forEach(link => {
+      ensureMappingForViewExists(mapping, link.toViewId);
+      mapping[view.id].toViews.push(link.toViewId);
+      mapping[link.toViewId].fromViews.push(view.id);
+    });
+
+    return mapping;
+  }, {});
+}
+
 const mapStateToProps = (state, ownProps) => {
   const projectId = parseInt(ownProps.match.params.projectId, 10);
   const whiteboardId = parseInt(ownProps.match.params.whiteboardId, 10);
   const project = findProjectWithId(state.app.projects, projectId);
   const whiteboard = findWhiteboardWithId(state.app.projects, projectId, whiteboardId);
   const views = whiteboard && whiteboard.views;
+
+  const viewLinkMapping = getViewLinkMapping(views);
 
   const whiteboardNavEntries = project.whiteboards.
     filter(item => item.id !== whiteboardId).
@@ -107,6 +133,7 @@ const mapStateToProps = (state, ownProps) => {
     project,
     whiteboard,
     views,
+    viewLinkMapping,
     navigationMenuEntries: [
       { title: 'Home', url: '/'},
       { title: 'Bibliothek', url: '/library'},
