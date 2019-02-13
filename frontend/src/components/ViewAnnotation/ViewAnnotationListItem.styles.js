@@ -31,7 +31,7 @@ export default (theme) => ({
     cursor: 'pointer',
     margin: '4px 12px 0',
     '& svg g': {
-      stroke: theme.textColor
+      stroke: theme.textColorOnBackground
     },
     '&:hover svg g': {
       stroke: theme.accentColor

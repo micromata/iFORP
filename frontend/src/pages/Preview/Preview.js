@@ -104,7 +104,7 @@ export class Preview extends Component {
             title={ `iFORP / Preview` }
           />
           <main>
-            <div className='content'>
+            <div className={`content ${this.state.showAnnotations ? 'WithAnnotations' : ''}`}>
               <HTMLPage
                 htmlElementAttributes={ previewData.htmlElementAttributes || {} }
                 head={ previewData.head || '' }

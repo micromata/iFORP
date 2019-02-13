@@ -63,7 +63,7 @@ class Whiteboard extends Component {
           title={ `iFORP / ${ this.props.project.name } / ${ this.props.whiteboard.name }` }
         />
         <div className={this.props.classes.Whiteboard}>
-          <ElementGrid>
+          <ElementGrid nowrap>
             { this.props.views.map((view, index) =>
               <ButtonTile
                 key={ view.id }
@@ -80,7 +80,7 @@ class Whiteboard extends Component {
           </ElementGrid>
         </div>
         <ProjectButtonBar entries={ this.props.navigationMenuEntries }>
-          <CircleButton onClick={ this.handleStartPreview } disabled={ !(this.props.views && this.props.views.length) }>
+          <CircleButton onClick={ this.handleStartPreview } disabled={ !this.props.canStartPreview }>
             <PreviewIcon />
           </CircleButton>
           <CircleButton onClick={ this.handleCreateViewClick }>
@@ -131,6 +131,8 @@ const mapStateToProps = (state, ownProps) => {
     filter(item => item.id !== whiteboardId).
     map(item => ({ title: item.name, url: `/projects/${projectId}/whiteboards/${item.id}` }));
 
+  const canStartPreview = views && views.length && views.every(view => view.hasFile);
+
   return {
     projectId,
     whiteboardId,
@@ -138,6 +140,7 @@ const mapStateToProps = (state, ownProps) => {
     whiteboard,
     views,
     viewLinkMapping,
+    canStartPreview,
     onlyLinearClickflow: state.app.whiteboardClickflow === 'linear',
     navigationMenuEntries: [
       { title: 'Home', url: '/'},

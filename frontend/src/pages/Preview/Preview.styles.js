@@ -9,6 +9,10 @@ export default theme => ({
       '& .content': {
         display: 'flex',
         justifyContent: 'center',
+        marginBottom: '80px',
+        '&.WithAnnotations': {
+          marginBottom: '220px'
+        },
         '& .preview-wrapper': {
           height: '100vh',
           flexShrink: 0,
