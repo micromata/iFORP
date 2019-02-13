@@ -101,7 +101,7 @@ export class Preview extends Component {
           <NavBar
             exit
             exitUrl={ `/projects/${ this.props.projectId }/whiteboards/${ this.props.whiteboardId}` }
-            title={ `iFORP > Preview` }
+            title={ `iFORP / Preview` }
           />
           <main>
             <div className='content'>

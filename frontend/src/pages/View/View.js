@@ -11,9 +11,12 @@ import LibraryZipUpload from '../../components/Library/LibraryZipUpload';
 import LibraryImagesUpload from '../../components/Library/LibraryImagesUpload';
 import HTMLPage from '../../components/HTMLPage/HTMLPage';
 import Button from '../../components/Button/Button';
+import CircleButton from '../../components/Button/CircleButton';
 import Modal from '../../components/Modal/Modal';
+import DeleteIcon from '../../assets/img/Delete';
 import {
   deleteImageInteractionElement,
+  deleteView,
   getLibraryDirectories,
   getViewsForWhiteboard,
   getViewDetails,
@@ -88,6 +91,19 @@ class View extends Component {
       newState.links[interactionId] = viewId;
       return newState;
     });
+  }
+
+  handleDeleteViewClick = () => {
+    this.setState({ deleteViewId: this.props.viewId });
+  }
+
+  handleConfirmDeleteView = async () => {
+    await this.props.deleteView(this.props.projectId, this.props.whiteboardId, this.state.deleteViewId);
+    this.props.history.push(`/projects/${this.props.projectId}/whiteboards/${this.props.whiteboardId}`);
+  }
+
+  handleCancelDeleteView = () => {
+    this.setState({ deleteViewId: null });
   }
 
   handleDeleteImageInteractionElement = interactionId => {
@@ -215,19 +231,23 @@ class View extends Component {
         </main>
         <ProjectButtonBar includeNavigationMenu={ false }>
           { showLibrary && this.state.selectedFilter === 'html' &&
-              <LibraryZipUpload onZipFileSelected={ this.props.uploadZipFile } />
+            <LibraryZipUpload onZipFileSelected={ this.props.uploadZipFile } />
           }
           { showLibrary && this.state.selectedFilter === 'image' &&
             <LibraryImagesUpload onImagesSelected={ this.props.uploadImages } />
           }
-          { showLibrary &&
-            <Button buttonStyle='round' onClick={ this.handleUseDirectoryItem } disable={ !this.state.selectedDirectoryItemId }>use</Button>
-          }
           { !showLibrary &&
             <React.Fragment>
               <Button buttonStyle='round' onClick={ this.handleShowLibrarySelection }>aus Bibliothek wählen</Button>
+              <CircleButton onClick={ this.handleDeleteViewClick } className='ghost'><DeleteIcon /></CircleButton>
               <Button buttonStyle='round' onClick={ this.handleSaveLinksForView }>Speichern</Button>
             </React.Fragment>
+          }
+          { showLibrary &&
+            <React.Fragment>
+              <CircleButton onClick={ this.handleDeleteViewClick } className='ghost'><DeleteIcon /></CircleButton>
+              <Button buttonStyle='round' onClick={ this.handleUseDirectoryItem } disable={ !this.state.selectedDirectoryItemId }>use</Button>
+          </React.Fragment>
           }
         </ProjectButtonBar>
         <Modal
@@ -238,6 +258,15 @@ class View extends Component {
           labelConfirm='Ja'
           onCancel={ this.handleCancelDeleteImageInteractionElement }
           onConfirm={ this.handleConfirmDeleteImageInteractionElement }
+        />
+        <Modal
+          show={ this.state.deleteViewId }
+          headerText='View löschen'
+          bodyText={ 'Möchten Sie die View wirklich löschen?' }
+          labelCancel='Nein'
+          labelConfirm='Ja'
+          onCancel={ this.handleCancelDeleteView }
+          onConfirm={ this.handleConfirmDeleteView }
         />
       </div>
     );
@@ -255,7 +284,8 @@ const actions = {
   usePageForView,
   saveLinksForView,
   addInteractionElementToView,
-  deleteImageInteractionElement
+  deleteImageInteractionElement,
+  deleteView
 };
 
 const mapStateToProps = (state, ownProps) => {

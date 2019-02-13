@@ -20,7 +20,16 @@ export default (theme) => ({
       minWidth: '56px'
     },
     '& button[class^=CircleButton]': {
-      marginTop: '-40px'
+      marginTop: '-40px',
+      '&.ghost': {
+        marginTop: 0,
+        backgroundColor: '#5E5E5E',
+        '& svg g': { stroke: '#E9E9E9' },
+        '&:hover': {
+          backgroundColor: theme.accentColor,
+          '& svg g': { stroke: '#FFF' },
+        }
+      }
     }
   }
 });
