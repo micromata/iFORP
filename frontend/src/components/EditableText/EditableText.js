@@ -58,7 +58,7 @@ export class EditableText extends Component {
             ref={ this.inputRef }
             value={ this.state.editedText }
             onChange={ this.handleInputChange }
-            onBlur={ this.cancelEditing }
+            onBlur={ this.confirmEditing }
             onKeyDown={ this.handleInputKeyDown }
             minLength={ this.props.minLength || 5 }
             maxLength={ this.props.maxLength || 20 }
