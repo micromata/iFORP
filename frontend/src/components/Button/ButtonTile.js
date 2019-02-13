@@ -11,9 +11,10 @@ const ButtonTile = ({
   disabled = false,
   children,
   titleBelow = false,
-  TileIcon
+  TileIcon,
+  connectRight = false
 }) => (
-  <div className={classes.ButtonTile}>
+  <div className={`${classes.ButtonTile} ${connectRight ? 'ConnectRight' : ''}`}>
     {children &&
       !titleBelow && (
         <a className={classes.ProjectName} onClick={onClick}>

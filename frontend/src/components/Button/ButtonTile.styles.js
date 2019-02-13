@@ -1,5 +1,20 @@
 export default theme => ({
   ButtonTile: {
+    marginBottom: '2rem',
+    zIndex: 1,
+    '&.ConnectRight': {
+      '&::after': {
+        content: '""',
+        width: '36px',
+        height: '5px',
+        backgroundColor: theme.accentColor,
+        display: 'inline-block',
+        position: 'relative',
+        right: '-184px',
+        top: '-116px',
+        zIndex: 0
+      }
+    },
     '& button.btn': {
       backgroundColor: '#D9D9D9',
       borderRadius: '.5rem',
@@ -12,9 +27,8 @@ export default theme => ({
       cursor: 'pointer',
       '&:hover': {
         backgroundColor: '#BCBCBC',
-      },
-    },
-    marginBottom: "2rem"
+      }
+    }
   },
   DeleteButton: {
     position: 'relative',

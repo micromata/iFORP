@@ -5,7 +5,7 @@ export default (theme) => ({
     display: 'flex',
     alignItems: 'flex-start',
     width: '100%',
-    '&:before': {
+    '&::before': {
       counterIncrement: 'annotationCounter',
       content: 'counter(annotationCounter)',
       display: 'inline-block',

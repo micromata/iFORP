@@ -42,7 +42,7 @@ const styles = theme => ({
     html: {
       boxSizing: 'border-box',
     },
-    '*, *:before, *:after': {
+    '*, *::before, *::after': {
       boxSizing: 'inherit',
     },
     'html,body,#root': {

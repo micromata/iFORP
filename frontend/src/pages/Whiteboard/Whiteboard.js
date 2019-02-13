@@ -33,6 +33,14 @@ class Whiteboard extends Component {
     this.props.history.push(`/projects/${this.props.project.id}/whiteboards/${this.props.whiteboardId}/views/${viewId}/preview`);
   }
 
+  hasConnectorToFollowingView = (viewId, index) => {
+    if (!this.props.onlyLinearClickflow) return false;
+    if (index === this.props.views.length - 1) return false;
+
+    const followingView = this.props.views[index+1];
+    return this.props.viewLinkMapping[viewId].toViews.includes(followingView.id);
+  }
+
   render() {
     if (!this.props.views) return null;
 
@@ -56,11 +64,12 @@ class Whiteboard extends Component {
         />
         <div className={this.props.classes.Whiteboard}>
           <ElementGrid>
-            { this.props.views.map(view =>
+            { this.props.views.map((view, index) =>
               <ButtonTile
                 key={ view.id }
                 titleBelow
                 TileIcon={ getIconForView(view) }
+                connectRight={ this.hasConnectorToFollowingView(view.id, index) }
                 onClick={ () => this.navigateToView(view.id) }>
                 <EditableText
                   text={ view.name }
@@ -129,6 +138,7 @@ const mapStateToProps = (state, ownProps) => {
     whiteboard,
     views,
     viewLinkMapping,
+    onlyLinearClickflow: state.app.whiteboardClickflow === 'linear',
     navigationMenuEntries: [
       { title: 'Home', url: '/'},
       { title: 'Bibliothek', url: '/library'},

@@ -65,7 +65,7 @@ const styles = theme => ({
       height: '26px',
       width: '50px',
       cursor: 'pointer',
-      '&:before': {
+      '&::before': {
         content: '""',
         padding: '12px',
         backgroundColor: props => props.colorActive || theme.accentColor || '#5E5E5E',
