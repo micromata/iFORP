@@ -85,23 +85,23 @@ export class HTMLPage extends Component {
         }
 
         #new-interaction-element-rect {
-          border: 1px dashed rgb(255, 80, 80);
-          background-color: rgb(255, 80, 80, 0.4);
+          border: 1px dashed #F9BB1F;
+          background-color: rgb(240, 188, 72, 0.4);
           position: absolute;
           visibility: hidden;
         }
 
         .interaction-element-rect {
-          border: 1px dashed rgb(255, 80, 80);
-          background-color: rgb(255, 80, 80, 0.4);
+          border: 1px dashed #F9BB1F;
+          background-color: rgb(240, 188, 72, 0.4);
           position: absolute;
           opacity: ${this.props.allowInteractionElementCreation ? '1' : '0'};
           cursor: ${ this.props.allowInteractionElementCreation ? 'default' : 'pointer' };
         }
 
         .interaction-element-rect-highlighted {
-          border: 1px dashed rgb(255, 80, 80);
-          background-color: rgb(255, 80, 80, 0.4);
+          border: 1px dashed #F9BB1F;
+          background-color: rgb(240, 188, 72, 0.4);
           position: absolute;
           opacity: 1;
         }
@@ -112,7 +112,7 @@ export class HTMLPage extends Component {
           color: #FFF;
           width: 20px;
           height: 20px;
-          background: rgb(255, 80, 80);
+          background: #F9BB1F;
           border-radius: 50%;
           display: flex;
           justify-content: center;

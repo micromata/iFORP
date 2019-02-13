@@ -71,7 +71,7 @@ class Whiteboard extends Component {
         <NavBar
           exit
           exitUrl={ `/projects/${ this.props.projectId }` }
-          title={ `iFORP > ${ this.props.project.name } > ${ this.props.whiteboard.name }` }
+          title={ `iFORP / ${ this.props.project.name } / ${ this.props.whiteboard.name }` }
         />
         <div className={this.props.classes.Whiteboard}>
           <ElementGrid>

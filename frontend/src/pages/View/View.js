@@ -174,7 +174,7 @@ class View extends Component {
         <NavBar
           exit
           exitUrl={ `/projects/${ this.props.projectId }/whiteboards/${ this.props.whiteboardId}` }
-          title={ `iFORP > ${this.props.projectName} > ${this.props.whiteboardName} > ${this.props.view && this.props.view.name}` }
+          title={ `iFORP / ${this.props.projectName} / ${this.props.whiteboardName} / ${this.props.view && this.props.view.name}` }
         />
         { showLibrary &&
           <LibraryFilter selectedFilter={ this.state.selectedFilter } onFilterChange={ this.handleFilterChange } />

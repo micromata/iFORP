@@ -4,8 +4,7 @@ import injectSheet from 'react-jss';
 import styles from './Preview.styles';
 import NavBar from '../../components/NavBar/NavBar';
 import HTMLPage from '../../components/HTMLPage/HTMLPage';
-import Toggle from '../../components/Toggle/Toggle';
-import ViewAnnotationList from '../../components/ViewAnnotation/ViewAnnotationList';
+import ViewAnnotationPanel from '../../components/ViewAnnotation/ViewAnnotationPanel';
 import Modal from '../../components/Modal/Modal';
 import { getViewsForWhiteboard, getViewDetails, addAnnotationToView, changeViewAnnotationText, deleteViewAnnotation } from '../../actions/app-actions';
 import { baseURL, findViewWithId } from '../../utils';
@@ -14,7 +13,7 @@ export class Preview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showAnnotations: window.localStorage.getItem('iforp.preview.showAnnotations') || false,
+      showAnnotations: false,
       deleteAnnotationId: null
     };
   }
@@ -41,11 +40,8 @@ export class Preview extends Component {
     this.props.history.push(`/projects/${this.props.projectId}/whiteboards/${this.props.whiteboardId}/views/${viewLink.toViewId}/preview`);
   };
 
-  handleToggleAnnotations = showAnnotations => {
-    showAnnotations ? // eslint-disable-line
-      window.localStorage.setItem('iforp.preview.showAnnotations', '1') :
-      window.localStorage.removeItem('iforp.preview.showAnnotations');
-    this.setState({ showAnnotations })
+  handleToggleAnnotations = () => {
+    this.setState(prevState => ({ showAnnotations: !prevState.showAnnotations }));
   }
 
   handleAnnotate = coords => {
@@ -121,25 +117,15 @@ export class Preview extends Component {
                 onAnnotate={ this.handleAnnotate }
                 viewportSize="desktop"
               />
-              <div className='annotation-panel'>
-                <h3>Anmerkungen</h3>
-                <Toggle
-                  labelLeft="Off"
-                  labelRight="On"
-                  textColorActive="#FFFFFF"
-                  isActive={this.state.showAnnotations}
-                  onToggle={this.handleToggleAnnotations}
-                />
-                { this.state.showAnnotations &&
-                  <ViewAnnotationList
-                    annotations={ this.props.annotations }
-                    onChangeAnnotationText={ this.handleChangeAnnotationText }
-                    onDeleteAnnotation={ this.handleDeleteAnnotation }
-                  />
-                }
-              </div>
             </div>
           </main>
+          <ViewAnnotationPanel
+            visible={ this.state.showAnnotations }
+            onToggleVisibility={ this.handleToggleAnnotations }
+            annotations={ this.props.annotations }
+            onChangeAnnotationText={ this.handleChangeAnnotationText }
+            onDeleteAnnotation={ this.handleDeleteAnnotation }
+          />
         </div>
         <Modal
           show={ this.state.deleteAnnotationId }

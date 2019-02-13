@@ -8,6 +8,7 @@ export default theme => ({
     '& main': {
       '& .content': {
         display: 'flex',
+        justifyContent: 'center',
         '& .preview-wrapper': {
           height: '100vh',
           flexShrink: 0,
@@ -15,19 +16,24 @@ export default theme => ({
           '&.desktop': { maxWidth: '1280px' },
         	'&.tablet': { maxWidth: '768px' },
         	'&.phone': { maxWidth: '375px' }
-        },
-        '& .annotation-panel': {
-          padding: '20px',
-          flexShrink: 0,
-          flexGrow: 1,
-          width: '400px',
-          maxWidth: '400px',
-          maxHeight: '100vh',
-          overflow: 'scroll',
-          '& h3': {
-            color: theme.textColorOnBackground,
-            textAlign: 'center'
-          }
+        }
+      },
+      '& .annotation-panel': {
+        padding: '20px',
+        width: '100%',
+        overflow: 'scroll',
+        height: '200px',
+        position: 'fixed',
+        bottom: 0,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        background: theme.ButtonBar.backgroundColor,
+        '& button[class^=CircleButton]': {
+          position: 'relative',
+          top: '-30px',
+          zIndex: 10
         }
       }
     }

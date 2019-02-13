@@ -49,7 +49,7 @@ class Project extends Component {
         <NavBar
           exit
           exitUrl={ `/projects` }
-          title={ `iFORP > ${ this.props.project.name }` }
+          title={ `iFORP / ${ this.props.project.name }` }
         />
         <div className={this.props.classes.Project}>
           <ElementGrid>
