@@ -113,6 +113,7 @@ const addViewAnnotation = (newState, projectId, whiteboardId, viewId, annotation
 
   if (!view) throw new Error(`view with id ${viewId} (project ${projectId}, whiteboard ${whiteboardId}) not found`);
 
+  view.annotations = view.annotations || [];
   view.annotations.push(annotation);
 }
 
