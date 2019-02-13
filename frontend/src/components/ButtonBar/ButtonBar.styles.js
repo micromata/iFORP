@@ -23,7 +23,7 @@ export default (theme) => ({
       marginTop: '-40px',
       '&.ghost': {
         marginTop: 0,
-        backgroundColor: '#5E5E5E',
+        backgroundColor: '#4E4E4E',
         '& svg g': { stroke: '#E9E9E9' },
         '&:hover': {
           backgroundColor: theme.accentColor,

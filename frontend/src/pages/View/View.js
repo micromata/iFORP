@@ -88,6 +88,7 @@ class View extends Component {
   handleSetLinkTarget = (interactionId, viewId) => {
     this.setState(prevState => {
       const newState = { ...prevState };
+      newState.links = this.props.onlyLinearClickflow ? {} : newState.links;
       newState.links[interactionId] = viewId;
       return newState;
     });
@@ -230,24 +231,24 @@ class View extends Component {
           }
         </main>
         <ProjectButtonBar includeNavigationMenu={ false }>
-          { showLibrary && this.state.selectedFilter === 'html' &&
-            <LibraryZipUpload onZipFileSelected={ this.props.uploadZipFile } />
-          }
-          { showLibrary && this.state.selectedFilter === 'image' &&
-            <LibraryImagesUpload onImagesSelected={ this.props.uploadImages } />
+          { showLibrary &&
+              <React.Fragment>
+              { this.state.selectedFilter === 'html' &&
+                <LibraryZipUpload onZipFileSelected={ this.props.uploadZipFile } />
+              }
+              { this.state.selectedFilter === 'image' &&
+                <LibraryImagesUpload onImagesSelected={ this.props.uploadImages } />
+              }
+              <CircleButton onClick={ this.handleDeleteViewClick } className='ghost' disabled={ !this.props.canDelete }><DeleteIcon /></CircleButton>
+              <Button buttonStyle='round' onClick={ this.handleUseDirectoryItem } disable={ !this.state.selectedDirectoryItemId }>use</Button>
+            </React.Fragment>
           }
           { !showLibrary &&
             <React.Fragment>
               <Button buttonStyle='round' onClick={ this.handleShowLibrarySelection }>aus Bibliothek wählen</Button>
-              <CircleButton onClick={ this.handleDeleteViewClick } className='ghost'><DeleteIcon /></CircleButton>
+              <CircleButton onClick={ this.handleDeleteViewClick } className='ghost' disabled={ !this.props.canDelete }><DeleteIcon /></CircleButton>
               <Button buttonStyle='round' onClick={ this.handleSaveLinksForView }>Speichern</Button>
             </React.Fragment>
-          }
-          { showLibrary &&
-            <React.Fragment>
-              <CircleButton onClick={ this.handleDeleteViewClick } className='ghost'><DeleteIcon /></CircleButton>
-              <Button buttonStyle='round' onClick={ this.handleUseDirectoryItem } disable={ !this.state.selectedDirectoryItemId }>use</Button>
-          </React.Fragment>
           }
         </ProjectButtonBar>
         <Modal
@@ -288,6 +289,20 @@ const actions = {
   deleteView
 };
 
+const getViewsToLinkTo = (viewId, whiteboard, onlyLinearClickflow) => {
+  if (!whiteboard || !whiteboard.views) return [];
+
+  const viewsSortedById = [...whiteboard.views].sort((a, b) => a.id - b.id);
+  const mappedViews = viewsSortedById.map(view => ({ value: view.id, title: view.name }));
+
+  if (onlyLinearClickflow) {
+    const viewsBehind = mappedViews.filter(view => view.value > viewId);
+    return viewsBehind.length ? [viewsBehind[0]] : [];
+  }
+
+  return mappedViews.filter(view => view.value !== viewId);
+}
+
 const mapStateToProps = (state, ownProps) => {
   const projectId = Number(ownProps.match.params.projectId);
   const whiteboardId = Number(ownProps.match.params.whiteboardId);
@@ -299,12 +314,8 @@ const mapStateToProps = (state, ownProps) => {
 
   const { directories } = state.app.library;
 
-  const viewsToLinkTo = (whiteboard && whiteboard.views) ?
-    whiteboard.views.
-      filter(view => view.id !== viewId).
-      map(view => ({ value: view.id, title: view.name })) :
-    [];
-
+  const onlyLinearClickflow = state.app.whiteboardClickflow === 'linear';
+  const viewsToLinkTo = getViewsToLinkTo(viewId, whiteboard, onlyLinearClickflow);
   const viewLinkOptions = (whiteboard && whiteboard.views) ?
     [{value: 0, title: '-'}].concat(viewsToLinkTo):
     [];
@@ -318,7 +329,9 @@ const mapStateToProps = (state, ownProps) => {
     whiteboardName: whiteboard.name,
     directories,
     view,
-    viewLinkOptions
+    viewLinkOptions,
+    onlyLinearClickflow,
+    canDelete: !onlyLinearClickflow || viewsToLinkTo.length === 0
   }
 };
 
