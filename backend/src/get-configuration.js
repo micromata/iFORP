@@ -8,6 +8,9 @@ const logger = getLogger('config');
 
 const defaults = {
   configurationPath: path.resolve(os.homedir(), '.iforp/iforprc.json'),
+  whiteboard: {
+    clickflow: 'linear'
+  },
   upload: {
     directory: path.resolve(os.homedir(), '.iforp/library/'),
     maxFileSize: 5 * 1024 * 1024,
@@ -17,6 +20,9 @@ const defaults = {
 };
 
 const test = {
+  whiteboard: {
+    clickflow: 'linear'
+  },
   upload: {
     directory: path.resolve(os.tmpdir(), '.iforp/library/'),
     maxFileSize: 5 * 1024 * 1024,

@@ -186,11 +186,15 @@ const addInteractionElementToView = (projectId, whiteboardId, viewId, coords) =>
   const response = await http.post(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}/interaction-elements`, coords);
   const interactionElement = await response.json();
 
+  const responseViewDetails = await http.get(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}`);
+  const viewDetails = await responseViewDetails.json();
+
   dispatch({
     type: actionNames.VIEW_IMAGE_INTERACTION_ELEMENT_ADDED,
     projectId,
     whiteboardId,
     viewId,
+    viewDetails,
     interactionElement
   });
 

@@ -3,6 +3,7 @@ import { deepClone, findProjectWithId, findWhiteboardWithId, findViewWithId, fin
 
 const initialState = {
   projects: [],
+  whiteboardClickflow: 'linear',
   library: {
     directories: []
   }
@@ -133,15 +134,6 @@ const removeAnnotationFromView = (newState, projectId, whiteboardId, viewId, ann
   view.annotations = view.annotations.filter(annotation => annotation.id !== annotationId);
 }
 
-const addViewImageInteractionElement = (newState, projectId, whiteboardId, viewId, interactionElement) => {
-  const view = findViewWithId(newState.projects, projectId, whiteboardId, viewId);
-
-  if (!view) throw new Error(`view with id ${viewId} (project ${projectId}, whiteboard ${whiteboardId}) not found`);
-
-  view.imageInteractionElements = view.imageInteractionElements || [];
-  view.imageInteractionElements.push(interactionElement);
-}
-
 const removeViewImageInteractionElement = (newState, projectId, whiteboardId, viewId, interactionId) => {
   const view = findViewWithId(newState.projects, projectId, whiteboardId, viewId);
 
@@ -215,7 +207,7 @@ export default (state = initialState, action) => {
       removeAnnotationFromView(newState, action.projectId, action.whiteboardId, action.viewId, action.annotationId);
       return newState;
     case actionNames.VIEW_IMAGE_INTERACTION_ELEMENT_ADDED:
-      addViewImageInteractionElement(newState, action.projectId, action.whiteboardId, action.viewId, action.interactionElement);
+      setViewDetails(newState, action.projectId, action.whiteboardId, action.viewDetails);
       return newState;
     case actionNames.VIEW_IMAGE_INTERACTION_ELEMENT_DELETED:
       removeViewImageInteractionElement(newState, action.projectId, action.whiteboardId, action.viewId, action.interactionId);
