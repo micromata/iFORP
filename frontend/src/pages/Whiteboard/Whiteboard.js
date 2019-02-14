@@ -16,6 +16,8 @@ import { getViewsForWhiteboard, createNewView, renameView } from '../../actions/
 import { findProjectWithId, findWhiteboardWithId } from '../../utils';
 
 class Whiteboard extends Component {
+  numberOfViews = { last: 0, current: 0 }
+
   componentDidMount = () => {
     this.props.getViewsForWhiteboard(this.props.projectId, this.props.whiteboardId);
   }
@@ -41,6 +43,15 @@ class Whiteboard extends Component {
     return this.props.viewLinkMapping[viewId].toViews.includes(followingView.id);
   }
 
+  componentDidUpdate() {
+    if (this.numberOfViews.current > this.numberOfViews.last) {
+      const lastView = [...this.props.views].pop();
+      const node = document.querySelector(`#view-${lastView.id}`);
+      if (!node) return;
+      node.scrollIntoView();
+    }
+  }
+
   render() {
     if (!this.props.views) return null;
 
@@ -55,6 +66,9 @@ class Whiteboard extends Component {
       }
     };
 
+    this.numberOfViews.last = this.numberOfViews.current;
+    this.numberOfViews.current = this.props.views.length;
+
     return (
       <React.Fragment>
         <NavBar
@@ -66,6 +80,7 @@ class Whiteboard extends Component {
           <ElementGrid nowrap>
             { this.props.views.map((view, index) =>
               <ButtonTile
+                id={ `view-${view.id}` }
                 key={ view.id }
                 titleBelow
                 TileIcon={ getIconForView(view) }

@@ -58,7 +58,7 @@ const styles = theme => ({
       backgroundColor: theme.backgroundColor,
       fontFamily: 'Verdana',
       color: theme.textColor,
-    },
+    }
   },
   App: {
     ...dottedBackground(
