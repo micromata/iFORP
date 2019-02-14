@@ -29,7 +29,8 @@ export default {
       accentColor: '#F9BB1F'
     },
     ButtonBar: {
-      backgroundColor: 'rgba(100, 100, 100, 0.9)'
+      backgroundColor: 'rgba(100, 100, 100, 0.9)',
+      backgroundColorGhost: '#4E4E4E'
     },
     Select: {
       default: {
@@ -65,7 +66,8 @@ export default {
       accentColor: '#F9BB1F',
     },
     ButtonBar: {
-      backgroundColor: 'rgba(100, 100, 100, 0.9)'
+      backgroundColor: 'rgba(100, 100, 100, 0.9)',
+      backgroundColorGhost: '#4E4E4E'
     },
     Select: {
       default: {
@@ -101,7 +103,8 @@ export default {
       accentColor: '#F9BB1F',
     },
     ButtonBar: {
-      backgroundColor: 'rgba(74, 85, 117, 0.9)'
+      backgroundColor: 'rgba(74, 85, 117, 0.9)',
+      backgroundColorGhost: '#32394C'
     },
     Select: {
       default: {

@@ -67,7 +67,7 @@ export class HTMLPage extends Component {
         body {
           counter-reset: interactionElementCounter;
           cursor: ${ this.props.allowInteractionElementCreation ? 'crosshair' : 'default' };
-          background: rgba(255, 255, 255, 0.2);
+          background: rgba(255, 255, 255, 0);
           width: 1280px;
         }
 

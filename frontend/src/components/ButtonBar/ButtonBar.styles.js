@@ -1,4 +1,4 @@
-export default (theme) => ({
+export default theme => ({
   ButtonBar: {
     width: '100%',
     display: 'flex',
@@ -23,9 +23,9 @@ export default (theme) => ({
       marginTop: '-40px',
       '&.ghost': {
         marginTop: 0,
-        backgroundColor: '#4E4E4E',
+        backgroundColor: theme.ButtonBar.backgroundColorGhost,
         '& svg g': { stroke: '#E9E9E9' },
-        '&:hover': {
+        '&:hover:not(:disabled)': {
           backgroundColor: theme.accentColor,
           '& svg g': { stroke: '#FFF' },
         }
