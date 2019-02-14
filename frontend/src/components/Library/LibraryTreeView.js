@@ -58,7 +58,9 @@ class LibraryTreeView extends Component {
                   { directory.name }
                   { directoryToExpand === directory.id &&
                     <ul>
-                      { directory[itemsKey].map(item =>
+                      { [...directory[itemsKey]]
+                        .sort((a, b) => a.name - b.name)
+                        .map(item =>
                         <li
                           key={ `${itemsKey}-${item.id}` }
                           className={ `${this.props.selectedItemId === item.id ? 'selected' : '' }` }
