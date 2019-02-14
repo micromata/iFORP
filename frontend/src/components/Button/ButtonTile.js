@@ -5,6 +5,7 @@ import CircleButton from './CircleButton';
 import DeleteIcon from '../../assets/img/Delete';
 
 const ButtonTile = ({
+  id,
   classes,
   onClick,
   onDeleteClick,
@@ -14,7 +15,7 @@ const ButtonTile = ({
   TileIcon,
   connectRight = false
 }) => (
-  <div className={`${classes.ButtonTile} ${connectRight ? 'ConnectRight' : ''}`}>
+  <div id={ id } className={`${classes.ButtonTile} ${connectRight ? 'ConnectRight' : ''}`}>
     {children &&
       !titleBelow && (
         <a className={classes.ProjectName} onClick={onClick}>

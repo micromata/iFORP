@@ -1,5 +1,7 @@
 const isDev = process.env.NODE_ENV === 'development';
-const baseURL = isDev ? 'http://localhost:3001' : '';
+const baseURL = isDev ? `${window.location.protocol}//${window.location.hostname}:3001` : '';
+
+console.log('baseUrl', baseURL)
 
 const deepClone = obj => JSON.parse(JSON.stringify(obj));
 
