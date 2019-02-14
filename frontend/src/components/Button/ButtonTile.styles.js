@@ -47,6 +47,7 @@ export default theme => ({
     marginTop: '1rem',
     fontSize: '1rem',
     userSelect: 'none',
-    textAlign: 'center'
+    textAlign: 'center',
+    lineHeight: '28px',
   },
 });
