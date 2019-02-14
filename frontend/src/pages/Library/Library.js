@@ -57,7 +57,7 @@ class Library extends Component {
     return {
       htmlElementAttributes: { lang: 'en'},
       head: '<style>html, body { margin: 0; padding: 0; }</style>',
-      body: `<div style='width: ${image.width}px; height: ${image.height}px; background-image: url(${baseURL}/library/images/${image.name});' />`,
+      body: `<div style='width: ${image.width}px; height: ${image.height}px; margin-left: auto; margin-right: auto; background-image: url(${baseURL}/library/images/${image.name});' />`,
       assets: []
     };
   }

@@ -84,7 +84,7 @@ export class Preview extends Component {
     return {
       htmlElementAttributes: { lang: 'en'},
       head: '<style>html, body { margin: 0; padding: 0; }</style>',
-      body: `<div style='width: ${this.props.view.imageWidth}px; height: ${this.props.view.imageHeight}px; background-image: url(${baseURL}/library/images/${this.props.view.imageName});' />`,
+      body: `<div style='width: ${this.props.view.imageWidth}px; height: ${this.props.view.imageHeight}px; margin-left: auto; margin-right: auto; background-image: url(${baseURL}/library/images/${this.props.view.imageName});' />`,
       assets: [],
       fileType: this.props.view.fileType,
       interactionElements: this.props.view.imageInteractionElements,

@@ -26,6 +26,10 @@ export default (theme) => ({
     '&.nav-left': {
       minWidth: '200px',
       justifyContent: 'flex-start',
+      '& svg': {
+        height: '100%',
+        transform: 'rotate(90deg)'
+      }
     },
     '&.nav-center': {
       fontSize: '18px',
@@ -40,8 +44,5 @@ export default (theme) => ({
       fontSize: '12px',
       height: '100%',
     },
-  },
-  BackNavigation: {
-    height: '100%',
-  },
+  }
 });

@@ -12,7 +12,7 @@ export const NavBar = ({ classes, theme, title, exit = false, exitUrl = '/' }) =
     <div className={classes.NavItem + ' nav-left'}>
       {exit && exitUrl &&
         <Link to={ exitUrl }>
-          <BackIcon className={classes.BackNavigation} color={ theme.NavBar.textColor } />
+          <BackIcon color={ theme.NavBar.textColor } />
         </Link>
       }
     </div>

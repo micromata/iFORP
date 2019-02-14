@@ -21,7 +21,7 @@ export class LibraryImagesUpload extends Component {
           multiple={ true }
           onChange={ this.handleFileInputChange }
         />
-        <label htmlFor="imagesUpload">Upload Images</label>
+        <label htmlFor="imagesUpload">Bilder hochladen</label>
       </div>
     )
   }

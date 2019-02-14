@@ -133,6 +133,10 @@ class View extends Component {
       return;
     }
 
+    if (this.props.onlyLinearClickflow && this.props.viewLinkOptions.length <= 1) {
+      return this.props.history.push(`/projects/${this.props.projectId}/whiteboards/${this.props.whiteboardId}`);
+    }
+
     const links = this.getLinksFromView(view);
     this.setState({ links,  librarySelectMode: false });
   }
@@ -153,7 +157,7 @@ class View extends Component {
       return {
         htmlElementAttributes: { lang: 'en'},
         head: '<style>html, body { margin: 0; padding: 0; }</style>',
-        body: `<div style='width: ${image.width}px; height: ${image.height}px; background-image: url(${baseURL}/library/images/${image.name});' />`,
+        body: `<div style='width: ${image.width}px; height: ${image.height}px; margin-left: auto; margin-right: auto; background-image: url(${baseURL}/library/images/${image.name});' />`,
         assets: [],
         interactionElements: [],
         fileType: 'image'
@@ -174,7 +178,7 @@ class View extends Component {
     return {
       htmlElementAttributes: { lang: 'en'},
       head: '<style>html, body { margin: 0; padding: 0; }</style>',
-      body: `<div style='width: ${this.props.view.imageWidth}px; height: ${this.props.view.imageHeight}px; background-image: url(${baseURL}/library/images/${this.props.view.imageName});' />`,
+      body: `<div style='width: ${this.props.view.imageWidth}px; height: ${this.props.view.imageHeight}px; margin-left: auto; margin-right: auto; background-image: url(${baseURL}/library/images/${this.props.view.imageName});' />`,
       assets: [],
       interactionElements: [...this.props.view.imageInteractionElements].sort((a, b) => a.id - b.id),
       fileType: this.props.view.fileType
@@ -240,7 +244,7 @@ class View extends Component {
                 <LibraryImagesUpload onImagesSelected={ this.props.uploadImages } />
               }
               <CircleButton onClick={ this.handleDeleteViewClick } className='ghost' disabled={ !this.props.canDelete }><DeleteIcon /></CircleButton>
-              <Button buttonStyle='round' onClick={ this.handleUseDirectoryItem } disable={ !this.state.selectedDirectoryItemId }>use</Button>
+              <Button buttonStyle='round' onClick={ this.handleUseDirectoryItem } disable={ !this.state.selectedDirectoryItemId }>Verwenden</Button>
             </React.Fragment>
           }
           { !showLibrary &&

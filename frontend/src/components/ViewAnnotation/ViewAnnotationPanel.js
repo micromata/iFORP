@@ -18,7 +18,7 @@ export const ViewAnnotationPanel = ({ classes, annotations, onChangeAnnotationTe
       />
     }
     { Boolean(visible && !annotations.length) &&
-      <i><br />Es sind keine Anmerkungen vorhanden.<br /><br />Durch Klicken auf die Vorschau können Sie eine Anmerkung erstellen.</i>
+      <i><br /><br />Durch Klicken auf den Screen können Sie Anmerkungen erstellen.</i>
     }
   </div>
 );

@@ -67,8 +67,12 @@ export class HTMLPage extends Component {
         body {
           counter-reset: interactionElementCounter;
           cursor: ${ this.props.allowInteractionElementCreation ? 'crosshair' : 'default' };
-          background: #FFF;
+          background: rgba(255, 255, 255, 0.2);
           width: 1280px;
+        }
+
+        body:empty {
+          background: transparent;
         }
 
         .annotation {
@@ -152,11 +156,12 @@ export class HTMLPage extends Component {
 
 
     // Fill body element
-    this.iframeDocument.body.innerHTML = `
+    const bodyHtml = `
       ${this.props.body}
       ${annotationsMarkup}
       ${newInteractionElementMarkup}
-      ${existingInteractionElementsMarkup}`;
+      ${existingInteractionElementsMarkup}`.trim();
+    this.iframeDocument.body.innerHTML = bodyHtml;
 
     // Insert JavaScript and CSS assets to the view
     this.props.assets.forEach(asset => {

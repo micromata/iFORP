@@ -11,6 +11,10 @@ class ViewLinkEditor extends Component {
     return (
       <div className={ this.props.classes.ViewLinkEditor }>
         <h3>Verlinkungen</h3>
+        { this.props.fileType === 'image' && !this.props.availableInteractionElements.length &&
+          <i>Erstellen Sie neue Interaktionselemente durch Ziehen mit der Maus</i>
+        }
+
         { this.props.fileType === 'html' &&
           this.props.availableInteractionElements.map(element => (
             <LinkSelectForHTML

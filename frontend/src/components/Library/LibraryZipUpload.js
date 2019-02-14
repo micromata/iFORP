@@ -20,7 +20,7 @@ export class LibraryZipUpload extends Component {
           accept='.zip'
           onChange={ this.handleFileInputChange }
         />
-        <label htmlFor="zippedHtmlUpload">Upload HTML</label>
+        <label htmlFor="zippedHtmlUpload">HTML hochladen</label>
       </div>
     )
   }
