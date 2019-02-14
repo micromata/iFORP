@@ -75,6 +75,7 @@ const updateDirectoryInLibrary = (newState, directory) => {
 
 const addDetailsToPage = (newState, pageDetails) => {
   newState.library.directories.map(directory => {
+    directory.pages = directory.pages || [];
     directory.pages = directory.pages.map(page => page.id === pageDetails.id ? pageDetails : page);
     return directory;
   });
