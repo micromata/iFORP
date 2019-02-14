@@ -21,6 +21,6 @@ export default theme => ({
     backgroundColor: 'gray',
     padding: '.5rem',
     minWidth: '10rem',
-    zIndex: 1
+    zIndex: 2
   },
 });
