@@ -1,3 +1,5 @@
+import config from '../../config';
+
 export default theme => ({
   Preview: {
     height: '100%',
@@ -17,9 +19,9 @@ export default theme => ({
           height: '100vh',
           flexShrink: 0,
           flexGrow: 1,
-          '&.desktop': { maxWidth: '1280px' },
-        	'&.tablet': { maxWidth: '768px' },
-        	'&.phone': { maxWidth: '375px' }
+          '&.desktop': { maxWidth: `${config.viewportWidthDesktop}px` },
+        	'&.tablet': { maxWidth: `${config.viewportWidthTablet}px` },
+        	'&.phone': { maxWidth: `${config.viewportWidthPhone}px` },
         }
       }
     }

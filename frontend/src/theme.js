@@ -45,6 +45,10 @@ export default {
     },
     Modal: {
       backgroundColor: 'rgba(100, 100, 100, 0.9)'
+    },
+    ViewportSwitch: {
+      colorSelected: '#F9BB1F',
+      colorDefault: '#E9E9E9'
     }
   },
   light: {
@@ -82,6 +86,10 @@ export default {
     },
     Modal: {
       backgroundColor: 'rgba(100, 100, 100, 0.9)'
+    },
+    ViewportSwitch: {
+      colorSelected: '#F9BB1F',
+      colorDefault: '#E9E9E9'
     }
   },
   purple: {
@@ -119,6 +127,10 @@ export default {
     },
     Modal: {
       backgroundColor: 'rgba(74, 85, 117, 0.9)'
+    },
+    ViewportSwitch: {
+      colorSelected: '#F9BB1F',
+      colorDefault: '#E9E9E9'
     }
   },
 };

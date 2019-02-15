@@ -14,7 +14,8 @@ export class Preview extends Component {
     super(props);
     this.state = {
       showAnnotations: false,
-      deleteAnnotationId: null
+      deleteAnnotationId: null,
+      viewportSize: 'desktop'
     };
   }
 
@@ -40,13 +41,17 @@ export class Preview extends Component {
     this.props.history.push(`/projects/${this.props.projectId}/whiteboards/${this.props.whiteboardId}/views/${viewLink.toViewId}/preview`);
   };
 
+  handleChangeViewportSize = viewportSize => {
+    this.setState({ viewportSize });
+  }
+
   handleToggleAnnotations = () => {
     this.setState(prevState => ({ showAnnotations: !prevState.showAnnotations }));
   }
 
   handleAnnotate = coords => {
     if (!this.state.showAnnotations) return;
-    this.props.addAnnotationToView(this.props.projectId, this.props.whiteboardId, this.props.viewId, 'desktop', coords.x, coords.y);
+    this.props.addAnnotationToView(this.props.projectId, this.props.whiteboardId, this.props.viewId, this.state.viewportSize, coords.x, coords.y);
   }
 
   handleChangeAnnotationText = (annotationId, text) => {
@@ -115,14 +120,16 @@ export class Preview extends Component {
                 imageInteractionElements={ previewData.fileType === 'image' ? previewData.interactionElements : [] }
                 onInteractionElementClick={ this.handleInteractionElementClick }
                 onAnnotate={ this.handleAnnotate }
-                viewportSize="desktop"
+                viewportSize={ this.state.viewportSize }
               />
             </div>
           </main>
           <ViewAnnotationPanel
             visible={ this.state.showAnnotations }
-            onToggleVisibility={ this.handleToggleAnnotations }
             annotations={ this.props.annotations }
+            currentViewportSize={ this.state.viewportSize }
+            onChangeViewportSize={ this.handleChangeViewportSize }
+            onToggleVisibility={ this.handleToggleAnnotations }
             onChangeAnnotationText={ this.handleChangeAnnotationText }
             onDeleteAnnotation={ this.handleDeleteAnnotation }
           />

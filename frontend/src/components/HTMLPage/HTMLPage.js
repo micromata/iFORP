@@ -3,6 +3,7 @@ import injectSheet from 'react-jss';
 import styles from './HTMLPage.styles';
 import { baseURL } from '../../utils';
 import { initInteractionElementDrawing } from './interaction-element-drawing';
+import config from '../../config';
 
 export class HTMLPage extends Component {
   iframeDocument = '';
@@ -16,10 +17,8 @@ export class HTMLPage extends Component {
     this.injectIframeContent();
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.viewportSize === this.props.viewportSize) {
-      this.injectIframeContent();
-    }
+  componentDidUpdate() {
+    this.injectIframeContent();
   }
 
   handleInteractionElementClick = event => {
@@ -68,7 +67,7 @@ export class HTMLPage extends Component {
           counter-reset: interactionElementCounter;
           cursor: ${ this.props.allowInteractionElementCreation ? 'crosshair' : 'default' };
           background: rgba(255, 255, 255, 0);
-          width: 1280px;
+          width: ${config.widthForViewportSize[this.props.viewportSize]}px;
         }
 
         body:empty {

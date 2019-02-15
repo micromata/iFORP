@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
 import styles from './View.styles';
+import config from '../../config';
 import NavBar from '../../components/NavBar/NavBar';
 import LibraryFilter from '../../components/Library/LibraryFilter';
 import LibraryTreeView from '../../components/Library/LibraryTreeView';
@@ -318,7 +319,7 @@ const mapStateToProps = (state, ownProps) => {
 
   const { directories } = state.app.library;
 
-  const onlyLinearClickflow = state.app.whiteboardClickflow === 'linear';
+  const onlyLinearClickflow = config.whiteboardClickflow === 'linear';
   const viewsToLinkTo = getViewsToLinkTo(viewId, whiteboard, onlyLinearClickflow);
   const viewLinkOptions = (whiteboard && whiteboard.views) ?
     [{value: 0, title: '-'}].concat(viewsToLinkTo):

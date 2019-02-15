@@ -3,7 +3,6 @@ import { deepClone, findProjectWithId, findWhiteboardWithId, findViewWithId, fin
 
 const initialState = {
   projects: [],
-  whiteboardClickflow: 'linear',
   library: {
     directories: []
   }

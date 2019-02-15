@@ -26,5 +26,15 @@ export default (theme) => ({
     '& i': {
       color: theme.textColorOnBackground,
     },
-  }
+  },
+  Buttons: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    '& div:empty': {
+      minWidth: '56px'
+    },
+  },
 });

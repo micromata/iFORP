@@ -1,3 +1,5 @@
+import config from '../../config';
+
 export default (theme) => ({
   HTMLPage: {
     '&.preview-wrapper': {
@@ -14,9 +16,9 @@ export default (theme) => ({
         	margin: 'auto',
         	height: '100%',
           width: '100%',
-        	'&.desktop': { maxWidth: '1280px' },
-        	'&.tablet': { width: '768px' },
-        	'&.phone': { width: '375px' }
+        	'&.desktop': { maxWidth: `${config.viewportWidthDesktop}px` },
+        	'&.tablet': { width: `${config.viewportWidthTablet}px` },
+        	'&.phone': { width: `${config.viewportWidthPhone}px` },
         }
       }
 

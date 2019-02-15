@@ -1,8 +1,6 @@
 const isDev = process.env.NODE_ENV === 'development';
 const baseURL = isDev ? `${window.location.protocol}//${window.location.hostname}:3001` : '';
 
-console.log('baseUrl', baseURL)
-
 const deepClone = obj => JSON.parse(JSON.stringify(obj));
 
 const findProjectWithId = (projects, projectId) => projects && projects.find(project => project.id === projectId);

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
 import styles from './Whiteboard.styles';
+import config from '../../config';
 import NavBar from '../../components/NavBar/NavBar';
 import ProjectButtonBar from '../../components/ProjectButtonBar/ProjectButtonBar';
 import EditableText from '../../components/EditableText/EditableText';
@@ -156,7 +157,7 @@ const mapStateToProps = (state, ownProps) => {
     views,
     viewLinkMapping,
     canStartPreview,
-    onlyLinearClickflow: state.app.whiteboardClickflow === 'linear',
+    onlyLinearClickflow: config.whiteboardClickflow === 'linear',
     navigationMenuEntries: [
       { title: 'Home', url: '/'},
       { title: 'Bibliothek', url: '/library'},
