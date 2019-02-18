@@ -2,6 +2,7 @@ let isMouseDown = false;
 let rect;
 let onCreateInteractionElement;
 let touchIdentifier;
+let horizontalOffset;
 const posStart = { x: 0, y: 0 };
 const posCurrent = { x: 0, y: 0 };
 
@@ -16,6 +17,7 @@ const calculateRectangleCoords = () => (
 
 const createInteractionElement = () => {
   const coords = calculateRectangleCoords();
+  coords.x = coords.x - horizontalOffset;
 
   if (coords.width < 16 || coords.height < 16) return;
 
@@ -107,9 +109,10 @@ const handleTouchEnd = event => {
   createInteractionElement();
 }
 
-export const initInteractionElementDrawing = (container, rectNode, onCreateInteractionElementFunc) => {
+export const initInteractionElementDrawing = (container, rectNode, horizOffset, onCreateInteractionElementFunc) => {
   rect = rectNode;
   onCreateInteractionElement = onCreateInteractionElementFunc;
+  horizontalOffset = horizOffset;
 
   container.removeEventListener('mousedown', handleMouseDown);
   container.removeEventListener('mousemove', handleMouseMove);

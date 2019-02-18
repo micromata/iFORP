@@ -9,7 +9,6 @@ const widthForViewportSize = {
 
 const whiteboardClickflow = 'linear';
 
-
 export default {
   viewportWidthDesktop,
   viewportWidthTablet,

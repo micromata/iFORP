@@ -1,3 +1,5 @@
+import config from './config';
+
 const isDev = process.env.NODE_ENV === 'development';
 const baseURL = isDev ? `${window.location.protocol}//${window.location.hostname}:3001` : '';
 
@@ -41,6 +43,16 @@ const findImageWithId = (directories, imageId) => {
   }, null);
 }
 
+const calculateImagePreviewOffset = (viewportSize, imageWidth) => {
+  const viewportWidth = config.widthForViewportSize[viewportSize];
+
+  if (typeof imageWidth !== 'number') return viewportWidth;
+
+  const result = (viewportWidth - imageWidth) / 2;
+
+  return result > 0 ? result : 0;
+}
+
 export {
   isDev,
   baseURL,
@@ -50,5 +62,6 @@ export {
   findViewWithId,
   findViewAnnotationWithId,
   findPageWithId,
-  findImageWithId
+  findImageWithId,
+  calculateImagePreviewOffset
 };

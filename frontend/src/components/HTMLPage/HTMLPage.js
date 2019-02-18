@@ -145,7 +145,7 @@ export class HTMLPage extends Component {
         <div
           class='interaction-element-rect'
           data-interaction-id='${item.id}'
-          style='left: ${item.x}px; top: ${item.y}px; width: ${item.width}px; height: ${item.height}px'
+          style='left: ${item.x + this.props.horizontalOffset}px; top: ${item.y}px; width: ${item.width}px; height: ${item.height}px'
         >
         </div>
       `).join('') : '';
@@ -192,6 +192,7 @@ export class HTMLPage extends Component {
       initInteractionElementDrawing(
         this.iframeDocument.body,
         this.iframeDocument.body.querySelector('#new-interaction-element-rect'),
+        this.props.horizontalOffset,
         this.props.onCreateInteractionElement);
     }
 

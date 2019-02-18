@@ -7,7 +7,7 @@ import HTMLPage from '../../components/HTMLPage/HTMLPage';
 import ViewAnnotationPanel from '../../components/ViewAnnotation/ViewAnnotationPanel';
 import Modal from '../../components/Modal/Modal';
 import { getViewsForWhiteboard, getViewDetails, addAnnotationToView, changeViewAnnotationText, deleteViewAnnotation } from '../../actions/app-actions';
-import { baseURL, findViewWithId } from '../../utils';
+import { baseURL, findViewWithId, calculateImagePreviewOffset } from '../../utils';
 
 export class Preview extends Component {
   constructor(props) {
@@ -82,7 +82,8 @@ export class Preview extends Component {
         assets: this.props.view.assets,
         interactionElements: this.props.view.interactionElements,
         annotations: this.props.view.annotations,
-        fileType: this.props.view.fileType
+        fileType: this.props.view.fileType,
+        horizontalOffset: 0
       }
     }
 
@@ -94,6 +95,7 @@ export class Preview extends Component {
       fileType: this.props.view.fileType,
       interactionElements: this.props.view.imageInteractionElements,
       annotations: this.props.view.annotations,
+      horizontalOffset: calculateImagePreviewOffset(this.state.viewportSize, this.props.view.imageWidth)
     };
   }
 
@@ -121,6 +123,7 @@ export class Preview extends Component {
                 onInteractionElementClick={ this.handleInteractionElementClick }
                 onAnnotate={ this.handleAnnotate }
                 viewportSize={ this.state.viewportSize }
+                horizontalOffset={ previewData.horizontalOffset }
               />
             </div>
           </main>

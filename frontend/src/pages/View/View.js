@@ -35,7 +35,8 @@ import {
   findWhiteboardWithId,
   findViewWithId,
   findPageWithId,
-  findImageWithId
+  findImageWithId,
+  calculateImagePreviewOffset
 } from '../../utils';
 
 class View extends Component {
@@ -161,7 +162,8 @@ class View extends Component {
         body: `<div style='width: ${image.width}px; height: ${image.height}px; margin-left: auto; margin-right: auto; background-image: url(${baseURL}/library/images/${image.name});' />`,
         assets: [],
         interactionElements: [],
-        fileType: 'image'
+        fileType: 'image',
+        horizontalOffset: calculateImagePreviewOffset('desktop', image.width)
       };
     }
 
@@ -172,7 +174,8 @@ class View extends Component {
         body: this.props.view.body,
         assets: this.props.view.assets,
         interactionElements: this.props.view.interactionElements,
-        fileType: this.props.view.fileType
+        fileType: this.props.view.fileType,
+        horizontalOffset: 0
       }
     }
 
@@ -182,7 +185,8 @@ class View extends Component {
       body: `<div style='width: ${this.props.view.imageWidth}px; height: ${this.props.view.imageHeight}px; margin-left: auto; margin-right: auto; background-image: url(${baseURL}/library/images/${this.props.view.imageName});' />`,
       assets: [],
       interactionElements: [...this.props.view.imageInteractionElements].sort((a, b) => a.id - b.id),
-      fileType: this.props.view.fileType
+      fileType: this.props.view.fileType,
+      horizontalOffset: calculateImagePreviewOffset('desktop', this.props.view.imageWidth)
     };
   }
 
@@ -218,6 +222,7 @@ class View extends Component {
               body={ previewData.body || '' }
               assets={ previewData.assets || [] }
               viewportSize="desktop"
+              horizontalOffset={ previewData.horizontalOffset }
               allowInteractionElementCreation={ !showLibrary && previewData.fileType === 'image' }
               imageInteractionElements={ previewData.fileType === 'image' ? previewData.interactionElements : [] }
               onCreateInteractionElement={ coords => this.props.addInteractionElementToView(this.props.projectId, this.props.whiteboardId, this.props.view.id, coords) }
