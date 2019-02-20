@@ -17,7 +17,7 @@ export const save = async base => {
   whiteboard.name = 'Default Whiteboard';
 
   const project = new Project();
-  project.name = `A ${superb.random()} Project`;
+  project.name = `${superb.random()} Project`;
   project.whiteboards = [whiteboard];
 
   const view = new View();

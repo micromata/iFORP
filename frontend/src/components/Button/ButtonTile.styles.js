@@ -20,13 +20,17 @@ export default theme => ({
       borderRadius: '.5rem',
       height: '8.25rem',
       width: '11.5rem',
+      overflow: 'hidden',
       outline: 'none',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       cursor: 'pointer',
       '&:hover': {
-        backgroundColor: '#BCBCBC',
+        backgroundColor: '#BCBCBC'
+      },
+      '& img': {
+        maxWidth: '11.5rem',
       }
     }
   },

@@ -9,12 +9,11 @@ import EditableText from '../../components/EditableText/EditableText';
 import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
 import TileViewHtmlIcon from '../../assets/img/TileViewHtml';
-import TileViewImageIcon from '../../assets/img/TileViewImage';
 import CircleButton from '../../components/Button/CircleButton';
 import PreviewIcon from '../../assets/img/Preview';
 import PlusIcon from '../../assets/img/Plus';
 import { getViewsForWhiteboard, createNewView, renameView } from '../../actions/app-actions';
-import { findProjectWithId, findWhiteboardWithId } from '../../utils';
+import { baseURL, findProjectWithId, findWhiteboardWithId } from '../../utils';
 
 class Whiteboard extends Component {
   numberOfViews = { last: 0, current: 0 }
@@ -60,12 +59,19 @@ class Whiteboard extends Component {
       switch (view.fileType) {
         case 'html':
           return TileViewHtmlIcon;
-        case 'image':
-          return TileViewImageIcon;
         default:
           return null;
       }
     };
+
+    const getImagePathForView = view => {
+      switch (view.fileType) {
+        case 'image':
+         return `${baseURL}/library/images/${view.imageName}`;
+        default:
+         return null;
+      }
+    }
 
     this.numberOfViews.last = this.numberOfViews.current;
     this.numberOfViews.current = this.props.views.length;
@@ -85,6 +91,7 @@ class Whiteboard extends Component {
                 key={ view.id }
                 titleBelow
                 TileIcon={ getIconForView(view) }
+                TileImagePath={ getImagePathForView(view) }
                 connectRight={ this.hasConnectorToFollowingView(view.id, index) }
                 onClick={ () => this.navigateToView(view.id) }>
                 <EditableText

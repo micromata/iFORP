@@ -13,6 +13,7 @@ const ButtonTile = ({
   children,
   titleBelow = false,
   TileIcon,
+  TileImagePath,
   connectRight = false
 }) => (
   <div id={ id } className={`${classes.ButtonTile} ${connectRight ? 'ConnectRight' : ''}`}>
@@ -31,7 +32,8 @@ const ButtonTile = ({
       </div>
     }
     <button className={`btn`} onClick={onClick} disabled={disabled}>
-      { TileIcon &&<TileIcon /> }
+      { TileIcon && <TileIcon /> }
+      { TileImagePath && <img src={ TileImagePath } /> }
     </button>
     {children &&
       titleBelow && (
