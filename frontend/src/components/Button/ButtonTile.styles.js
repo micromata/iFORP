@@ -27,6 +27,7 @@ export default theme => ({
       cursor: 'pointer',
       border: 'none',
       padding: 0,
+      borderRadius: 0,
       '&:hover': {
         backgroundColor: '#BCBCBC'
       },

@@ -29,7 +29,7 @@ export default ({ className = '', id = '' }) => (
           </text>
           <path
             d="M83,0 C94.045695,-3.55271368e-15 103,8.954305 103,20 M20,103 C8.954305,103 0,94.045695 0,83"
-            stroke="#F9BB1F"
+            stroke="#EE9A02"
             strokeWidth="4"
           />
         </g>

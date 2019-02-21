@@ -11,6 +11,7 @@ export default theme => ({
     backgroundColor: theme.accentColor,
     border: 'none',
     fontSize: '18px',
+    fontWeight: 'bold',
     color: '#fff',
     userSelect: 'none',
     padding: '8px 45px',

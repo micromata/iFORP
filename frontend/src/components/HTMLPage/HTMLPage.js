@@ -80,7 +80,7 @@ export class HTMLPage extends Component {
           height: 30px;
           border-radius: 50%;
           z-index: 999999;
-          background: #F9BB1F;
+          background: #EE9A02;
           color: #FFF;
           line-height: 30px;
           text-align: center;
@@ -88,14 +88,14 @@ export class HTMLPage extends Component {
         }
 
         #new-interaction-element-rect {
-          border: 1px dashed #F9BB1F;
+          border: 1px dashed #EE9A02;
           background-color: rgb(240, 188, 72, 0.4);
           position: absolute;
           visibility: hidden;
         }
 
         .interaction-element-rect {
-          border: 1px dashed #F9BB1F;
+          border: 1px dashed #EE9A02;
           background-color: rgb(240, 188, 72, 0.4);
           position: absolute;
           opacity: ${this.props.allowInteractionElementCreation ? '1' : '0'};
@@ -103,7 +103,7 @@ export class HTMLPage extends Component {
         }
 
         .interaction-element-rect-highlighted {
-          border: 1px dashed #F9BB1F;
+          border: 1px dashed #EE9A02;
           background-color: rgb(240, 188, 72, 0.4);
           position: absolute;
           opacity: 1;
@@ -115,7 +115,7 @@ export class HTMLPage extends Component {
           color: #FFF;
           width: 20px;
           height: 20px;
-          background: #F9BB1F;
+          background: #EE9A02;
           border-radius: 50%;
           display: flex;
           justify-content: center;

@@ -14,7 +14,7 @@ export default {
     backgroundColor: '#3D3D3D',
     textColor: '#5E5E5E',
     textColorOnBackground: '#FFF',
-    accentColor: '#F9BB1F',
+    accentColor: '#EE9A02',
     DottedBackground: {
       backgroundColor: '#3D3D3D',
       dotColor: '#5E5E5E',
@@ -26,7 +26,7 @@ export default {
     NavigationMenu: {
       backgroundColor: '#5E5E5E',
       textColor: '#FFF',
-      accentColor: '#F9BB1F'
+      accentColor: '#EE9A02'
     },
     ButtonBar: {
       backgroundColor: 'rgba(100, 100, 100, 0.9)',
@@ -38,22 +38,22 @@ export default {
         backgroundColor: '#5A5A5A'
       },
       notDefault: {
-        textColor: '#F9BB1F',
+        textColor: '#EE9A02',
         backgroundColor: '#5A5A5A',
-        borderColor: '#F9BB1F'
+        borderColor: '#EE9A02'
       }
     },
     Modal: {
       backgroundColor: 'rgba(100, 100, 100, 0.9)'
     },
     ViewportSwitch: {
-      colorSelected: '#F9BB1F',
+      colorSelected: '#EE9A02',
       colorDefault: '#E9E9E9'
     }
   },
   light: {
     backgroundColor: '#FFF',
-    accentColor: '#F9BB1F',
+    accentColor: '#EE9A02',
     textColor: '#5E5E5E',
     textColorOnBackground: '#5E5E5E',
     DottedBackground: {
@@ -67,7 +67,7 @@ export default {
     NavigationMenu: {
       backgroundColor: '#E9E9E9',
       textColor: '#5E5E5E',
-      accentColor: '#F9BB1F',
+      accentColor: '#EE9A02',
     },
     ButtonBar: {
       backgroundColor: 'rgba(100, 100, 100, 0.9)',
@@ -88,13 +88,13 @@ export default {
       backgroundColor: 'rgba(100, 100, 100, 0.9)'
     },
     ViewportSwitch: {
-      colorSelected: '#F9BB1F',
+      colorSelected: '#EE9A02',
       colorDefault: '#E9E9E9'
     }
   },
   purple: {
     backgroundColor: '#32394C',
-    accentColor: '#F9BB1F',
+    accentColor: '#EE9A02',
     textColor: '#5E5E5E',
     textColorOnBackground: '#FFF',
     DottedBackground: {
@@ -108,7 +108,7 @@ export default {
     NavigationMenu: {
       backgroundColor: '#485578',
       textColor: '#FFFFFF',
-      accentColor: '#F9BB1F',
+      accentColor: '#EE9A02',
     },
     ButtonBar: {
       backgroundColor: 'rgba(74, 85, 117, 0.9)',
@@ -120,16 +120,16 @@ export default {
         backgroundColor: '#5A5A5A'
       },
       notDefault: {
-        textColor: '#F9BB1F',
+        textColor: '#EE9A02',
         backgroundColor: '#5A5A5A',
-        borderColor: '#F9BB1F'
+        borderColor: '#EE9A02'
       }
     },
     Modal: {
       backgroundColor: 'rgba(74, 85, 117, 0.9)'
     },
     ViewportSwitch: {
-      colorSelected: '#F9BB1F',
+      colorSelected: '#EE9A02',
       colorDefault: '#E9E9E9'
     }
   },

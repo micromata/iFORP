@@ -1,8 +1,9 @@
 export default {
   button: {
-    backgroundColor: '#F9BB1F',
+    backgroundColor: '#EE9A02',
     border: 'none',
     fontSize: '18px',
+    fontWeight: 'bold',
     color: '#fff',
     userSelect: 'none',
     display: 'flex',

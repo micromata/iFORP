@@ -12,6 +12,7 @@ export default theme => ({
         backgroundColor: theme.accentColor,
         border: 'none',
         color: '#fff',
+        fontWeight: 'bold',
         padding: '8px 45px',
         outlineStyle: 'none',
         cursor: 'pointer',
