@@ -56,7 +56,7 @@ class ProjectOverview extends Component {
       <React.Fragment>
         <NavBar exit title={ `iFORP / Projektübersicht` } />
         <div className={ this.props.classes.ProjectOverview }>
-          <SearchBar searchTerm={ this.state.searchTerm } onChange={ this.handleSearchTermChange } />
+          <SearchBar searchTerm={ this.state.searchTerm } onChange={ this.handleSearchTermChange } light />
           <ElementGrid>
             { filteredProjects.map(project =>
               <ButtonTile

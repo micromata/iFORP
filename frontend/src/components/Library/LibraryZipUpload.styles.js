@@ -1,5 +1,6 @@
 export default theme => ({
   LibraryZipUpload: {
+    display: 'inline-block',
     '& input[type=file]': {
       width: '0.1px',
       height: '0.1px',

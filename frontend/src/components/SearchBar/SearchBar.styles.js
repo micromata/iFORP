@@ -1,19 +1,33 @@
 export default theme => ({
   SearchBar: {
-    width: '100%',
+    width: '360px',
     height: '60px',
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    marginTop: '-30px',
-    padding: '40px 80px',
     zIndex: 10,
     '& input': {
+      display: 'inline-block',
       backgroundColor: 'transparent',
-      maxWidth: '250px',
-      marginLeft: '40px',
-      color: theme.textColorOnBackground
-    }
+      fontSize: '14px',
+      color: theme.textColor,
+      paddingLeft: '40px',
+      height: '40px'
+    },
+    '& svg': {
+      transform: 'scale(0.8)',
+      position: 'relative',
+      top: '-42px',
+      left: '14px',
+      '& g': {
+        stroke: theme.textColor
+      }
+    },
+    '&.light': {
+      '& input': {
+        borderColor: theme.textColorOnBackground,
+        color: theme.textColorOnBackground
+      },
+      '& svg g': {
+        stroke: theme.textColorOnBackground
+      }
+    },
   }
 });

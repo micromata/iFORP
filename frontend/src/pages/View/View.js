@@ -4,8 +4,7 @@ import injectSheet from 'react-jss';
 import styles from './View.styles';
 import config from '../../config';
 import NavBar from '../../components/NavBar/NavBar';
-import LibraryFilter from '../../components/Library/LibraryFilter';
-import LibraryTreeView from '../../components/Library/LibraryTreeView';
+import LibrarySidebar from '../../components/Library/LibrarySidebar';
 import ViewLinkEditor from '../../components/ViewLinkEditor/ViewLinkEditor';
 import ProjectButtonBar from '../../components/ProjectButtonBar/ProjectButtonBar';
 import LibraryZipUpload from '../../components/Library/LibraryZipUpload';
@@ -44,7 +43,7 @@ class View extends Component {
     super(props);
 
     this.state = {
-      selectedFilter: window.localStorage.getItem('iforp.library.selectedFilter') || 'html',
+      selectedItemType: null,
       selectedDirectoryItemId: null,
       usedPageId: null,
       links: {},
@@ -70,17 +69,8 @@ class View extends Component {
     }, {});
   }
 
-  handleFilterChange = selectedFilter => {
-    window.localStorage.setItem('iforp.library.selectedFilter', selectedFilter);
-    this.setState({ selectedFilter, selectedDirectoryItemId: null });
-  }
-
-  handleSelectDirectoryItem = selectedDirectoryItemId => {
-    this.setState({ selectedDirectoryItemId });
-
-    if (this.state.selectedFilter === 'html') {
-      this.props.getPageDetails(selectedDirectoryItemId);
-    }
+  handleSelectDirectoryItem = (selectedItemType, selectedDirectoryItemId) => {
+    this.setState({selectedItemType, selectedDirectoryItemId });
   }
 
   handleShowLibrarySelection = () => {
@@ -124,11 +114,11 @@ class View extends Component {
 
   handleUseDirectoryItem = async () => {
     let view;
-    if (this.state.selectedFilter === 'html') {
+    if (this.state.selectedItemType === 'html') {
       const page = findPageWithId(this.props.directories, this.state.selectedDirectoryItemId) || {};
       view = await this.props.usePageForView(this.props.projectId, this.props.whiteboardId, this.props.viewId, page);
     }
-    else if (this.state.selectedFilter === 'image') {
+    else if (this.state.selectedItemType === 'image') {
       const image = findImageWithId(this.props.directories, this.state.selectedDirectoryItemId) || {};
       view = await this.props.useImageForView(this.props.projectId, this.props.whiteboardId, this.props.viewId, image);
     } else {
@@ -150,7 +140,7 @@ class View extends Component {
 
   getPreviewData = showLibrary => {
     if (showLibrary) {
-      if (this.state.selectedFilter === 'html') {
+      if (this.state.selectedItemType === 'html') {
         return findPageWithId(this.props.directories, this.state.selectedDirectoryItemId) || {};
       }
 
@@ -202,16 +192,14 @@ class View extends Component {
           exitUrl={ `/projects/${ this.props.projectId }/whiteboards/${ this.props.whiteboardId}` }
           title={ `iFORP / ${this.props.projectName} / ${this.props.whiteboardName} / ${this.props.view && this.props.view.name}` }
         />
-        { showLibrary &&
-          <LibraryFilter selectedFilter={ this.state.selectedFilter } onFilterChange={ this.handleFilterChange } />
-        }
         <main>
           { showLibrary &&
-            <LibraryTreeView
+            <LibrarySidebar
               directories={ this.props.directories }
-              fileTypeFilter={ this.state.selectedFilter }
               selectedItemId={ this.state.selectedDirectoryItemId }
               onSelectItem={ this.handleSelectDirectoryItem }
+              onZipFileSelected={ this.props.uploadZipFile }
+              onImagesSelected={ this.props.uploadImages }
             />
           }
 
@@ -242,15 +230,15 @@ class View extends Component {
         </main>
         <ProjectButtonBar includeNavigationMenu={ false }>
           { showLibrary &&
-              <React.Fragment>
-              { this.state.selectedFilter === 'html' &&
-                <LibraryZipUpload onZipFileSelected={ this.props.uploadZipFile } />
-              }
-              { this.state.selectedFilter === 'image' &&
-                <LibraryImagesUpload onImagesSelected={ this.props.uploadImages } />
+            <React.Fragment>
+              { Boolean(this.props.directories && this.props.directories.length) &&
+                <React.Fragment>
+                  <LibraryZipUpload onZipFileSelected={ this.props.uploadZipFile } />
+                  <LibraryImagesUpload onImagesSelected={ this.props.uploadImages } />
+                </React.Fragment>
               }
               <CircleButton onClick={ this.handleDeleteViewClick } className='ghost' disabled={ !this.props.canDelete }><DeleteIcon /></CircleButton>
-              <Button buttonStyle='round' onClick={ this.handleUseDirectoryItem } disable={ !this.state.selectedDirectoryItemId }>Verwenden</Button>
+              <Button buttonStyle='round' onClick={ this.handleUseDirectoryItem } disabled={ !this.state.selectedDirectoryItemId }>Verwenden</Button>
             </React.Fragment>
           }
           { !showLibrary &&

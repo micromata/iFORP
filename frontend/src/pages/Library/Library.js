@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import injectSheet from 'react-jss';
 import styles from './Library.styles';
 import NavBar from '../../components/NavBar/NavBar';
-import LibraryFilter from '../../components/Library/LibraryFilter';
-import LibraryTreeView from '../../components/Library/LibraryTreeView';
+import LibrarySidebar from '../../components/Library/LibrarySidebar';
 import ProjectButtonBar from '../../components/ProjectButtonBar/ProjectButtonBar';
 import LibraryZipUpload from '../../components/Library/LibraryZipUpload';
 import LibraryImagesUpload from '../../components/Library/LibraryImagesUpload';
@@ -17,7 +16,7 @@ class Library extends Component {
     super(props);
 
     this.state = {
-      selectedFilter: window.localStorage.getItem('iforp.library.selectedFilter') || 'html',
+      selectedItemType: null,
       selectedDirectoryItemId: null,
     };
   }
@@ -26,21 +25,12 @@ class Library extends Component {
     this.props.getLibraryDirectories();
   }
 
-  handleFilterChange = selectedFilter => {
-    window.localStorage.setItem('iforp.library.selectedFilter', selectedFilter);
-    this.setState({ selectedFilter, selectedDirectoryItemId: null });
-  }
-
-  handleSelectDirectoryItem = selectedDirectoryItemId => {
-    this.setState({ selectedDirectoryItemId });
-
-    if (this.state.selectedFilter === 'html') {
-      this.props.getPageDetails(selectedDirectoryItemId);
-    }
+  handleSelectDirectoryItem = (selectedItemType, selectedDirectoryItemId) => {
+    this.setState({selectedItemType, selectedDirectoryItemId });
   }
 
   getPreviewData = () => {
-    if (this.state.selectedFilter === 'html') {
+    if (this.state.selectedItemType === 'html') {
       const page = findPageWithId(this.props.directories, this.state.selectedDirectoryItemId);
       if (!page) return {};
 
@@ -68,13 +58,13 @@ class Library extends Component {
     return (
       <div className={ this.props.classes.Library }>
         <NavBar title={ `iFORP / Bibliothek` } exit />
-        <LibraryFilter selectedFilter={ this.state.selectedFilter } onFilterChange={ this.handleFilterChange } />
         <main>
-          <LibraryTreeView
+          <LibrarySidebar
             directories={ this.props.directories }
-            fileTypeFilter={ this.state.selectedFilter }
             selectedItemId={ this.state.selectedDirectoryItemId }
             onSelectItem={ this.handleSelectDirectoryItem }
+            onZipFileSelected={ this.props.uploadZipFile }
+            onImagesSelected={ this.props.uploadImages }
           />
 
           <div className='content'>
@@ -88,11 +78,11 @@ class Library extends Component {
           </div>
         </main>
         <ProjectButtonBar includeNavigationMenu={ true }>
-          { this.state.selectedFilter === 'html' &&
-            <LibraryZipUpload onZipFileSelected={ this.props.uploadZipFile } />
-          }
-          { this.state.selectedFilter === 'image' &&
-            <LibraryImagesUpload onImagesSelected={ this.props.uploadImages } />
+          { Boolean(this.props.directories && this.props.directories.length) &&
+            <React.Fragment>
+              <LibraryZipUpload onZipFileSelected={ this.props.uploadZipFile } />
+              <LibraryImagesUpload onImagesSelected={ this.props.uploadImages } />
+            </React.Fragment>
           }
         </ProjectButtonBar>
       </div>

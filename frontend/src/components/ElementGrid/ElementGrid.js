@@ -1,8 +1,15 @@
 import React from 'react';
 import injectSheet from 'react-jss';
 
-const ElementGrid = ({ classes, children, nowrap }) => (
-  <div className={`${classes.ElementGrid} ${nowrap ? 'nowrap' : ''}`}>{children}</div>
+const getClassNames = (classes, nowrap, leftAlign) => {
+  const classNames = [ classes.ElementGrid ];
+  if (nowrap) classNames.push('nowrap');
+  if (leftAlign) classNames.push('leftAlign');
+  return classNames.join(' ');
+}
+
+const ElementGrid = ({ classes, children, nowrap, leftAlign }) => (
+  <div className={ getClassNames(classes, nowrap, leftAlign) }>{children}</div>
 );
 
 const styles = theme => ({
@@ -11,6 +18,9 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'center',
     flexWrap: 'wrap',
+    '&.leftAlign': {
+      justifyContent: 'flex-start'
+    },
     '&.nowrap': {
       margin: '100px',
       overflow: 'scroll',

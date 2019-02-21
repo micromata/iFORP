@@ -1,5 +1,6 @@
 export default theme => ({
   LibraryImagesUpload: {
+    display: 'inline-block',
     '& input[type=file]': {
       width: '0.1px',
       height: '0.1px',

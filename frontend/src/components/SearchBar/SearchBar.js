@@ -4,10 +4,10 @@ import SearchIcon from '../../assets/img/Search';
 import TextInput from '../TextInput/TextInput';
 import styles from './SearchBar.styles';
 
-export const SearchBar = ({ classes, theme, searchTerm, onChange }) => (
-  <div className={classes.SearchBar}>
-    <SearchIcon color={ theme.textColorOnBackground } />
+export const SearchBar = ({ classes, searchTerm, onChange, light }) => (
+  <div className={`${classes.SearchBar} ${light ? 'light': ''}`}>
     <TextInput value={ searchTerm } onChange={ onChange }/>
+    <SearchIcon />
   </div>
 );
 

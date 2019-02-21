@@ -49,6 +49,12 @@ export default {
     ViewportSwitch: {
       colorSelected: '#EE9A02',
       colorDefault: '#E9E9E9'
+    },
+    FilterChip: {
+      textColor: '#5E5E5E',
+      textColorChecked: '#4A4A4A',
+      backgroundColor: '#E9E9e9',
+      backgroundColorChecked: '#C8C8C8'
     }
   },
   light: {
@@ -90,6 +96,12 @@ export default {
     ViewportSwitch: {
       colorSelected: '#EE9A02',
       colorDefault: '#E9E9E9'
+    },
+    FilterChip: {
+      textColor: '#5E5E5E',
+      textColorChecked: '#4A4A4A',
+      backgroundColor: '#E9E9e9',
+      backgroundColorChecked: '#C8C8C8'
     }
   },
   purple: {
@@ -131,6 +143,12 @@ export default {
     ViewportSwitch: {
       colorSelected: '#EE9A02',
       colorDefault: '#E9E9E9'
+    },
+    FilterChip: {
+      textColor: '#5E5E5E',
+      textColorChecked: '#4A4A4A',
+      backgroundColor: '#E9E9e9',
+      backgroundColorChecked: '#C8C8C8'
     }
   },
 };

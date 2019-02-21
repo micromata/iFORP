@@ -8,7 +8,6 @@ export default (theme) => ({
     	position: 'relative',
     	padding: '0 0 75vh 0',
       '& .preview': {
-        	border: '1px solid gray',
         	position: 'absolute',
         	top: '0',
         	left: '0',

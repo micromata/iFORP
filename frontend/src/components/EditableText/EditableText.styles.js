@@ -4,7 +4,7 @@ export default (theme) => ({
     display: 'inline-block',
     width: '100%',
     '& input[type=text]': {
-      'fontSize': '16px',
+      'fontSize': '14px',
       'background': 'transparent',
       'color': theme.textColorOnBackground,
       'border': `1px dashed ${theme.accentColor}`,

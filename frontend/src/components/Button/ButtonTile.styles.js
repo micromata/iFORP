@@ -51,7 +51,7 @@ export default theme => ({
     display: 'flex',
     justifyContent: 'center',
     marginTop: '1rem',
-    fontSize: '1rem',
+    fontSize: '14px',
     userSelect: 'none',
     textAlign: 'center',
     lineHeight: '28px',
