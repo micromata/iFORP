@@ -71,7 +71,12 @@ function enrichWithInteractionIds(fileContents) {
   return { markup: $.html() };
 }
 
-export function processHtmlFile(file, uploadDirectory, extractionBasePath) {
+export function processHtmlFile(
+  file,
+  uploadDirectory,
+  extractionBasePath,
+  directoryName
+) {
   const filePath = path.resolve(extractionBasePath, file);
   const { markup } = enrichWithInteractionIds(
     fs.readFileSync(filePath).toString()
@@ -104,6 +109,7 @@ export function processHtmlFile(file, uploadDirectory, extractionBasePath) {
     body,
     head,
     assets,
-    htmlElementAttributes
+    htmlElementAttributes,
+    thumbnailPath: `${directoryName}${path.sep}thumbnail-${name}.png`
   };
 }

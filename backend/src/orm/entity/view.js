@@ -59,6 +59,9 @@ export class View {
   assets = undefined;
 
   @Column('text', { nullable: true })
+  htmlThumbnailPath = undefined;
+
+  @Column('text', { nullable: true })
   imageName = undefined;
 
   @Column('int', { nullable: true })

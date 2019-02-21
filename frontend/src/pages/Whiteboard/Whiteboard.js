@@ -55,17 +55,10 @@ class Whiteboard extends Component {
   render() {
     if (!this.props.views) return null;
 
-    const getIconForView = view => {
+    const getThumbnailPathForView = view => {
       switch (view.fileType) {
         case 'html':
-          return TileViewHtmlIcon;
-        default:
-          return null;
-      }
-    };
-
-    const getImagePathForView = view => {
-      switch (view.fileType) {
+         return `${baseURL}/library/${view.htmlThumbnailPath}`;
         case 'image':
          return `${baseURL}/library/images/${view.imageName}`;
         default:
@@ -90,8 +83,7 @@ class Whiteboard extends Component {
                 id={ `view-${view.id}` }
                 key={ view.id }
                 titleBelow
-                TileIcon={ getIconForView(view) }
-                TileImagePath={ getImagePathForView(view) }
+                TileImagePath={ getThumbnailPathForView(view) }
                 connectRight={ this.hasConnectorToFollowingView(view.id, index) }
                 onClick={ () => this.navigateToView(view.id) }>
                 <EditableText

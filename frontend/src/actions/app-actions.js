@@ -349,6 +349,7 @@ const usePageForView = (projectId, whiteboardId, viewId, page) => async (dispatc
   view.head = page.head;
   view.body = page.body;
   view.htmlElementAttributes = page.htmlElementAttributes;
+  view.htmlThumbnailPath = page.thumbnailPath;
   view.assets = page.assets;
   view.viewLinks = [];
   view.imageName = null;

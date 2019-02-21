@@ -23,6 +23,9 @@ export class Page {
   @Column('text')
   body = undefined;
 
+  @Column('text')
+  thumbnailPath = undefined;
+
   @Column('text', {
     nullable: true,
     transformer: {

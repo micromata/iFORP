@@ -24,6 +24,7 @@ import {
   exceptionWithHttpStatus
 } from '../utils/request';
 import getImageDimensions from 'buffer-image-size';
+import { createThumbnailFromPage } from '../utils/html-thumbnail';
 
 const logger = getLogger('library');
 
@@ -78,8 +79,17 @@ export const uploadZip = async (file, userDefinedDirName = '') => {
   const directory = new Directory();
   directory.name = getPathSegments(extractionBasePath).pop();
   directory.pages = htmlFiles.map(file =>
-    processHtmlFile(file, uploadOptions.directory, extractionBasePath)
+    processHtmlFile(
+      file,
+      uploadOptions.directory,
+      extractionBasePath,
+      directory.name
+    )
   );
+
+  directory.pages.forEach(page => {
+    createThumbnailFromPage(page, extractionBasePath, directory);
+  });
 
   const saved = await getRepository(Directory).save(directory);
   logger.info('Saved the directory to the database.');
