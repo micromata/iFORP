@@ -17,7 +17,6 @@ export default theme => ({
     },
     '& button.btn': {
       backgroundColor: '#D9D9D9',
-      borderRadius: '.5rem',
       height: '8.25rem',
       width: '11.5rem',
       overflow: 'hidden',
@@ -26,6 +25,8 @@ export default theme => ({
       justifyContent: 'center',
       alignItems: 'center',
       cursor: 'pointer',
+      border: 'none',
+      padding: 0,
       '&:hover': {
         backgroundColor: '#BCBCBC'
       },
