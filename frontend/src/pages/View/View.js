@@ -241,7 +241,7 @@ class View extends Component {
               </div>
               <div className='ButtonsCenter'>
                 <CircleButton onClick={ this.handleDeleteViewClick } className='ghost' disabled={ !this.props.canDelete }>
-                  <DeleteIcon color={ this.props.canDelete ? this.props.theme.textColorSecondary : this.props.theme.textColorTertiary } />
+                  <DeleteIcon color={ this.props.canDelete ? this.props.theme.Button.textColor : this.props.theme.Button.textColorDisabled } />
                 </CircleButton>
               </div>
               <div className='ButtonsRight'>
@@ -254,11 +254,11 @@ class View extends Component {
           { !showLibrary &&
             <React.Fragment>
               <div className='ButtonsLeft'>
-                <Button buttonStyle='round' onClick={ this.handleShowLibrarySelection }>aus Bibliothek wählen</Button>
+                <Button buttonStyle='round' className='ghost' onClick={ this.handleShowLibrarySelection }>Inhalt ersetzen</Button>
               </div>
               <div className='ButtonsCenter'>
                 <CircleButton onClick={ this.handleDeleteViewClick } className='ghost' disabled={ !this.props.canDelete }>
-                  <DeleteIcon color={ this.props.canDelete ? this.props.theme.textColorSecondary : this.props.theme.textColorTertiary } />
+                  <DeleteIcon color={ this.props.canDelete ? this.props.theme.Button.textColor : this.props.theme.Button.textColorDisabled } />
                 </CircleButton>
               </div>
               <div className='ButtonsRight'>

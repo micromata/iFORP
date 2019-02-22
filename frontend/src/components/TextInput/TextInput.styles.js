@@ -1,6 +1,6 @@
 export default theme => ({
   textInput: {
-    border: `1px solid ${theme.textColorPrimary}`,
+    border: `1px solid ${theme.textColor}`,
     fontSize: '14px',
     borderRadius: '100px',
     outlineStyle: 'none',

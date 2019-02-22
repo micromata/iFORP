@@ -1,21 +1,21 @@
 export default (theme) => ({
   EditableText: {
-    color: theme.textColorPrimary,
+    color: theme.textColor,
     display: 'inline-block',
     width: '100%',
     '& input[type=text]': {
       'fontSize': '14px',
       'background': 'transparent',
-      'color': theme.textColorPrimary,
+      'color': theme.textColor,
       'border': `1px dashed ${theme.accentColor}`,
       'padding': '4px',
       'textAlign': 'center',
       'outline': 'none'
     },
     '&.Secondary': {
-      color: theme.textColorSecondary,
+      color: theme.textColorOnBackground,
       '& input[type=text]': {
-        'color': theme.textColorSecondary,
+        'color': theme.textColorOnBackground,
       }
     }
   }

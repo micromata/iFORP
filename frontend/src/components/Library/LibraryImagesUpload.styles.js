@@ -11,8 +11,8 @@ export default theme => ({
       userSelect: 'none',
       zIndex: '-1',
       '& + label': {
-        backgroundColor: theme.bgColorPrimary,
-        color: theme.textColorSecondary,
+        backgroundColor: theme.Button.backgroundColorGhost,
+        color: theme.Button.textColor,
         border: 'none',
         fontWeight: 'bold',
         padding: '8px 45px',
@@ -26,7 +26,7 @@ export default theme => ({
     },
     '&.highlighted input[type=file] + label': {
       backgroundColor: theme.accentColor,
-      color: theme.textColorSecondary
+      color: theme.Button.textColor
     }
   }
 });

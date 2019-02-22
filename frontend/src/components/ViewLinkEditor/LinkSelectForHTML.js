@@ -25,7 +25,7 @@ const LinkSelectForHTML = ({
           ))
         }
       </select>
-      <ArrowDownIcon color={ theme.textColorPrimary } />
+      <ArrowDownIcon color={ theme.textColor } />
     </div>
   </div>
 );

@@ -1,9 +1,10 @@
 export default (theme) => ({
   ViewLinkEditor: {
-    width: '400px',
-    maxWidth: '400px',
-    color: theme.textColorPrimary,
-    backgroundColor: theme.bgColorSecondary,
+    width: '480px',
+    maxWidth: '48s0px',
+    color: theme.textColor,
+    backgroundColor: theme.Sidebar.backgroundColor,
+    boxShadow: '2px 2px 4px 0 rgba(0, 0, 0, 0.30)',
     padding: '20px',
     fontSize: '14px',
     marginBottom: '80px',

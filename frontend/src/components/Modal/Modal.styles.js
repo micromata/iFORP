@@ -5,7 +5,7 @@ export default (theme) => ({
     position: 'fixed',
     left: 0,
     top: 0,
-    background: theme.Modal.backgroundColor,
+    background: theme.Modal.backdropColor,
     zIndex: 999999999,
     display: 'flex',
     justifyContent: 'center',
@@ -13,7 +13,7 @@ export default (theme) => ({
   },
   Modal: {
     width: '480px',
-    background: theme.bgColorSecondary,
+    background: theme.Modal.backgroundColor,
     borderRadius: '10px',
     padding: '20px',
     display: 'flex',

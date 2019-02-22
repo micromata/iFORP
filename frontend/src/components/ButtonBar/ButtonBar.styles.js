@@ -33,6 +33,9 @@ export default theme => ({
     },
     '&.pullUp button[class^=CircleButton]': {
       marginTop: '-46px'
+    },
+    '& div:empty': {
+      minWidth: '56px'
     }
   }
 });

@@ -1,4 +1,5 @@
 import config from '../../config';
+import { NavBarHeight } from '../../components/NavBar/NavBar';
 
 export default theme => ({
   Preview: {
@@ -8,6 +9,7 @@ export default theme => ({
       margin: 0
     },
     '& main': {
+      paddingTop: `${NavBarHeight}`,
       '& .content': {
         display: 'flex',
         justifyContent: 'center',

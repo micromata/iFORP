@@ -15,7 +15,7 @@ class LibrarySidebar extends Component {
     super(props);
 
     this.state = {
-      expanded: true,
+      expanded: false,
       htmlChecked: true,
       imagesChecked: true,
       searchTerm: null

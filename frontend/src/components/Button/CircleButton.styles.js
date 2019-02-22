@@ -1,7 +1,7 @@
 export default theme => ({
   button: {
     backgroundColor: theme.accentColor,
-    color: theme.textColorSecondary,
+    color: theme.Button.textColor,
     border: 'none',
     fontSize: '18px',
     fontWeight: 'bold',
@@ -17,12 +17,12 @@ export default theme => ({
     minHeight: '56px',
     minWidth: '56px',
     '&.ghost': {
-      color: theme.textColorSecondary,
-      background: theme.bgColorPrimary,
+      color: theme.Button.textColor,
+      background: theme.Button.backgroundColorGhost
     },
     '&[disabled]':{
-      color: theme.textColorTertiary,
-      background: theme.bgColorTertiary,
+      color: theme.Button.textColorDisabled,
+      background: theme.Button.backgroundColorDisabled,
       border: 'none',
       cursor: 'not-allowed'
     }

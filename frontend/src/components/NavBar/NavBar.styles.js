@@ -1,4 +1,4 @@
-import { NavBarHeight } from "./NavBar";
+import { NavBarHeight } from './NavBar';
 
 export default (theme) => ({
   NavBar: {
@@ -10,6 +10,7 @@ export default (theme) => ({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    position: 'fixed',
     zIndex: 10,
   },
   NavItem: {

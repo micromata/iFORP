@@ -8,11 +8,11 @@ const getBorderRadius = props => {
 
 export default theme => ({
   button: {
+    color: theme.Button.textColor,
     backgroundColor: theme.accentColor,
     border: 'none',
     fontSize: '18px',
     fontWeight: 'bold',
-    color: theme.textColorSecondary,
     userSelect: 'none',
     padding: '8px 45px',
     outlineStyle: 'none',
@@ -24,14 +24,14 @@ export default theme => ({
       backgroundColor: theme.accentColor,
     },
     '&[disabled]':{
-      color: theme.textColorTertiary,
-      background: theme.bgColorTertiary,
+      color: theme.Button.textColorDisabled,
+      background: theme.Button.backgroundColorDisabled,
       border: 'none',
       cursor: 'not-allowed'
     },
     '&.ghost': {
-      backgroundColor: 'transparent',
-      border: 'none',
+      color: theme.Button.textColor,
+      background: theme.Button.backgroundColorGhost,
     },
     '&.light': {
       backgroundColor: 'transparent',
@@ -39,7 +39,7 @@ export default theme => ({
       color: theme.accentColor,
       '&:hover':{
         backgroundColor: theme.accentColor,
-        color: theme.textColorSecondary
+        color: theme.textColor
       },
     }
   },

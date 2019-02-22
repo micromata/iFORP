@@ -1,12 +1,15 @@
+import { NavBarHeight } from '../../components/NavBar/NavBar';
+
 export default theme => ({
   Start: {
-    color: theme.textColorSecondary,
+    color: theme.textColorOnBackground,
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
     fontSize: '1.5rem',
     justifyContent: 'center',
     padding: '2rem',
+    paddingTop: `${NavBarHeight}`,
     '& button': {
       width: '11rem',
       borderRadius: '100px',

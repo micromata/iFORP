@@ -1,7 +1,7 @@
 export default (theme) => ({
   ViewAnnotationListItem: {
     margin: '20px 0',
-    color: theme.textColorOnBackground,
+    color: theme.textColor,
     display: 'flex',
     alignItems: 'flex-start',
     width: '100%',
@@ -14,6 +14,7 @@ export default (theme) => ({
       width: '30px',
       height: '30px',
       borderRadius: '50%',
+      color: theme.Button.textColor,
       background: theme.accentColor,
       lineHeight: '30px',
       marginRight: '20px'
@@ -31,7 +32,7 @@ export default (theme) => ({
     cursor: 'pointer',
     margin: '4px 12px 0',
     '& svg g': {
-      stroke: theme.textColorPrimary
+      stroke: theme.textColor
     },
     '&:hover svg g': {
       stroke: theme.accentColor

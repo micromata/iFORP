@@ -16,7 +16,7 @@ export default theme => ({
       }
     },
     '& button.btn': {
-      backgroundColor: theme.bgColorTertiary,
+      backgroundColor: theme.ButtonTile.backgroundColor,
       boxShadow: `0 0 8px 0 rgba(0, 0, 0, 0.50)`,
       border: '1px solid transparent',
       height: '8.25rem',
@@ -54,7 +54,7 @@ export default theme => ({
     }
   },
   ProjectName: {
-    color: theme.textColorSecondary,
+    color: theme.textColorOnBackground,
     textDecoration: 'none',
     display: 'flex',
     justifyContent: 'center',

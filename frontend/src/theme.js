@@ -9,106 +9,119 @@ linear-gradient(${backgroundColor} calc(${dotSpace} - ${dotSize}), transparent 1
   backgroundSize: `${dotSpace} ${dotSpace}`,
 });
 
-const themeColors = {
-  dark: {
-    accentColor: '#EE9A02',
-    textColorPrimary: '#4A4A4A',
-    textColorSecondary: '#FFF',
-    textColorTertiary: '#A9A9A9',
-    bgColorPrimary: '#5E5E5E',
-    bgColorSecondary: '#FFF',
-    bgColorTertiary: '#E9E9E9',
-    bgColorQuartary: '#C8C8C8'
-  },
-  light: {
-    accentColor: '#EE9A02',
-  },
-  purple: {
-    accentColor: '#EE9A02',
-  },
-}
-
 export default {
   dark: {
-    ...themeColors.dark,
-    backgroundColor: themeColors.dark.bgColorPrimary,
-    textColor: themeColors.dark.textColorPrimary,
-    textColorOnBackground: themeColors.dark.textColorSecondary,
+    accentColor: '#EE9A02',
+    backgroundColor: '#5E5E5E',
+    textColor: '#4A4A4A',
+    textColorOnBackground: '#FFF',
     DottedBackground: {
-      dotColor: themeColors.dark.bgColorPrimary,
-      backgroundColor: themeColors.dark.textColorPrimary
+      dotColor: '#5E5E5E',
+      backgroundColor: '#4A4A4A'
     },
     NavBar: {
-      backgroundColor: themeColors.dark.bgColorSecondary,
-      textColor: themeColors.dark.textColorPrimary
+      backgroundColor: '#FFF',
+      textColor: '#4A4A4A'
     },
     NavigationMenu: {
-      backgroundColor: themeColors.dark.bgColorPrimary,
-      textColor: themeColors.dark.textColorSecondary,
-      accentColor: themeColors.dark.accentColor
+      backgroundColor: '#5E5E5E',
+      textColor: '#FFF',
+      accentColor: '#EE9A02'
+    },
+    Button: {
+      textColor: '#FFF',
+      textColorDisabled: '#A9A9A9',
+      backgroundColorDisabled: '#E9E9E9',
+      backgroundColorGhost: '#5E5E5E'
     },
     ButtonBar: {
-      backgroundColor: themeColors.dark.bgColorSecondary,
-      backgroundColorGhost: themeColors.dark.textColorPrimary
+      backgroundColor: '#FFF',
+      backgroundColorGhost: '#4A4A4A'
     },
     Modal: {
-      backgroundColor: 'rgba(100, 100, 100, 0.9)'
+      backgroundColor: '#FFF',
+      backdropColor: 'rgba(100, 100, 100, 0.9)'
     },
     ViewportSwitch: {
-      colorSelected: themeColors.dark.accentColor,
-      colorDefault: themeColors.dark.bgColorTertiary
+      colorSelected: '#EE9A02',
+      colorDefault: '#E9E9E9'
     },
     FilterChip: {
-      textColor: themeColors.dark.bgColorPrimary,
-      textColorChecked: themeColors.dark.textColorPrimary,
-      backgroundColor: themeColors.dark.bgColorTertiary,
-      backgroundColorChecked: themeColors.dark.bgColorQuartary
+      textColor: '#5E5E5E',
+      textColorChecked: '#4A4A4A',
+      backgroundColor: '#E9E9E9',
+      backgroundColorChecked: '#C8C8C8'
+    },
+    Sidebar: {
+      backgroundColor: '#FFF'
+    },
+    Select: {
+      backgroundColor: '#FFF'
+    },
+    ButtonTile: {
+      backgroundColor: '#E9E9E9'
     }
   },
   light: {
+    accentColor: '#EE9A02',
     backgroundColor: '#FFF',
-    accentColor: themeColors.light.accentColor,
     textColor: '#5E5E5E',
     textColorOnBackground: '#5E5E5E',
     DottedBackground: {
       backgroundColor: '#FFF',
-      dotColor: '#E9E9E9',
+      dotColor: '#E9E9E9'
     },
     NavBar: {
       backgroundColor: '#E9E9E9',
-      textColor: '#5E5E5E',
+      textColor: '#5E5E5E'
     },
     NavigationMenu: {
       backgroundColor: '#E9E9E9',
       textColor: '#5E5E5E',
-      accentColor: themeColors.light.accentColor,
+      accentColor: '#EE9A02'
+    },
+    Button: {
+      textColor: '#FFF',
+      textColorDisabled: '#A9A9A9',
+      backgroundColorDisabled: '#E9E9E9',
+      backgroundColorGhost: '#5E5E5E'
     },
     ButtonBar: {
-      backgroundColor: 'rgba(100, 100, 100, 0.9)',
-      backgroundColorGhost: '#4E4E4E'
+      backgroundColor: '#E9E9E9',
+      backgroundColorGhost: '#4A4A4A'
     },
     Modal: {
-      backgroundColor: 'rgba(100, 100, 100, 0.9)'
+      backgroundColor: '#FFF',
+      backdropColor: 'rgba(100, 100, 100, 0.9)'
     },
     ViewportSwitch: {
-      colorSelected: themeColors.light.accentColor,
-      colorDefault: '#E9E9E9'
+      colorSelected: '#EE9A02',
+      colorDefault: '#C8C8C8'
     },
     FilterChip: {
       textColor: '#5E5E5E',
       textColorChecked: '#4A4A4A',
-      backgroundColor: '#E9E9e9',
+      backgroundColor: '#E9E9E9',
       backgroundColorChecked: '#C8C8C8'
+    },
+    Sidebar: {
+      backgroundColor: '#FFF'
+    },
+    Select: {
+      backgroundColor: '#FFF'
+    },
+    ButtonTile: {
+      backgroundColor: '#E9E9E9'
     }
   },
   purple: {
+    accentColor: '#EE9A02',
     backgroundColor: '#32394C',
-    accentColor: themeColors.purple.accentColor,
     textColor: '#5E5E5E',
     textColorOnBackground: '#FFF',
     DottedBackground: {
-      backgroundColor: '#32394C',
       dotColor: '#485578',
+      backgroundColor: '#32394C',
     },
     NavBar: {
       backgroundColor: '#485578',
@@ -117,24 +130,40 @@ export default {
     NavigationMenu: {
       backgroundColor: '#485578',
       textColor: '#FFFFFF',
-      accentColor: themeColors.purple.accentColor,
+      accentColor: '#EE9A02'
+    },
+    Button: {
+      textColor: '#FFF',
+      textColorDisabled: '#A9A9A9',
+      backgroundColorDisabled: '#E9E9E9',
+      backgroundColorGhost: '#5E5E5E'
     },
     ButtonBar: {
-      backgroundColor: 'rgba(74, 85, 117, 0.9)',
+      backgroundColor: 'rgba(74, 85, 117)',
       backgroundColorGhost: '#32394C'
     },
     Modal: {
-      backgroundColor: 'rgba(74, 85, 117, 0.9)'
+      backgroundColor: '#FFF',
+      backdropColor: 'rgba(74, 85, 117, 0.9)'
     },
     ViewportSwitch: {
-      colorSelected: themeColors.purple.accentColor,
+      colorSelected: '#EE9A02',
       colorDefault: '#E9E9E9'
     },
     FilterChip: {
       textColor: '#5E5E5E',
       textColorChecked: '#4A4A4A',
-      backgroundColor: '#E9E9e9',
+      backgroundColor: '#E9E9E9',
       backgroundColorChecked: '#C8C8C8'
+    },
+    Sidebar: {
+      backgroundColor: '#FFF'
+    },
+    Select: {
+      backgroundColor: '#FFF'
+    },
+    ButtonTile: {
+      backgroundColor: '#E9E9E9'
     }
   },
 };

@@ -1,4 +1,5 @@
 import config from '../../config';
+import { NavBarHeight } from '../../components/NavBar/NavBar';
 
 export default () => ({
   View: {
@@ -8,6 +9,7 @@ export default () => ({
       height: 'calc(100% - 120px)',
       display: 'flex',
       alignItems: 'stretch',
+      paddingTop: `${NavBarHeight}`,
       '& .content': {
         padding: '20px',
         display: 'flex',

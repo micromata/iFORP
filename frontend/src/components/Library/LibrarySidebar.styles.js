@@ -1,12 +1,12 @@
 export default (theme) => ({
   LibrarySidebar: {
-    backgroundColor: theme.bgColorSecondary,
+    backgroundColor: theme.Sidebar.backgroundColor,
     width: '480px',
     height: '100vh',
     padding: '40px',
     paddingBottom: '75px',
     overflow: 'scroll',
-    boxShadow: '2px 2px 4px 0 rgba(0,0,0,0.50)',
+    boxShadow: '2px 2px 4px 0 rgba(0, 0, 0, 0.30)',
     zIndex: 8,
     transition: 'width 0.3s linear, margin-right 0.3s linear',
     '&.expanded': {

@@ -28,7 +28,7 @@ const LinkSelectForImage = ({
           ))
         }
       </select>
-      <ArrowDownIcon color={ theme.textColorPrimary } />
+      <ArrowDownIcon color={ theme.textColor } />
     </div>
     <div className={classes.DeleteButton} onClick={() => onDelete(interactionId)}>
       <DeleteIcon />
