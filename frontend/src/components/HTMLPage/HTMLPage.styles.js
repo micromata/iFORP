@@ -3,10 +3,9 @@ import config from '../../config';
 export default (theme) => ({
   HTMLPage: {
     '&.preview-wrapper': {
-      height: '0',
-    	marginBottom: '15px',
+      height: '100%',
+    	marginBottom: '100px',
     	position: 'relative',
-    	padding: '0 0 75vh 0',
       '& .preview': {
         	position: 'absolute',
         	top: '0',

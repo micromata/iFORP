@@ -8,6 +8,7 @@ export default (theme) => ({
     overflow: 'scroll',
     boxShadow: '2px 2px 4px 0 rgba(0,0,0,0.50)',
     zIndex: 10,
+    transition: 'width 0.3s linear, margin-right 0.3s linear',
     '&.expanded': {
       width: '950px',
       marginRight: '-520px'

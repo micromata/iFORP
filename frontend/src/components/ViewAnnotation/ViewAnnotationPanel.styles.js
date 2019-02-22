@@ -34,7 +34,7 @@ export default (theme) => ({
     alignItems: 'center',
     justifyContent: 'space-between',
     '& div:empty': {
-      minWidth: '56px'
+      width: '200px'
     },
   },
 });
