@@ -107,6 +107,7 @@ class LibrarySidebar extends Component {
                   titleBelow
                   TileImagePath={ getThumbnailPathForFile(file) }
                   onClick={ () => this.handleSelectFile(file) }
+                  highlighted={ file.id === this.props.selectedItemId }
                   >
                     <span className={ this.props.classes.LibrarySidebarFilename }>{ file.name }</span>
                   </ButtonTile>
