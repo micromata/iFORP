@@ -6,6 +6,7 @@ export default (theme) => ({
     listStyle: 'none',
     width: '600px',
     maxHeight: '200px',
-    overflow: 'scroll'
+    overflow: 'scroll',
+    marginTop: '-40px'
   }
 });

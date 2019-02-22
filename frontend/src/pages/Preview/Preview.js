@@ -101,6 +101,9 @@ export class Preview extends Component {
 
   render() {
     const previewData = this.getPreviewData();
+    const annotations = previewData.annotations ?
+      previewData.annotations.filter(annotation => annotation.viewportSize === this.state.viewportSize) :
+      [];
 
     return (
       <React.Fragment>
@@ -118,7 +121,7 @@ export class Preview extends Component {
                 body={ previewData.body || '' }
                 assets={ previewData.assets || [] }
                 showAnnotations={ this.state.showAnnotations }
-                annotations={ previewData.annotations || [] }
+                annotations={ annotations }
                 imageInteractionElements={ previewData.fileType === 'image' ? previewData.interactionElements : [] }
                 onInteractionElementClick={ this.handleInteractionElementClick }
                 onAnnotate={ this.handleAnnotate }
@@ -129,7 +132,7 @@ export class Preview extends Component {
           </main>
           <ViewAnnotationPanel
             visible={ this.state.showAnnotations }
-            annotations={ this.props.annotations }
+            annotations={ annotations }
             currentViewportSize={ this.state.viewportSize }
             onChangeViewportSize={ this.handleChangeViewportSize }
             onToggleVisibility={ this.handleToggleAnnotations }

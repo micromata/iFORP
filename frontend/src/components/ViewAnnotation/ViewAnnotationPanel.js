@@ -20,13 +20,14 @@ export const ViewAnnotationPanel = ({ classes, annotations, currentViewportSize,
     </div>
     { Boolean(visible && annotations.length) &&
       <ViewAnnotationList
+        currentViewportSize={ currentViewportSize }
         annotations={ annotations }
         onChangeAnnotationText={ onChangeAnnotationText }
         onDeleteAnnotation={ onDeleteAnnotation }
       />
     }
     { Boolean(visible && !annotations.length) &&
-      <i><br /><br />Durch Klicken auf den Screen können Sie Anmerkungen erstellen.</i>
+      <p>Durch Klicken auf den Screen können Sie Anmerkungen erstellen.</p>
     }
   </div>
 );

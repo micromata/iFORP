@@ -10,7 +10,8 @@ const ViewAnnotationList = ({
   onDeleteAnnotation
 }) => (
   <ul className={ classes.ViewAnnotationList }>
-    { annotations.map(annotation =>
+    { annotations
+      .map(annotation =>
       <ViewAnnotationListItem
         key={ annotation.id }
         annotation={ annotation }
