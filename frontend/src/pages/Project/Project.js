@@ -61,6 +61,7 @@ class Project extends Component {
                 onClick={ () => this.navigateToWhiteboard(whiteboard.id) }
                 onDeleteClick={() => this.handleDeleteWhiteboardClick(whiteboard.id)}>
                 <EditableText
+                  classNames='Secondary'
                   text={ whiteboard.name }
                   onEditingConfirmed={ newName => this.props.renameWhiteboard(this.props.project.id, whiteboard.id, newName) }
                 />

@@ -46,7 +46,7 @@ export class EditableText extends Component {
 
   render() {
     return (
-      <div className={ this.props.classes.EditableText } onClick={ this.handleSetEditMode }>
+      <div className={ `${this.props.classes.EditableText} ${this.props.classNames || ''}` } onClick={ this.handleSetEditMode }>
         { !this.state.isEditing &&
           <React.Fragment>
             { this.props.text }

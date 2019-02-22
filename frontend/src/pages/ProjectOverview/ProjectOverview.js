@@ -66,6 +66,7 @@ class ProjectOverview extends Component {
                 onClick={ () => this.navigateToProject(project.id ) }
                 onDeleteClick={() => this.handleDeleteProjectClick(project.id)}>
                 <EditableText
+                  classNames='Secondary'
                   text={ project.name }
                   onEditingConfirmed={ newName => this.props.renameProject(project.id, newName) }
                 />

@@ -7,7 +7,9 @@ export default (theme) => ({
     justifyContent: 'flex-start',
     position: 'fixed',
     padding: '20px 20px',
+    color: theme.textColorPrimary,
     backgroundColor: theme.ButtonBar.backgroundColor,
+    boxShadow: '0 -2px 6px 0 rgba(0,0,0,0.20)',
     bottom: 0,
     visibility: 'visible',
     zIndex: 10,
@@ -20,11 +22,10 @@ export default (theme) => ({
     '& button[class^=CircleButton]': {
       position: 'relative',
       top: '-44px',
-      marginBottom: '-44px',
       transform: 'rotate(180deg)',
     },
     '& i': {
-      color: theme.textColorOnBackground,
+      color: theme.textColorPrimary
     },
   },
   Buttons: {

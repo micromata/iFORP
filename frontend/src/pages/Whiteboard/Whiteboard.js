@@ -86,6 +86,7 @@ class Whiteboard extends Component {
                 connectRight={ this.hasConnectorToFollowingView(view.id, index) }
                 onClick={ () => this.navigateToView(view.id) }>
                 <EditableText
+                  classNames='Secondary'
                   text={ view.name }
                   onEditingConfirmed={ newName => this.props.renameView(this.props.projectId, this.props.whiteboardId, view.id, newName) }
                 />

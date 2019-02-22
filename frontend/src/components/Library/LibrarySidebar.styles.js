@@ -11,7 +11,7 @@ export default (theme) => ({
     transition: 'width 0.3s linear, margin-right 0.3s linear',
     '&.expanded': {
       width: '920px',
-      marginRight: '-440'
+      marginRight: '-440px'
     },
     '& h3': {
       marginTop: 0,
