@@ -11,7 +11,7 @@ export default theme => ({
         display: 'inline-block',
         position: 'relative',
         right: '-184px',
-        top: '-116px',
+        top: '-122px',
         zIndex: 0
       }
     },

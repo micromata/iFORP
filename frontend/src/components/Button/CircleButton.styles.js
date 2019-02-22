@@ -12,6 +12,8 @@ export default theme => ({
     outlineStyle: 'none',
     cursor: 'pointer',
     borderRadius: '50%',
+    background: theme.accentColor,
+    boxShadow: '0 2px 10px 0 rgba(0,0,0,0.16), 0 2px 5px 0 rgba(0,0,0,0.26)',
     minHeight: '56px',
     minWidth: '56px',
     '&.ghost': {

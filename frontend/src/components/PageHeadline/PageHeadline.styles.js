@@ -3,7 +3,8 @@ export default theme => ({
     color: theme.textColorSecondary,
     fontSize: '25px',
     '& .subtitle': {
-      fontSize: '14px'
+      fontSize: '14px',
+      fontWeight: 'normal'
     }
   },
 });
