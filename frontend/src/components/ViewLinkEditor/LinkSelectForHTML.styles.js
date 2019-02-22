@@ -15,21 +15,16 @@ export default theme => ({
     '& select': {
       height: '40px',
       padding: '0 15px',
-      border: 'none',
       cursor: 'pointer',
       width: '100%',
       borderRadius: '20px',
-      color: theme.Select.default.textColor,
-      backgroundColor: theme.Select.default.backgroundColor,
+      color: theme.textColorPrimary,
+      backgroundColor: theme.bgColorSecondary,
+      border: `1px solid ${theme.textColorPrimary}`,
       fontSize: '14px',
       outline: 'none',
       appearance: 'none',
-      '-webkit-appearance': 'none',
-      '&:not(.default-value)': {
-        backgroundColor: theme.Select.notDefault.backgroundColor,
-        border: `1px solid ${theme.Select.notDefault.borderColor}`,
-        color: theme.Select.notDefault.textColor
-      }
+      '-webkit-appearance': 'none'
     },
     '& svg': {
       marginLeft: '-30px',

@@ -3,8 +3,6 @@ import injectSheet from 'react-jss';
 import styles from './LinkSelectForHTML.styles';
 import ArrowDownIcon from '../../assets/img/ArrowDown';
 
-const isDefaultValue = value => !value || value === '0';
-
 const LinkSelectForHTML = ({
   classes,
   theme,
@@ -19,7 +17,6 @@ const LinkSelectForHTML = ({
     </label>
     <div className={classes.SelectHelper}>
       <select
-        className={ isDefaultValue(value) ? 'default-value' : '' }
         value={value}
         onChange={onChange}
         >
@@ -28,7 +25,7 @@ const LinkSelectForHTML = ({
           ))
         }
       </select>
-      <ArrowDownIcon color={ isDefaultValue(value) ? theme.Select.default.textColor : theme.Select.notDefault.textColor } />
+      <ArrowDownIcon color={ theme.textColorPrimary } />
     </div>
   </div>
 );

@@ -74,9 +74,7 @@ class LibrarySidebar extends Component {
         <div className={ this.state.expanded ? this.props.classes.CollapseIcon : this.props.classes.ExpandIcon} onClick={this.handleToggleExpanded}>
           <BackIcon color={ this.props.theme.textColor } />
         </div>
-        <h3>
-          Bibliothek
-        </h3>
+        <h3>Bibliothek</h3>
         { !hasFiles &&
           <React.Fragment>
             <p className={ this.props.classes.LibraryEmptyTeaser }>

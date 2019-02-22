@@ -4,9 +4,6 @@ import styles from './LinkSelectForImage.styles';
 import ArrowDownIcon from '../../assets/img/ArrowDown';
 import DeleteIcon from '../../assets/img/Delete';
 
-
-const isDefaultValue = value => !value || value === '0';
-
 const LinkSelectForImage = ({
   classes,
   theme,
@@ -23,7 +20,6 @@ const LinkSelectForImage = ({
     </div>
     <div className={classes.SelectHelper}>
       <select
-        className={ isDefaultValue(value) ? 'default-value' : '' }
         value={value}
         onChange={onChange}
         >
@@ -32,7 +28,7 @@ const LinkSelectForImage = ({
           ))
         }
       </select>
-      <ArrowDownIcon color={ isDefaultValue(value) ? theme.Select.default.textColor : theme.Select.notDefault.textColor } />
+      <ArrowDownIcon color={ theme.textColorPrimary } />
     </div>
     <div className={classes.DeleteButton} onClick={() => onDelete(interactionId)}>
       <DeleteIcon />

@@ -2,14 +2,20 @@ export default (theme) => ({
   ViewLinkEditor: {
     width: '400px',
     maxWidth: '400px',
-    color: theme.textColorOnBackground,
+    color: theme.textColorPrimary,
+    backgroundColor: theme.bgColorSecondary,
     padding: '20px',
     fontSize: '14px',
     marginBottom: '80px',
+    zIndex: 0,
     '& h3': {
-      fontSize: '16px',
-      fontWeight: 'normal',
-      margin: '0 0 16px 0'
-    }
+      marginTop: 0,
+      marginBottom: '10px',
+      fontSize: '25px'
+    },
+  },
+  ImageLinkTeaser: {
+    fontSize: '17px',
+    lineHeight: '27px'
   }
 });

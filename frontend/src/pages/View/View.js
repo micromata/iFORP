@@ -203,6 +203,17 @@ class View extends Component {
             />
           }
 
+          { !showLibrary &&
+            <ViewLinkEditor
+              fileType={ previewData.fileType }
+              availableInteractionElements={ previewData.interactionElements || [] }
+              viewLinkOptions={ this.props.viewLinkOptions }
+              links={ this.state.links }
+              setLinkTarget={ this.handleSetLinkTarget }
+              deleteImageInteractionElement={ this.handleDeleteImageInteractionElement }
+            />
+          }
+
           <div className='content'>
             <HTMLPage
               htmlElementAttributes={ previewData.htmlElementAttributes || {} }
@@ -216,17 +227,6 @@ class View extends Component {
               onCreateInteractionElement={ coords => this.props.addInteractionElementToView(this.props.projectId, this.props.whiteboardId, this.props.view.id, coords) }
             />
           </div>
-
-          { !showLibrary &&
-            <ViewLinkEditor
-              fileType={ previewData.fileType }
-              availableInteractionElements={ previewData.interactionElements || [] }
-              viewLinkOptions={ this.props.viewLinkOptions }
-              links={ this.state.links }
-              setLinkTarget={ this.handleSetLinkTarget }
-              deleteImageInteractionElement={ this.handleDeleteImageInteractionElement }
-            />
-          }
         </main>
         <ProjectButtonBar includeNavigationMenu={ false }>
           { showLibrary &&
@@ -333,7 +333,7 @@ const mapStateToProps = (state, ownProps) => {
   const onlyLinearClickflow = config.whiteboardClickflow === 'linear';
   const viewsToLinkTo = getViewsToLinkTo(viewId, whiteboard, onlyLinearClickflow);
   const viewLinkOptions = (whiteboard && whiteboard.views) ?
-    [{value: 0, title: '-'}].concat(viewsToLinkTo):
+    [{value: 0, title: 'Linkziel setzen '}].concat(viewsToLinkTo):
     [];
 
 

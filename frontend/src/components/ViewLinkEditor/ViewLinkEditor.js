@@ -3,6 +3,7 @@ import injectSheet from 'react-jss';
 import styles from './ViewLinkEditor.styles';
 import LinkSelectForHTML from './LinkSelectForHTML';
 import LinkSelectForImage from './LinkSelectForImage';
+import config from '../../config';
 
 class ViewLinkEditor extends Component {
   render() {
@@ -10,9 +11,12 @@ class ViewLinkEditor extends Component {
 
     return (
       <div className={ this.props.classes.ViewLinkEditor }>
-        <h3>Verlinkungen</h3>
+        <h3>{ config.whiteboardClickflow === 'linear' ? 'Verlinkung setzen' : 'Verlinkungen setzen' }</h3>
         { this.props.fileType === 'image' && !this.props.availableInteractionElements.length &&
-          <i>Erstellen Sie neue Interaktionselemente durch Ziehen mit der Maus</i>
+          <p className={ this.props.classes.ImageLinkTeaser }>
+            Sie haben bisher noch keine Verlinkung gesetzt.
+            Bitte markieren Sie dazu einen Bereich, der dazu dienen soll und legen das Link-Ziel fest.
+          </p>
         }
 
         { this.props.fileType === 'html' &&

@@ -51,17 +51,6 @@ export default {
       backgroundColor: themeColors.dark.bgColorSecondary,
       backgroundColorGhost: themeColors.dark.textColorPrimary
     },
-    Select: {
-      default: {
-        textColor: '#000',
-        backgroundColor: themeColors.dark.bgColorPrimary,
-      },
-      notDefault: {
-        textColor: themeColors.dark.accentColor,
-        backgroundColor: themeColors.dark.bgColorPrimary,
-        borderColor: themeColors.dark.accentColor
-      }
-    },
     Modal: {
       backgroundColor: 'rgba(100, 100, 100, 0.9)'
     },
@@ -98,17 +87,6 @@ export default {
       backgroundColor: 'rgba(100, 100, 100, 0.9)',
       backgroundColorGhost: '#4E4E4E'
     },
-    Select: {
-      default: {
-        textColor: '#5E5E5E',
-        backgroundColor: '#E9E9E9'
-      },
-      notDefault: {
-        textColor: '#868686',
-        backgroundColor: '#E9E9E9',
-        borderColor: '#868686'
-      }
-    },
     Modal: {
       backgroundColor: 'rgba(100, 100, 100, 0.9)'
     },
@@ -144,17 +122,6 @@ export default {
     ButtonBar: {
       backgroundColor: 'rgba(74, 85, 117, 0.9)',
       backgroundColorGhost: '#32394C'
-    },
-    Select: {
-      default: {
-        textColor: '#000',
-        backgroundColor: '#5A5A5A'
-      },
-      notDefault: {
-        textColor: themeColors.purple.accentColor,
-        backgroundColor: '#5A5A5A',
-        borderColor: themeColors.purple.accentColor
-      }
     },
     Modal: {
       backgroundColor: 'rgba(74, 85, 117, 0.9)'
