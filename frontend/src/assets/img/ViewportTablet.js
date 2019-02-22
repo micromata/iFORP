@@ -1,11 +1,9 @@
 import React from 'react';
 
 export default ({ color = '#000' }) => (
-  <svg width="18" height="24" xmlns="http://www.w3.org/2000/svg">
+  <svg width="27" height="34" xmlns="http://www.w3.org/2000/svg">
     <path
-      d="M16 24a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v20c0 1.1.9 2 2 2h14zM2 21V3h14v18H2zm6.5 1.5a.5.5 0 1 1 1 0 .5.5 0 0 1-1 0z"
-      fill={ color }
-      fillRule="nonzero"
-    />
+      d="M23.2.2H3.5C1.5.2 0 1.7 0 3.7v26.8C0 32.4 1.6 34 3.5 34h19.7c2 0 3.6-1.6 3.6-3.5V3.7c0-2-1.6-3.5-3.6-3.5zm-9.8 32.4a2.1 2.1 0 1 1 0-4.3 2.1 2.1 0 0 1 0 4.3zM24 26.9H2.8V4.4H24v22.5z"
+      fill={ color } fillRule="nonzero"/>
   </svg>
 );

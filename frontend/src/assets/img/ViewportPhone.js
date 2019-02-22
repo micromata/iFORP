@@ -1,12 +1,10 @@
 import React from 'react';
 
 export default ({ color = '#000' }) => (
-
-  <svg width="14" height="24" xmlns="http://www.w3.org/2000/svg">
-    <path
-      d="M14 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v20c0 1.1.9 2 2 2h10a2 2 0 0 0 2-2V2zM5.5 2h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1zM7 22a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm5-3H2V5h10v14z"
-      fill={ color }
-      fillRule="nonzero"
-    />
+  <svg width="19" height="32" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" fillRule="evenodd">
+      <path d="M14.8.6H3.6C1.6.6 0 2 0 4v24c0 1.9 1.6 3.5 3.6 3.5h11.2c2 0 3.6-1.6 3.6-3.6V4c0-1.9-1.6-3.4-3.6-3.4zM9.2 30.2a2.1 2.1 0 1 1 0-4.3 2.1 2.1 0 0 1 0 4.3zm6.3-5.7H3V4.8h12.6v19.7z" fill={ color } fillRule="nonzero"/>
+      <path d="M-7-.8h33.8V33H-7z"/>
+    </g>
   </svg>
 );
