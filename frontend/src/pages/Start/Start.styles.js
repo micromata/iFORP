@@ -6,7 +6,7 @@ export default theme => ({
     flexDirection: 'column',
     fontSize: '1.5rem',
     justifyContent: 'center',
-    height: 'calc(100vh - 53px);',
+    padding: '2rem',
     '& button': {
       width: '11rem',
       borderRadius: '100px',

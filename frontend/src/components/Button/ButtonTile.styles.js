@@ -16,7 +16,9 @@ export default theme => ({
       }
     },
     '& button.btn': {
-      backgroundColor: '#D9D9D9',
+      backgroundColor: theme.bgColorTertiary,
+      boxShadow: `0 0 8px 0 rgba(0, 0, 0, 0.50)`,
+      border: '1px solid transparent',
       height: '8.25rem',
       width: '11.5rem',
       overflow: 'hidden',
@@ -25,11 +27,11 @@ export default theme => ({
       justifyContent: 'center',
       alignItems: 'center',
       cursor: 'pointer',
-      border: 'none',
       padding: 0,
       borderRadius: 0,
       '&:hover': {
-        backgroundColor: '#BCBCBC'
+        border: `1px solid ${theme.accentColor}`,
+        boxShadow: `0 0 8px 0 ${theme.accentColor}`,
       },
       '& img': {
         maxWidth: '11.5rem',

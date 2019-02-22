@@ -14,7 +14,9 @@ export default (theme) => ({
       marginRight: '-520px'
     },
     '& h3': {
-      marginTop: 0
+      marginTop: 0,
+      marginBottom: '10px',
+      fontSize: '25px'
     },
     '& .UploadButtons': {
       display: 'flex',
@@ -41,7 +43,8 @@ export default (theme) => ({
   LibrarySidebarFilter: {
     display: 'flex',
     justifyContent: 'flex-start',
-    alignItems: 'flex-end'
+    alignItems: 'flex-end',
+    marginBottom: '20px'
   },
   LibrarySidebarFilename: {
     color: theme.textColor
