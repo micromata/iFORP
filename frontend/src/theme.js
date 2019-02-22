@@ -9,57 +9,76 @@ linear-gradient(${backgroundColor} calc(${dotSpace} - ${dotSize}), transparent 1
   backgroundSize: `${dotSpace} ${dotSpace}`,
 });
 
+const themeColors = {
+  dark: {
+    accentColor: '#EE9A02',
+    textColorPrimary: '#4A4A4A',
+    textColorSecondary: '#FFF',
+    textColorTertiary: '#A9A9A9',
+    bgColorPrimary: '#5E5E5E',
+    bgColorSecondary: '#FFF',
+    bgColorTertiary: '#E9E9E9',
+    bgColorQuartary: '#C8C8C8'
+  },
+  light: {
+    accentColor: '#EE9A02',
+  },
+  purple: {
+    accentColor: '#EE9A02',
+  },
+}
+
 export default {
   dark: {
-    backgroundColor: '#3D3D3D',
-    textColor: '#5E5E5E',
-    textColorOnBackground: '#FFF',
-    accentColor: '#EE9A02',
+    ...themeColors.dark,
+    backgroundColor: themeColors.dark.bgColorPrimary,
+    textColor: themeColors.dark.textColorPrimary,
+    textColorOnBackground: themeColors.dark.textColorSecondary,
     DottedBackground: {
-      backgroundColor: '#3D3D3D',
-      dotColor: '#5E5E5E',
+      dotColor: themeColors.dark.bgColorPrimary,
+      backgroundColor: themeColors.dark.textColorPrimary
     },
     NavBar: {
-      backgroundColor: '#5E5E5E',
-      textColor: '#FFF',
+      backgroundColor: themeColors.dark.bgColorSecondary,
+      textColor: themeColors.dark.textColorPrimary
     },
     NavigationMenu: {
-      backgroundColor: '#5E5E5E',
-      textColor: '#FFF',
-      accentColor: '#EE9A02'
+      backgroundColor: themeColors.dark.bgColorPrimary,
+      textColor: themeColors.dark.textColorSecondary,
+      accentColor: themeColors.dark.accentColor
     },
     ButtonBar: {
-      backgroundColor: 'rgba(100, 100, 100, 0.9)',
-      backgroundColorGhost: '#4E4E4E'
+      backgroundColor: themeColors.dark.bgColorSecondary,
+      backgroundColorGhost: themeColors.dark.textColorPrimary
     },
     Select: {
       default: {
         textColor: '#000',
-        backgroundColor: '#5A5A5A'
+        backgroundColor: themeColors.dark.bgColorPrimary,
       },
       notDefault: {
-        textColor: '#EE9A02',
-        backgroundColor: '#5A5A5A',
-        borderColor: '#EE9A02'
+        textColor: themeColors.dark.accentColor,
+        backgroundColor: themeColors.dark.bgColorPrimary,
+        borderColor: themeColors.dark.accentColor
       }
     },
     Modal: {
       backgroundColor: 'rgba(100, 100, 100, 0.9)'
     },
     ViewportSwitch: {
-      colorSelected: '#EE9A02',
-      colorDefault: '#E9E9E9'
+      colorSelected: themeColors.dark.accentColor,
+      colorDefault: themeColors.dark.bgColorTertiary
     },
     FilterChip: {
-      textColor: '#5E5E5E',
-      textColorChecked: '#4A4A4A',
-      backgroundColor: '#E9E9e9',
-      backgroundColorChecked: '#C8C8C8'
+      textColor: themeColors.dark.bgColorPrimary,
+      textColorChecked: themeColors.dark.textColorPrimary,
+      backgroundColor: themeColors.dark.bgColorTertiary,
+      backgroundColorChecked: themeColors.dark.bgColorQuartary
     }
   },
   light: {
     backgroundColor: '#FFF',
-    accentColor: '#EE9A02',
+    accentColor: themeColors.light.accentColor,
     textColor: '#5E5E5E',
     textColorOnBackground: '#5E5E5E',
     DottedBackground: {
@@ -73,7 +92,7 @@ export default {
     NavigationMenu: {
       backgroundColor: '#E9E9E9',
       textColor: '#5E5E5E',
-      accentColor: '#EE9A02',
+      accentColor: themeColors.light.accentColor,
     },
     ButtonBar: {
       backgroundColor: 'rgba(100, 100, 100, 0.9)',
@@ -94,7 +113,7 @@ export default {
       backgroundColor: 'rgba(100, 100, 100, 0.9)'
     },
     ViewportSwitch: {
-      colorSelected: '#EE9A02',
+      colorSelected: themeColors.light.accentColor,
       colorDefault: '#E9E9E9'
     },
     FilterChip: {
@@ -106,7 +125,7 @@ export default {
   },
   purple: {
     backgroundColor: '#32394C',
-    accentColor: '#EE9A02',
+    accentColor: themeColors.purple.accentColor,
     textColor: '#5E5E5E',
     textColorOnBackground: '#FFF',
     DottedBackground: {
@@ -120,7 +139,7 @@ export default {
     NavigationMenu: {
       backgroundColor: '#485578',
       textColor: '#FFFFFF',
-      accentColor: '#EE9A02',
+      accentColor: themeColors.purple.accentColor,
     },
     ButtonBar: {
       backgroundColor: 'rgba(74, 85, 117, 0.9)',
@@ -132,16 +151,16 @@ export default {
         backgroundColor: '#5A5A5A'
       },
       notDefault: {
-        textColor: '#EE9A02',
+        textColor: themeColors.purple.accentColor,
         backgroundColor: '#5A5A5A',
-        borderColor: '#EE9A02'
+        borderColor: themeColors.purple.accentColor
       }
     },
     Modal: {
       backgroundColor: 'rgba(74, 85, 117, 0.9)'
     },
     ViewportSwitch: {
-      colorSelected: '#EE9A02',
+      colorSelected: themeColors.purple.accentColor,
       colorDefault: '#E9E9E9'
     },
     FilterChip: {

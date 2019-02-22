@@ -3,6 +3,7 @@ import { NavBarHeight } from "./NavBar";
 export default (theme) => ({
   NavBar: {
     backgroundColor: theme.NavBar.backgroundColor,
+    boxShadow: '0 2px 6px 0 rgba(0,0,0,0.20)',
     width: '100%',
     height: NavBarHeight,
     display: 'flex',

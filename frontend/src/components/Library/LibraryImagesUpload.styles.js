@@ -10,9 +10,9 @@ export default theme => ({
       userSelect: 'none',
       zIndex: '-1',
       '& + label': {
-        backgroundColor: theme.accentColor,
+        backgroundColor: theme.bgColorPrimary,
+        color: theme.textColorSecondary,
         border: 'none',
-        color: '#fff',
         fontWeight: 'bold',
         padding: '8px 45px',
         outlineStyle: 'none',
@@ -21,6 +21,10 @@ export default theme => ({
         minWidth: '100%',
         minHeight: '30px',
         display: 'inline-block'
+      },
+      '&.highlighted + label': {
+        backgroundColor: theme.accentColor,
+        color: theme.textColorSecondary
       }
     }
   }

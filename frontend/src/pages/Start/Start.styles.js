@@ -1,6 +1,6 @@
 export default theme => ({
   Start: {
-    color: theme.textColorOnBackground,
+    color: theme.textColorSecondary,
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',

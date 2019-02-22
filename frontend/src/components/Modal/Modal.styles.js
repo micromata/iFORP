@@ -13,7 +13,7 @@ export default (theme) => ({
   },
   Modal: {
     width: '480px',
-    background: '#FFF',
+    background: theme.bgColorSecondary,
     borderRadius: '10px',
     padding: '20px',
     display: 'flex',

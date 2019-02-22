@@ -12,7 +12,7 @@ export class LibraryImagesUpload extends Component {
 
   render() {
     return (
-      <div className={ this.props.classes.LibraryImagesUpload }>
+      <div className={ `${this.props.classes.LibraryImagesUpload} ${ this.props.highlighted ? 'highlighted' : '' }`}>
         <input
           type='file'
           id='imagesUpload'

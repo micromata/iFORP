@@ -12,7 +12,7 @@ export class LibraryZipUpload extends Component {
 
   render() {
     return (
-      <div className={ this.props.classes.LibraryZipUpload }>
+      <div className={ `${this.props.classes.LibraryZipUpload} ${ this.props.highlighted ? 'highlighted' : '' }` }>
         <input
           type='file'
           id='zippedHtmlUpload'

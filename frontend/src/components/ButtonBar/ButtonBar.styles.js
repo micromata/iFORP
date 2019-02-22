@@ -8,6 +8,7 @@ export default theme => ({
     position: 'fixed',
     padding: '20px 20px',
     backgroundColor: theme.ButtonBar.backgroundColor,
+    boxShadow: '0 -2px 6px 0 rgba(0,0,0,0.20)',
     bottom: 0,
     visibility: 'visible',
     transition: 'bottom 0.5s, visibility 0.5s',
@@ -19,17 +20,8 @@ export default theme => ({
     '& div:empty': {
       minWidth: '56px'
     },
-    '& button[class^=CircleButton]': {
-      marginTop: '-40px',
-      '&.ghost': {
-        marginTop: 0,
-        backgroundColor: theme.ButtonBar.backgroundColorGhost,
-        '& svg g': { stroke: '#E9E9E9' },
-        '&:hover:not(:disabled)': {
-          backgroundColor: theme.accentColor,
-          '& svg g': { stroke: '#FFF' },
-        }
-      }
+    '&.pullUp button[class^=CircleButton]': {
+      marginTop: '-46px'
     }
   }
 });

@@ -24,7 +24,7 @@ export class ProjectButtonBar extends Component {
   render() {
     return (
       <React.Fragment>
-        <ButtonBar className={ this.state.navigationMenuVisible ? 'fade' : '' }>
+        <ButtonBar className={ `${this.props.pullUp ? 'pullUp' : ''} ${this.state.navigationMenuVisible ? 'fade' : ''}` }>
           { this.props.children }
           { this.props.entries && this.props.entries.length &&
             <CircleButton onClick={ this.handleShowNavigationMenuClick }>

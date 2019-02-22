@@ -237,14 +237,20 @@ class View extends Component {
                   <LibraryImagesUpload onImagesSelected={ this.props.uploadImages } />
                 </React.Fragment>
               }
-              <CircleButton onClick={ this.handleDeleteViewClick } className='ghost' disabled={ !this.props.canDelete }><DeleteIcon /></CircleButton>
-              <Button buttonStyle='round' onClick={ this.handleUseDirectoryItem } disabled={ !this.state.selectedDirectoryItemId }>Verwenden</Button>
+              <CircleButton onClick={ this.handleDeleteViewClick } className='ghost' disabled={ !this.props.canDelete }>
+                <DeleteIcon color={ this.props.canDelete ? this.props.theme.textColorSecondary : this.props.theme.textColorTertiary } />
+              </CircleButton>
+              <Button buttonStyle='round' onClick={ this.handleUseDirectoryItem } disabled={ !this.state.selectedDirectoryItemId }>
+                Verwenden
+              </Button>
             </React.Fragment>
           }
           { !showLibrary &&
             <React.Fragment>
               <Button buttonStyle='round' onClick={ this.handleShowLibrarySelection }>aus Bibliothek wählen</Button>
-              <CircleButton onClick={ this.handleDeleteViewClick } className='ghost' disabled={ !this.props.canDelete }><DeleteIcon /></CircleButton>
+              <CircleButton onClick={ this.handleDeleteViewClick } className='ghost' disabled={ !this.props.canDelete }>
+                <DeleteIcon color={ this.props.canDelete ? this.props.theme.textColorSecondary : this.props.theme.textColorTertiary } />
+              </CircleButton>
               <Button buttonStyle='round' onClick={ this.handleSaveLinksForView }>Speichern</Button>
             </React.Fragment>
           }

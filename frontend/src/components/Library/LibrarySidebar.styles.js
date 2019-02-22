@@ -1,13 +1,13 @@
 export default (theme) => ({
   LibrarySidebar: {
-    backgroundColor: '#FFF',
+    backgroundColor: theme.bgColorSecondary,
     width: '520px',
     height: '100vh',
     padding: '40px',
     paddingBottom: '75px',
     overflow: 'scroll',
     boxShadow: '2px 2px 4px 0 rgba(0,0,0,0.50)',
-    zIndex: 10,
+    zIndex: 8,
     transition: 'width 0.3s linear, margin-right 0.3s linear',
     '&.expanded': {
       width: '950px',

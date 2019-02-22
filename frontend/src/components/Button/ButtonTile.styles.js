@@ -46,7 +46,7 @@ export default theme => ({
     }
   },
   ProjectName: {
-    color: theme.textColorOnBackground,
+    color: theme.textColorSecondary,
     textDecoration: 'none',
     display: 'flex',
     justifyContent: 'center',

@@ -73,7 +73,7 @@ class ProjectOverview extends Component {
             )}
           </ElementGrid>
         </div>
-        <ProjectButtonBar entries={ this.props.navigationMenuEntries }>
+        <ProjectButtonBar entries={ this.props.navigationMenuEntries } pullUp>
           <div />
           <CircleButton onClick={ this.handleCreateProjectClick }>
             <PlusIcon />

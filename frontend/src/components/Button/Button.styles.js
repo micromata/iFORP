@@ -12,7 +12,7 @@ export default theme => ({
     border: 'none',
     fontSize: '18px',
     fontWeight: 'bold',
-    color: '#fff',
+    color: theme.textColorSecondary,
     userSelect: 'none',
     padding: '8px 45px',
     outlineStyle: 'none',
@@ -24,7 +24,8 @@ export default theme => ({
       backgroundColor: theme.accentColor,
     },
     '&[disabled]':{
-      background: '#FCDD8F',
+      color: theme.textColorTertiary,
+      background: theme.bgColorTertiary,
       border: 'none',
       cursor: 'not-allowed'
     },
@@ -38,7 +39,7 @@ export default theme => ({
       color: theme.accentColor,
       '&:hover':{
         backgroundColor: theme.accentColor,
-        color: '#fff'
+        color: theme.textColorSecondary
       },
     }
   },

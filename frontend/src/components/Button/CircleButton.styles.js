@@ -1,10 +1,10 @@
-export default {
+export default theme => ({
   button: {
-    backgroundColor: '#EE9A02',
+    backgroundColor: theme.accentColor,
     border: 'none',
     fontSize: '18px',
     fontWeight: 'bold',
-    color: '#fff',
+    color: theme.textColorSecondary,
     userSelect: 'none',
     display: 'flex',
     justifyContent: 'center',
@@ -14,17 +14,11 @@ export default {
     borderRadius: '50%',
     minHeight: '56px',
     minWidth: '56px',
-    '&:hover':{
-      backgroundColor: '#FFB600',
-    },
     '&[disabled]':{
-      background: '#FCDD8F',
+      color: theme.textColorTertiary,
+      background: theme.bgColorTertiary,
       border: 'none',
       cursor: 'not-allowed'
-    },
-    '&.ghost': {
-      backgroundColor: 'transparent',
-      border: 'none'
     }
   },
-};
+});

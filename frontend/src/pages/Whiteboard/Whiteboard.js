@@ -93,9 +93,9 @@ class Whiteboard extends Component {
             )}
           </ElementGrid>
         </div>
-        <ProjectButtonBar entries={ this.props.navigationMenuEntries }>
+        <ProjectButtonBar entries={ this.props.navigationMenuEntries } pullUp>
           <CircleButton onClick={ this.handleStartPreview } disabled={ !this.props.canStartPreview }>
-            <PreviewIcon />
+            <PreviewIcon color={ this.props.canStartPreview ? this.props.theme.textColorSecondary : this.props.theme.textColorTertiary } />
           </CircleButton>
           <CircleButton onClick={ this.handleCreateViewClick }>
             <PlusIcon />

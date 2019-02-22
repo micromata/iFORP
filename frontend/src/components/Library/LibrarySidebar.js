@@ -87,8 +87,8 @@ class LibrarySidebar extends Component {
               <span className='footnote'>Tipp: Sie können neben .jpg, .png Dateien auch komplette .zip Dateien mit .html und .css auswählen.</span>
             </p>
             <div className='UploadButtons'>
-              <LibraryZipUpload onZipFileSelected={ this.props.onZipFileSelected } />
-              <LibraryImagesUpload onImagesSelected={ this.props.onImagesSelected } />
+              <LibraryZipUpload highlighted onZipFileSelected={ this.props.onZipFileSelected } />
+              <LibraryImagesUpload highlighted onImagesSelected={ this.props.onImagesSelected } />
             </div>
           </React.Fragment>
         }
