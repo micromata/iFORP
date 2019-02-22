@@ -1,5 +1,5 @@
 import * as http from '../services/backendrequest.service';
-import { findWhiteboardWithId, findViewWithId } from '../utils';
+import { findWhiteboardWithId, findViewWithId, delay } from '../utils';
 import cheerio from 'cheerio';
 
 const actionNames = {
@@ -257,9 +257,14 @@ const getViewsForWhiteboard = (projectId, whiteboardId) => async (dispatch, getS
   return views;
 }
 
-const getLibraryDirectories = () => async dispatch => {
+const fetchAllDirectoryFiles = async () => {
   const response = await http.get('/library/files');
   const directories = await response.json();
+  return directories;
+}
+
+const getLibraryDirectories = () => async dispatch => {
+  const directories = await fetchAllDirectoryFiles();
 
   dispatch({
     type: actionNames.LIBRARY_DIRECTORIES_RECEIVED,
@@ -298,25 +303,33 @@ const getPageDetails = pageId => async dispatch => {
 const uploadZipFile = file => async dispatch => {
   const response = await http.uploadSingleFile('/library/upload/zip', file);
   const directory = await response.json();
+  const allDirectories = await fetchAllDirectoryFiles();
+  const directoryWithPages = allDirectories.find(dir => dir.id === directory.id);
+
+  await delay(1000);
 
   dispatch({
     type: actionNames.LIBRARY_DIRECTORY_IMPORTED,
-    directory
+    directory: directoryWithPages
   });
 
-  return directory;
+  return directoryWithPages;
 }
 
 const uploadImages = files => async dispatch => {
   const response = await http.uploadMultipleFiles('/library/upload/images', files);
   const directory = await response.json();
+  const allDirectories = await fetchAllDirectoryFiles();
+  const directoryWithImages = allDirectories.find(dir => dir.id === directory.id);
+
+  await delay(1000);
 
   dispatch({
     type: actionNames.LIBRARY_IMAGES_IMPORTED,
-    directory
+    directory: directoryWithImages
   });
 
-  return directory;
+  return directoryWithImages;
 }
 
 const getViewDetails = (projectId, whiteboardId, viewId) => async (dispatch, getState) => {

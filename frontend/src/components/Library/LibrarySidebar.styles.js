@@ -1,7 +1,7 @@
 export default (theme) => ({
   LibrarySidebar: {
     backgroundColor: theme.bgColorSecondary,
-    width: '520px',
+    width: '480px',
     height: '100vh',
     padding: '40px',
     paddingBottom: '75px',
@@ -10,8 +10,8 @@ export default (theme) => ({
     zIndex: 8,
     transition: 'width 0.3s linear, margin-right 0.3s linear',
     '&.expanded': {
-      width: '950px',
-      marginRight: '-520px'
+      width: '920px',
+      marginRight: '-440'
     },
     '& h3': {
       marginTop: 0,
@@ -20,11 +20,7 @@ export default (theme) => ({
     },
     '& .UploadButtons': {
       display: 'flex',
-      flexWrap: 'wrap',
-      '& div': {
-        marginRight: '20px',
-        marginBottom: '20px'
-      }
+      flexWrap: 'wrap'
     }
   },
   ExpandIcon: {
@@ -42,6 +38,7 @@ export default (theme) => ({
   },
   LibrarySidebarFilter: {
     display: 'flex',
+    flexWrap: 'wrap',
     justifyContent: 'flex-start',
     alignItems: 'flex-end',
     marginBottom: '20px'

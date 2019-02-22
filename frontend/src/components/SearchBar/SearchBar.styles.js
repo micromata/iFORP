@@ -1,5 +1,6 @@
 export default theme => ({
   SearchBar: {
+    minWidth: '360px',
     width: '360px',
     height: '60px',
     zIndex: 10,

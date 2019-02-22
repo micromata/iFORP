@@ -12,13 +12,24 @@ export default theme => ({
     bottom: 0,
     visibility: 'visible',
     transition: 'bottom 0.5s, visibility 0.5s',
+    '& .ButtonsLeft': {
+      width: '50vw',
+      display: 'flex',
+      justifyContent: 'flex-start',
+    },
+    '& .ButtonsCenter': {
+      display: 'flex',
+      justifyContent: 'center',
+    },
+    '& .ButtonsRight': {
+      width: '50vw',
+      display: 'flex',
+      justifyContent: 'flex-end',
+    },
     zIndex: 10,
     '&.fade': {
       bottom: '-80px',
       visibility: 'hidden'
-    },
-    '& div:empty': {
-      minWidth: '56px'
     },
     '&.pullUp button[class^=CircleButton]': {
       marginTop: '-46px'

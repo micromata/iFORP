@@ -17,6 +17,8 @@ const styles = theme => ({
     position: 'relative',
     display: 'flex',
     justifyContent: 'center',
+    marginLeft: '-16px',
+    marginRight: '-16px',
     flexWrap: 'wrap',
     '&.leftAlign': {
       justifyContent: 'flex-start'

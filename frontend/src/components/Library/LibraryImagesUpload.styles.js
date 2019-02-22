@@ -1,6 +1,7 @@
 export default theme => ({
   LibraryImagesUpload: {
     display: 'inline-block',
+    margin: '10px 20px 10px 0',
     '& input[type=file]': {
       width: '0.1px',
       height: '0.1px',
@@ -21,11 +22,11 @@ export default theme => ({
         minWidth: '100%',
         minHeight: '30px',
         display: 'inline-block'
-      },
-      '&.highlighted + label': {
-        backgroundColor: theme.accentColor,
-        color: theme.textColorSecondary
       }
+    },
+    '&.highlighted input[type=file] + label': {
+      backgroundColor: theme.accentColor,
+      color: theme.textColorSecondary
     }
   }
 });

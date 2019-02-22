@@ -53,6 +53,10 @@ const calculateImagePreviewOffset = (viewportSize, imageWidth) => {
   return result > 0 ? result : 0;
 }
 
+const delay = milliseconds => new Promise(resolve => {
+  setTimeout(resolve, milliseconds);
+})
+
 export {
   isDev,
   baseURL,
@@ -63,5 +67,6 @@ export {
   findViewAnnotationWithId,
   findPageWithId,
   findImageWithId,
-  calculateImagePreviewOffset
+  calculateImagePreviewOffset,
+  delay
 };

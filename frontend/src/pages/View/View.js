@@ -231,27 +231,39 @@ class View extends Component {
         <ProjectButtonBar includeNavigationMenu={ false }>
           { showLibrary &&
             <React.Fragment>
-              { Boolean(this.props.directories && this.props.directories.length) &&
-                <React.Fragment>
-                  <LibraryZipUpload onZipFileSelected={ this.props.uploadZipFile } />
-                  <LibraryImagesUpload onImagesSelected={ this.props.uploadImages } />
-                </React.Fragment>
-              }
-              <CircleButton onClick={ this.handleDeleteViewClick } className='ghost' disabled={ !this.props.canDelete }>
-                <DeleteIcon color={ this.props.canDelete ? this.props.theme.textColorSecondary : this.props.theme.textColorTertiary } />
-              </CircleButton>
-              <Button buttonStyle='round' onClick={ this.handleUseDirectoryItem } disabled={ !this.state.selectedDirectoryItemId }>
-                Verwenden
-              </Button>
+              <div className='ButtonsLeft'>
+                { Boolean(this.props.directories && this.props.directories.length) &&
+                  <React.Fragment>
+                    <LibraryZipUpload onZipFileSelected={ this.props.uploadZipFile } />
+                    <LibraryImagesUpload onImagesSelected={ this.props.uploadImages } />
+                  </React.Fragment>
+                }
+              </div>
+              <div className='ButtonsCenter'>
+                <CircleButton onClick={ this.handleDeleteViewClick } className='ghost' disabled={ !this.props.canDelete }>
+                  <DeleteIcon color={ this.props.canDelete ? this.props.theme.textColorSecondary : this.props.theme.textColorTertiary } />
+                </CircleButton>
+              </div>
+              <div className='ButtonsRight'>
+                <Button buttonStyle='round' onClick={ this.handleUseDirectoryItem } disabled={ !this.state.selectedDirectoryItemId }>
+                  Verwenden
+                </Button>
+              </div>
             </React.Fragment>
           }
           { !showLibrary &&
             <React.Fragment>
-              <Button buttonStyle='round' onClick={ this.handleShowLibrarySelection }>aus Bibliothek wählen</Button>
-              <CircleButton onClick={ this.handleDeleteViewClick } className='ghost' disabled={ !this.props.canDelete }>
-                <DeleteIcon color={ this.props.canDelete ? this.props.theme.textColorSecondary : this.props.theme.textColorTertiary } />
-              </CircleButton>
-              <Button buttonStyle='round' onClick={ this.handleSaveLinksForView }>Speichern</Button>
+              <div className='ButtonsLeft'>
+                <Button buttonStyle='round' onClick={ this.handleShowLibrarySelection }>aus Bibliothek wählen</Button>
+              </div>
+              <div className='ButtonsCenter'>
+                <CircleButton onClick={ this.handleDeleteViewClick } className='ghost' disabled={ !this.props.canDelete }>
+                  <DeleteIcon color={ this.props.canDelete ? this.props.theme.textColorSecondary : this.props.theme.textColorTertiary } />
+                </CircleButton>
+              </div>
+              <div className='ButtonsRight'>
+                <Button buttonStyle='round' onClick={ this.handleSaveLinksForView }>Speichern</Button>
+              </div>
             </React.Fragment>
           }
         </ProjectButtonBar>
