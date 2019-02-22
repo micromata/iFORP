@@ -9,6 +9,7 @@ import EditableText from '../../components/EditableText/EditableText';
 import ElementGrid from '../../components/ElementGrid/ElementGrid';
 import ButtonTile from '../../components/Button/ButtonTile';
 import CircleButton from '../../components/Button/CircleButton';
+import PageHeadline from '../../components/PageHeadline/PageHeadline';
 import PreviewIcon from '../../assets/img/Preview';
 import PlusIcon from '../../assets/img/Plus';
 import { getViewsForWhiteboard, createNewView, renameView } from '../../actions/app-actions';
@@ -73,9 +74,10 @@ class Whiteboard extends Component {
         <NavBar
           exit
           exitUrl={ `/projects/${ this.props.projectId }` }
-          title={ `iFORP / ${ this.props.project.name } / ${ this.props.whiteboard.name }` }
+          title='iFORP'
         />
         <div className={this.props.classes.Whiteboard}>
+          <PageHeadline title={this.props.whiteboard.name} subtitle={this.props.projectName} />
           <ElementGrid nowrap>
             { this.props.views.map((view, index) =>
               <ButtonTile
@@ -150,6 +152,7 @@ const mapStateToProps = (state, ownProps) => {
 
   return {
     projectId,
+    projectName: project.name,
     whiteboardId,
     project,
     whiteboard,

@@ -190,7 +190,7 @@ class View extends Component {
         <NavBar
           exit
           exitUrl={ `/projects/${ this.props.projectId }/whiteboards/${ this.props.whiteboardId}` }
-          title={ `iFORP / ${this.props.projectName} / ${this.props.whiteboardName} / ${this.props.view && this.props.view.name}` }
+          title='iFORP'
         />
         <main>
           { showLibrary &&

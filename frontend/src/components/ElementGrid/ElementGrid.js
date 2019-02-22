@@ -24,7 +24,6 @@ const styles = theme => ({
       justifyContent: 'flex-start'
     },
     '&.nowrap': {
-      margin: '100px',
       overflow: 'scroll',
       flexWrap: 'nowrap',
       justifyContent: 'flex-start'

@@ -57,7 +57,7 @@ class Library extends Component {
 
     return (
       <div className={ this.props.classes.Library }>
-        <NavBar title={ `iFORP / Bibliothek` } exit />
+        <NavBar title='iFORP' exit />
         <main>
           <LibrarySidebar
             directories={ this.props.directories }

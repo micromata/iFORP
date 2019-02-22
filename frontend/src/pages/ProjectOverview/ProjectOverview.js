@@ -12,6 +12,7 @@ import EditableText from '../../components/EditableText/EditableText';
 import CircleButton from '../../components/Button/CircleButton';
 import PlusIcon from '../../assets/img/Plus';
 import Modal from '../../components/Modal/Modal';
+import PageHeadline from '../../components/PageHeadline/PageHeadline';
 import { createNewProject, renameProject, deleteProject } from '../../actions/app-actions';
 
 class ProjectOverview extends Component {
@@ -54,9 +55,12 @@ class ProjectOverview extends Component {
 
     return (
       <React.Fragment>
-        <NavBar exit title={ `iFORP / Projektübersicht` } />
+        <NavBar exit title='iFORP' />
         <div className={ this.props.classes.ProjectOverview }>
-          <SearchBar searchTerm={ this.state.searchTerm } onChange={ this.handleSearchTermChange } light />
+          <div className={ this.props.classes.ProjectOverviewHead }>
+            <PageHeadline title='Projektübersicht' />
+            <SearchBar searchTerm={ this.state.searchTerm } onChange={ this.handleSearchTermChange } light />
+          </div>
           <ElementGrid>
             { filteredProjects.map(project =>
               <ButtonTile

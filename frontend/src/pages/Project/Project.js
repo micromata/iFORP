@@ -13,6 +13,7 @@ import PlusIcon from '../../assets/img/Plus';
 import { createNewWhiteboard, renameWhiteboard, deleteWhiteboard } from '../../actions/app-actions';
 import { findProjectWithId } from '../../utils';
 import Modal from '../../components/Modal/Modal';
+import PageHeadline from '../../components/PageHeadline/PageHeadline';
 
 class Project extends Component {
   constructor(props) {
@@ -49,9 +50,10 @@ class Project extends Component {
         <NavBar
           exit
           exitUrl={ `/projects` }
-          title={ `iFORP / ${ this.props.project.name }` }
+          title='iFORP'
         />
         <div className={this.props.classes.Project}>
+          <PageHeadline title={this.props.project.name} />
           <ElementGrid>
             { this.props.project.whiteboards.map(whiteboard =>
               <ButtonTile
