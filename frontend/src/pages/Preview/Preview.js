@@ -13,7 +13,8 @@ export class Preview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isAnnotationModeActive: false,
+      isAnnotationModeActive: true,
+      annotationToShow: null,
       deleteAnnotationId: null,
       viewportSize: 'desktop'
     };
@@ -68,6 +69,10 @@ export class Preview extends Component {
     this.setState({ deleteAnnotationId: null });
   }
 
+  handleSelectAnnotation = annotationId => {
+    this.setState({ annotationIdToShow: annotationId });
+  }
+
   handleCancelDeleteAnnotation = () => {
     this.setState({ deleteAnnotationId: null });
   }
@@ -105,6 +110,7 @@ export class Preview extends Component {
     const annotations = previewData.annotations ?
       previewData.annotations.filter(annotation => annotation.viewportSize === this.state.viewportSize) :
       [];
+    const annotationToShow = annotations.find(a => a.id === this.state.annotationIdToShow);
 
     return (
       <React.Fragment>
@@ -126,6 +132,7 @@ export class Preview extends Component {
                 imageInteractionElements={ previewData.fileType === 'image' ? previewData.interactionElements : [] }
                 onInteractionElementClick={ this.handleInteractionElementClick }
                 onAnnotate={ this.handleAnnotate }
+                onSelectAnnotation={ this.handleSelectAnnotation }
                 viewportSize={ this.state.viewportSize }
                 horizontalOffset={ previewData.horizontalOffset }
               />
@@ -134,6 +141,7 @@ export class Preview extends Component {
           <ViewAnnotationPanel
             annotations={ annotations }
             isAnnotationModeActive={ this.state.isAnnotationModeActive }
+            annotationToShow={ annotationToShow }
             currentViewportSize={ this.state.viewportSize }
             onChangeViewportSize={ this.handleChangeViewportSize }
             onToggleAnnotationMode={ this.handleToggleAnnotationMode }

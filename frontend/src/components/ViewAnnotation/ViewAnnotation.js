@@ -1,16 +1,19 @@
 import React from 'react';
 import injectSheet from 'react-jss';
-import styles from './ViewAnnotationListItem.styles.js';
+import styles from './ViewAnnotation.styles.js';
 import EditableText from '../EditableText/EditableText';
 import DeleteIcon from '../../assets/img/Delete';
 
-const ViewAnnotationListItem = ({
+const ViewAnnotation = ({
   classes,
   annotation,
   onChangeAnnotationText,
   onDeleteAnnotation
 }) => (
-  <li className={ classes.ViewAnnotationListItem}>
+  <div className={ classes.ViewAnnotation}>
+    <div className={ classes.AnnotationBubble }>
+      { annotation.id }
+    </div>
     <div className={ classes.AnnotationText}>
       <EditableText
         text={ annotation.text }
@@ -21,7 +24,7 @@ const ViewAnnotationListItem = ({
     <div className={classes.DeleteButton} onClick={() => onDeleteAnnotation(annotation.id)}>
       <DeleteIcon />
     </div>
-  </li>
+  </div>
 );
 
-export default injectSheet(styles)(ViewAnnotationListItem);
+export default injectSheet(styles)(ViewAnnotation);

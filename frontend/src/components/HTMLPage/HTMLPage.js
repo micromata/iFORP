@@ -33,13 +33,14 @@ export class HTMLPage extends Component {
     event.preventDefault();
     if (!this.props.onAnnotate || !this.props.isAnnotationModeActive) return;
 
-    this.props.onAnnotate({x: event.pageX - 15, y: event.pageY - 15 });
+    this.props.onAnnotate({x: event.pageX - 20, y: event.pageY - 20 });
   }
 
   handleAnnotationClicked = event => {
     event.stopPropagation();
     const annotationId = Number(event.target.attributes['data-annotation-id'].value);
     console.log('annotation clicked', { annotationId });
+    this.props.onSelectAnnotation(annotationId);
   }
 
   unhighlightInteractionElements = () => {
@@ -82,13 +83,13 @@ export class HTMLPage extends Component {
 
         .annotation {
           position: absolute;
-          width: 30px;
-          height: 30px;
+          width: 40px;
+          height: 40px;
           border-radius: 50%;
           z-index: 999999;
           background: #EE9A02;
           color: #FFF;
-          line-height: 30px;
+          line-height: 40px;
           text-align: center;
           font-family: Verdana, Sans Serif;
         }

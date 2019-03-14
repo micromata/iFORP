@@ -1,7 +1,7 @@
 import React from 'react';
 import injectSheet from 'react-jss';
 import styles from './ViewAnnotationPanel.styles';
-import ViewAnnotationList from './ViewAnnotationList';
+import ViewAnnotation from './ViewAnnotation';
 import ViewportSwitch from '../ViewportSwitch/ViewportSwitch';
 import Toggle from '../Toggle/Toggle';
 
@@ -19,9 +19,9 @@ export const ViewAnnotationPanel = ({ classes, annotations, currentViewportSize,
       />
     </div>
     { Boolean(isAnnotationModeActive && Boolean(annotationToShow)) &&
-      <ViewAnnotationList
+      <ViewAnnotation
         currentViewportSize={ currentViewportSize }
-        annotations={ annotations }
+        annotation={ annotationToShow }
         onChangeAnnotationText={ onChangeAnnotationText }
         onDeleteAnnotation={ onDeleteAnnotation }
       />

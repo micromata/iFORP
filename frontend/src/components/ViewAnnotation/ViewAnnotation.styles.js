@@ -1,24 +1,25 @@
 export default (theme) => ({
-  ViewAnnotationListItem: {
+  ViewAnnotation: {
+    padding: '0 20px',
+    width: '650px',
+    maxHeight: '200px',
+    overflow: 'scroll',
+    marginTop: '-40px',
     margin: '20px 0',
     color: theme.textColor,
     display: 'flex',
     alignItems: 'flex-start',
-    width: '100%',
-    '&::before': {
-      counterIncrement: 'annotationCounter',
-      content: 'counter(annotationCounter)',
-      display: 'inline-block',
-      textAlign: 'center',
-      minWidth: '30px',
-      width: '30px',
-      height: '30px',
-      borderRadius: '50%',
-      color: theme.Button.textColor,
-      background: theme.accentColor,
-      lineHeight: '30px',
-      marginRight: '20px'
-    },
+  },
+  AnnotationBubble: {
+    textAlign: 'center',
+    minWidth: '40px',
+    width: '40px',
+    height: '40px',
+    borderRadius: '50%',
+    color: theme.Button.textColor,
+    background: theme.accentColor,
+    lineHeight: '40px',
+    marginRight: '20px'
   },
   AnnotationText: {
     paddingTop: '4px',
