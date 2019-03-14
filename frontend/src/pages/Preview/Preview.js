@@ -8,6 +8,8 @@ import ViewAnnotationPanel from '../../components/ViewAnnotation/ViewAnnotationP
 import Modal from '../../components/Modal/Modal';
 import { getViewsForWhiteboard, getViewDetails, addAnnotationToView, changeViewAnnotationText, deleteViewAnnotation } from '../../actions/app-actions';
 import { baseURL, findViewWithId, calculateImagePreviewOffset } from '../../utils';
+import parseDate from 'date-fns/parse';
+import formatDate from 'date-fns/format';
 
 export class Preview extends Component {
   constructor(props) {
@@ -224,7 +226,7 @@ const mapStateToProps = (state, ownProps) => {
   const view = findViewWithId(state.app.projects, projectId, whiteboardId, viewId);
   const annotations = (view && view.annotations) ?
     [...view.annotations]
-      .map(a => ({...a, formattedDate: (new Date(a.isoDate)).toLocaleString('de') }))
+      .map(a => ({...a, formattedDate: formatDate(parseDate(a.isoDate), 'DD.MM.YYYY') }))
       .sort((a, b) => a.id - b.id) :
     [];
 

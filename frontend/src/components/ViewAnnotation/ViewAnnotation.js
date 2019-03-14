@@ -5,6 +5,12 @@ import EditableText from '../EditableText/EditableText';
 import DeleteIcon from '../../assets/img/Delete';
 import EditNewViewAnnotation from './EditNewViewAnnotation';
 
+const viewportSizeMap = {
+  desktop: 'Desktop',
+  tablet: 'Tablet',
+  phone: 'Smartphone'
+};
+
 const ViewAnnotation = ({ classes, annotation, onChangeAnnotationText, onDeleteAnnotation, onCreateAnnotation, onCancelAnnotate }) => (
   <div className={ classes.ViewAnnotation}>
     <div className={ classes.AnnotationBubble }>
@@ -13,7 +19,9 @@ const ViewAnnotation = ({ classes, annotation, onChangeAnnotationText, onDeleteA
     { !annotation.isNewAnnotation &&
       <>
       <div className={ classes.AnnotationText}>
-        <span><b>{ annotation.author }</b>, am { annotation.formattedDate }, { annotation.viewportSize }</span>
+        <span>
+          <b>{ annotation.author }</b>, am { annotation.formattedDate }, { viewportSizeMap[annotation.viewportSize] }
+        </span>
         <EditableText
           text={ annotation.text }
           onEditingConfirmed={ newText => onChangeAnnotationText(annotation.id, newText) }

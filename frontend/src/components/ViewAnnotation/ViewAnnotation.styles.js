@@ -23,6 +23,11 @@ export default (theme) => ({
   AnnotationText: {
     paddingTop: '4px',
     flexGrow: 1,
+    '& span': {
+      display: 'inline-block',
+      fontSize: '14px',
+      marginBottom: '10px'
+    },
     '& input[type=text]': {
       width: '100%',
       textAlign: 'left'
