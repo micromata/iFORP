@@ -15,33 +15,36 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <Card
-        position='absolute'
-        top='150px'
-        right='150px'
-        width='420px'
-        height='465px'
-      >
-        <Toggle
-          labelLeft="Anmelden"
-          labelRight="Registrieren"
-          isActive={this.state.mode === 'signUp'}
-          onToggle={enabled => {
-            this.setState({ mode: enabled === true ? 'signUp' : 'signIn' });
-          }}
-        />
-        {this.state.mode === 'signIn' && (
-          <SignInForm handleSignIn={this.props.handleSignIn} error={this.props.signInError} />
-        )}
-        {this.state.mode === 'signUp' && (
-          <SignUpForm handleSignUp={this.props.handleSignUp} error={this.props.signUpError} />
-        )}
-      </Card>
+      <div className={ this.props.classes.LoginForm}>
+        <Card>
+          <Toggle
+            labelLeft="Anmelden"
+            labelRight="Registrieren"
+            isActive={this.state.mode === 'signUp'}
+            onToggle={enabled => {
+              this.setState({ mode: enabled === true ? 'signUp' : 'signIn' });
+            }}
+          />
+          {this.state.mode === 'signIn' && (
+            <SignInForm handleSignIn={this.props.handleSignIn} error={this.props.signInError} />
+          )}
+          {this.state.mode === 'signUp' && (
+            <SignUpForm handleSignUp={this.props.handleSignUp} error={this.props.signUpError} />
+          )}
+        </Card>
+      </div>
     );
   }
 }
 
 const styles = theme => ({
+  LoginForm: {
+    marginTop: '140px',
+    marginRight: '180px',
+    marginLeft: '50px',
+    width: '420px',
+    height: '465px'
+  },
   FormSwitch: {
     display: 'flex',
     alignItems: 'center',

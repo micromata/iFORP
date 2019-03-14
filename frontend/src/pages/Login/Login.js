@@ -63,8 +63,8 @@ class Login extends Component {
     if (isTokenValid) return (<Redirect to="/" />);
 
     return (
-      <div>
-        <main>
+      <div className={ this.props.classes.Login }>
+        <main className={ this.props.classes.LoginMain}>
           <div className={this.props.classes.Hero}>
             <IForpBrand className={this.props.classes.IforpBrand} />
             <p className={this.props.classes.HeroText}>
@@ -80,13 +80,15 @@ class Login extends Component {
           />
         </main>
         <footer className={this.props.classes.Footer}>
-          Dieses Projekt wird gefördert durch
           <div className={this.props.classes.Promoters}>
-            <img
-              src={BBFLogo}
-              className={this.props.classes.PromoterLogo}
-              alt="Bundesagentur für Bildung und Forschung"
-            />
+            <div>
+              Dieses Projekt wird gefördert durch<br /><br />
+              <img
+                src={BBFLogo}
+                className={this.props.classes.PromoterLogo}
+                alt="Bundesagentur für Bildung und Forschung"
+              />
+            </div>
             <MicromataBrand className={this.props.classes.PromoterLogo} />
           </div>
         </footer>

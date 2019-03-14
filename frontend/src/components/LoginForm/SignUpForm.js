@@ -84,6 +84,7 @@ const styles = {
   },
   FormInputs: {
     height: '100%',
+    marginBottom: '20px'
   },
   SignUpError: {
     color: '#c0392b',
