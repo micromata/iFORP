@@ -45,6 +45,7 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    userSelect: 'none',
     '& .toggle-checkbox:checked+.toggle-button::before': {
       left: '24px',
     },

@@ -1,33 +1,30 @@
 import React from 'react';
 import injectSheet from 'react-jss';
 import styles from './ViewAnnotationPanel.styles';
-import ArrowDownIcon from '../../assets/img/ArrowDown';
-import CircleButton from '../Button/CircleButton';
 import ViewAnnotationList from './ViewAnnotationList';
 import ViewportSwitch from '../ViewportSwitch/ViewportSwitch';
+import Toggle from '../Toggle/Toggle';
 
-export const ViewAnnotationPanel = ({ classes, annotations, currentViewportSize, onChangeViewportSize, onChangeAnnotationText, onDeleteAnnotation, onToggleVisibility, visible, className = '' }) => (
-  <div className={ `${classes.ViewAnnotationPanel} ${className} ${ visible ? 'visible' : '' }` }>
+export const ViewAnnotationPanel = ({ classes, annotations, currentViewportSize, onChangeViewportSize, onChangeAnnotationText, onDeleteAnnotation, onToggleAnnotationMode, isAnnotationModeActive, annotationToShow, className = '' }) => (
+  <div className={ `${classes.ViewAnnotationPanel} ${className} ${ annotationToShow ? 'visible' : '' }` }>
     <div className={ classes.Buttons }>
-      <div />
-      <CircleButton onClick={ onToggleVisibility}>
-        <ArrowDownIcon />
-      </CircleButton>
+      <Toggle
+        labelRight={`Anmerkungen (${annotations.length})`}
+        isActive={isAnnotationModeActive}
+        onToggle={onToggleAnnotationMode}
+      />
       <ViewportSwitch
         currentViewportSize={ currentViewportSize }
         onChangeViewportSize={ onChangeViewportSize }
       />
     </div>
-    { Boolean(visible && annotations.length) &&
+    { Boolean(isAnnotationModeActive && Boolean(annotationToShow)) &&
       <ViewAnnotationList
         currentViewportSize={ currentViewportSize }
         annotations={ annotations }
         onChangeAnnotationText={ onChangeAnnotationText }
         onDeleteAnnotation={ onDeleteAnnotation }
       />
-    }
-    { Boolean(visible && !annotations.length) &&
-      <p>Durch Klicken auf den Screen können Sie Anmerkungen erstellen.</p>
     }
   </div>
 );

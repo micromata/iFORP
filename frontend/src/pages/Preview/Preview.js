@@ -13,7 +13,7 @@ export class Preview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showAnnotations: false,
+      isAnnotationModeActive: false,
       deleteAnnotationId: null,
       viewportSize: 'desktop'
     };
@@ -36,7 +36,7 @@ export class Preview extends Component {
 
   handleInteractionElementClick = interactionId => {
     const viewLink = this.props.view.viewLinks.find(link => link.interactionId === interactionId);
-    if (!viewLink || this.state.showAnnotations) return;
+    if (!viewLink || this.state.isAnnotationModeActive) return;
 
     this.props.history.push(`/projects/${this.props.projectId}/whiteboards/${this.props.whiteboardId}/views/${viewLink.toViewId}/preview`);
   };
@@ -45,12 +45,12 @@ export class Preview extends Component {
     this.setState({ viewportSize });
   }
 
-  handleToggleAnnotations = () => {
-    this.setState(prevState => ({ showAnnotations: !prevState.showAnnotations }));
+  handleToggleAnnotationMode = () => {
+    this.setState(prevState => ({ isAnnotationModeActive: !prevState.isAnnotationModeActive }));
   }
 
   handleAnnotate = coords => {
-    if (!this.state.showAnnotations) return;
+    if (!this.state.isAnnotationModeActive) return;
     this.props.addAnnotationToView(this.props.projectId, this.props.whiteboardId, this.props.viewId, this.state.viewportSize, coords.x, coords.y);
   }
 
@@ -114,13 +114,13 @@ export class Preview extends Component {
             title='iFORP'
           />
           <main>
-            <div className={`content ${this.state.showAnnotations ? 'WithAnnotations' : ''}`}>
+            <div className={`content ${this.state.isAnnotationModeActive ? 'WithAnnotations' : ''}`}>
               <HTMLPage
                 htmlElementAttributes={ previewData.htmlElementAttributes || {} }
                 head={ previewData.head || '' }
                 body={ previewData.body || '' }
                 assets={ previewData.assets || [] }
-                showAnnotations={ this.state.showAnnotations }
+                isAnnotationModeActive={ this.state.isAnnotationModeActive }
                 annotations={ annotations }
                 imageInteractionElements={ previewData.fileType === 'image' ? previewData.interactionElements : [] }
                 onInteractionElementClick={ this.handleInteractionElementClick }
@@ -131,11 +131,11 @@ export class Preview extends Component {
             </div>
           </main>
           <ViewAnnotationPanel
-            visible={ this.state.showAnnotations }
             annotations={ annotations }
+            isAnnotationModeActive={ this.state.isAnnotationModeActive }
             currentViewportSize={ this.state.viewportSize }
             onChangeViewportSize={ this.handleChangeViewportSize }
-            onToggleVisibility={ this.handleToggleAnnotations }
+            onToggleAnnotationMode={ this.handleToggleAnnotationMode }
             onChangeAnnotationText={ this.handleChangeAnnotationText }
             onDeleteAnnotation={ this.handleDeleteAnnotation }
           />

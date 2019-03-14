@@ -34,8 +34,11 @@ export default (theme) => ({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    '& div:empty': {
-      width: '200px'
+    '& label[for=toggle]': {
+      fontWeight: 'bold'
     },
+    '& .toggle-button': {
+      margin: '0 22px 0 0'
+    }
   },
 });

@@ -31,7 +31,7 @@ export class HTMLPage extends Component {
 
   handleAddAnnotation = event => {
     event.preventDefault();
-    if (!this.props.onAnnotate || !this.props.showAnnotations) return;
+    if (!this.props.onAnnotate || !this.props.isAnnotationModeActive) return;
 
     this.props.onAnnotate({x: event.pageX - 15, y: event.pageY - 15 });
   }
@@ -127,7 +127,7 @@ export class HTMLPage extends Component {
           visibility: ${this.props.allowInteractionElementCreation ? 'visible' : 'hidden'}
         }
       </style>`;
-    const annotationsMarkup = this.props.showAnnotations ?
+    const annotationsMarkup = this.props.isAnnotationModeActive ?
       this.props.annotations.map((annotation, index) => `
       <div class='annotation' style='top: ${annotation.y}px; left: ${annotation.x}px;'>
         ${index+1}
@@ -180,11 +180,11 @@ export class HTMLPage extends Component {
       querySelectorAll('[data-interaction-id]').
       forEach(link => link.addEventListener('click', this.handleInteractionElementClick));
 
-    if (this.props.showAnnotations) {
+    if (this.props.isAnnotationModeActive) {
       this.iframeDocument.body.addEventListener('click', this.handleAddAnnotation);
     }
 
-    if (this.props.imageInteractionElements && !this.props.showAnnotations) {
+    if (this.props.imageInteractionElements && !this.props.isAnnotationModeActive) {
       this.iframeDocument.body.addEventListener('click', this.highlightInteractionElements);
     }
 
