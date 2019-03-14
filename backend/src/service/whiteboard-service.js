@@ -1,4 +1,4 @@
-import superb from 'superb';
+import { randomSuperbWord } from '../utils/superb-words';
 import { getRepository } from 'typeorm';
 import { Project } from '../orm/entity/project';
 import { Whiteboard } from '../orm/entity/whiteboard';
@@ -18,7 +18,6 @@ export const find = async projectId => {
 };
 
 export const save = async projectId => {
-  const supportWord = superb.random();
   const projectRepo = getRepository(Project);
   const whiteboardRepo = getRepository(Whiteboard);
   const project = await projectRepo.findOne(projectId);
@@ -29,9 +28,7 @@ export const save = async projectId => {
     );
   }
   const whiteboard = {
-    name: `${supportWord.charAt(0).toUpperCase()}${supportWord.substr(
-      1
-    )} whiteboard`,
+    name: `${randomSuperbWord()}es Whiteboard`,
     project
   };
   const view = new View();

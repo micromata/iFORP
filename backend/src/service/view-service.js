@@ -1,4 +1,4 @@
-import superb from 'superb';
+import { randomSuperbWord } from '../utils/superb-words';
 import { getConnection, getRepository } from 'typeorm';
 import { Whiteboard } from '../orm/entity/whiteboard';
 import { View } from '../orm/entity/view';
@@ -32,7 +32,7 @@ export const save = async (whiteboardId, base) => {
   view.whiteboard = whiteboard;
   view.hasFile = false;
   view.fileType = null;
-  view.name = view.name || `${superb.random()} View`;
+  view.name = view.name || `${randomSuperbWord()}e View`;
   return viewRepo.save(view);
 };
 

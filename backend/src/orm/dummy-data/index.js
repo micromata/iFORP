@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { createConnection } from 'typeorm';
-import superb from 'superb';
+import { randomSuperbWord } from '../../utils/superb-words';
 import slugify from '@sindresorhus/slugify';
 
 import { Directory } from '../entity/directory';
@@ -19,7 +19,7 @@ createConnection(getConnectionOptions())
   .then(async connection => {
     logger.info('Add dummy data …');
 
-    const fakeUploadedDirName = slugify(`my ${superb()} directory`);
+    const fakeUploadedDirName = slugify(`my ${randomSuperbWord()} directory`);
 
     // Dummy file upload
     const dummyFiles = await dummyFileUpload(fakeUploadedDirName);

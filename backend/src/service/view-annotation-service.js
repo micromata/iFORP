@@ -1,4 +1,4 @@
-import superb from 'superb';
+import { randomSuperbWord } from '../utils/superb-words';
 import { getRepository } from 'typeorm';
 import { View } from '../orm/entity/view';
 import { ViewAnnotation } from '../orm/entity/view-annotation';
@@ -17,7 +17,7 @@ export const save = async (viewId, base) => {
   }
   const annotation = base;
   annotation.view = view;
-  annotation.text = annotation.text || `${superb.random()} Anmerkung`;
+  annotation.text = annotation.text || `${randomSuperbWord()}e Anmerkung`;
   const savedAnnotation = viewAnnotationRepo.save(annotation);
   return {
     id: savedAnnotation.id,

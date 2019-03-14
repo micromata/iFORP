@@ -1,4 +1,4 @@
-import superb from 'superb';
+import { randomSuperbWord } from '../../utils/superb-words';
 
 import { Project } from '../entity/project';
 import { Whiteboard } from '../entity/whiteboard';
@@ -7,11 +7,11 @@ import { Asset } from '../entity/asset';
 
 export function getDummyProject(fakeUploadedDirName) {
   const project = new Project();
-  project.name = `My ${superb()} project`;
+  project.name = `My ${randomSuperbWord()} project`;
   project.whiteboards = [];
 
   const wb = new Whiteboard();
-  wb.name = `My ${superb()} whiteboard`;
+  wb.name = `My ${randomSuperbWord()} whiteboard`;
   wb.views = [];
 
   const view = new View();

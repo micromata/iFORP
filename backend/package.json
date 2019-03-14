@@ -56,7 +56,6 @@
     "reflect-metadata": "0.1.12",
     "signale": "1.2.1",
     "sqlite3": "4.0.2",
-    "superb": "3.0.0",
     "typeorm": "0.2.7",
     "uuid": "3.3.2",
     "yauzl": "2.10.0",

@@ -1,4 +1,4 @@
-import superb from 'superb';
+import { randomSuperbWord } from '../utils/superb-words';
 import { getRepository } from 'typeorm';
 import { Project } from '../orm/entity/project';
 import { Whiteboard } from '../orm/entity/whiteboard';
@@ -17,7 +17,7 @@ export const save = async base => {
   whiteboard.name = 'Standard Whiteboard';
 
   const project = new Project();
-  project.name = `${superb.random()} Project`;
+  project.name = `${randomSuperbWord()}es Projekt`;
   project.whiteboards = [whiteboard];
 
   const view = new View();
