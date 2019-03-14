@@ -36,6 +36,12 @@ export class HTMLPage extends Component {
     this.props.onAnnotate({x: event.pageX - 15, y: event.pageY - 15 });
   }
 
+  handleAnnotationClicked = event => {
+    event.stopPropagation();
+    const annotationId = Number(event.target.attributes['data-annotation-id'].value);
+    console.log('annotation clicked', { annotationId });
+  }
+
   unhighlightInteractionElements = () => {
     this.iframeDocument.body.
       querySelectorAll('.interaction-element-rect').
@@ -127,9 +133,10 @@ export class HTMLPage extends Component {
           visibility: ${this.props.allowInteractionElementCreation ? 'visible' : 'hidden'}
         }
       </style>`;
+
     const annotationsMarkup = this.props.isAnnotationModeActive ?
       this.props.annotations.map((annotation, index) => `
-      <div class='annotation' style='top: ${annotation.y}px; left: ${annotation.x}px;'>
+      <div class='annotation' style='top: ${annotation.y}px; left: ${annotation.x}px; cursor: pointer;' data-annotation-id='${annotation.id}'>
         ${index+1}
       </div>
     `).join('') : '';
@@ -182,6 +189,10 @@ export class HTMLPage extends Component {
 
     if (this.props.isAnnotationModeActive) {
       this.iframeDocument.body.addEventListener('click', this.handleAddAnnotation);
+
+      this.iframeDocument.body.
+        querySelectorAll('.annotation').
+        forEach(annotation => annotation.addEventListener('click', this.handleAnnotationClicked));
     }
 
     if (this.props.imageInteractionElements && !this.props.isAnnotationModeActive) {
