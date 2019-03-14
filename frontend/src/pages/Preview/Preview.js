@@ -14,9 +14,10 @@ export class Preview extends Component {
     super(props);
     this.state = {
       isAnnotationModeActive: true,
+      annotationIdToShow: null,
       newAnnotation: null,
       deleteAnnotationId: null,
-      viewportSize: 'desktop'
+      viewportSize: 'desktop',
     };
   }
 
@@ -44,11 +45,18 @@ export class Preview extends Component {
 
   handleChangeViewportSize = viewportSize => {
     if (viewportSize === this.state.viewportSize) return;
-    this.setState({ viewportSize, isAnnotationModeActive: false });
+    this.setState({
+      viewportSize,
+      isAnnotationModeActive: false,
+      annotationIdToShow: null
+    });
   }
 
   handleToggleAnnotationMode = () => {
-    this.setState(prevState => ({ isAnnotationModeActive: !prevState.isAnnotationModeActive }));
+    this.setState(prevState => ({
+      isAnnotationModeActive: !prevState.isAnnotationModeActive,
+      annotationIdToShow: null
+    }));
   }
 
   handleAnnotate = coords => {
@@ -83,7 +91,10 @@ export class Preview extends Component {
   }
 
   handleCancelAnnotate = () => {
-    this.setState({ newAnnotation: null });
+    this.setState({
+      newAnnotation: null,
+      annotationToShow: null
+    });
   }
 
   handleChangeAnnotationText = (annotationId, text) => {
@@ -96,7 +107,10 @@ export class Preview extends Component {
 
   handleConfirmDeleteAnnotation = () => {
     this.props.deleteViewAnnotation(this.props.projectId, this.props.whiteboardId, this.props.viewId, this.state.deleteAnnotationId);
-    this.setState({ deleteAnnotationId: null });
+    this.setState({
+      deleteAnnotationId: null,
+      annotationIdToShow: null
+    });
   }
 
   handleSelectAnnotation = annotationId => {
