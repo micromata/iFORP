@@ -14,7 +14,7 @@ export class Preview extends Component {
     super(props);
     this.state = {
       isAnnotationModeActive: true,
-      annotationToShow: null,
+      newAnnotation: null,
       deleteAnnotationId: null,
       viewportSize: 'desktop'
     };
@@ -53,7 +53,37 @@ export class Preview extends Component {
 
   handleAnnotate = coords => {
     if (!this.state.isAnnotationModeActive) return;
-    this.props.addAnnotationToView(this.props.projectId, this.props.whiteboardId, this.props.viewId, this.state.viewportSize, coords.x, coords.y);
+    const newAnnotation = {
+      id: '*',
+      text: '',
+      author: '',
+      x: coords.x,
+      y: coords.y,
+      isoDate: (new Date()).toISOString(),
+      isNewAnnotation: true
+    };
+
+    this.setState({newAnnotation, annotationIdToShow: '*'});
+  }
+
+  handleSaveNewAnnotation = async ({ author, text }) => {
+    if (!this.state.isAnnotationModeActive) return;
+
+    const annotation = {
+      text,
+      author,
+      x: this.state.newAnnotation.x,
+      y: this.state.newAnnotation.y,
+      isoDate: this.state.newAnnotation.isoDate,
+      viewportSize: this.state.viewportSize
+    };
+
+    const savedAnnotation = await this.props.addAnnotationToView(this.props.projectId, this.props.whiteboardId, this.props.viewId, annotation);
+    this.setState({ newAnnotation: null, annotationIdToShow: savedAnnotation.id });
+  }
+
+  handleCancelAnnotate = () => {
+    this.setState({ newAnnotation: null });
   }
 
   handleChangeAnnotationText = (annotationId, text) => {
@@ -87,7 +117,7 @@ export class Preview extends Component {
         body: this.props.view.body,
         assets: this.props.view.assets,
         interactionElements: this.props.view.interactionElements,
-        annotations: this.props.view.annotations,
+        annotations: this.props.annotations,
         fileType: this.props.view.fileType,
         horizontalOffset: 0
       }
@@ -100,7 +130,7 @@ export class Preview extends Component {
       assets: [],
       fileType: this.props.view.fileType,
       interactionElements: this.props.view.imageInteractionElements,
-      annotations: this.props.view.annotations,
+      annotations: this.props.annotations,
       horizontalOffset: calculateImagePreviewOffset(this.state.viewportSize, this.props.view.imageWidth)
     };
   }
@@ -108,8 +138,14 @@ export class Preview extends Component {
   render() {
     const previewData = this.getPreviewData();
     const annotations = previewData.annotations ?
-      previewData.annotations.filter(annotation => annotation.viewportSize === this.state.viewportSize) :
+      previewData.annotations
+        .filter(annotation => annotation.viewportSize === this.state.viewportSize)
+        .map((annotation, index) => ({...annotation, index: index+1})) :
       [];
+    if (this.state.newAnnotation) {
+      annotations.push(this.state.newAnnotation);
+    }
+
     const annotationToShow = annotations.find(a => a.id === this.state.annotationIdToShow);
 
     return (
@@ -147,6 +183,8 @@ export class Preview extends Component {
             onToggleAnnotationMode={ this.handleToggleAnnotationMode }
             onChangeAnnotationText={ this.handleChangeAnnotationText }
             onDeleteAnnotation={ this.handleDeleteAnnotation }
+            onCreateAnnotation={ this.handleSaveNewAnnotation }
+            onCancelAnnotate={ this.handleCancelAnnotate }
           />
         </div>
         <Modal
@@ -171,7 +209,9 @@ const mapStateToProps = (state, ownProps) => {
   const viewId = Number(ownProps.match.params.viewId);
   const view = findViewWithId(state.app.projects, projectId, whiteboardId, viewId);
   const annotations = (view && view.annotations) ?
-    [...view.annotations].sort((a, b) => a.id - b.id) :
+    [...view.annotations]
+      .map(a => ({...a, formattedDate: (new Date(a.isoDate)).toLocaleString('de') }))
+      .sort((a, b) => a.id - b.id) :
     [];
 
   return {

@@ -18,7 +18,16 @@ export const save = async (viewId, base) => {
   const annotation = base;
   annotation.view = view;
   annotation.text = annotation.text || `${superb.random()} Annotation`;
-  return viewAnnotationRepo.save(annotation);
+  const savedAnnotation = viewAnnotationRepo.save(annotation);
+  return {
+    id: savedAnnotation.id,
+    author: savedAnnotation.author,
+    text: savedAnnotation.text,
+    isoDate: savedAnnotation.isoDate,
+    viewportSize: savedAnnotation.viewportSize,
+    x: savedAnnotation.x,
+    y: savedAnnotation.y
+  };
 };
 
 export const findById = async id => {

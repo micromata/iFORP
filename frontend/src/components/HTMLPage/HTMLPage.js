@@ -136,9 +136,9 @@ export class HTMLPage extends Component {
       </style>`;
 
     const annotationsMarkup = this.props.isAnnotationModeActive ?
-      this.props.annotations.map((annotation, index) => `
+      this.props.annotations.map(annotation => `
       <div class='annotation' style='top: ${annotation.y}px; left: ${annotation.x}px; cursor: pointer;' data-annotation-id='${annotation.id}'>
-        ${index+1}
+        ${ annotation.isNewAnnotation ? '*' : annotation.index }
       </div>
     `).join('') : '';
 

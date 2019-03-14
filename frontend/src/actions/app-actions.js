@@ -167,19 +167,19 @@ const deleteImageInteractionElement = (projectId, whiteboardId, viewId, interact
   }
 }
 
-const addAnnotationToView = (projectId, whiteboardId, viewId, viewportSize, x, y) => async dispatch => {
-  const response = await http.post(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}/annotations`, { viewportSize, x, y});
-  const annotation = await response.json();
+const addAnnotationToView = (projectId, whiteboardId, viewId, annotation) => async dispatch => {
+  const response = await http.post(`/projects/${projectId}/whiteboards/${whiteboardId}/views/${viewId}/annotations`, annotation);
+  const savedAnnotation = await response.json();
 
   dispatch({
     type: actionNames.VIEW_ANNOTATION_ADDED,
     projectId,
     whiteboardId,
     viewId,
-    annotation
+    annotation: savedAnnotation
   });
 
-  return annotation;
+  return savedAnnotation;
 }
 
 const addInteractionElementToView = (projectId, whiteboardId, viewId, coords) => async dispatch => {

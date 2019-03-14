@@ -12,7 +12,13 @@ export class ViewAnnotation {
   view = undefined;
 
   @Column('text')
+  author = undefined;
+
+  @Column('text')
   text = undefined;
+
+  @Column('text')
+  isoDate = undefined;
 
   @Column('text')
   viewportSize = undefined;

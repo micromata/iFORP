@@ -1,11 +1,10 @@
 export default (theme) => ({
   ViewAnnotation: {
-    padding: '0 20px',
+    padding: '0',
+    margin: '0',
     width: '650px',
-    maxHeight: '200px',
+    maxHeight: '220px',
     overflow: 'scroll',
-    marginTop: '-40px',
-    margin: '20px 0',
     color: theme.textColor,
     display: 'flex',
     alignItems: 'flex-start',
@@ -39,4 +38,17 @@ export default (theme) => ({
       stroke: theme.accentColor
     }
   },
+  AnnotationNew: {
+    width: '100%',
+    border: '1px solid red',
+    display: 'flex',
+    flexDirection: 'column',
+    '& input[type=text]': {
+      width: '250px',
+    },
+    '& textarea': {
+      resize: 'none',
+      height: '62px'
+    }
+  }
 });

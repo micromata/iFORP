@@ -5,7 +5,20 @@ import ViewAnnotation from './ViewAnnotation';
 import ViewportSwitch from '../ViewportSwitch/ViewportSwitch';
 import Toggle from '../Toggle/Toggle';
 
-export const ViewAnnotationPanel = ({ classes, annotations, currentViewportSize, onChangeViewportSize, onChangeAnnotationText, onDeleteAnnotation, onToggleAnnotationMode, isAnnotationModeActive, annotationToShow, className = '' }) => (
+export const ViewAnnotationPanel = ({
+    classes,
+    annotations,
+    currentViewportSize,
+    isAnnotationModeActive,
+    annotationToShow,
+    onChangeViewportSize,
+    onChangeAnnotationText,
+    onDeleteAnnotation,
+    onToggleAnnotationMode,
+    onCancelAnnotate,
+    onCreateAnnotation,
+    className = ''
+  }) => (
   <div className={ `${classes.ViewAnnotationPanel} ${className} ${ annotationToShow ? 'visible' : '' }` }>
     <div className={ classes.Buttons }>
       <Toggle
@@ -24,6 +37,8 @@ export const ViewAnnotationPanel = ({ classes, annotations, currentViewportSize,
         annotation={ annotationToShow }
         onChangeAnnotationText={ onChangeAnnotationText }
         onDeleteAnnotation={ onDeleteAnnotation }
+        onCreateAnnotation={ onCreateAnnotation }
+        onCancelAnnotate={ onCancelAnnotate }
       />
     }
   </div>
