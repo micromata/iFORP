@@ -18,7 +18,7 @@ export default theme => ({
     outlineStyle: 'none',
     cursor: 'pointer',
     borderRadius: getBorderRadius,
-    minHeight: '30px',
+    minHeight: '45px',
     minWidth: props => props.minimumWidth || 0,
     '&:hover':{
       backgroundColor: theme.accentColor,

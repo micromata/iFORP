@@ -20,7 +20,7 @@ class LoginForm extends Component {
         top='150px'
         right='150px'
         width='420px'
-        height='426px'
+        height='465px'
       >
         <Toggle
           labelLeft="Sign In"

@@ -30,7 +30,7 @@ class SignInForm extends Component {
         >
           <div className={this.props.classes.FormInputs}>
             <TextInput
-              placeholder={'Email Address'}
+              placeholder={'Email'}
               type="email"
               onChange={event =>
                 this.setState({ emailAddress: event.target.value })

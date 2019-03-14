@@ -36,7 +36,7 @@ class SignUpForm extends Component {
               onChange={event => this.setState({ username: event.target.value })}
             />
             <TextInput
-              placeholder={'Email Address'}
+              placeholder={'Email'}
               type="email"
               onChange={event =>
                 this.setState({ emailAddress: event.target.value })

@@ -5,7 +5,7 @@ export default theme => ({
     borderRadius: '100px',
     outlineStyle: 'none',
     width: '100%',
-    minHeight: '35px',
+    minHeight: '40px',
     padding: '0 16px',
     margin: '12px 0',
     '&:focus': {
