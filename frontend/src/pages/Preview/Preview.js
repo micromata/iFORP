@@ -42,7 +42,8 @@ export class Preview extends Component {
   };
 
   handleChangeViewportSize = viewportSize => {
-    this.setState({ viewportSize });
+    if (viewportSize === this.state.viewportSize) return;
+    this.setState({ viewportSize, isAnnotationModeActive: false });
   }
 
   handleToggleAnnotationMode = () => {
