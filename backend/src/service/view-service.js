@@ -10,7 +10,7 @@ export const getByWhiteboardId = async whiteboardId => {
   const byWhiteboardId = await viewRepo.find({ whiteboard: whiteboardId });
   if (!byWhiteboardId) {
     throw exceptionWithHttpStatus(
-      `Found no views associated with whiteboard ID ${whiteboardId}.`,
+      `Es sind keine View zu Whiteboard ${whiteboardId} zugeordnet.`,
       404
     );
   }
@@ -24,7 +24,7 @@ export const save = async (whiteboardId, base) => {
   const whiteboard = await whiteboardRepo.findOne(whiteboardId);
   if (!whiteboard) {
     throw exceptionWithHttpStatus(
-      `Cannot add view to non existent whiteboard.`,
+      `View kann zu nicht existierendem Whiteboard nicht hinzugefügt werden.`,
       404
     );
   }
@@ -41,7 +41,7 @@ export const findById = async id => {
 
   const view = await viewRepo.findOne(id);
   if (!view) {
-    throw exceptionWithHttpStatus(`View with ID ${id} not found.`, 404);
+    throw exceptionWithHttpStatus(`View mit ${id} nicht gefunden.`, 404);
   }
   return view;
 };
@@ -56,7 +56,10 @@ export const replace = async (id, base) => {
   const view = await viewRepo.findOne(id);
 
   if (!view) {
-    throw exceptionWithHttpStatus(`Cannot replace view with ID ${id}`, 404);
+    throw exceptionWithHttpStatus(
+      `View mit ID ${id} kann nicht ersetzt werden`,
+      404
+    );
   }
 
   view.hasFile = true;

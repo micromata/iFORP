@@ -17,7 +17,10 @@ export const register = async (req, res) => {
     return res.send({ token });
   } catch (error) {
     if (violatesUniqueConstraint(error)) {
-      throw exceptionWithHttpStatus('E-Mail address already exists.', 409);
+      throw exceptionWithHttpStatus(
+        'Die E-Mail-Adresse existiert bereits.',
+        409
+      );
     }
   }
 };
@@ -30,7 +33,10 @@ export const login = async (req, res) => {
   });
 
   if (!loginSubject) {
-    throw exceptionWithHttpStatus('Credentials are incorrect.', 401);
+    throw exceptionWithHttpStatus(
+      'Die Anmeldeinformationen sind ungültig.',
+      401
+    );
   }
 
   const passwordMatches = await hashMatches(
@@ -39,7 +45,10 @@ export const login = async (req, res) => {
   );
 
   if (!passwordMatches) {
-    throw exceptionWithHttpStatus('Credentials are incorrect.', 401);
+    throw exceptionWithHttpStatus(
+      'Die Anmeldeinformationen sind ungültig.',
+      401
+    );
   }
 
   const token = await createTokenFor(loginSubject);

@@ -10,7 +10,7 @@ export const find = async projectId => {
   const project = await repo.findOne(projectId);
   if (!project) {
     throw exceptionWithHttpStatus(
-      `Cannot find whiteboards associated with project ID ${projectId}`,
+      `Es wurden keine Whiteboards zu Projekt ${projectId} gefunden`,
       404
     );
   }
@@ -24,7 +24,7 @@ export const save = async projectId => {
   const project = await projectRepo.findOne(projectId);
   if (!project) {
     throw exceptionWithHttpStatus(
-      `Cannot save whiteboard to non-existent project with ID ${projectId}`,
+      `Whiteboard kann nicht in ein nicht bestehendes Projekt mit ID ${projectId} gespeichert werden.`,
       404
     );
   }
@@ -54,7 +54,7 @@ export const remove = async id => {
   const found = await whiteboardRepo.findOne(id);
   if (!found) {
     throw exceptionWithHttpStatus(
-      `Cannot delete non-existent whiteboard with ID ${id}`,
+      `Nicht vorhandenes Whiteboard mit ID ${id} kann nicht gelöscht werden.`,
       404
     );
   }
@@ -66,7 +66,7 @@ export const update = async (id, base) => {
   const orig = await whiteboardRepo.findOne(id);
   if (!orig) {
     throw exceptionWithHttpStatus(
-      `Cannot update whiteboard with ID ${id}`,
+      `Whiteboard mit ID ${id} kann nicht aktualisiert werden.`,
       404
     );
   }

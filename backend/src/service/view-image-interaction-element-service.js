@@ -13,7 +13,7 @@ export const save = async (viewId, base) => {
   const view = await viewRepo.findOne(viewId);
   if (!view) {
     throw exceptionWithHttpStatus(
-      `Cannot add interaction element to non existent view.`,
+      `Interaktionselement kann zu nicht existierender View nicht hinzugefügt werden.`,
       404
     );
   }

@@ -45,7 +45,7 @@ export const extractZip = async (archive, basePath) => {
       writeStream.on('error', err => reject(err));
     });
   if (await fs.exists(basePath))
-    throw exceptionWithHttpStatus('Folder already exists.', 400);
+    throw exceptionWithHttpStatus('Verzeichnis existiert bereits.', 400);
   await fs.mkdirp(basePath);
 
   let entry;

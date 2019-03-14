@@ -11,13 +11,13 @@ export const save = async (viewId, base) => {
   const view = await viewRepo.findOne(viewId);
   if (!view) {
     throw exceptionWithHttpStatus(
-      `Cannot add annotation to non existent view.`,
+      `Anmerkung kan zu einer nicht existierenden View nicht hinzugefügt werden.`,
       404
     );
   }
   const annotation = base;
   annotation.view = view;
-  annotation.text = annotation.text || `${superb.random()} Annotation`;
+  annotation.text = annotation.text || `${superb.random()} Anmerkung`;
   const savedAnnotation = viewAnnotationRepo.save(annotation);
   return {
     id: savedAnnotation.id,
@@ -36,7 +36,7 @@ export const findById = async id => {
   const annotation = await viewAnnotationRepo.findOne(id);
   if (!annotation) {
     throw exceptionWithHttpStatus(
-      `ViewAnnotation with ID ${id} not found.`,
+      `Anmerkung mit ID ${id} nicht gefunden.`,
       404
     );
   }
@@ -54,7 +54,7 @@ export const replace = async (id, base) => {
 
   if (!annotation) {
     throw exceptionWithHttpStatus(
-      `Cannot replace ViewAnnotation with ID ${id}`,
+      `Anmerkung mit ${id} kann nicht aktualisiert werden.`,
       404
     );
   }

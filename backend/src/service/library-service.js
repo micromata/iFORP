@@ -71,7 +71,7 @@ export const uploadZip = async (file, userDefinedDirName = '') => {
   if (htmlFiles.length < 1) {
     await rmdir(extractionBasePath);
     throw exceptionWithHttpStatus(
-      'You need to upload a Zip file containing HTML files',
+      'Sie müssen eine .zip-Datei mit HTML-Dateien hochladen.',
       422 // unprocessable entity
     );
   }

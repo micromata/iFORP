@@ -14,7 +14,7 @@ export const save = async base => {
   const repo = getRepository(Project);
 
   const whiteboard = new Whiteboard();
-  whiteboard.name = 'Default Whiteboard';
+  whiteboard.name = 'Standard Whiteboard';
 
   const project = new Project();
   project.name = `${superb.random()} Project`;
@@ -22,7 +22,7 @@ export const save = async base => {
 
   const view = new View();
   whiteboard.views = [];
-  view.name = `Initial view`;
+  view.name = `Initiale View`;
   view.hasFile = false;
   whiteboard.views.push(view);
 
@@ -36,7 +36,7 @@ export const findById = async id => {
   const repo = getRepository(Project);
   const project = await repo.findOne(id);
   if (!project) {
-    throw exceptionWithHttpStatus(`Project with ID ${id} not found.`, 404);
+    throw exceptionWithHttpStatus(`Project mit ID ${id} nicht gefunden.`, 404);
   }
   return project;
 };
@@ -45,7 +45,7 @@ export const update = async (id, base) => {
   const repo = getRepository(Project);
   const origProject = await repo.findOne(id);
   if (!origProject) {
-    throw exceptionWithHttpStatus(`Project with ID ${id} not found.`, 404);
+    throw exceptionWithHttpStatus(`Project mit ID ${id} nicht gefunden.`, 404);
   }
   const patched = { ...origProject, ...base };
   return repo.save(patched);
@@ -56,7 +56,7 @@ export const remove = async id => {
   const found = await repo.findOne(id);
   if (!found) {
     throw exceptionWithHttpStatus(
-      `Cannot delete non-existent project with ID ${id}`,
+      `Das nicht existierende Projekte mit ID ${id} kann nicht gelöscht werden.`,
       404
     );
   }
