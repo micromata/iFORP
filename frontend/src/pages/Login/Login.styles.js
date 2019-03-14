@@ -2,11 +2,12 @@ export default () => ({
   Hero: {
     backgroundColor: '#fff',
     paddingTop: '25px',
-    paddingLeft: '50px',
-    paddingBottom: '150px',
+    paddingLeft: '200px',
+    paddingBottom: '65px',
   },
   HeroText: {
     color: '#5E5E5E',
+    fontSize: '25px'
   },
   IforpBrand: {
     marginBottom: '120px',
