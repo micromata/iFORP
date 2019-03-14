@@ -48,9 +48,9 @@ export default {
     },
     FilterChip: {
       textColor: '#5E5E5E',
-      textColorChecked: '#4A4A4A',
+      textColorChecked: '#FFF',
       backgroundColor: '#E9E9E9',
-      backgroundColorChecked: '#C8C8C8'
+      backgroundColorChecked: '#EE9A02'
     },
     Sidebar: {
       backgroundColor: '#FFF'
