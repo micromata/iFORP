@@ -13,7 +13,7 @@ export class Preview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isAnnotationModeActive: true,
+      isAnnotationModeActive: false,
       annotationIdToShow: null,
       newAnnotation: null,
       deleteAnnotationId: null,
@@ -114,7 +114,7 @@ export class Preview extends Component {
   }
 
   handleSelectAnnotation = annotationId => {
-    this.setState({ annotationIdToShow: annotationId });
+    this.setState({ annotationIdToShow: annotationId, newAnnotation: null });
   }
 
   handleCancelDeleteAnnotation = () => {

@@ -43,14 +43,14 @@ class SignUpForm extends Component {
               }
             />
             <TextInput
-              placeholder={'Password'}
+              placeholder={'Passwort'}
               type="password"
               onChange={event =>
                 this.setState({ password: event.target.value })
               }
             />
             <TextInput
-              placeholder={'Password repeat'}
+              placeholder={'Passwort-Wiederholung'}
               type="password"
               onChange={event =>
                 this.setState({ passwordRepeat: event.target.value })
@@ -66,7 +66,7 @@ class SignUpForm extends Component {
             buttonStyle={'round'}
             disabled={this.maySubmit() === false}
           >
-            Start prototyping
+            Start
           </Button>
         </form>
       </React.Fragment>

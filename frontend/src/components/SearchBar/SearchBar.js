@@ -6,7 +6,7 @@ import styles from './SearchBar.styles';
 
 export const SearchBar = ({ classes, searchTerm, onChange, light }) => (
   <div className={`${classes.SearchBar} ${light ? 'light': ''}`}>
-    <TextInput value={ searchTerm } onChange={ onChange }/>
+    <TextInput value={ searchTerm } onChange={ onChange } placeholder="Suche"/>
     <SearchIcon />
   </div>
 );

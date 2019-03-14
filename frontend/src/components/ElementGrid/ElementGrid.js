@@ -12,7 +12,7 @@ const ElementGrid = ({ classes, children, nowrap, leftAlign }) => (
   <div className={ getClassNames(classes, nowrap, leftAlign) }>{children}</div>
 );
 
-const styles = theme => ({
+const styles = () => ({
   ElementGrid: {
     position: 'relative',
     display: 'flex',

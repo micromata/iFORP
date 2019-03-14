@@ -42,7 +42,7 @@ class UserDropdown extends React.Component {
               </DropdownItem>
             ) }
             <DropdownItem onClick={ this.logout }>
-              Logout
+              Abmelden
             </DropdownItem>
           </div>
         )}

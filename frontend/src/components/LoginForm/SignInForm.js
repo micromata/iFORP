@@ -37,7 +37,7 @@ class SignInForm extends Component {
               }
             />
             <TextInput
-              placeholder={'Password'}
+              placeholder={'Passwort'}
               type="password"
               onChange={event =>
                 this.setState({ password: event.target.value })
@@ -53,7 +53,7 @@ class SignInForm extends Component {
             buttonStyle={'round'}
             disabled={this.maySubmit() === false}
           >
-            Start prototyping
+            Start
           </Button>
         </form>
       </React.Fragment>

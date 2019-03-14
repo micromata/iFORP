@@ -9,7 +9,7 @@ class LoginForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mode: 'signIn',
+      mode: 'signIn'
     };
   }
 
@@ -23,8 +23,8 @@ class LoginForm extends Component {
         height='465px'
       >
         <Toggle
-          labelLeft="Sign In"
-          labelRight="Sign Up"
+          labelLeft="Anmelden"
+          labelRight="Registrieren"
           isActive={this.state.mode === 'signUp'}
           onToggle={enabled => {
             this.setState({ mode: enabled === true ? 'signUp' : 'signIn' });

@@ -103,7 +103,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     project: findProjectWithId(state.app.projects, projectId),
     navigationMenuEntries: [
-      { title: 'Home', url: '/'},
+      { title: 'Startseite', url: '/'},
       { title: 'Bibliothek', url: '/library'},
       { title: 'Projektübersicht', url: '/projects'},
       ...projectNavEntries
