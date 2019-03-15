@@ -20,7 +20,7 @@ export default () => ({
     fontSize: '25px'
   },
   IforpBrand: {
-    marginBottom: '120px',
+    marginBottom: '60px',
   },
   Footer: {
     width: '100%',
