@@ -156,10 +156,10 @@ export class Preview extends Component {
     const annotations = previewData.annotations ?
       previewData.annotations
         .filter(annotation => annotation.viewportSize === this.state.viewportSize)
-        .map((annotation, index) => ({...annotation, index: index+1})) :
+        .map((annotation, index) => ({...annotation, index: index + 1})) :
       [];
     if (this.state.newAnnotation) {
-      annotations.push(this.state.newAnnotation);
+      annotations.push({...this.state.newAnnotation, index: annotations.length + 1 });
     }
 
     const annotationToShow = annotations.find(a => a.id === this.state.annotationIdToShow);

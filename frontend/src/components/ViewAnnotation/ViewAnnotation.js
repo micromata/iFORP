@@ -11,36 +11,55 @@ const viewportSizeMap = {
   phone: 'Smartphone'
 };
 
-const ViewAnnotation = ({ classes, annotation, onChangeAnnotationText, onDeleteAnnotation, onCreateAnnotation, onCancelAnnotate }) => (
-  <div className={ classes.ViewAnnotation}>
-    <div className={ classes.AnnotationBubble }>
-      { annotation.isNewAnnotation ? '*' : annotation.index }
-    </div>
-    { !annotation.isNewAnnotation &&
-      <>
-      <div className={ classes.AnnotationText}>
-        <span>
-          <b>{ annotation.author }</b>, am { annotation.formattedDate }, { viewportSizeMap[annotation.viewportSize] }
-        </span>
-        <EditableText
-          text={ annotation.text }
-          onEditingConfirmed={ newText => onChangeAnnotationText(annotation.id, newText) }
-          maxLength={ 140 }
+class ViewAnnotation extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isEditing: false
+    }
+  }
+
+  handleIsEditingChanged = isEditing => {
+    this.setState({isEditing});
+  }
+
+  render () {
+    return (
+      <div className={ this.props.classes.ViewAnnotation}>
+        <div className={ this.props.classes.AnnotationBubble }>
+          { this.props.annotation.index }
+        </div>
+        { !this.props.annotation.isNewAnnotation &&
+          <>
+          <div className={ this.props.classes.AnnotationText}>
+            <span>
+              <b>{ this.props.annotation.author }</b>, am { this.props.annotation.formattedDate }, { viewportSizeMap[this.props.annotation.viewportSize] }
+            </span>
+            <EditableText
+              inputStyle='TextInput'
+              text={ this.props.annotation.text }
+              maxLength={ 140 }
+              onIsEditingChanged={ this.handleIsEditingChanged }
+              onEditingConfirmed={ newText => this.props.onChangeAnnotationText(this.props.annotation.id, newText) }
+              showSaveAndCancelButtons
+            />
+          </div>
+          <div className={this.props.classes.DeleteButton} onClick={() => this.props.onDeleteAnnotation(this.props.annotation.id)}>
+            <DeleteIcon />
+          </div>
+        </>
+      }
+      {
+        this.props.annotation.isNewAnnotation &&
+        <EditNewViewAnnotation
+          onCreateAnnotation={ this.props.onCreateAnnotation }
+          onCancelAnnotate={ this.props.onCancelAnnotate }
         />
-      </div>
-      <div className={classes.DeleteButton} onClick={() => onDeleteAnnotation(annotation.id)}>
-        <DeleteIcon />
-      </div>
-    </>
-  }
-  {
-    annotation.isNewAnnotation &&
-    <EditNewViewAnnotation
-      onCreateAnnotation={ onCreateAnnotation }
-      onCancelAnnotate={ onCancelAnnotate }
-    />
-  }
-</div>
-);
+      }
+    </div>
+  )
+}
+}
 
 export default injectSheet(styles)(ViewAnnotation);

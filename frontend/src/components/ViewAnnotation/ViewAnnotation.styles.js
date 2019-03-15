@@ -2,7 +2,7 @@ export default (theme) => ({
   ViewAnnotation: {
     padding: '0',
     margin: '0',
-    width: '650px',
+    width: '600px',
     maxHeight: '220px',
     overflow: 'scroll',
     color: theme.textColor,

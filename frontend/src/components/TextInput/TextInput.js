@@ -8,6 +8,10 @@ const TextInput = ({
   placeholder,
   type = 'text',
   onChange,
+  onBlur = _ => { },
+  onKeyDown = _ => { },
+  minLength = 5,
+  maxLength = 20
 }) => (
   <input
     type={type}
@@ -15,6 +19,10 @@ const TextInput = ({
     placeholder={placeholder}
     value={value}
     onChange={onChange}
+    onBlur={ onBlur }
+    onKeyDown={ onKeyDown }
+    minLength={ minLength }
+    maxLength={ maxLength }
   />
 );
 
