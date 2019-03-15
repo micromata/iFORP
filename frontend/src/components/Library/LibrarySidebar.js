@@ -78,11 +78,11 @@ class LibrarySidebar extends Component {
         { !hasFiles &&
           <React.Fragment>
             <p className={ this.props.classes.LibraryEmptyTeaser }>
-              Sie haben bisher noch keine Dateien in die Bibliothek geladen.
+              Du hast bisher noch keine Dateien in die Bibliothek geladen.
               <br />
-              Bitte laden Sie Ihre HTML oder Bilddateien hoch, um aus ihnen auswählen zu können.
+              Bitte lade Deine HTML oder Bilddateien hoch, um aus ihnen auswählen zu können.
               <br />
-              <span className='footnote'>Tipp: Sie können neben .jpg, .png Dateien auch komplette .zip Dateien mit .html und .css auswählen.</span>
+              <span className='footnote'>Tipp: Du kannst neben .jpg, .png Dateien auch komplette .zip Dateien mit .html und .css auswählen.</span>
             </p>
             <div className='UploadButtons'>
               <LibraryZipUpload highlighted onZipFileSelected={ this.props.onZipFileSelected } />

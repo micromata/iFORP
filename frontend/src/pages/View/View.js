@@ -270,7 +270,7 @@ class View extends Component {
         <Modal
           show={ this.state.deleteImageInteractionElementId }
           headerText='Interaktionselement löschen'
-          bodyText={ 'Möchten Sie das Interaktionselement wirklich löschen?' }
+          bodyText={ 'Möchtest Du das Interaktionselement wirklich löschen?' }
           labelCancel='Nein'
           labelConfirm='Ja'
           onCancel={ this.handleCancelDeleteImageInteractionElement }
@@ -279,7 +279,7 @@ class View extends Component {
         <Modal
           show={ this.state.deleteViewId }
           headerText='View löschen'
-          bodyText={ 'Möchten Sie die View wirklich löschen?' }
+          bodyText={ 'Möchtest Du die View wirklich löschen?' }
           labelCancel='Nein'
           labelConfirm='Ja'
           onCancel={ this.handleCancelDeleteView }

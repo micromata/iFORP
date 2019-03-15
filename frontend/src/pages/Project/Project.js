@@ -80,7 +80,7 @@ class Project extends Component {
         <Modal
           show={ Boolean(this.state.deleteWhiteboardId) }
           headerText='Whiteboard löschen'
-          bodyText={ 'Möchten Sie das Whiteboard wirklich löschen?' }
+          bodyText={ 'Möchtest Du das Whiteboard wirklich löschen?' }
           labelCancel='Nein'
           labelConfirm='Ja'
           onCancel={ this.handleCancelDeleteWhiteboard }

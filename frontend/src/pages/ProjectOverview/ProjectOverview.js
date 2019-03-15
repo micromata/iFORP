@@ -87,7 +87,7 @@ class ProjectOverview extends Component {
         <Modal
           show={ this.state.deleteProjectId }
           headerText='Projekt löschen'
-          bodyText={ 'Möchten Sie das Projekt wirklich löschen?' }
+          bodyText={ 'Möchtest Du das Projekt wirklich löschen?' }
           labelCancel='Nein'
           labelConfirm='Ja'
           onCancel={ this.handleCancelDeleteProject }

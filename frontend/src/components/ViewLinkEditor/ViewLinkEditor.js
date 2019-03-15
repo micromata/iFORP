@@ -14,8 +14,8 @@ class ViewLinkEditor extends Component {
         <h3>{ config.whiteboardClickflow === 'linear' ? 'Verlinkung setzen' : 'Verlinkungen setzen' }</h3>
         { this.props.fileType === 'image' && !this.props.availableInteractionElements.length &&
           <p className={ this.props.classes.ImageLinkTeaser }>
-            Sie haben bisher noch keine Verlinkung gesetzt.
-            Bitte markieren Sie dazu einen Bereich, der dazu dienen soll und legen sie das Link-Ziel fest.
+            Du hast bisher noch keine Verlinkung gesetzt.
+            Bitte markiere dazu einen Bereich, der dazu dienen soll und legen anschließend das Link-Ziel fest.
           </p>
         }
 

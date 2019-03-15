@@ -206,7 +206,7 @@ export class Preview extends Component {
         <Modal
           show={ this.state.deleteAnnotationId }
           headerText='Anmerkung löschen'
-          bodyText={ 'Möchten Sie die Anmerkung wirklich löschen?' }
+          bodyText={ 'Möchtest Du die Anmerkung wirklich löschen?' }
           labelCancel='Nein'
           labelConfirm='Ja'
           onCancel={ this.handleCancelDeleteAnnotation }

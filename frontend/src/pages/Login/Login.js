@@ -68,7 +68,7 @@ class Login extends Component {
           <div className={this.props.classes.Hero}>
             <IForpBrand className={this.props.classes.IforpBrand} />
             <p className={this.props.classes.HeroText}>
-              Erstellen Sie Ihren eigenen HTML-Prototypen<br />
+              Erstelle Deinen eigenen HTML-Prototypen<br />
               ohne Programmiererfahrung.
             </p>
           </div>
