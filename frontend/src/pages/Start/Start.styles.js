@@ -6,31 +6,71 @@ export default theme => ({
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
-    fontSize: '1.5rem',
     justifyContent: 'center',
     padding: '2rem',
     paddingTop: `${NavBarHeight}`,
-    '& button': {
-      width: '11rem',
-      borderRadius: '100px',
-      padding: '8px 10px',
-    },
-    '& .newProjectText, .recentProjectText': {
-      marginBottom: '3rem',
-      textAlign: 'center',
-      '& > p': {
-        margin: 0,
+    '& .newProject': {
+      marginTop: '60px',
+      padding: '0 80px',
+      maxWidth: '600px',
+      fontSize: '32px',
+      '& button[class^=CircleButton]': {
+        zIndex: 1,
+        position: 'relative'
       },
+      '& .newProjectName': {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        maxWidth: '380px',
+        padding: '26px',
+        marginTop: '-28px',
+        marginLeft: '28px',
+        fontSize: '17px',
+        color: theme.textColor,
+        background: theme.NewProject.backgroundColor,
+        '& input[type=text]': {
+          marginBottom: 0
+        },
+        '& button': {
+          marginTop: '26px'
+        }
+      }
     },
-    '& .recentProjectText': {
-      marginTop: '8rem',
+    '& .recentProjects': {
+      marginTop: '60px',
+      padding: '40px 20px 40px 80px',
+      borderTop: '1px solid white',
+      maxWidth: '600px',
+      fontSize: '32px',
+      '& div[class^=ElementGrid]': {
+        justifyContent: 'flex-start',
+        '& div[class^=ButtonTile]': {
+          marginBottom: 0
+        }
+      }
+    },
+    '& p': {
+      marginTop: 0
+    },
+    '@media (min-width: 1000px)': {
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+      '& .newProject': {
+        padding: '40px 80px',
+      },
+      '& .recentProjects': {
+        borderTop: 'none',
+        borderLeft: '1px solid white',
+      }
     },
     '& .ghost': {
-      position: 'absolute',
-      width: '3rem',
-      height: '3rem',
-      right: '-6rem',
-      top: '2.5rem',
+      background: 'transparent',
+      padding: '0 0 8px 0',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'flex-end',
     },
   },
 });

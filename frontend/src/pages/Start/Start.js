@@ -8,13 +8,20 @@ import TileProjectIcon from '../../assets/img/TileProject';
 import injectSheet from 'react-jss';
 import styles from './Start.styles';
 import Button from '../../components/Button/Button';
+import CircleButton from '../../components/Button/CircleButton';
+import TextInput from '../../components/TextInput/TextInput';
 import Dots from '../../assets/img/Dots';
+import PlusIcon from '../../assets/img/Plus';
 
 class Start extends Component {
   constructor(props) {
     super(props);
 
-    this.createNewProject = this.createNewProject.bind(this);
+    this.state = {
+      newProjectName: '',
+      newWhiteboardName: '',
+      newProjectOpen: false
+    }
   }
 
   navigateToProjectOverview = () => {
@@ -29,9 +36,13 @@ class Start extends Component {
     this.props.history.push(`/projects/${projectId}/whiteboards/${whiteboardId}`);
   };
 
-  createNewProject() {
+  openNewProjectOptions = () => {
+    this.setState({ newProjectOpen: true });
+  }
+
+  createNewProject = () => {
     this.props.
-      createNewProject(this.navigateToProject).
+      createNewProject(this.state.newProjectName, this.state.newWhiteboardName).
       then(project => {
         this.navigateToWhiteboard(project.id, project.whiteboards[0].id);
       });
@@ -44,24 +55,37 @@ class Start extends Component {
       <React.Fragment>
         <NavBar title="iFORP" />
         <div className={this.props.classes.Start}>
-          <div className="newProjectText">
-            <p>Start prototyping</p>
-            <p>with a</p>
-          </div>
           <div className="newProject">
-            <Button onClick={this.createNewProject}>New Project</Button>
+            <p>Beginne mit dem Prototyping eines neuen Projekts</p>
+            <CircleButton onClick={this.openNewProjectOptions}>
+              <PlusIcon />
+            </CircleButton>
+            { this.state.newProjectOpen &&
+              <div className="newProjectName">
+                Gib Deinem Projekt einen Namen
+                <TextInput
+                  placeholder="Projektname"
+                  onChange={ event => this.setState({newProjectName: event.target.value.trim()})}
+                />
+                <TextInput
+                  placeholder="Name des ersten Whiteboards"
+                  onChange={ event => this.setState({newWhiteboardName: event.target.value.trim()})}
+                />
+                <Button buttonStyle="round" onClick={ this.createNewProject } disabled={!this.state.newProjectName || !this.state.newWhiteboardName}>
+                  Start
+                </Button>
+              </div>
+            }
           </div>
 
           { hasExistingProject &&
-            <React.Fragment>
-              <div className="recentProjectText">
-                <p>or</p>
-                <p>choose a recent project</p>
-              </div>
+            <div className="recentProjects">
+              <p>Wähle ein aktuelles Projekt</p>
               <ElementGrid>
                 { this.props.projects.map(project =>
                   <ButtonTile
                     key={ project.id }
+                    small
                     titleBelow
                     TileIcon={ TileProjectIcon }
                     onClick={ () => this.navigateToProject(project.id ) }>
@@ -75,7 +99,7 @@ class Start extends Component {
                   <Dots color={ this.props.theme.Button.textColor } />
                 </Button>
               </ElementGrid>
-            </React.Fragment>
+            </div>
           }
         </div>
       </React.Fragment>
@@ -84,7 +108,7 @@ class Start extends Component {
 }
 
 const mapStateToProps = state => ({
-  projects: state.app.projects.slice(0, 3)
+  projects: state.app.projects.slice(0, 2)
 });
 
 const actions = { createNewProject };

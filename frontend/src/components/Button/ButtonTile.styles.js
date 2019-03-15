@@ -35,13 +35,22 @@ export default theme => ({
       },
       '& img': {
         maxWidth: '11.5rem',
-      }
+      },
     },
     '&.highlighted': {
       '& button.btn': {
         border: `1px solid ${theme.accentColor}`,
         boxShadow: `0 0 8px 0 ${theme.accentColor}`,
       },
+    },
+    '&.small': {
+      '& button.btn': {
+        height: '6.25rem',
+        width: '8.5rem',
+        '& svg': {
+          transform: 'scale(0.7)'
+        }
+      }
     }
   },
   DeleteButton: {

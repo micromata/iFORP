@@ -14,10 +14,10 @@ export const save = async base => {
   const repo = getRepository(Project);
 
   const whiteboard = new Whiteboard();
-  whiteboard.name = 'Standard Whiteboard';
+  whiteboard.name = base.firstWhiteboardName || 'First Whiteboard';
 
   const project = new Project();
-  project.name = `${randomSuperbWord()}es Projekt`;
+  project.name = base.projectName || `${randomSuperbWord()}es Projekt`;
   project.whiteboards = [whiteboard];
 
   const view = new View();
@@ -27,8 +27,7 @@ export const save = async base => {
   whiteboard.views.push(view);
 
   return repo.save({
-    ...project,
-    ...base
+    ...project
   });
 };
 

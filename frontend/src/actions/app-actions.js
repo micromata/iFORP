@@ -36,8 +36,8 @@ const getAllProjects = () => async dispatch => {
   });
 };
 
-const createNewProject = () => async dispatch => {
-  const response = await http.post('/projects');
+const createNewProject = (projectName = '', firstWhiteboardName = '') => async dispatch => {
+  const response = await http.post('/projects', { projectName, firstWhiteboardName });
   const project = await response.json();
 
   dispatch({

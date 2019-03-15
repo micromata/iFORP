@@ -9,7 +9,7 @@ export default theme => ({
     padding: '0 16px',
     margin: '12px 0',
     '&:focus': {
-      border: '2px solid ' + theme.accentColor,
+      border: '1px solid ' + theme.accentColor,
     },
   },
 });

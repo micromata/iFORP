@@ -4,10 +4,11 @@ import styles from './ButtonTile.styles.js';
 import CircleButton from './CircleButton';
 import DeleteIcon from '../../assets/img/Delete';
 
-const getClassNames = (classes, connectRight, highlighted) => {
+const getClassNames = (classes, connectRight, highlighted, small) => {
   const classNames = [classes.ButtonTile];
   if (connectRight) classNames.push('ConnectRight');
   if (highlighted) classNames.push('highlighted');
+  if (small) classNames.push('small');
   return classNames.join(' ');
 }
 
@@ -22,9 +23,10 @@ const ButtonTile = ({
   TileIcon,
   TileImagePath,
   connectRight = false,
-  highlighted = false
+  highlighted = false,
+  small = false
 }) => (
-  <div id={ id } className={getClassNames(classes, connectRight, highlighted)}>
+  <div id={ id } className={getClassNames(classes, connectRight, highlighted, small)}>
     {children &&
       !titleBelow && (
         <a className={classes.ProjectName} onClick={onClick}>

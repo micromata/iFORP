@@ -19,6 +19,9 @@ export default {
       dotColor: '#5E5E5E',
       backgroundColor: '#4A4A4A'
     },
+    NewProject: {
+      backgroundColor: '#FFF'
+    },
     NavBar: {
       backgroundColor: '#FFF',
       textColor: '#4A4A4A'
@@ -71,6 +74,9 @@ export default {
       backgroundColor: '#FFF',
       dotColor: '#E9E9E9'
     },
+    NewProject: {
+      backgroundColor: '#FFF'
+    },
     NavBar: {
       backgroundColor: '#E9E9E9',
       textColor: '#5E5E5E'
@@ -122,6 +128,9 @@ export default {
     DottedBackground: {
       dotColor: '#485578',
       backgroundColor: '#32394C',
+    },
+    NewProject: {
+      backgroundColor: '#FFF'
     },
     NavBar: {
       backgroundColor: '#485578',
