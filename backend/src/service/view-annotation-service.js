@@ -18,7 +18,7 @@ export const save = async (viewId, base) => {
   const annotation = base;
   annotation.view = view;
   annotation.text = annotation.text || `${randomSuperbWord()}e Anmerkung`;
-  const savedAnnotation = viewAnnotationRepo.save(annotation);
+  const savedAnnotation = await viewAnnotationRepo.save(annotation);
   return {
     id: savedAnnotation.id,
     author: savedAnnotation.author,
