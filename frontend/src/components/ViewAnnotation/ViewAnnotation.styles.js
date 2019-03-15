@@ -31,6 +31,12 @@ export default (theme) => ({
     '& input[type=text]': {
       width: '100%',
       textAlign: 'left'
+    },
+    '& div[class^=EditableText]': {
+      fontSize: '17px',
+      '& input[type=text]': {
+        fontSize: '17px'
+      }
     }
   },
   DeleteButton: {
