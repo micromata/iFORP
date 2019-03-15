@@ -18,6 +18,7 @@ export default (theme) => ({
       outline: 'none',
       fontSize: '14px',
       cursor: 'pointer',
+      background: 'transparent',
       '&:hover, &:active, &:focus': {
         color: theme.accentColor
       }

@@ -37,7 +37,7 @@ class UserDropdown extends React.Component {
         {this.state.isOpen && (
           <div className={classes.Drop}>
             { availableThemes.map(theme =>
-              <DropdownItem onClick={ () => switchTheme(theme) }>
+              <DropdownItem key={`theme-${theme}`} onClick={ () => switchTheme(theme) }>
                 Theme {theme} { currentThemeName === theme ? '✓' : '' }
               </DropdownItem>
             ) }

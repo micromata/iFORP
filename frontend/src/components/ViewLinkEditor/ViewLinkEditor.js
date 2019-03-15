@@ -15,7 +15,7 @@ class ViewLinkEditor extends Component {
         { this.props.fileType === 'image' && !this.props.availableInteractionElements.length &&
           <p className={ this.props.classes.ImageLinkTeaser }>
             Du hast bisher noch keine Verlinkung gesetzt.
-            Bitte markiere dazu einen Bereich, der dazu dienen soll und legen anschließend das Link-Ziel fest.
+            Bitte markiere dazu einen Bereich, der dazu dienen soll und lege anschließend das Link-Ziel fest.
           </p>
         }
 
