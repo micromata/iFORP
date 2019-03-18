@@ -36,14 +36,14 @@ class UserDropdown extends React.Component {
         </div>
         {this.state.isOpen && (
           <div className={classes.Drop}>
+            <DropdownItem onClick={ this.logout }>
+              Abmelden
+            </DropdownItem>
             { availableThemes.map(theme =>
               <DropdownItem key={`theme-${theme}`} onClick={ () => switchTheme(theme) }>
                 Theme {theme} { currentThemeName === theme ? '✓' : '' }
               </DropdownItem>
             ) }
-            <DropdownItem onClick={ this.logout }>
-              Abmelden
-            </DropdownItem>
           </div>
         )}
       </div>

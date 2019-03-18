@@ -13,9 +13,9 @@ export default theme => ({
       cursor: 'pointer',
       padding: '0 .5rem',
     },
-    '& button[class^=DropdownItem]:last-of-type': {
-      borderTop: '1px solid white',
-      paddingTop: '8px'
+    '& button[class^=DropdownItem]:first-of-type': {
+      borderBottom: '1px solid white',
+      paddingBottom: '8px'
     }
   },
   Drop: {
