@@ -26,7 +26,9 @@ export class HTMLPage extends Component {
     event.stopPropagation();
     if (!this.props.onInteractionElementClick) return;
 
-    this.props.onInteractionElementClick(event.target.attributes['data-interaction-id'].value);
+    const attribute = event.target.attributes['data-interaction-id'];
+    if (!attribute) return;
+    this.props.onInteractionElementClick(attribute.value);
   }
 
   handleAddAnnotation = event => {
@@ -38,7 +40,10 @@ export class HTMLPage extends Component {
 
   handleAnnotationClicked = event => {
     event.stopPropagation();
-    const annotationId = Number(event.target.attributes['data-annotation-id'].value);
+    const attribute = event.target.attributes['data-annotation-id'];
+    if (!attribute) return;
+
+    const annotationId = Number(attribute.value);
     console.log('annotation clicked', { annotationId });
     this.props.onSelectAnnotation(annotationId);
   }
@@ -54,23 +59,35 @@ export class HTMLPage extends Component {
       querySelectorAll('.interaction-element-rect').
       forEach(item => item.classList.add('interaction-element-rect-highlighted'));
 
+    const elementsAdded = [];
+
     if (this.props.fileType === 'html') {
       this.iframeDocument.body.
         querySelectorAll('[data-interaction-id]').
         forEach(item => {
+          const interactionId = item.attributes['data-interaction-id'].value;
+          if (!interactionId || !this.props.viewLinks) return;
+          const interactionTarget = this.props.viewLinks.find(link => link.interactionId === interactionId);
+          if (!interactionTarget) return;
+
           const clientBoundary = item.getBoundingClientRect();
-          const highlighted = this.iframeDocument.body.document.createElement('div');
+          const highlighted = this.iframeDocument.createElement('div');
           highlighted.style.position = 'absolute';
           highlighted.style.top = clientBoundary.top;
           highlighted.style.left = clientBoundary.left;
           highlighted.style.width = clientBoundary.width;
           highlighted.style.height = clientBoundary.height;
           highlighted.classList.add('interaction-element-rect-highlighted');
-          this.iframeDocument.body.document.append(highlighted);
+          highlighted.style.zIndex = 1000000;
+          elementsAdded.push(highlighted);
+          this.iframeDocument.body.append(highlighted);
         })
     }
 
-    window.setTimeout(this.unhighlightInteractionElements, 500);
+    window.setTimeout(() => {
+      this.unhighlightInteractionElements();
+      elementsAdded.forEach(element => element.remove());
+    }, 500);
   }
 
   injectIframeContent() {

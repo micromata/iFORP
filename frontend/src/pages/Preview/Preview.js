@@ -135,6 +135,7 @@ export class Preview extends Component {
         interactionElements: this.props.view.interactionElements,
         annotations: this.props.annotations,
         fileType: this.props.view.fileType,
+        viewLinks: this.props.view.viewLinks,
         horizontalOffset: 0
       }
     }
@@ -147,7 +148,8 @@ export class Preview extends Component {
       fileType: this.props.view.fileType,
       interactionElements: this.props.view.imageInteractionElements,
       annotations: this.props.annotations,
-      horizontalOffset: calculateImagePreviewOffset(this.state.viewportSize, this.props.view.imageWidth)
+      horizontalOffset: calculateImagePreviewOffset(this.state.viewportSize, this.props.view.imageWidth),
+      viewLinks: this.props.view.viewLinks,
     };
   }
 
@@ -182,6 +184,8 @@ export class Preview extends Component {
                 isAnnotationModeActive={ this.state.isAnnotationModeActive }
                 annotations={ annotations }
                 imageInteractionElements={ previewData.fileType === 'image' ? previewData.interactionElements : [] }
+                fileType={ previewData.fileType }
+                viewLinks={ previewData.viewLinks }
                 onInteractionElementClick={ this.handleInteractionElementClick }
                 onAnnotate={ this.handleAnnotate }
                 onSelectAnnotation={ this.handleSelectAnnotation }
