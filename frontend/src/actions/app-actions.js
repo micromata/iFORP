@@ -1,5 +1,5 @@
 import * as http from '../services/backendrequest.service';
-import { findWhiteboardWithId, findViewWithId, delay } from '../utils';
+import { findWhiteboardWithId, findViewWithId } from '../utils';
 import cheerio from 'cheerio';
 
 const actionNames = {
@@ -306,8 +306,6 @@ const uploadZipFile = file => async dispatch => {
   const allDirectories = await fetchAllDirectoryFiles();
   const directoryWithPages = allDirectories.find(dir => dir.id === directory.id);
 
-  await delay(1000);
-
   dispatch({
     type: actionNames.LIBRARY_DIRECTORY_IMPORTED,
     directory: directoryWithPages
@@ -321,8 +319,6 @@ const uploadImages = files => async dispatch => {
   const directory = await response.json();
   const allDirectories = await fetchAllDirectoryFiles();
   const directoryWithImages = allDirectories.find(dir => dir.id === directory.id);
-
-  await delay(1000);
 
   dispatch({
     type: actionNames.LIBRARY_IMAGES_IMPORTED,

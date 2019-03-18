@@ -25,7 +25,7 @@ class LibrarySidebar extends Component {
       imagesChecked: typeof(imagesFilterFromLocalStorage) === 'string' ?
         imagesFilterFromLocalStorage === '1' :
         true,
-      searchTerm: null
+      searchTerm: ''
     };
   }
 
