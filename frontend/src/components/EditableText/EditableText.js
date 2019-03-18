@@ -33,6 +33,8 @@ export class EditableText extends Component {
   }
 
   confirmEditing = async event => {
+    if (!this.state.editedText.trim().length) return;
+
     event && event.stopPropagation(); // eslint-disable-line
     await this.props.onEditingConfirmed(this.state.editedText);
     this.cancelEditing();

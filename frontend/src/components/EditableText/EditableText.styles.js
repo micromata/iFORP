@@ -8,7 +8,7 @@ export default (theme) => ({
       '&:not([class^=TextInput])': {
         'fontSize': '14px',
         'background': 'transparent',
-        'color': theme.textColor,
+        'color': theme.textColorOnBackground,
         'border': `1px dashed ${theme.accentColor}`,
         'padding': '4px',
         'textAlign': 'center',
