@@ -1,17 +1,36 @@
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
+import NotFoundSvg from '../../assets/img/not-found';
 
 class PageNotFound extends Component {
   render() {
     return (
-      <h1 className={this.props.classes.PageNotFound}>404 Page not found</h1>
+      <div className={ this.props.classes.PageNotFound }>
+        <NotFoundSvg />
+        <a href="/">zur Startseite</a>
+      </div>
     );
   }
 }
 
 const styles = theme => ({
   PageNotFound: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
     color: 'white',
+    '& svg': {
+      height: '70vh'
+    },
+    '& a': {
+      fontSize: '36px',
+      color: theme.textColorOnBackground,
+      textDecoration: 'none',
+      '&:hover, &:active, &:focus': {
+        color: theme.accentColor
+      }
+    }
   },
 });
 
