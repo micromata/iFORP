@@ -346,7 +346,7 @@ const mapStateToProps = (state, ownProps) => {
     view,
     viewLinkOptions,
     onlyLinearClickflow,
-    canDelete: !onlyLinearClickflow || viewsToLinkTo.length === 0
+    canDelete: true //! onlyLinearClickflow || viewsToLinkTo.length === 0
   }
 };
 
