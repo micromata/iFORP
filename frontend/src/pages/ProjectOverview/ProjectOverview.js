@@ -103,8 +103,7 @@ const actions = { createNewProject, renameProject, deleteProject };
 const mapStateToProps = state => ({
   projects: state.app.projects,
   navigationMenuEntries: [
-    { title: 'Startseite', url: '/'},
-    { title: 'Bibliothek', url: '/library'}
+    { title: 'Startseite', url: '/'}
   ]
 });
 

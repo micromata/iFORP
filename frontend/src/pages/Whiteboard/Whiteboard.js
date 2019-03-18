@@ -162,7 +162,6 @@ const mapStateToProps = (state, ownProps) => {
     onlyLinearClickflow: config.whiteboardClickflow === 'linear',
     navigationMenuEntries: [
       { title: 'Startseite', url: '/'},
-      { title: 'Bibliothek', url: '/library'},
       { title: 'Projektübersicht', url: '/projects'},
       ...whiteboardNavEntries
     ]
