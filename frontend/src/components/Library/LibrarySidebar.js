@@ -14,19 +14,28 @@ class LibrarySidebar extends Component {
   constructor(props) {
     super(props);
 
+    const htmlFilterFromLocalStorage = localStorage.getItem('iforp.library.html');
+    const imagesFilterFromLocalStorage = localStorage.getItem('iforp.library.images');
+
     this.state = {
       expanded: false,
-      htmlChecked: true,
-      imagesChecked: true,
+      htmlChecked: typeof(htmlFilterFromLocalStorage) === 'string' ?
+        htmlFilterFromLocalStorage === '1' :
+        true,
+      imagesChecked: typeof(imagesFilterFromLocalStorage) === 'string' ?
+        imagesFilterFromLocalStorage === '1' :
+        true,
       searchTerm: null
     };
   }
 
   handleHtmlFilterChange = () => {
+    localStorage.setItem('iforp.library.html', this.state.htmlChecked ? '0' : '1');
     this.setState(prevState => ({htmlChecked: !prevState.htmlChecked}));
   }
 
   handleImageFilterChange = () => {
+    localStorage.setItem('iforp.library.images', this.state.imagesChecked ? '0' : '1');
     this.setState(prevState => ({imagesChecked: !prevState.imagesChecked}));
   }
 
