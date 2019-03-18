@@ -19,9 +19,11 @@ class Start extends Component {
 
     this.state = {
       newProjectName: '',
-      newWhiteboardName: '',
+      newWhiteboardName: 'erstes Whiteboard',
       newProjectOpen: false
     }
+
+    this.newProjectNameRef = React.createRef();
   }
 
   navigateToProjectOverview = () => {
@@ -37,7 +39,10 @@ class Start extends Component {
   };
 
   openNewProjectOptions = () => {
-    this.setState({ newProjectOpen: true });
+    this.setState({ newProjectOpen: true },
+    () => {
+      this.newProjectNameRef.current.focus();
+    });
   }
 
   createNewProject = () => {
@@ -64,10 +69,13 @@ class Start extends Component {
               <div className="newProjectName">
                 Gib Deinem Projekt einen Namen
                 <TextInput
+                  refElement={ this.newProjectNameRef }
+                  value={this.state.newProjectName}
                   placeholder="Projektname"
                   onChange={ event => this.setState({newProjectName: event.target.value.trim()})}
                 />
                 <TextInput
+                  value={this.state.newWhiteboardName}
                   placeholder="Name des ersten Whiteboards"
                   onChange={ event => this.setState({newWhiteboardName: event.target.value.trim()})}
                 />

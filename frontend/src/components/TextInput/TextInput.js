@@ -11,10 +11,12 @@ const TextInput = ({
   onBlur = _ => { },
   onKeyDown = _ => { },
   minLength = 5,
-  maxLength = 20
+  maxLength = 20,
+  refElement
 }) => (
   <input
     type={type}
+    ref={refElement}
     className={classes.textInput}
     placeholder={placeholder}
     value={value}
