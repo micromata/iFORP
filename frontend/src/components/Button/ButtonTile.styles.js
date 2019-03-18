@@ -59,7 +59,10 @@ export default theme => ({
     left: '-44px',
     transform: 'scale(0.7)',
     '& button': {
-      backgroundColor: '#666666'
+      backgroundColor: '#666666',
+      '&:hover': {
+        backgroundColor: theme.accentColor
+      }
     }
   },
   ProjectName: {
