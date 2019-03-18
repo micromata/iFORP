@@ -19,18 +19,20 @@ export default theme => ({
       width: '100%',
       borderRadius: '20px',
       color: theme.textColor,
-      backgroundColor: theme.Select.backgroundColor,
+      backgroundColor: 'transparent',
       border: `1px solid ${theme.textColor}`,
       fontSize: '14px',
       outline: 'none',
       appearance: 'none',
-      '-webkit-appearance': 'none'
+      '-webkit-appearance': 'none',
+      zIndex: 1
     },
     '& svg': {
       marginLeft: '-30px',
       marginTop: '16px',
       cursor: 'pointer',
       transform: 'scale(1.5, 1.5)',
+      zIndex: 0
     }
   }
 });
