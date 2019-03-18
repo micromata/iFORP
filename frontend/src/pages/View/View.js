@@ -26,7 +26,8 @@ import {
   useImageForView,
   usePageForView,
   saveLinksForView,
-  addInteractionElementToView
+  addInteractionElementToView,
+  createNewView
 } from '../../actions/app-actions';
 import {
   baseURL,
@@ -81,8 +82,10 @@ class View extends Component {
     this.setState(prevState => {
       const newState = { ...prevState };
       newState.links = this.props.onlyLinearClickflow ? {} : newState.links;
-      newState.links[interactionId] = viewId;
+      newState.links[interactionId] = Number(viewId);
       return newState;
+    }, () => {
+      console.log({ interactionId, viewId, links: this.state.links })
     });
   }
 
@@ -134,8 +137,30 @@ class View extends Component {
   }
 
   handleSaveLinksForView = async () => {
-    await this.props.saveLinksForView(this.props.projectId, this.props.whiteboardId, this.props.viewId, this.state.links);
-    this.props.history.push(`/projects/${this.props.projectId}/whiteboards/${this.props.whiteboardId}`);
+    let links = { ...this.state.links };
+
+    const hasLinkToNewView = Object.values(links).some(link => link === -1);
+    let newView = null;
+
+    console.log({ hasLinkToNewView });
+
+    if (hasLinkToNewView) {
+      newView = await this.props.createNewView(this.props.projectId, this.props.whiteboardId);
+      links = Object.keys(links).reduce((acc, key) => {
+        acc[key] = links[key] === -1 ? newView.id : links[key];
+        return acc;
+      }, {});
+
+      console.log({ links, newView});
+    }
+
+    await this.props.saveLinksForView(this.props.projectId, this.props.whiteboardId, this.props.viewId, links);
+
+    const urlToPush = hasLinkToNewView ?
+      `/projects/${this.props.projectId}/whiteboards/${this.props.whiteboardId}/views/${newView.id}` :
+      `/projects/${this.props.projectId}/whiteboards/${this.props.whiteboardId}`
+
+    this.props.history.push(urlToPush);
   }
 
   getPreviewData = showLibrary => {
@@ -301,7 +326,8 @@ const actions = {
   saveLinksForView,
   addInteractionElementToView,
   deleteImageInteractionElement,
-  deleteView
+  deleteView,
+  createNewView
 };
 
 const getViewsToLinkTo = (viewId, whiteboard, onlyLinearClickflow) => {
@@ -332,9 +358,9 @@ const mapStateToProps = (state, ownProps) => {
   const onlyLinearClickflow = config.whiteboardClickflow === 'linear';
   const viewsToLinkTo = getViewsToLinkTo(viewId, whiteboard, onlyLinearClickflow);
   const viewLinkOptions = (whiteboard && whiteboard.views) ?
-    [{value: 0, title: 'Linkziel setzen '}].concat(viewsToLinkTo):
+    [{value: 0, title: '- Linkziel setzen -'}].concat(viewsToLinkTo):
     [];
-
+  viewLinkOptions.push({ value: -1, title: '- neue View -'});
 
   return {
     projectId,
