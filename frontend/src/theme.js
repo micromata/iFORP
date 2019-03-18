@@ -63,6 +63,9 @@ export default {
     },
     ButtonTile: {
       backgroundColor: '#E9E9E9'
+    },
+    ViewAnnotationPanel: {
+      toggleTextColor: '#4A4A4A'
     }
   },
   light: {
@@ -118,6 +121,9 @@ export default {
     },
     ButtonTile: {
       backgroundColor: '#E9E9E9'
+    },
+    ViewAnnotationPanel: {
+      textColor: '#4A4A4A'
     }
   },
   purple: {
@@ -173,6 +179,9 @@ export default {
     },
     ButtonTile: {
       backgroundColor: '#E9E9E9'
+    },
+    ViewAnnotationPanel: {
+      textColor: '#FFF'
     }
   },
 };

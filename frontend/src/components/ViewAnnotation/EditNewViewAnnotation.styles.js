@@ -19,6 +19,7 @@ export default (theme) => ({
       fontSize: '14px',
       cursor: 'pointer',
       background: 'transparent',
+      color: theme.ViewAnnotationPanel.textColor,
       '&:hover, &:active, &:focus': {
         color: theme.accentColor
       }

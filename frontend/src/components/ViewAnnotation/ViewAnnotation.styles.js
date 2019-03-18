@@ -5,7 +5,7 @@ export default (theme) => ({
     width: '600px',
     maxHeight: '220px',
     overflow: 'scroll',
-    color: theme.textColor,
+    color: theme.ViewAnnotationPanel.textColor,
     display: 'flex',
     alignItems: 'flex-start',
   },
@@ -34,8 +34,12 @@ export default (theme) => ({
     },
     '& div[class^=EditableText]': {
       fontSize: '17px',
+      color: theme.ViewAnnotationPanel.textColor,
       '& input[type=text]': {
         fontSize: '17px'
+      },
+      '& button': {
+        color: theme.ViewAnnotationPanel.textColor
       }
     }
   },
@@ -43,7 +47,7 @@ export default (theme) => ({
     cursor: 'pointer',
     margin: '4px 12px 0',
     '& svg g': {
-      stroke: theme.textColor
+      stroke: theme.ViewAnnotationPanel.textColor,
     },
     '&:hover svg g': {
       stroke: theme.accentColor

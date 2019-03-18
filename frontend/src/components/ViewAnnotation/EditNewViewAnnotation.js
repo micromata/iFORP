@@ -29,11 +29,28 @@ class EditNewViewAnnotation extends React.Component {
     this.props.onCreateAnnotation({ author: this.state.author, text: this.state.text });
   }
 
+  handleTextKeyDown = event => {
+    if (event.key === 'Enter') {
+      return this.handleCreateAnnotation();
+    }
+  }
+
   render() {
     return (
       <div className={ this.props.classes.EditNewViewAnnotation }>
-        <TextInput value={ this.state.author } onChange={ this.handleChangeAuthor } placeholder='Autor' />
-        <TextInput value={ this.state.text } onChange={ this.handleChangeText } placeholder='Anmerkung' />
+        <TextInput
+          value={ this.state.author }
+          placeholder='Autor'
+          maxLength={50}
+          onChange={ this.handleChangeAuthor }
+        />
+        <TextInput
+          value={ this.state.text }
+          placeholder='Anmerkung'
+          maxLength={140}
+          onChange={ this.handleChangeText }
+          onKeyDown={ this.handleTextKeyDown }
+        />
         <div className={ this.props.classes.Buttons }>
           <button type="button" onClick={ this.props.onCancelAnnotate }>Abbrechen</button>
           <button type="button" onClick={ this.handleCreateAnnotation}>Speichern</button>

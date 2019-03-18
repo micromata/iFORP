@@ -7,7 +7,7 @@ export default (theme) => ({
     justifyContent: 'flex-start',
     position: 'fixed',
     padding: '20px 20px',
-    color: theme.textColor,
+    color: theme.ViewAnnotationPanel.textColor,
     backgroundColor: theme.ButtonBar.backgroundColor,
     boxShadow: '0 -2px 6px 0 rgba(0,0,0,0.20)',
     bottom: 0,
@@ -26,6 +26,11 @@ export default (theme) => ({
       '& svg': {
         transform: 'rotate(180deg)'
       }
+    },
+    '& div[class^=Toggle]': {
+      '& label.active': {
+        color: theme.ViewAnnotationPanel.textColor
+      }
     }
   },
   Buttons: {
@@ -40,5 +45,5 @@ export default (theme) => ({
     '& .toggle-button': {
       margin: '0 22px 0 0'
     }
-  },
+  }
 });
