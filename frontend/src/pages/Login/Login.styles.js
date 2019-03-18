@@ -7,7 +7,7 @@ export default () => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-around'
   },
   Hero: {
     backgroundColor: 'transparent',

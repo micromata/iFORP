@@ -32,6 +32,7 @@ class SignInForm extends Component {
             <TextInput
               placeholder={'Email'}
               type="email"
+              maxLength={200}
               onChange={event =>
                 this.setState({ emailAddress: event.target.value })
               }
