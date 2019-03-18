@@ -54,6 +54,22 @@ export class HTMLPage extends Component {
       querySelectorAll('.interaction-element-rect').
       forEach(item => item.classList.add('interaction-element-rect-highlighted'));
 
+    if (this.props.fileType === 'html') {
+      this.iframeDocument.body.
+        querySelectorAll('[data-interaction-id]').
+        forEach(item => {
+          const clientBoundary = item.getBoundingClientRect();
+          const highlighted = this.iframeDocument.body.document.createElement('div');
+          highlighted.style.position = 'absolute';
+          highlighted.style.top = clientBoundary.top;
+          highlighted.style.left = clientBoundary.left;
+          highlighted.style.width = clientBoundary.width;
+          highlighted.style.height = clientBoundary.height;
+          highlighted.classList.add('interaction-element-rect-highlighted');
+          this.iframeDocument.body.document.append(highlighted);
+        })
+    }
+
     window.setTimeout(this.unhighlightInteractionElements, 500);
   }
 
@@ -196,7 +212,7 @@ export class HTMLPage extends Component {
         forEach(annotation => annotation.addEventListener('click', this.handleAnnotationClicked));
     }
 
-    if (this.props.imageInteractionElements && !this.props.isAnnotationModeActive) {
+    if (!this.props.isAnnotationModeActive) {
       this.iframeDocument.body.addEventListener('click', this.highlightInteractionElements);
     }
 
