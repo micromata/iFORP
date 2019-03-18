@@ -22,10 +22,6 @@ class Whiteboard extends Component {
     this.props.getViewsForWhiteboard(this.props.projectId, this.props.whiteboardId);
   }
 
-  handleCreateViewClick = () => {
-    this.props.createNewView(this.props.projectId, this.props.whiteboardId);
-  }
-
   navigateToView = viewId => {
     this.props.history.push(`/projects/${this.props.project.id}/whiteboards/${this.props.whiteboardId}/views/${viewId}`);
   }
@@ -33,6 +29,11 @@ class Whiteboard extends Component {
   handleStartPreview = () => {
     const viewId = this.props.views[0].id;
     this.props.history.push(`/projects/${this.props.project.id}/whiteboards/${this.props.whiteboardId}/views/${viewId}/preview`);
+  }
+
+  handleCreateViewClick = async () => {
+    const view = await this.props.createNewView(this.props.projectId, this.props.whiteboardId);
+    this.navigateToView(view.id);
   }
 
   hasConnectorToFollowingView = (viewId, index) => {

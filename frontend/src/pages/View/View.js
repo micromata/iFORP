@@ -182,7 +182,6 @@ class View extends Component {
 
   render() {
     const showLibrary = this.state.librarySelectMode || !(this.props.view && this.props.view.hasFile);
-
     const previewData = this.getPreviewData(showLibrary);
 
     return (
