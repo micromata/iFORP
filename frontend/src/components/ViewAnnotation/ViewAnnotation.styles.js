@@ -39,7 +39,10 @@ export default (theme) => ({
         fontSize: '17px'
       },
       '& button': {
-        color: theme.ViewAnnotationPanel.textColor
+        color: theme.ViewAnnotationPanel.textColor,
+        '&:hover, &:active, &:focus': {
+          color: theme.accentColor
+        }
       }
     }
   },

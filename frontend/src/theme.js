@@ -10,7 +10,7 @@ linear-gradient(${backgroundColor} calc(${dotSpace} - ${dotSize}), transparent 1
 });
 
 export default {
-  dark: {
+  Standard: {
     accentColor: '#EE9A02',
     backgroundColor: '#5E5E5E',
     textColor: '#4A4A4A',
@@ -65,10 +65,10 @@ export default {
       backgroundColor: '#E9E9E9'
     },
     ViewAnnotationPanel: {
-      toggleTextColor: '#4A4A4A'
+      textColor: '#4A4A4A'
     }
   },
-  light: {
+  Hell: {
     accentColor: '#EE9A02',
     backgroundColor: '#FFF',
     textColor: '#5E5E5E',
@@ -78,7 +78,7 @@ export default {
       dotColor: '#E9E9E9'
     },
     NewProject: {
-      backgroundColor: '#FFF'
+      backgroundColor: '#E9E9E9'
     },
     NavBar: {
       backgroundColor: '#E9E9E9',
@@ -126,7 +126,7 @@ export default {
       textColor: '#4A4A4A'
     }
   },
-  purple: {
+  ProFi: {
     accentColor: '#EE9A02',
     backgroundColor: '#32394C',
     textColor: '#5E5E5E',
