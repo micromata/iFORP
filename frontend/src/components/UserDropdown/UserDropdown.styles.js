@@ -13,6 +13,10 @@ export default theme => ({
       cursor: 'pointer',
       padding: '0 .5rem',
     },
+    '& button[class^=DropdownItem]:last-of-type': {
+      borderTop: '1px solid white',
+      paddingTop: '8px'
+    }
   },
   Drop: {
     position: 'absolute',
