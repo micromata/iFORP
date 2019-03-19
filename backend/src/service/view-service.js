@@ -14,6 +14,7 @@ export const getByWhiteboardId = async whiteboardId => {
       404
     );
   }
+
   return byWhiteboardId;
 };
 
@@ -28,6 +29,7 @@ export const save = async (whiteboardId, base) => {
       404
     );
   }
+
   const view = base;
   view.whiteboard = whiteboard;
   view.hasFile = false;
@@ -43,6 +45,7 @@ export const findById = async id => {
   if (!view) {
     throw exceptionWithHttpStatus(`View mit ${id} nicht gefunden.`, 404);
   }
+
   return view;
 };
 

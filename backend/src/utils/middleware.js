@@ -9,6 +9,7 @@ export const ensureAuthentication = (request, response, next) => {
   if (!token) {
     throw exceptionWithHttpStatus(`'Authorization' header is missing.`, 401);
   }
+
   validateToken(token)
     .then(decoded => {
       request.userData = decoded;

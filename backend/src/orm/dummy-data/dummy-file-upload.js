@@ -14,6 +14,6 @@ export async function dummyFileUpload(fakeUploadedDirName) {
       .then(() => fs.createFile(jsFile))
       .then(() => fs.writeFile(jsFile, 'console.log("Yeah");', 'utf8'))
       .then(() => resolve('Done with filesystem stuff.'))
-      .catch(reason => reject(new Error(reason)));
+      .catch(error => reject(new Error(error)));
   });
 }

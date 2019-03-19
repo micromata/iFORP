@@ -13,6 +13,7 @@ export function extractScriptAssets(markup, relPath) {
     return asset;
   });
 }
+
 export function extractStyleAssets(markup, relPath) {
   const $ = cheerio.load(markup);
   const inlineStyles = $('style');
@@ -59,6 +60,7 @@ function mapElementToAsset(el, relPath) {
   } else {
     asset.contents = el.firstChild.nodeValue.trim();
   }
+
   return asset;
 }
 

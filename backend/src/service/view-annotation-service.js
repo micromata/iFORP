@@ -15,6 +15,7 @@ export const save = async (viewId, base) => {
       404
     );
   }
+
   const annotation = base;
   annotation.view = view;
   annotation.text = annotation.text || `${randomSuperbWord()}e Anmerkung`;
@@ -40,6 +41,7 @@ export const findById = async id => {
       404
     );
   }
+
   return annotation;
 };
 

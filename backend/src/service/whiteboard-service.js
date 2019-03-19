@@ -14,6 +14,7 @@ export const find = async projectId => {
       404
     );
   }
+
   return project.whiteboards;
 };
 
@@ -27,6 +28,7 @@ export const save = async projectId => {
       404
     );
   }
+
   const whiteboard = {
     name: `${randomSuperbWord()}es Whiteboard`,
     project
@@ -55,6 +57,7 @@ export const remove = async id => {
       404
     );
   }
+
   return whiteboardRepo.remove(found);
 };
 
@@ -67,6 +70,7 @@ export const update = async (id, base) => {
       404
     );
   }
+
   const patched = {
     ...orig,
     ...base

@@ -8,7 +8,10 @@
   ],
   "parser": "babel-eslint",
   "parserOptions": {
-    "allowImportExportEverywhere": true
+    "allowImportExportEverywhere": true,
+    "ecmaFeatures": {
+      "legacyDecorators": true
+    }
   },
   "rules": {
     "prettier/prettier": "error",

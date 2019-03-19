@@ -48,10 +48,10 @@ export const getRequestHandler = logger => handler => {
   return async (req, res) => {
     try {
       await handler(req, res);
-    } catch (exception) {
-      logger.error(exception);
-      res.status(exception.statusCode || 500);
-      res.send(exception.message);
+    } catch (error) {
+      logger.error(error);
+      res.status(error.statusCode || 500);
+      res.send(error.message);
     }
   };
 };

@@ -38,6 +38,7 @@ function getExtractionBasePath(baseDir, directoryName, ranTimes = 0) {
   if (fs.existsSync(extractionPath)) {
     return getExtractionBasePath(baseDir, directoryName, ranTimes + 1);
   }
+
   return extractionPath;
 }
 
@@ -106,6 +107,7 @@ const getImagePath = (imagesDirPath, fileName, extension, ranTimes = 0) => {
   if (fs.existsSync(filePathToCheck)) {
     return getImagePath(imagesDirPath, fileName, extension, ranTimes + 1);
   }
+
   return filePathToCheck;
 };
 
@@ -175,6 +177,7 @@ export const getPage = async pageId => {
   if (!page) {
     throw exceptionWithHttpStatus(`Page with ID ${pageId} not found.`, 404);
   }
+
   return page;
 };
 
@@ -187,5 +190,6 @@ export const getProjectFile = async fileAbsPath => {
   if (!(await fs.exists(file))) {
     throw exceptionWithHttpStatus('File not found!', 404);
   }
+
   return file;
 };

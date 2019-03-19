@@ -7,4 +7,5 @@ export const getLogger = (...logScope) => {
     scope
   });
 };
+
 export default getLogger;

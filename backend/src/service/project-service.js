@@ -37,6 +37,7 @@ export const findById = async id => {
   if (!project) {
     throw exceptionWithHttpStatus(`Project mit ID ${id} nicht gefunden.`, 404);
   }
+
   return project;
 };
 
@@ -46,6 +47,7 @@ export const update = async (id, base) => {
   if (!origProject) {
     throw exceptionWithHttpStatus(`Project mit ID ${id} nicht gefunden.`, 404);
   }
+
   const patched = { ...origProject, ...base };
   return repo.save(patched);
 };
@@ -59,5 +61,6 @@ export const remove = async id => {
       404
     );
   }
+
   return repo.remove(found);
 };

@@ -18,6 +18,7 @@ export const rmdir = async dir => {
       fs.unlinkSync(filename);
     }
   }
+
   return fs.rmdir(dir);
 };
 
@@ -36,6 +37,7 @@ export const extractZip = async (archive, basePath) => {
   };
 
   const writeFile = (readStream, location) =>
+    // eslint-disable-next-line no-async-promise-executor
     new Promise(async (resolve, reject) => {
       const writeStream = await fs.createWriteStream(location);
       readStream.pipe(writeStream);
@@ -57,8 +59,10 @@ export const extractZip = async (archive, basePath) => {
     } else {
       await writeFile(await entry.openReadStream(), entryLocationPath);
     }
+
     processedFiles.push(entry.fileName);
   }
+
   return processedFiles;
 };
 

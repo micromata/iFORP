@@ -16,7 +16,6 @@ app.use('/library', libraryEndpoint);
 app.use('/projects', projectsEndpoint);
 app.use('/auth', authEndpoint);
 
-// TODO Serve built frontend
 app.use(express.static(path.join(__dirname, '/public')));
 
 export default app;

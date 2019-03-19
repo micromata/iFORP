@@ -39,6 +39,7 @@ const getUserConfiguration = () => {
     if (!error.code === 'ENOENT') {
       logger.error(error);
     }
+
     return {};
   }
 };
@@ -47,5 +48,6 @@ export const getConfiguration = () => {
   if (process.env.NODE_ENV === 'test') {
     return test;
   }
+
   return deepMerge(defaults, getUserConfiguration());
 };
