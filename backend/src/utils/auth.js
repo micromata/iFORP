@@ -1,12 +1,12 @@
-import BCrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import { sign, verify } from 'jsonwebtoken';
 
 const tokenSecret = 'TODO: make configurable';
 
 export const createHash = async plainTextString =>
-  BCrypt.hash(plainTextString, 10);
+  bcrypt.hash(plainTextString, 10);
 export const hashMatches = async (hashedString, plainTextString) =>
-  BCrypt.compare(plainTextString, hashedString);
+  bcrypt.compare(plainTextString, hashedString);
 export const createToken = (payload, secret, options = {}) =>
   new Promise((resolve, reject) => {
     sign(payload, secret, options, (err, token) => {
