@@ -72,7 +72,11 @@ class View extends Component {
   }
 
   handleSelectDirectoryItem = (selectedItemType, selectedDirectoryItemId) => {
-    this.setState({selectedItemType, selectedDirectoryItemId });
+    this.setState({
+      selectedItemType,
+      selectedDirectoryItemId,
+      newImageInteractionElementCoords: null
+    });
   }
 
   handleShowLibrarySelection = () => {
@@ -145,7 +149,7 @@ class View extends Component {
     }
 
     const links = this.getLinksFromView(view);
-    this.setState({ links,  librarySelectMode: false });
+    this.setState({ links,  librarySelectMode: false, newImageInteractionElementCoords: null });
   }
 
   handleSaveLinksForView = async () => {
