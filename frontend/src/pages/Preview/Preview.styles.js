@@ -1,7 +1,7 @@
 import config from '../../config';
 import { NavBarHeight } from '../../components/NavBar/NavBar';
 
-export default theme => ({
+export default () => ({
   Preview: {
     height: '100%',
     width: '100%',

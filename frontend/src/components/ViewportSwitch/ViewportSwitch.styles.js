@@ -1,4 +1,4 @@
-export default theme => ({
+export default () => ({
   ViewportSwitch: {
     width: '200px',
     display: 'flex',

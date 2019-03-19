@@ -1,4 +1,3 @@
-/* eslint-disable filenames/match-exported */
 import React, { Component } from 'react';
 import injectSheet from 'react-jss';
 import styles from './EditableText.styles';
@@ -28,14 +27,14 @@ export class EditableText extends Component {
   }
 
   cancelEditing = event => {
-    event && event.stopPropagation(); // eslint-disable-line
+    event && event.stopPropagation(); // eslint-disable-line no-unused-expressions
     this.setState({ isEditing: false, editedText: null });
   }
 
   confirmEditing = async event => {
     if (!this.state.editedText.trim().length) return;
 
-    event && event.stopPropagation(); // eslint-disable-line
+    event && event.stopPropagation(); // eslint-disable-line no-unused-expressions
     await this.props.onEditingConfirmed(this.state.editedText);
     this.cancelEditing();
   }

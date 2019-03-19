@@ -1,6 +1,6 @@
 import config from '../../config';
 
-export default (theme) => ({
+export default () => ({
   HTMLPage: {
     '&.preview-wrapper': {
       height: '100%',

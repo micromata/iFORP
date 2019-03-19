@@ -6,7 +6,6 @@ const Button = ({
   classes,
   className = '',
   type = 'button',
-  buttonStyle = 'default',
   children,
   onClick,
   disabled = false,

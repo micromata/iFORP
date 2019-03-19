@@ -1,6 +1,6 @@
 import { NavBarHeight } from '../NavBar/NavBar';
 
-export default theme => ({
+export default () => ({
   UserDropdown: {
     position: 'relative',
     '& svg': {

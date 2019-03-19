@@ -1,6 +1,6 @@
 import { NavBarHeight } from '../../components/NavBar/NavBar';
 
-export default theme => ({
+export default () => ({
   Whiteboard: {
     padding: '40px 80px',
     marginBottom: '80px',

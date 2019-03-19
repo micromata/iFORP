@@ -4,7 +4,6 @@ import styles from './DropdownItem.styles';
 
 const DropdownItem = ({
   classes,
-  buttonStyle = 'default',
   children,
   onClick,
   disabled = false,
