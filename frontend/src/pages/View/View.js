@@ -406,7 +406,8 @@ const mapStateToProps = (state, ownProps) => {
   const viewLinkOptions = (whiteboard && whiteboard.views) ?
     [{value: 0, title: '- Linkziel setzen -'}].concat(viewsToLinkTo):
     [];
-  // ViewLinkOptions.push({ value: -1, title: '- neue View -'});
+
+  viewLinkOptions.push({ value: -1, title: '- neue View -'});
 
   return {
     projectId,
