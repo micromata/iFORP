@@ -25,6 +25,18 @@ export function extractStyleAssets(markup, relPath) {
   });
 }
 
+export function extractImageAssets(markup, relPath) {
+  const $ = cheerio.load(markup);
+  const images = $('img[data-image-id]').toArray();
+  return images.map(img => {
+    const imageId = $(img).attr('data-image-id');
+    const asset = mapElementToAsset(img, relPath);
+    asset.imageId = imageId;
+    asset.type = 'img';
+    return asset;
+  });
+}
+
 function removeAssetsFromDocument($) {
   $('link[rel="stylesheet"]').remove();
   $('style').remove();
@@ -54,9 +66,9 @@ export function extractDocumentBody(markup) {
 
 function mapElementToAsset(el, relPath) {
   const asset = new Asset();
-  const styleSrc = el.attribs.src || el.attribs.href;
-  if (styleSrc) {
-    asset.location = path.join(relPath, styleSrc);
+  const assetSrc = el.attribs.src || el.attribs.href;
+  if (assetSrc) {
+    asset.location = path.join(relPath, assetSrc);
   } else {
     asset.contents = el.firstChild.nodeValue.trim();
   }
@@ -64,12 +76,23 @@ function mapElementToAsset(el, relPath) {
   return asset;
 }
 
-function enrichWithInteractionIds(fileContents) {
+function enrichWithInteractionAndImageIds(fileContents) {
   const $ = cheerio.load(fileContents);
   $('a,button,input[type=button]').attr(
     'data-interaction-id',
     (el, val) => val || uuid()
   );
+
+  $('img')
+    .toArray()
+    .forEach(img => {
+      const origSrc = $(img)
+        .attr('src')
+        .trim();
+      if (origSrc.startsWith('data:')) return;
+
+      $(img).attr('data-image-id', uuid());
+    });
   return { markup: $.html() };
 }
 
@@ -80,7 +103,7 @@ export function processHtmlFile(
   directoryName
 ) {
   const filePath = path.resolve(extractionBasePath, file);
-  const { markup } = enrichWithInteractionIds(
+  const { markup } = enrichWithInteractionAndImageIds(
     fs.readFileSync(filePath).toString()
   );
   const name = filePath
@@ -96,6 +119,13 @@ export function processHtmlFile(
       )
     ),
     ...extractScriptAssets(
+      markup,
+      path.relative(
+        uploadDirectory,
+        path.join(extractionBasePath, path.dirname(file))
+      )
+    ),
+    ...extractImageAssets(
       markup,
       path.relative(
         uploadDirectory,

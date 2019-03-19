@@ -1,6 +1,8 @@
+import cheerio from 'cheerio';
 import puppeteer from 'puppeteer';
 import path from 'path';
 import fs from 'fs-extra';
+import imgBase64 from 'base64-img';
 
 const getParentDirPath = directory => {
   const segments = directory.split(path.sep);
@@ -18,12 +20,29 @@ const buildStyle = (page, directory) => {
     .join(' ');
 };
 
+const replaceImageSources = (page, directory) => {
+  const $ = cheerio.load(page.body);
+  const imgDir = getParentDirPath(directory);
+
+  page.assets
+    .filter(asset => asset.type === 'img')
+    .forEach(asset => {
+      const selector = `img[data-image-id="${asset.imageId}"]`;
+      const imgPath = path.resolve(imgDir, asset.location);
+      const base64Data = imgBase64.base64Sync(imgPath);
+      $(selector).attr('src', base64Data);
+    });
+
+  return $.html();
+};
+
 const buildHtmlForPage = (page, directory) => {
   const attributes = Object.keys(page.htmlElementAttributes)
     .map(attrName => `${attrName}='${page.htmlElementAttributes[attrName]}'`)
     .join(' ');
 
   const style = buildStyle(page, directory);
+  const body = replaceImageSources(page, directory);
 
   const wholePageMarkup = `
     <html ${attributes}>
@@ -34,7 +53,7 @@ const buildHtmlForPage = (page, directory) => {
         <style>
           ${style}
         </style>
-        ${page.body}
+        ${body}
       </body>
     </html>
   `;

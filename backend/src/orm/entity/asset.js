@@ -14,6 +14,9 @@ export class Asset {
   @Column('text', { nullable: true })
   location = undefined;
 
+  @Column('text', { nullable: true })
+  imageId = undefined;
+
   get isInline() {
     return !this.location && this.contents;
   }

@@ -205,17 +205,27 @@ export class HTMLPage extends Component {
 
     // Insert JavaScript and CSS assets to the view
     this.props.assets.forEach(asset => {
-      if (asset.type === 'js') {
-        this.iframeDocument.body.append(
-          this.getScriptElement(this.iframeDocument, asset)
-        );
-      } else {
-        this.iframeDocument.head.append(
-          this.getLinkElement(this.iframeDocument, asset)
-        );
+      switch (asset.type) {
+        case 'js':
+          this.iframeDocument.body.append(
+            this.getScriptElement(this.iframeDocument, asset)
+          );
+          break;
+        case 'css':
+          this.iframeDocument.head.append(
+            this.getLinkElement(this.iframeDocument, asset)
+          );
+          break;
+        case 'img':
+          this.iframeDocument.body.
+            querySelectorAll(`img[data-image-id="${asset.imageId}"]`).
+            forEach(img => {
+              img.setAttribute('src', `${baseURL}/library/${asset.location}`);
+            });
+          break;
+        default:
       }
     });
-
 
     this.iframeDocument.body.
       querySelectorAll('[data-interaction-id]').
