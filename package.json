@@ -5,6 +5,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "install:all": "cd frontend && npm i && cd ../backend && npm i && cd .. && npm i",
     "start:dev": "npm-run-all --parallel start:backend:dev start:frontend:dev",
     "start:backend:dev": "(cd ./backend && npm start)",
     "start:frontend:dev": "(cd ./frontend && npm start)"
