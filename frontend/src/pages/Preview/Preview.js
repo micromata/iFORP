@@ -172,7 +172,7 @@ export class Preview extends Component {
           <NavBar
             exit
             exitUrl={ `/projects/${ this.props.projectId }/whiteboards/${ this.props.whiteboardId}` }
-            title='iFORP'
+            title={ this.props.view ? this.props.view.name : 'iFORP' }
           />
           <main>
             <div className={`content ${this.state.isAnnotationModeActive ? 'WithAnnotations' : ''}`}>

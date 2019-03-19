@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 import BackIcon from '../../assets/img/Back';
 import styles from './NavBar.styles';
 import UserDropdown from '../UserDropdown/UserDropdown';
+import EditableText from '../EditableText/EditableText';
 
 export const NavBarHeight = '53px';
 
-export const NavBar = ({ classes, theme, title, exit = false, exitUrl = '/' }) => (
+export const NavBar = ({ classes, theme, title, exit = false, exitUrl = '/', onTitleEdited = null }) => (
   <div className={classes.NavBar + ' nav-bar'}>
     <div className={classes.NavItem + ' nav-left'}>
       {exit && exitUrl &&
@@ -17,7 +18,12 @@ export const NavBar = ({ classes, theme, title, exit = false, exitUrl = '/' }) =
       }
     </div>
     <div className={classes.NavItem + ' nav-center'}>
-      {title}
+      { typeof onTitleEdited === 'function' &&
+        <EditableText text={ title } onEditingConfirmed={ onTitleEdited } />
+      }
+      { typeof onTitleEdited !== 'function' &&
+        title
+      }
     </div>
     <div className={classes.NavItem + ' nav-right'}>
       <UserDropdown />

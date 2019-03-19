@@ -80,10 +80,12 @@ class LibrarySidebar extends Component {
 
     return (
       <div className={ `${this.props.classes.LibrarySidebar} ${this.state.expanded ? 'expanded' : ''}` }>
-        <div className={ this.state.expanded ? this.props.classes.CollapseIcon : this.props.classes.ExpandIcon} onClick={this.handleToggleExpanded}>
-          <BackIcon color={ this.props.theme.textColor } />
+        <div className={ this.props.classes.Header }>
+          <h3>Bibliothek</h3>
+          <div className={ this.state.expanded ? this.props.classes.CollapseIcon : this.props.classes.ExpandIcon} onClick={this.handleToggleExpanded}>
+            <BackIcon color={ this.props.theme.textColor } />
+          </div>
         </div>
-        <h3>Bibliothek</h3>
         { !hasFiles &&
           <React.Fragment>
             <p className={ this.props.classes.LibraryEmptyTeaser }>

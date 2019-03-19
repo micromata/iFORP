@@ -10,7 +10,10 @@ export default theme => ({
       fontSize: '14px',
       color: theme.textColor,
       paddingLeft: '40px',
-      height: '40px'
+      height: '40px',
+      '&::placeholder': {
+        color: theme.textColor
+      }
     },
     '& svg': {
       transform: 'scale(0.8)',
@@ -24,7 +27,10 @@ export default theme => ({
     '&.light': {
       '& input': {
         borderColor: theme.textColorOnBackground,
-        color: theme.textColorOnBackground
+        color: theme.textColorOnBackground,
+        '&::placeholder': {
+          color: theme.textColorOnBackground
+        }
       },
       '& svg g': {
         stroke: theme.textColorOnBackground

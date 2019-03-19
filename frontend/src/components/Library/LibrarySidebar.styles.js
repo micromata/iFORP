@@ -23,6 +23,15 @@ export default (theme) => ({
       flexWrap: 'wrap'
     }
   },
+  Header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '10px',
+    '& h3': {
+      margin: 0
+    }
+  },
   ExpandIcon: {
     display: 'flex',
     justifyContent: 'flex-end',

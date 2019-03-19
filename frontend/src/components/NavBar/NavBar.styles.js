@@ -25,7 +25,6 @@ export default (theme) => ({
       color: theme.NavBar.textColor,
     },
     '&.nav-left': {
-      minWidth: '200px',
       justifyContent: 'flex-start',
       '& svg': {
         height: '100%',
@@ -40,10 +39,16 @@ export default (theme) => ({
       minWith: 0
     },
     '&.nav-right': {
-      minWidth: '200px',
       justifyContent: 'flex-end',
       fontSize: '12px',
       height: '100%',
     },
+    '& div[class^=EditableText]': {
+      fontSize: '18px',
+      '& input[type=text]': {
+        fontSize: '18px',
+        color: theme.NavBar.textColor
+      }
+    }
   }
 });

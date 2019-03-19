@@ -27,7 +27,8 @@ import {
   usePageForView,
   saveLinksForView,
   addInteractionElementToView,
-  createNewView
+  createNewView,
+  renameView
 } from '../../actions/app-actions';
 import {
   baseURL,
@@ -46,7 +47,6 @@ class View extends Component {
     this.state = {
       selectedItemType: null,
       selectedDirectoryItemId: null,
-      usedPageId: null,
       links: {},
       newImageInteractionElementCoords: null,
       librarySelectMode: false,
@@ -105,6 +105,10 @@ class View extends Component {
     ));
   }
 
+  handleRenameView = newName => {
+    this.props.renameView(this.props.projectId, this.props.whiteboardId, this.props.viewId, newName)
+  }
+
   handleDeleteViewClick = () => {
     this.setState({ deleteViewId: this.props.viewId });
   }
@@ -158,7 +162,13 @@ class View extends Component {
     }
 
     const links = this.getLinksFromView(view);
-    this.setState({ links,  librarySelectMode: false, newImageInteractionElementCoords: null });
+    this.setState({
+      links,
+      librarySelectMode: false,
+      newImageInteractionElementCoords: null,
+      selectedItemType: null,
+      selectedDirectoryItemId: null
+    });
   }
 
   handleSaveLinksForView = async () => {
@@ -260,7 +270,8 @@ class View extends Component {
         <NavBar
           exit
           exitUrl={ `/projects/${ this.props.projectId }/whiteboards/${ this.props.whiteboardId}` }
-          title='iFORP'
+          title={ this.props.view && this.props.view.name }
+          onTitleEdited={ this.handleRenameView }
         />
         <main>
           { showLibrary &&
@@ -373,7 +384,8 @@ const actions = {
   addInteractionElementToView,
   deleteImageInteractionElement,
   deleteView,
-  createNewView
+  createNewView,
+  renameView
 };
 
 const getViewsToLinkTo = (viewId, whiteboard, onlyLinearClickflow) => {
