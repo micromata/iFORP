@@ -48,6 +48,7 @@ class View extends Component {
       selectedDirectoryItemId: null,
       usedPageId: null,
       links: {},
+      newImageInteractionElementCoords: null,
       librarySelectMode: false,
       deleteImageInteractionElementId: null
     };
@@ -87,6 +88,17 @@ class View extends Component {
     }, () => {
       console.log({ interactionId, viewId, links: this.state.links })
     });
+  }
+
+  handleCreateImageInteractionElement = coords => {
+    this.setState(prevState => (
+      {
+        links: this.props.onlyLinearClickflow ?
+          { [-1]: 0 } :
+          { [-1]: 0, ...prevState.links },
+        newImageInteractionElementCoords: coords
+      }
+    ));
   }
 
   handleDeleteViewClick = () => {
@@ -137,12 +149,25 @@ class View extends Component {
   }
 
   handleSaveLinksForView = async () => {
+    let newInteractionElement = null;
     let links = { ...this.state.links };
+
+    if (this.state.newImageInteractionElementCoords) {
+      newInteractionElement = await this.props.addInteractionElementToView(this.props.projectId, this.props.whiteboardId, this.props.view.id, this.state.newImageInteractionElementCoords);
+
+      links = Object.keys(links).reduce((acc, key) => {
+        if (Number(key) === -1) {
+          acc[newInteractionElement.id] = links[key];
+        } else {
+          acc[key] = links[key];
+        }
+
+        return acc;
+      }, {});
+    }
 
     const hasLinkToNewView = Object.values(links).some(link => link === -1);
     let newView = null;
-
-    console.log({ hasLinkToNewView });
 
     if (hasLinkToNewView) {
       newView = await this.props.createNewView(this.props.projectId, this.props.whiteboardId);
@@ -150,8 +175,6 @@ class View extends Component {
         acc[key] = links[key] === -1 ? newView.id : links[key];
         return acc;
       }, {});
-
-      console.log({ links, newView});
     }
 
     await this.props.saveLinksForView(this.props.projectId, this.props.whiteboardId, this.props.viewId, links);
@@ -194,12 +217,22 @@ class View extends Component {
       }
     }
 
+    let interactionElements = [...this.props.view.imageInteractionElements].sort((a, b) => a.id - b.id);
+
+    if (this.state.newImageInteractionElementCoords) {
+      if (this.props.onlyLinearClickflow) {
+        interactionElements = [ { id: -1, ...this.state.newImageInteractionElementCoords } ];
+      } else {
+        interactionElements.push(this.state.newImageInteractionElementCoords);
+      }
+    }
+
     return {
       htmlElementAttributes: { lang: 'en'},
       head: '<style>html, body { margin: 0; padding: 0; }</style>',
       body: `<div style='width: ${this.props.view.imageWidth}px; height: ${this.props.view.imageHeight}px; margin-left: auto; margin-right: auto; background-image: url(${baseURL}/library/images/${this.props.view.imageName});' />`,
       assets: [],
-      interactionElements: [...this.props.view.imageInteractionElements].sort((a, b) => a.id - b.id),
+      interactionElements,
       fileType: this.props.view.fileType,
       horizontalOffset: calculateImagePreviewOffset('desktop', this.props.view.imageWidth)
     };
@@ -248,7 +281,7 @@ class View extends Component {
               horizontalOffset={ previewData.horizontalOffset }
               allowInteractionElementCreation={ !showLibrary && previewData.fileType === 'image' }
               imageInteractionElements={ previewData.fileType === 'image' ? previewData.interactionElements : [] }
-              onCreateInteractionElement={ coords => this.props.addInteractionElementToView(this.props.projectId, this.props.whiteboardId, this.props.view.id, coords) }
+              onCreateInteractionElement={ this.handleCreateImageInteractionElement }
             />
           </div>
         </main>
@@ -360,7 +393,7 @@ const mapStateToProps = (state, ownProps) => {
   const viewLinkOptions = (whiteboard && whiteboard.views) ?
     [{value: 0, title: '- Linkziel setzen -'}].concat(viewsToLinkTo):
     [];
-  viewLinkOptions.push({ value: -1, title: '- neue View -'});
+  // ViewLinkOptions.push({ value: -1, title: '- neue View -'});
 
   return {
     projectId,
