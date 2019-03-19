@@ -123,6 +123,15 @@ class View extends Component {
   }
 
   handleConfirmDeleteImageInteractionElement = () => {
+    if (this.state.deleteImageInteractionElementId === -1) {
+      this.setState({
+        newImageInteractionElementCoords: null,
+        deleteImageInteractionElementId: null,
+        links: { }
+      });
+      return;
+    }
+
     this.props.deleteImageInteractionElement(this.props.projectId, this.props.whiteboardId, this.props.viewId, this.state.deleteImageInteractionElementId);
     this.setState({ deleteImageInteractionElementId: null });
   }

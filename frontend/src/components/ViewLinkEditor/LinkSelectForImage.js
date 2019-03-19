@@ -30,9 +30,12 @@ const LinkSelectForImage = ({
       </select>
       <ArrowDownIcon color={ theme.textColor } />
     </div>
-    <div className={classes.DeleteButton} onClick={() => onDelete(interactionId)}>
-      <DeleteIcon />
-    </div>
+
+    { interactionId !== -1 &&
+      <div className={classes.DeleteButton} onClick={() => onDelete(interactionId)}>
+        <DeleteIcon />
+      </div>
+    }
   </div>
 );
 
