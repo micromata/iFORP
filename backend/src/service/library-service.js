@@ -92,7 +92,17 @@ export const uploadZip = async (file, userDefinedDirName = '') => {
     createThumbnailFromPage(page, extractionBasePath, directory)
   );
 
-  await Promise.all(screenshotTasks);
+  try {
+    await Promise.all(screenshotTasks);
+  } catch (error) {
+    logger.error(error);
+    logger.info(
+      'thumbnail creation failed -> resetting thumbnail paths to null'
+    );
+    directory.pages.forEach(page => {
+      page.thumbnailPath = ``;
+    });
+  }
 
   const saved = await getRepository(Directory).save(directory);
   logger.info('Saved the directory to the database.');

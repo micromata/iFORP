@@ -8,6 +8,8 @@ import ButtonTile from '../Button/ButtonTile';
 import BackIcon from '../../assets/img/Back';
 import LibraryZipUpload from '../Library/LibraryZipUpload';
 import LibraryImagesUpload from '../Library/LibraryImagesUpload';
+import TileViewHtml from '../../assets/img/TileViewHtml';
+import TileViewImage from '../../assets/img/TileViewImage';
 import { baseURL } from '../../utils';
 
 class LibrarySidebar extends Component {
@@ -70,9 +72,20 @@ class LibrarySidebar extends Component {
     const getThumbnailPathForFile = file => {
       switch (file.fileType) {
         case 'html':
-         return `${baseURL}/library/${file.thumbnailPath}`;
+         return file.thumbnailPath ? `${baseURL}/library/${file.thumbnailPath}` : null;
         case 'image':
          return `${baseURL}/library/images/${file.name}`;
+        default:
+         return null;
+      }
+    }
+
+    const getTileViewIcon = file => {
+      switch (file.fileType) {
+        case 'html':
+         return TileViewHtml
+        case 'image':
+         return TileViewImage;
         default:
          return null;
       }
@@ -114,6 +127,7 @@ class LibrarySidebar extends Component {
                   id={ `file-${file.id}` }
                   key={ `${file.fileType}-${file.id}` }
                   titleBelow
+                  TileIcon={ getTileViewIcon(file)}
                   TileImagePath={ getThumbnailPathForFile(file) }
                   onClick={ () => this.handleSelectFile(file) }
                   highlighted={ file.id === this.props.selectedItemId }

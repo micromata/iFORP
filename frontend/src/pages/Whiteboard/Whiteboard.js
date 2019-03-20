@@ -12,6 +12,8 @@ import CircleButton from '../../components/Button/CircleButton';
 import PageHeadline from '../../components/PageHeadline/PageHeadline';
 import PreviewIcon from '../../assets/img/Preview';
 import PlusIcon from '../../assets/img/Plus';
+import TileViewHtml from '../../assets/img/TileViewHtml';
+import TileViewImage from '../../assets/img/TileViewImage';
 import { getViewsForWhiteboard, createNewView, renameView } from '../../actions/app-actions';
 import { baseURL, findProjectWithId, findWhiteboardWithId } from '../../utils';
 
@@ -59,9 +61,20 @@ class Whiteboard extends Component {
     const getThumbnailPathForView = view => {
       switch (view.fileType) {
         case 'html':
-         return `${baseURL}/library/${view.htmlThumbnailPath}`;
+         return view.htmlThumbnailPath ? `${baseURL}/library/${view.htmlThumbnailPath}` : null;
         case 'image':
          return `${baseURL}/library/images/${view.imageName}`;
+        default:
+         return null;
+      }
+    }
+
+    const getTileViewIcon = view => {
+      switch (view.fileType) {
+        case 'html':
+         return TileViewHtml
+        case 'image':
+         return TileViewImage;
         default:
          return null;
       }
@@ -85,6 +98,7 @@ class Whiteboard extends Component {
                 id={ `view-${view.id}` }
                 key={ view.id }
                 titleBelow
+                TileIcon={ getTileViewIcon(view) }
                 TileImagePath={ getThumbnailPathForView(view) }
                 connectRight={ this.hasConnectorToFollowingView(view.id, index) }
                 onClick={ () => this.navigateToView(view.id) }>
