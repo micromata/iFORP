@@ -17,9 +17,14 @@ iFORP is designed to help you prototype your web applications. You can upload ei
 
 The frontend gets served on port 3000 and the backend will listen on port 3001.
 
-## Contributing
+## Contributing to this project
 
-<!-- tbd-->
+Anyone and everyone is welcome to contribute. Please take a moment to
+review our [Code of Conduct](CODE_OF_CONDUCT.md) as well as our [guidelines for contributing](CONTRIBUTING.md).
+
+- [Bug reports](CONTRIBUTING.md#bugs)
+- [Feature requests](CONTRIBUTING.md#features)
+- [Pull requests](CONTRIBUTING.md#pull-requests)
 
 ## Sponsors
 
