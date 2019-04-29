@@ -23,8 +23,10 @@ The frontend gets served on port 3000 and the backend will listen on port 3001.
 
 ## Sponsors
 
-![BMBF Logo](frontend/src/assets/img/BMBF.gif)
-![Micromata Logo](frontend/src/assets/img/micromata.svg)
+<p>
+	<img width="50%" src="https://rawcdn.githack.com/micromata/iFORP/18204decf266b75f09ccaacf21a2f631f690828d/artwork/bmbf.svg" alt="BMBF Logo">
+  <img width="50%" src="https://rawcdn.githack.com/micromata/iFORP/18204decf266b75f09ccaacf21a2f631f690828d/artwork/micromata.svg" alt="Micromata Logo">
+</p>
 
 ## License
 
