@@ -1,4 +1,7 @@
 # iFORP
+
+<img src="https://rawcdn.githack.com/micromata/iFORP/a85d9f5b98f2b304ba0f870134d5ecdaf7cebb87/artwork/iForpBrand.svg" alt="iFORP Logo">
+
 > Build your own HTML prototype without any coding experience
 
 ⚠️ This project is still under heavy development and not feature complete! ⚠️ 
@@ -7,7 +10,7 @@ But feel free to look inside the issues. We are happy about every contributor.
 
 ## Description
 
-iFORP is designed to help you prototype your web applications. You can upload either static HTML pages or Pictures and connect them visually.
+The collaborative, cross-disciplinary development of ideas is a very powerful, yet challenging approach to innovation. iForp supports this process with the rapid creation of WebApp prototypes. The prototype can be based on HTML/CSS/JSS as well as on images such as sketches, wireframes and screen designs. Individual views can be linked to logical clickflows. In addition, the tool supports the documentation of user feedback and design decisions.
 
 ## Quick install guide
 
