@@ -2,7 +2,7 @@
   "name": "iforp",
   "title": "iFORP",
   "description": "iFORP",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "install:all": "cd frontend && npm i && cd ../backend && npm i && cd .. && npm i",
