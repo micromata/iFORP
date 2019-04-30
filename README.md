@@ -9,11 +9,12 @@ But feel free to look inside the issues. We are happy about every contributor.
 
 iFORP is designed to help you prototype your web applications. You can upload either static HTML pages or Pictures and connect them visually.
 
-## Installing
+## Quick install guide
 
-- `git clone` this repository
-- `npm install` inside `backend/` and `frontend/`
-- `npm start` inside the project root
+    $ git clone https://github.com/micromata/iFORP.git
+    $ cd iFORP
+    $ npm run install:all
+    $ npm run start:dev
 
 The frontend gets served on port 3000 and the backend will listen on port 3001.
 
