@@ -1,8 +1,12 @@
 # iFORP
 
-<img src="https://rawcdn.githack.com/micromata/iFORP/a85d9f5b98f2b304ba0f870134d5ecdaf7cebb87/artwork/iForpBrand.svg" alt="iFORP Logo">
+<p align="center">
+  <img src="https://rawcdn.githack.com/micromata/iFORP/a85d9f5b98f2b304ba0f870134d5ecdaf7cebb87/artwork/iForpBrand.svg" alt="iFORP Logo">
+</p>
 
 > Build your own HTML prototype without any coding experience
+
+## Status of this projects
 
 ⚠️ This project is still under heavy development and not feature complete! ⚠️ 
 
@@ -32,9 +36,13 @@ review our [Code of Conduct](CODE_OF_CONDUCT.md) as well as our [guidelines for 
 
 ## Sponsors
 
-<p>
-	<img width="50%" src="https://rawcdn.githack.com/micromata/iFORP/18204decf266b75f09ccaacf21a2f631f690828d/artwork/bmbf.svg" alt="BMBF Logo">
-  <img width="50%" src="https://rawcdn.githack.com/micromata/iFORP/18204decf266b75f09ccaacf21a2f631f690828d/artwork/micromata.svg" alt="Micromata Logo">
+<p align="center">
+  <a href="https://www.bmbf.de">
+  	<img width="50%" src="https://rawcdn.githack.com/micromata/iFORP/18204decf266b75f09ccaacf21a2f631f690828d/artwork/bmbf.svg" alt="BMBF Logo">
+  </a>
+  <a href="https://www.micromata.com">
+    <img width="50%" src="https://rawcdn.githack.com/micromata/iFORP/18204decf266b75f09ccaacf21a2f631f690828d/artwork/micromata.svg" alt="Micromata Logo">
+  </a>
 </p>
 
 ## License
