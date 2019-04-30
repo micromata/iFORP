@@ -10,6 +10,17 @@
 
 The collaborative, cross-disciplinary development of ideas is a very powerful, yet challenging approach to innovation. iForp supports this process with the rapid creation of WebApp prototypes. The prototype can be based on HTML/CSS/JSS as well as on images such as sketches, wireframes and screen designs. Individual views can be linked to logical clickflows. In addition, the tool supports the documentation of user feedback and design decisions.
 
+The project is not yet feature complete but some core features are already available:
+
+* create, rename and delete projects
+* create, rename and delete whiteboards
+* create, rename and delete views
+* upload/import .zip archives with HTML/CSS/JS and parse linkable elements like buttons and anchors
+* upload/import images (.png, .jpg) and create linkable elements
+* link views to logical clickflows
+* testing whiteboards in preview mode with different output formats (desktop, tablet, smartphone)
+* adding user feedback in preview mode
+
 ## Quick install guide
 
     $ git clone https://github.com/micromata/iFORP.git
