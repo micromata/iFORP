@@ -3,7 +3,7 @@ import { readFileSync } from 'fs';
 import { resolve as resolvePath } from 'path';
 
 describe('MarkupUtil', () => {
-  describe('extractScriptAssets', async () => {
+  describe('extractScriptAssets', () => {
     it('should return all script assets defined in an HTML document', async () => {
       const markup = readFileSync(
         resolvePath(__dirname, '../dummy-page.html')
@@ -13,7 +13,7 @@ describe('MarkupUtil', () => {
       expect(scriptAssets.filter(asset => asset.isInline).length).toEqual(1);
     });
   });
-  describe('extractStyleAssets', async () => {
+  describe('extractStyleAssets', () => {
     it('should return all style assets defined in an HTML document', async () => {
       const markup = readFileSync(
         resolvePath(__dirname, '../dummy-page.html')

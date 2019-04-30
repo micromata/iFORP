@@ -1,8 +1,6 @@
 import path from 'path';
 import { createTestDatabaseConnection } from '../setup';
 import { get, post } from '../request';
-// import { rmdir } from '../../src/utils/fs';
-// import { getConfiguration } from '../../src/get-configuration';
 import { createTokenFor } from '../../src/utils/auth';
 
 describe('/library', () => {
@@ -19,22 +17,22 @@ describe('/library', () => {
     await connection.close();
   });
 
-  describe('/upload', () => {
+  describe('/upload/zip', () => {
     describe('POST', () => {
       it('should process ZIP archives containing HTML files', () => {
-        return post('/library/upload')
+        return post('/library/upload/zip')
           .set('Authorization', 'Bearer ' + authToken)
           .attach('file', path.resolve(__dirname, '../dummy-project.zip'))
           .expect(200);
       });
       it('should handle dupes', () => {
-        return post('/library/upload')
+        return post('/library/upload/zip')
           .set('Authorization', 'Bearer ' + authToken)
           .attach('file', path.resolve(__dirname, '../dummy-project.zip'))
           .expect(200);
       });
       it('should return HTTP 400 if no file was attached', () => {
-        return post('/library/upload')
+        return post('/library/upload/zip')
           .set('Authorization', 'Bearer ' + authToken)
           .expect(400);
       });

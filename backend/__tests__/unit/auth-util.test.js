@@ -6,8 +6,10 @@ describe('AuthUtil', () => {
       expect(await createHash('haash')).toBeTruthy();
     });
   });
-  describe('hashMatches', async () => {
-    const hash = await createHash('haash');
-    expect(await hashMatches(hash, 'haash')).toBeTruthy();
+  describe('hashMatches', () => {
+    it('should return true for equal strings', async () => {
+      const hash = await createHash('haash');
+      expect(await hashMatches(hash, 'haash')).toBeTruthy();
+    });
   });
 });

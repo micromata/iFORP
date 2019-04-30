@@ -64,7 +64,9 @@ projects.get(
 projects.post(
   '/:projectId/whiteboards',
   handleRequest(async (req, res) => {
-    return res.send(await whiteboardService.save(req.params.projectId));
+    return res.send(
+      await whiteboardService.save(req.params.projectId, req.body)
+    );
   })
 );
 

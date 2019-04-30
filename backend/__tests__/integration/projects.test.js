@@ -5,7 +5,7 @@ import { createTokenFor } from '../../src/utils/auth';
 async function createAndGetTestProject(testProjectName, authToken) {
   const res = await post('/projects')
     .set('Authorization', 'Bearer ' + authToken)
-    .send({ name: testProjectName })
+    .send({ projectName: testProjectName })
     .expect(200);
   return res.body;
 }
@@ -89,9 +89,7 @@ describe('/projects', () => {
                 .expect(200)
                 .then(fetchRes => {
                   expect(fetchRes.body.length).toBeGreaterThan(0);
-                  expect(fetchRes.body.pop().name).toEqual(
-                    'Default Whiteboard'
-                  );
+                  expect(fetchRes.body.pop().name).toEqual('First Whiteboard');
                 })
           ));
       });

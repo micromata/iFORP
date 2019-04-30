@@ -2,6 +2,7 @@
   "name": "iforp",
   "title": "iFORP",
   "description": "iFORP",
+  "homepage": "http://prototyping4innovation.de",
   "version": "0.1.0",
   "private": true,
   "scripts": {

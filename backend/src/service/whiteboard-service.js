@@ -18,7 +18,7 @@ export const find = async projectId => {
   return project.whiteboards;
 };
 
-export const save = async projectId => {
+export const save = async (projectId, base) => {
   const projectRepo = getRepository(Project);
   const whiteboardRepo = getRepository(Whiteboard);
   const project = await projectRepo.findOne(projectId);
@@ -30,7 +30,7 @@ export const save = async projectId => {
   }
 
   const whiteboard = {
-    name: `${randomSuperbWord()}es Whiteboard`,
+    name: base.name || `${randomSuperbWord()}es Whiteboard`,
     project
   };
   const view = new View();
